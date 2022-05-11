@@ -6,7 +6,7 @@ part 'pallet_events.freezed.dart';
 @freezed
 abstract class PalletEvent with _$PalletEvent {
 
-  const factory PalletEvent.listPallets(String workShop) = ListPallets;
+  const factory PalletEvent.listPallets(String sWorkShop, String sLocation, int nState) = ListPallets;
   const factory PalletEvent.getPalletBySeq(int palletSeq) = GetPalletBySeq;
 
   const factory PalletEvent.addPallet(String sQRData) = AddPallet;

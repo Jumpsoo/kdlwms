@@ -13,7 +13,6 @@ class BtnPacking extends StatelessWidget {
     var sTitle = '적재 작업';
     var sSubTitle = '완제품의 바코드를 읽어 팔레팅 진행';
 
-    final providers = getWmsProviders();
     
     return Column(
       children: [

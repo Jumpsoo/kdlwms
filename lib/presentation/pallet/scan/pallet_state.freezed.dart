@@ -20,7 +20,7 @@ PalletState _$PalletStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PalletState {
-  List<Pallet> get pallets => throw _privateConstructorUsedError;
+  List<Pallet>? get pallets => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $PalletStateCopyWith<$Res> {
   factory $PalletStateCopyWith(
           PalletState value, $Res Function(PalletState) then) =
       _$PalletStateCopyWithImpl<$Res>;
-  $Res call({List<Pallet> pallets, bool isLoading});
+  $Res call({List<Pallet>? pallets, bool isLoading});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$PalletStateCopyWithImpl<$Res> implements $PalletStateCopyWith<$Res> {
       pallets: pallets == freezed
           ? _value.pallets
           : pallets // ignore: cast_nullable_to_non_nullable
-              as List<Pallet>,
+              as List<Pallet>?,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -70,7 +70,7 @@ abstract class _$PalletStateCopyWith<$Res>
           _PalletState value, $Res Function(_PalletState) then) =
       __$PalletStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Pallet> pallets, bool isLoading});
+  $Res call({List<Pallet>? pallets, bool isLoading});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class __$PalletStateCopyWithImpl<$Res> extends _$PalletStateCopyWithImpl<$Res>
       pallets: pallets == freezed
           ? _value.pallets
           : pallets // ignore: cast_nullable_to_non_nullable
-              as List<Pallet>,
+              as List<Pallet>?,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -104,17 +104,20 @@ class __$PalletStateCopyWithImpl<$Res> extends _$PalletStateCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PalletState implements _PalletState {
-  _$_PalletState({required final List<Pallet> pallets, required this.isLoading})
+  _$_PalletState(
+      {required final List<Pallet>? pallets, required this.isLoading})
       : _pallets = pallets;
 
   factory _$_PalletState.fromJson(Map<String, dynamic> json) =>
       _$$_PalletStateFromJson(json);
 
-  final List<Pallet> _pallets;
+  final List<Pallet>? _pallets;
   @override
-  List<Pallet> get pallets {
+  List<Pallet>? get pallets {
+    final value = _pallets;
+    if (value == null) return null;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_pallets);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -154,14 +157,14 @@ class _$_PalletState implements _PalletState {
 
 abstract class _PalletState implements PalletState {
   factory _PalletState(
-      {required final List<Pallet> pallets,
+      {required final List<Pallet>? pallets,
       required final bool isLoading}) = _$_PalletState;
 
   factory _PalletState.fromJson(Map<String, dynamic> json) =
       _$_PalletState.fromJson;
 
   @override
-  List<Pallet> get pallets => throw _privateConstructorUsedError;
+  List<Pallet>? get pallets => throw _privateConstructorUsedError;
   @override
   bool get isLoading => throw _privateConstructorUsedError;
   @override

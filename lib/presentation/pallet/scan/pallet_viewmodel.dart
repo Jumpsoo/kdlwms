@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kdlwms/domain/model/note.dart';
-import 'package:kdlwms/domain/model/pallet.dart';
 import 'package:kdlwms/domain/model/pallet.dart';
 import 'package:kdlwms/domain/use_case/use_cases_wms.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_events.dart';
@@ -24,7 +22,6 @@ class PalletViewModel with ChangeNotifier {
   }
 
   void onEvent(PalletEvent event) {
-
     event.when(
       listPallets: listPallets,
       addPallet: addPallet,
@@ -32,21 +29,22 @@ class PalletViewModel with ChangeNotifier {
       deletePallet: deletePallet,
       scanQRData: scanQRData,
       getPalletBySeq: getPalletBySeq,
-
     );
   }
 
-  Future<void> listPallets(String workShop) async {
-    List<Pallet> pallets = await useCasesWms.listPallets(workShop);
+  Future<void> listPallets(
+      String sWorkShop, String sLocation, int nState) async {
+    List<Pallet>? palletlist =
+        await useCasesWms.listPallets(sWorkShop, sLocation, nState);
+
     _state = state.copyWith(
-      pallets: pallets,
+      pallets: palletlist,
     );
     notifyListeners();
   }
 
   // Future<void> _addPallet(Pallet pallet) async {
   Future<void> addPallet(String sQRData) async {
-    // 변환해서 넘겨준다.
     Pallet? pallet = scanQRData(sQRData);
     if (pallet == null) {
       return;
@@ -57,48 +55,38 @@ class PalletViewModel with ChangeNotifier {
 
   Future<void> updatePallet(Pallet pallet) async {
     await useCasesWms.updatePallet(pallet);
-    await listPallets(pallet.WORKSHOP);
+    await listPallets(pallet.WORKSHOP, pallet.LOCATION, pallet.STATE);
   }
 
   Future<void> deletePallet(Pallet pallet) async {
     await useCasesWms.deletePallet(pallet);
-    await listPallets(pallet.WORKSHOP);
+    await listPallets(pallet.WORKSHOP, pallet.LOCATION, pallet.STATE);
   }
-  Future<Pallet> getPalletBySeq(int palletSeq) async {
-    Pallet pallet = await useCasesWms.getPalletBySeq(palletSeq);
+
+  Future<Pallet?> getPalletBySeq(int palletSeq) async {
+    Pallet? pallet = await useCasesWms.getPalletBySeq(palletSeq);
     return pallet;
   }
 
-
   //리딩한 값 파싱은 여기서 진행
   Pallet? scanQRData(String sQRData) {
-    int nPalletSeq = 1;
-    String sWorkShop = '';
-    String sLocation = '';
-    String sItemNo = '';
-    String sItemLot = '';
-
-    int nQty = 1;
-    int nState = 0;
-    int nBoxNo = 0;
-
     Pallet pallet;
-    final splitted = sQRData.split('\t');
-    if (splitted == null || splitted.length == 0) {
+    final convertedData = sQRData.split('\t');
+    if (convertedData.isEmpty) {
       return null;
     }
     pallet = Pallet(
-      PALLET_SEQ: int.parse(splitted[0]),
-      WORKSHOP: splitted[1],
-      LOCATION: splitted[2],
-      ITEM_NO: splitted[3],
-      ITEM_LOT: splitted[4],
-      STATE: int.parse(splitted[5]),
-      QUANTITY: int.parse(splitted[6]),
+      PALLET_SEQ: int.parse(convertedData[0]),
+      WORKSHOP: convertedData[1],
+      LOCATION: convertedData[2],
+      ITEM_NO: convertedData[3],
+      ITEM_LOT: convertedData[4],
+      STATE: int.parse(convertedData[5]),
+      QUANTITY: int.parse(convertedData[6]),
       BARCODE: sQRData,
       SCAN_DATE: DateTime.now(),
       SCAN_USERNM: gDeviceName,
-      BOX_NO: int.parse(splitted[7]),
+      BOX_NO: int.parse(convertedData[7]),
     );
 
     return pallet;

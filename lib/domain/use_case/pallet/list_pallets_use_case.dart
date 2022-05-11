@@ -6,8 +6,8 @@ class ListPalletsUseCase{
 
   ListPalletsUseCase(this.repository);
 
-  Future<List<Pallet>> call (String workShop) async {
-    return await repository.getPalletList(workShop);
+  Future<List<Pallet>?> call (String sWorkShop, String sLocation, int nState) async {
+    return await repository.getPalletList(sWorkShop, sLocation, nState);
   }
 
 }

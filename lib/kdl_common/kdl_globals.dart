@@ -51,3 +51,6 @@ dynamic gElevatedButtonStyleSmallSize = ElevatedButton.styleFrom(
     borderRadius: BorderRadius.circular(15),
   ),
 );
+
+//상태
+enum LoadState { None, Pack, Confirm, Load, Arrive }

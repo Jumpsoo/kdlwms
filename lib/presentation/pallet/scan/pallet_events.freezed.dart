@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PalletEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String workShop) listPallets,
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
     required TResult Function(Pallet pallet) updatePallet,
@@ -28,7 +29,8 @@ mixin _$PalletEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -38,7 +40,8 @@ mixin _$PalletEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -101,7 +104,7 @@ abstract class $ListPalletsCopyWith<$Res> {
   factory $ListPalletsCopyWith(
           ListPallets value, $Res Function(ListPallets) then) =
       _$ListPalletsCopyWithImpl<$Res>;
-  $Res call({String workShop});
+  $Res call({String sWorkShop, String sLocation, int nState});
 }
 
 /// @nodoc
@@ -116,13 +119,23 @@ class _$ListPalletsCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? workShop = freezed,
+    Object? sWorkShop = freezed,
+    Object? sLocation = freezed,
+    Object? nState = freezed,
   }) {
     return _then(ListPallets(
-      workShop == freezed
-          ? _value.workShop
-          : workShop // ignore: cast_nullable_to_non_nullable
+      sWorkShop == freezed
+          ? _value.sWorkShop
+          : sWorkShop // ignore: cast_nullable_to_non_nullable
               as String,
+      sLocation == freezed
+          ? _value.sLocation
+          : sLocation // ignore: cast_nullable_to_non_nullable
+              as String,
+      nState == freezed
+          ? _value.nState
+          : nState // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -130,14 +143,18 @@ class _$ListPalletsCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ListPallets implements ListPallets {
-  const _$ListPallets(this.workShop);
+  const _$ListPallets(this.sWorkShop, this.sLocation, this.nState);
 
   @override
-  final String workShop;
+  final String sWorkShop;
+  @override
+  final String sLocation;
+  @override
+  final int nState;
 
   @override
   String toString() {
-    return 'PalletEvent.listPallets(workShop: $workShop)';
+    return 'PalletEvent.listPallets(sWorkShop: $sWorkShop, sLocation: $sLocation, nState: $nState)';
   }
 
   @override
@@ -145,12 +162,17 @@ class _$ListPallets implements ListPallets {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ListPallets &&
-            const DeepCollectionEquality().equals(other.workShop, workShop));
+            const DeepCollectionEquality().equals(other.sWorkShop, sWorkShop) &&
+            const DeepCollectionEquality().equals(other.sLocation, sLocation) &&
+            const DeepCollectionEquality().equals(other.nState, nState));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(workShop));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(sWorkShop),
+      const DeepCollectionEquality().hash(sLocation),
+      const DeepCollectionEquality().hash(nState));
 
   @JsonKey(ignore: true)
   @override
@@ -160,33 +182,36 @@ class _$ListPallets implements ListPallets {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String workShop) listPallets,
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
     required TResult Function(Pallet pallet) updatePallet,
     required TResult Function(Pallet pallet) deletePallet,
     required TResult Function(String sQRData) scanQRData,
   }) {
-    return listPallets(workShop);
+    return listPallets(sWorkShop, sLocation, nState);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
     TResult Function(Pallet pallet)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
   }) {
-    return listPallets?.call(workShop);
+    return listPallets?.call(sWorkShop, sLocation, nState);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -195,7 +220,7 @@ class _$ListPallets implements ListPallets {
     required TResult orElse(),
   }) {
     if (listPallets != null) {
-      return listPallets(workShop);
+      return listPallets(sWorkShop, sLocation, nState);
     }
     return orElse();
   }
@@ -245,9 +270,13 @@ class _$ListPallets implements ListPallets {
 }
 
 abstract class ListPallets implements PalletEvent {
-  const factory ListPallets(final String workShop) = _$ListPallets;
+  const factory ListPallets(
+          final String sWorkShop, final String sLocation, final int nState) =
+      _$ListPallets;
 
-  String get workShop => throw _privateConstructorUsedError;
+  String get sWorkShop => throw _privateConstructorUsedError;
+  String get sLocation => throw _privateConstructorUsedError;
+  int get nState => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ListPalletsCopyWith<ListPallets> get copyWith =>
       throw _privateConstructorUsedError;
@@ -317,7 +346,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String workShop) listPallets,
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
     required TResult Function(Pallet pallet) updatePallet,
@@ -330,7 +360,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -343,7 +374,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -472,7 +504,8 @@ class _$AddPallet implements AddPallet {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String workShop) listPallets,
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
     required TResult Function(Pallet pallet) updatePallet,
@@ -485,7 +518,8 @@ class _$AddPallet implements AddPallet {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -498,7 +532,8 @@ class _$AddPallet implements AddPallet {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -638,7 +673,8 @@ class _$UpdatePallet implements UpdatePallet {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String workShop) listPallets,
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
     required TResult Function(Pallet pallet) updatePallet,
@@ -651,7 +687,8 @@ class _$UpdatePallet implements UpdatePallet {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -664,7 +701,8 @@ class _$UpdatePallet implements UpdatePallet {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -804,7 +842,8 @@ class _$DeletePallet implements DeletePallet {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String workShop) listPallets,
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
     required TResult Function(Pallet pallet) updatePallet,
@@ -817,7 +856,8 @@ class _$DeletePallet implements DeletePallet {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -830,7 +870,8 @@ class _$DeletePallet implements DeletePallet {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -960,7 +1001,8 @@ class _$ScanQRData implements ScanQRData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String workShop) listPallets,
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
     required TResult Function(Pallet pallet) updatePallet,
@@ -973,7 +1015,8 @@ class _$ScanQRData implements ScanQRData {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,
@@ -986,7 +1029,8 @@ class _$ScanQRData implements ScanQRData {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String workShop)? listPallets,
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
     TResult Function(Pallet pallet)? updatePallet,

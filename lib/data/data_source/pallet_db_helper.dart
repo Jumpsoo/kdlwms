@@ -6,31 +6,35 @@ class PalletDbHelper {
 
   PalletDbHelper(this.db);
 
-  Future<Pallet> getPalletBySeq(int palletSeq) async {
+  Future<Pallet?> getPalletBySeq(int palletSeq) async {
     // SLEECT * FRO TB_WH_PALLET WHERE ID = 1
     final List<Map<String, dynamic>> maps = await db.query(
       'TB_WH_PALLET',
       where: 'PALLET_SEQ = ?',
       whereArgs: [palletSeq],
     );
-
-    return Pallet.fromJson(maps.first);
+    if(maps.isNotEmpty) {
+      return Pallet.fromJson(maps.first);
+    }else{
+      return null;
+    }
   }
 
-  Future<List<Pallet>> getPalletList(String workShop) async {
-    // 다가저 올경우
-    // final maps = await db.query('TB_WH_PALLET')
-
+  // 위치별 실적 리스트 조회
+  Future<List<Pallet>?> getPalletList(
+      String sWorkShop, String sLocation, int nState) async {
     final maps = await db.query(
       'TB_WH_PALLET',
-      where: 'WORKSHOP = ?',
-      whereArgs: [workShop],
+      where: 'WORKSHOP = ? and STATE = ?',
+      whereArgs: [sWorkShop, nState],
     );
-    return maps.map((e) => Pallet.fromJson(e)).toList();
+    if(maps.isNotEmpty) {
+      return maps.map((e) => Pallet.fromJson(e)).toList();
+    }
+    return null;
   }
 
   Future<void> insertPallet(Pallet pallet) async {
-    print('#####     $pallet');
     await db.insert('TB_WH_PALLET', pallet.toJson());
   }
 

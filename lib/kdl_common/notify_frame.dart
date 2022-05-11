@@ -15,12 +15,10 @@ class NotiPage extends StatefulWidget {
 
 class _NotiPageState extends State<NotiPage> {
 
-  String _msg = '';
-
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    _msg = widget.msg;
+
     super.setState(fn);
   }
 
@@ -30,8 +28,8 @@ class _NotiPageState extends State<NotiPage> {
       color: Colors.black,
       padding: const EdgeInsets.only(left: 0),
       alignment: Alignment.centerLeft,
-      width: 340,
-      height: 60,
+      width: 330,
+      height: 40,
       child: Row(
         children: [
           Column(
@@ -44,7 +42,7 @@ class _NotiPageState extends State<NotiPage> {
               AutoSizeText(
                 widget.msg,
                 style: const TextStyle(
-                    fontSize: 12.0, color: Colors.white, fontFamily: "Roboto"),
+                    fontSize: 18.0, color: Colors.white, fontFamily: "Roboto"),
               ),
             ],
           ),

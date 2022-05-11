@@ -8,7 +8,7 @@ part 'pallet_state.g.dart';
 @freezed
 class PalletState with _$PalletState {
   factory PalletState({
-    required List<Pallet> pallets,
+    required List<Pallet>? pallets,
     required bool isLoading,
   }) = _PalletState;
 

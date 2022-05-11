@@ -6,10 +6,8 @@ class GetPalletBySeq{
 
   GetPalletBySeq(this.repository);
 
-  Future<Pallet> call(int palletSeq) async {
-    print('repository.getPalletBySeq');
+  Future<Pallet?> call(int palletSeq) async {
     return await repository.getPalletBySeq(palletSeq);
   }
-
 }
 

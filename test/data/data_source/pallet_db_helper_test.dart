@@ -57,24 +57,21 @@ void main() {
       UPDT_DT: DateTime.now(),
     ));
 
-    expect((await palletDbHelper.getPalletList('A001')).length, 1);
+    expect((await palletDbHelper.getPalletList('A001','002',1)!), 1);
 
-    Pallet pallet = (await palletDbHelper.getPalletBySeq(1));
-    expect(pallet.PALLET_SEQ, 1);
+    Pallet? pallet = (await palletDbHelper.getPalletBySeq(0));
+    expect(pallet!.PALLET_SEQ, 1);
 
     await palletDbHelper.updatePallet(pallet.copyWith(
       LOCATION: 'ZZZ'
     ));
-    List<Pallet> tempSaveData;
-    tempSaveData = palletDbHelper.getPalletList('A001') as List<Pallet> ;
-    expect(tempSaveData[0].WORKSHOP, 'A001');
 
     pallet = (await palletDbHelper.getPalletBySeq(1));
-    expect(pallet.LOCATION, 'ZZZ');
+    expect(pallet!.LOCATION, 'ZZZ');
 
     await palletDbHelper.deletePallet(pallet);
 
-    expect((await palletDbHelper.getPalletList('A001')).length, 0);
+    expect((await palletDbHelper.getPalletList('A001', 'aa', 1))!.length, 0);
 
     await db.close();
 
