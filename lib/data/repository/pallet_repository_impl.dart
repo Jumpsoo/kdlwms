@@ -10,11 +10,6 @@ class PalletRepositoryImpl implements PalletRepository {
   PalletRepositoryImpl(this.db);
 
   @override
-  Future<void> deletePallet(Pallet pallet) async {
-    await db.deletePallet(pallet);
-  }
-
-  @override
   Future<Pallet?> getPalletBySeq(int palletSeq) async {
     // TODO: implement getNoteBySeq
     return await db.getPalletBySeq(palletSeq);
@@ -28,13 +23,34 @@ class PalletRepositoryImpl implements PalletRepository {
   }
 
   @override
-  Future<void> insertPallet(Pallet pallet) async {
-    await db.insertPallet(pallet);
+  Future<bool> insertPallet(Pallet pallet) async {
+    return await db.insertPallet(pallet);
   }
 
   @override
-  Future<void> updatePallet(Pallet pallet) async {
-    // TODO: implement updatePallet
-    await db.updatePallet(pallet);
+  Future<void> updatePallet(List<Pallet> pallets) async {
+    for(Pallet pallet in pallets) {
+      await db.updatePallet(pallet);
+    }
+  }
+
+  @override
+  Future<void> updatePalletState(List<Pallet> pallets) async {
+    for(Pallet pallet in pallets) {
+      await db.updatePalletState(pallet);
+    }
+  }
+
+  @override
+  Future<bool> deletePallet(List<Pallet> pallets) async {
+    try{
+      for(Pallet pallet in pallets) {
+        await db.deletePallet(pallet);
+      }
+    }catch(e){
+      print(e);
+      return false;
+    }
+    return true;
   }
 }

@@ -3,11 +3,12 @@ import 'package:kdlwms/domain/use_case/pallet/get_pallet_by_seq.dart';
  import 'package:kdlwms/domain/use_case/pallet/update_pallet_use_case.dart';
  import 'package:kdlwms/domain/use_case/pallet/delete_pallet_use_case.dart';
  import 'package:kdlwms/domain/use_case/pallet/list_pallets_use_case.dart';
+import 'package:kdlwms/domain/use_case/pallet/update_palletstate_use_case.dart';
 
 class UseCasesWms {
-
   final AddPalletUseCase addPallet;
   final UpdatePalletUseCase updatePallet;
+  final UpdatePalletStateUseCase updatePalletState;
   final DeletePalletUseCase deletePallet;
 
   final ListPalletsUseCase listPallets;
@@ -16,6 +17,7 @@ class UseCasesWms {
   UseCasesWms({
     required this.addPallet,
     required this.updatePallet,
+    required this.updatePalletState,
     required this.deletePallet,
     required this.listPallets,
     required this.getPalletBySeq,

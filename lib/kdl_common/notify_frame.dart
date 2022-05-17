@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 class NotiPage extends StatefulWidget {
   const NotiPage({
     Key? key,
-    required this.msg,
+    required this.msg, required this.nHeight,
   }) : super(key: key);
 
+  final double nHeight;
   final String msg;
 
   @override
@@ -29,7 +30,7 @@ class _NotiPageState extends State<NotiPage> {
       padding: const EdgeInsets.only(left: 0),
       alignment: Alignment.centerLeft,
       width: 330,
-      height: 40,
+      height: widget.nHeight,
       child: Row(
         children: [
           Column(

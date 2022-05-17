@@ -105,11 +105,11 @@ class _$NoteOrderCopyWithImpl<$Res> implements $NoteOrderCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $NoteOrderTitleCopyWith<$Res>
+abstract class _$$NoteOrderTitleCopyWith<$Res>
     implements $NoteOrderCopyWith<$Res> {
-  factory $NoteOrderTitleCopyWith(
-          NoteOrderTitle value, $Res Function(NoteOrderTitle) then) =
-      _$NoteOrderTitleCopyWithImpl<$Res>;
+  factory _$$NoteOrderTitleCopyWith(
+          _$NoteOrderTitle value, $Res Function(_$NoteOrderTitle) then) =
+      __$$NoteOrderTitleCopyWithImpl<$Res>;
   @override
   $Res call({OrderType orderType});
 
@@ -118,20 +118,20 @@ abstract class $NoteOrderTitleCopyWith<$Res>
 }
 
 /// @nodoc
-class _$NoteOrderTitleCopyWithImpl<$Res> extends _$NoteOrderCopyWithImpl<$Res>
-    implements $NoteOrderTitleCopyWith<$Res> {
-  _$NoteOrderTitleCopyWithImpl(
-      NoteOrderTitle _value, $Res Function(NoteOrderTitle) _then)
-      : super(_value, (v) => _then(v as NoteOrderTitle));
+class __$$NoteOrderTitleCopyWithImpl<$Res> extends _$NoteOrderCopyWithImpl<$Res>
+    implements _$$NoteOrderTitleCopyWith<$Res> {
+  __$$NoteOrderTitleCopyWithImpl(
+      _$NoteOrderTitle _value, $Res Function(_$NoteOrderTitle) _then)
+      : super(_value, (v) => _then(v as _$NoteOrderTitle));
 
   @override
-  NoteOrderTitle get _value => super._value as NoteOrderTitle;
+  _$NoteOrderTitle get _value => super._value as _$NoteOrderTitle;
 
   @override
   $Res call({
     Object? orderType = freezed,
   }) {
-    return _then(NoteOrderTitle(
+    return _then(_$NoteOrderTitle(
       orderType == freezed
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ class _$NoteOrderTitle implements NoteOrderTitle {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is NoteOrderTitle &&
+            other is _$NoteOrderTitle &&
             const DeepCollectionEquality().equals(other.orderType, orderType));
   }
 
@@ -167,8 +167,8 @@ class _$NoteOrderTitle implements NoteOrderTitle {
 
   @JsonKey(ignore: true)
   @override
-  $NoteOrderTitleCopyWith<NoteOrderTitle> get copyWith =>
-      _$NoteOrderTitleCopyWithImpl<NoteOrderTitle>(this, _$identity);
+  _$$NoteOrderTitleCopyWith<_$NoteOrderTitle> get copyWith =>
+      __$$NoteOrderTitleCopyWithImpl<_$NoteOrderTitle>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -246,16 +246,16 @@ abstract class NoteOrderTitle implements NoteOrder {
   OrderType get orderType => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $NoteOrderTitleCopyWith<NoteOrderTitle> get copyWith =>
+  _$$NoteOrderTitleCopyWith<_$NoteOrderTitle> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NoteOrderDateCopyWith<$Res>
+abstract class _$$NoteOrderDateCopyWith<$Res>
     implements $NoteOrderCopyWith<$Res> {
-  factory $NoteOrderDateCopyWith(
-          NoteOrderDate value, $Res Function(NoteOrderDate) then) =
-      _$NoteOrderDateCopyWithImpl<$Res>;
+  factory _$$NoteOrderDateCopyWith(
+          _$NoteOrderDate value, $Res Function(_$NoteOrderDate) then) =
+      __$$NoteOrderDateCopyWithImpl<$Res>;
   @override
   $Res call({OrderType orderType});
 
@@ -264,20 +264,20 @@ abstract class $NoteOrderDateCopyWith<$Res>
 }
 
 /// @nodoc
-class _$NoteOrderDateCopyWithImpl<$Res> extends _$NoteOrderCopyWithImpl<$Res>
-    implements $NoteOrderDateCopyWith<$Res> {
-  _$NoteOrderDateCopyWithImpl(
-      NoteOrderDate _value, $Res Function(NoteOrderDate) _then)
-      : super(_value, (v) => _then(v as NoteOrderDate));
+class __$$NoteOrderDateCopyWithImpl<$Res> extends _$NoteOrderCopyWithImpl<$Res>
+    implements _$$NoteOrderDateCopyWith<$Res> {
+  __$$NoteOrderDateCopyWithImpl(
+      _$NoteOrderDate _value, $Res Function(_$NoteOrderDate) _then)
+      : super(_value, (v) => _then(v as _$NoteOrderDate));
 
   @override
-  NoteOrderDate get _value => super._value as NoteOrderDate;
+  _$NoteOrderDate get _value => super._value as _$NoteOrderDate;
 
   @override
   $Res call({
     Object? orderType = freezed,
   }) {
-    return _then(NoteOrderDate(
+    return _then(_$NoteOrderDate(
       orderType == freezed
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
@@ -303,7 +303,7 @@ class _$NoteOrderDate implements NoteOrderDate {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is NoteOrderDate &&
+            other is _$NoteOrderDate &&
             const DeepCollectionEquality().equals(other.orderType, orderType));
   }
 
@@ -313,8 +313,8 @@ class _$NoteOrderDate implements NoteOrderDate {
 
   @JsonKey(ignore: true)
   @override
-  $NoteOrderDateCopyWith<NoteOrderDate> get copyWith =>
-      _$NoteOrderDateCopyWithImpl<NoteOrderDate>(this, _$identity);
+  _$$NoteOrderDateCopyWith<_$NoteOrderDate> get copyWith =>
+      __$$NoteOrderDateCopyWithImpl<_$NoteOrderDate>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -392,16 +392,16 @@ abstract class NoteOrderDate implements NoteOrder {
   OrderType get orderType => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $NoteOrderDateCopyWith<NoteOrderDate> get copyWith =>
+  _$$NoteOrderDateCopyWith<_$NoteOrderDate> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NoteOrderColorCopyWith<$Res>
+abstract class _$$NoteOrderColorCopyWith<$Res>
     implements $NoteOrderCopyWith<$Res> {
-  factory $NoteOrderColorCopyWith(
-          NoteOrderColor value, $Res Function(NoteOrderColor) then) =
-      _$NoteOrderColorCopyWithImpl<$Res>;
+  factory _$$NoteOrderColorCopyWith(
+          _$NoteOrderColor value, $Res Function(_$NoteOrderColor) then) =
+      __$$NoteOrderColorCopyWithImpl<$Res>;
   @override
   $Res call({OrderType orderType});
 
@@ -410,20 +410,20 @@ abstract class $NoteOrderColorCopyWith<$Res>
 }
 
 /// @nodoc
-class _$NoteOrderColorCopyWithImpl<$Res> extends _$NoteOrderCopyWithImpl<$Res>
-    implements $NoteOrderColorCopyWith<$Res> {
-  _$NoteOrderColorCopyWithImpl(
-      NoteOrderColor _value, $Res Function(NoteOrderColor) _then)
-      : super(_value, (v) => _then(v as NoteOrderColor));
+class __$$NoteOrderColorCopyWithImpl<$Res> extends _$NoteOrderCopyWithImpl<$Res>
+    implements _$$NoteOrderColorCopyWith<$Res> {
+  __$$NoteOrderColorCopyWithImpl(
+      _$NoteOrderColor _value, $Res Function(_$NoteOrderColor) _then)
+      : super(_value, (v) => _then(v as _$NoteOrderColor));
 
   @override
-  NoteOrderColor get _value => super._value as NoteOrderColor;
+  _$NoteOrderColor get _value => super._value as _$NoteOrderColor;
 
   @override
   $Res call({
     Object? orderType = freezed,
   }) {
-    return _then(NoteOrderColor(
+    return _then(_$NoteOrderColor(
       orderType == freezed
           ? _value.orderType
           : orderType // ignore: cast_nullable_to_non_nullable
@@ -449,7 +449,7 @@ class _$NoteOrderColor implements NoteOrderColor {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is NoteOrderColor &&
+            other is _$NoteOrderColor &&
             const DeepCollectionEquality().equals(other.orderType, orderType));
   }
 
@@ -459,8 +459,8 @@ class _$NoteOrderColor implements NoteOrderColor {
 
   @JsonKey(ignore: true)
   @override
-  $NoteOrderColorCopyWith<NoteOrderColor> get copyWith =>
-      _$NoteOrderColorCopyWithImpl<NoteOrderColor>(this, _$identity);
+  _$$NoteOrderColorCopyWith<_$NoteOrderColor> get copyWith =>
+      __$$NoteOrderColorCopyWithImpl<_$NoteOrderColor>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -538,6 +538,6 @@ abstract class NoteOrderColor implements NoteOrder {
   OrderType get orderType => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  $NoteOrderColorCopyWith<NoteOrderColor> get copyWith =>
+  _$$NoteOrderColorCopyWith<_$NoteOrderColor> get copyWith =>
       throw _privateConstructorUsedError;
 }

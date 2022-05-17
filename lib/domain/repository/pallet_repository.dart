@@ -8,9 +8,11 @@ abstract class PalletRepository {
   Future<List<Pallet>?> getPalletList(
       String sWorkShop, String sLocation, int nState);
 
-  Future<void> insertPallet(Pallet pallet);
+  Future<bool> insertPallet(Pallet pallet);
 
-  Future<void> deletePallet(Pallet pallet);
+  Future<bool> deletePallet(List<Pallet> pallet);
 
-  Future<void> updatePallet(Pallet pallet);
+  Future<void> updatePallet(List<Pallet> pallets);
+
+  Future<void> updatePalletState(List<Pallet> pallets);
 }

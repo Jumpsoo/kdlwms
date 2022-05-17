@@ -72,26 +72,28 @@ class _$ResultCopyWithImpl<T, $Res> implements $ResultCopyWith<T, $Res> {
 }
 
 /// @nodoc
-abstract class $SuccessCopyWith<T, $Res> {
-  factory $SuccessCopyWith(Success<T> value, $Res Function(Success<T>) then) =
-      _$SuccessCopyWithImpl<T, $Res>;
+abstract class _$$SuccessCopyWith<T, $Res> {
+  factory _$$SuccessCopyWith(
+          _$Success<T> value, $Res Function(_$Success<T>) then) =
+      __$$SuccessCopyWithImpl<T, $Res>;
   $Res call({T data});
 }
 
 /// @nodoc
-class _$SuccessCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
-    implements $SuccessCopyWith<T, $Res> {
-  _$SuccessCopyWithImpl(Success<T> _value, $Res Function(Success<T>) _then)
-      : super(_value, (v) => _then(v as Success<T>));
+class __$$SuccessCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
+    implements _$$SuccessCopyWith<T, $Res> {
+  __$$SuccessCopyWithImpl(
+      _$Success<T> _value, $Res Function(_$Success<T>) _then)
+      : super(_value, (v) => _then(v as _$Success<T>));
 
   @override
-  Success<T> get _value => super._value as Success<T>;
+  _$Success<T> get _value => super._value as _$Success<T>;
 
   @override
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(Success<T>(
+    return _then(_$Success<T>(
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -117,7 +119,7 @@ class _$Success<T> implements Success<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Success<T> &&
+            other is _$Success<T> &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
@@ -127,8 +129,8 @@ class _$Success<T> implements Success<T> {
 
   @JsonKey(ignore: true)
   @override
-  $SuccessCopyWith<T, Success<T>> get copyWith =>
-      _$SuccessCopyWithImpl<T, Success<T>>(this, _$identity);
+  _$$SuccessCopyWith<T, _$Success<T>> get copyWith =>
+      __$$SuccessCopyWithImpl<T, _$Success<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -198,31 +200,31 @@ abstract class Success<T> implements Result<T> {
 
   T get data => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SuccessCopyWith<T, Success<T>> get copyWith =>
+  _$$SuccessCopyWith<T, _$Success<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ErrorCopyWith<T, $Res> {
-  factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) then) =
-      _$ErrorCopyWithImpl<T, $Res>;
+abstract class _$$ErrorCopyWith<T, $Res> {
+  factory _$$ErrorCopyWith(_$Error<T> value, $Res Function(_$Error<T>) then) =
+      __$$ErrorCopyWithImpl<T, $Res>;
   $Res call({String e});
 }
 
 /// @nodoc
-class _$ErrorCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
-    implements $ErrorCopyWith<T, $Res> {
-  _$ErrorCopyWithImpl(Error<T> _value, $Res Function(Error<T>) _then)
-      : super(_value, (v) => _then(v as Error<T>));
+class __$$ErrorCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
+    implements _$$ErrorCopyWith<T, $Res> {
+  __$$ErrorCopyWithImpl(_$Error<T> _value, $Res Function(_$Error<T>) _then)
+      : super(_value, (v) => _then(v as _$Error<T>));
 
   @override
-  Error<T> get _value => super._value as Error<T>;
+  _$Error<T> get _value => super._value as _$Error<T>;
 
   @override
   $Res call({
     Object? e = freezed,
   }) {
-    return _then(Error<T>(
+    return _then(_$Error<T>(
       e == freezed
           ? _value.e
           : e // ignore: cast_nullable_to_non_nullable
@@ -248,7 +250,7 @@ class _$Error<T> implements Error<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Error<T> &&
+            other is _$Error<T> &&
             const DeepCollectionEquality().equals(other.e, e));
   }
 
@@ -258,8 +260,8 @@ class _$Error<T> implements Error<T> {
 
   @JsonKey(ignore: true)
   @override
-  $ErrorCopyWith<T, Error<T>> get copyWith =>
-      _$ErrorCopyWithImpl<T, Error<T>>(this, _$identity);
+  _$$ErrorCopyWith<T, _$Error<T>> get copyWith =>
+      __$$ErrorCopyWithImpl<T, _$Error<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -329,6 +331,6 @@ abstract class Error<T> implements Result<T> {
 
   String get e => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ErrorCopyWith<T, Error<T>> get copyWith =>
+  _$$ErrorCopyWith<T, _$Error<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

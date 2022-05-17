@@ -80,21 +80,21 @@ class _$NoteCopyWithImpl<$Res> implements $NoteCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
-  factory _$NoteCopyWith(_Note value, $Res Function(_Note) then) =
-      __$NoteCopyWithImpl<$Res>;
+abstract class _$$_NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
+  factory _$$_NoteCopyWith(_$_Note value, $Res Function(_$_Note) then) =
+      __$$_NoteCopyWithImpl<$Res>;
   @override
   $Res call({String title, String content, int color, int timestamp, int? id});
 }
 
 /// @nodoc
-class __$NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
-    implements _$NoteCopyWith<$Res> {
-  __$NoteCopyWithImpl(_Note _value, $Res Function(_Note) _then)
-      : super(_value, (v) => _then(v as _Note));
+class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
+    implements _$$_NoteCopyWith<$Res> {
+  __$$_NoteCopyWithImpl(_$_Note _value, $Res Function(_$_Note) _then)
+      : super(_value, (v) => _then(v as _$_Note));
 
   @override
-  _Note get _value => super._value as _Note;
+  _$_Note get _value => super._value as _$_Note;
 
   @override
   $Res call({
@@ -104,7 +104,7 @@ class __$NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res>
     Object? timestamp = freezed,
     Object? id = freezed,
   }) {
-    return _then(_Note(
+    return _then(_$_Note(
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -161,7 +161,7 @@ class _$_Note implements _Note {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Note &&
+            other is _$_Note &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.content, content) &&
             const DeepCollectionEquality().equals(other.color, color) &&
@@ -181,8 +181,8 @@ class _$_Note implements _Note {
 
   @JsonKey(ignore: true)
   @override
-  _$NoteCopyWith<_Note> get copyWith =>
-      __$NoteCopyWithImpl<_Note>(this, _$identity);
+  _$$_NoteCopyWith<_$_Note> get copyWith =>
+      __$$_NoteCopyWithImpl<_$_Note>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -212,5 +212,5 @@ abstract class _Note implements Note {
   int? get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$NoteCopyWith<_Note> get copyWith => throw _privateConstructorUsedError;
+  _$$_NoteCopyWith<_$_Note> get copyWith => throw _privateConstructorUsedError;
 }

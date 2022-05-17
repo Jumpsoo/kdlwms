@@ -60,6 +60,8 @@ class _SubMainPagState extends State<PltWorkPage> {
   @override
   Widget build(BuildContext context) {
 
+    double value  = 0;
+
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(

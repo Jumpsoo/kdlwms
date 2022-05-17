@@ -26,6 +26,7 @@ class PalletViewModel with ChangeNotifier {
       listPallets: listPallets,
       addPallet: addPallet,
       updatePallet: updatePallet,
+      updatePalletState: updatePalletState,
       deletePallet: deletePallet,
       scanQRData: scanQRData,
       getPalletBySeq: getPalletBySeq,
@@ -44,23 +45,25 @@ class PalletViewModel with ChangeNotifier {
   }
 
   // Future<void> _addPallet(Pallet pallet) async {
-  Future<void> addPallet(String sQRData) async {
+  Future<bool> addPallet(String sQRData) async {
     Pallet? pallet = scanQRData(sQRData);
     if (pallet == null) {
-      return;
+      return false;
     }
-    await useCasesWms.addPallet(pallet);
+    return await useCasesWms.addPallet(pallet);
     // await listPallets(pallet.WORKSHOP);
   }
 
-  Future<void> updatePallet(Pallet pallet) async {
-    await useCasesWms.updatePallet(pallet);
-    await listPallets(pallet.WORKSHOP, pallet.LOCATION, pallet.STATE);
+  Future<void> updatePallet(List<Pallet> pallets) async {
+    return await useCasesWms.updatePallet(pallets);
   }
 
-  Future<void> deletePallet(Pallet pallet) async {
-    await useCasesWms.deletePallet(pallet);
-    await listPallets(pallet.WORKSHOP, pallet.LOCATION, pallet.STATE);
+  Future<void> updatePalletState(List<Pallet> pallets) async {
+    return await useCasesWms.updatePalletState(pallets);
+  }
+
+  Future<bool> deletePallet(List<Pallet> pallets) async {
+    return await useCasesWms.deletePallet(pallets);
   }
 
   Future<Pallet?> getPalletBySeq(int palletSeq) async {

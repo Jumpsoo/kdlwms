@@ -7,6 +7,7 @@ import 'package:kdlwms/domain/use_case/pallet/list_pallets_use_case.dart';
 import 'package:kdlwms/domain/use_case/pallet/add_pallet_use_case.dart';
 import 'package:kdlwms/domain/use_case/pallet/delete_pallet_use_case.dart';
 import 'package:kdlwms/domain/use_case/pallet/update_pallet_use_case.dart';
+import 'package:kdlwms/domain/use_case/pallet/update_palletstate_use_case.dart';
 
 
 import 'package:kdlwms/domain/use_case/use_cases_wms.dart';
@@ -52,6 +53,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     listPallets: ListPalletsUseCase(repository),
     addPallet: AddPalletUseCase(repository),
     updatePallet: UpdatePalletUseCase(repository),
+    updatePalletState: UpdatePalletStateUseCase(repository),
     deletePallet: DeletePalletUseCase(repository),
     getPalletBySeq: GetPalletBySeq(repository),
   );

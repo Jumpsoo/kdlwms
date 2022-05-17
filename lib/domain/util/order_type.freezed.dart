@@ -72,19 +72,21 @@ class _$OrderTypeCopyWithImpl<$Res> implements $OrderTypeCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $AscendingCopyWith<$Res> {
-  factory $AscendingCopyWith(Ascending value, $Res Function(Ascending) then) =
-      _$AscendingCopyWithImpl<$Res>;
+abstract class _$$AscendingCopyWith<$Res> {
+  factory _$$AscendingCopyWith(
+          _$Ascending value, $Res Function(_$Ascending) then) =
+      __$$AscendingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AscendingCopyWithImpl<$Res> extends _$OrderTypeCopyWithImpl<$Res>
-    implements $AscendingCopyWith<$Res> {
-  _$AscendingCopyWithImpl(Ascending _value, $Res Function(Ascending) _then)
-      : super(_value, (v) => _then(v as Ascending));
+class __$$AscendingCopyWithImpl<$Res> extends _$OrderTypeCopyWithImpl<$Res>
+    implements _$$AscendingCopyWith<$Res> {
+  __$$AscendingCopyWithImpl(
+      _$Ascending _value, $Res Function(_$Ascending) _then)
+      : super(_value, (v) => _then(v as _$Ascending));
 
   @override
-  Ascending get _value => super._value as Ascending;
+  _$Ascending get _value => super._value as _$Ascending;
 }
 
 /// @nodoc
@@ -100,7 +102,7 @@ class _$Ascending implements Ascending {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Ascending);
+        (other.runtimeType == runtimeType && other is _$Ascending);
   }
 
   @override
@@ -174,20 +176,21 @@ abstract class Ascending implements OrderType {
 }
 
 /// @nodoc
-abstract class $DescendingCopyWith<$Res> {
-  factory $DescendingCopyWith(
-          Descending value, $Res Function(Descending) then) =
-      _$DescendingCopyWithImpl<$Res>;
+abstract class _$$DescendingCopyWith<$Res> {
+  factory _$$DescendingCopyWith(
+          _$Descending value, $Res Function(_$Descending) then) =
+      __$$DescendingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$DescendingCopyWithImpl<$Res> extends _$OrderTypeCopyWithImpl<$Res>
-    implements $DescendingCopyWith<$Res> {
-  _$DescendingCopyWithImpl(Descending _value, $Res Function(Descending) _then)
-      : super(_value, (v) => _then(v as Descending));
+class __$$DescendingCopyWithImpl<$Res> extends _$OrderTypeCopyWithImpl<$Res>
+    implements _$$DescendingCopyWith<$Res> {
+  __$$DescendingCopyWithImpl(
+      _$Descending _value, $Res Function(_$Descending) _then)
+      : super(_value, (v) => _then(v as _$Descending));
 
   @override
-  Descending get _value => super._value as Descending;
+  _$Descending get _value => super._value as _$Descending;
 }
 
 /// @nodoc
@@ -203,7 +206,7 @@ class _$Descending implements Descending {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is Descending);
+        (other.runtimeType == runtimeType && other is _$Descending);
   }
 
   @override

@@ -21,16 +21,16 @@ Pallet _$PalletFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Pallet {
   int get PALLET_SEQ => throw _privateConstructorUsedError;
-  String get WORKSHOP => throw _privateConstructorUsedError;
-  String get LOCATION => throw _privateConstructorUsedError;
-  String get ITEM_NO => throw _privateConstructorUsedError;
-  String get ITEM_LOT => throw _privateConstructorUsedError;
-  int get QUANTITY => throw _privateConstructorUsedError;
-  int get STATE => throw _privateConstructorUsedError;
-  String get BARCODE => throw _privateConstructorUsedError;
-  DateTime get SCAN_DATE => throw _privateConstructorUsedError;
-  String get SCAN_USERNM => throw _privateConstructorUsedError;
-  int get BOX_NO => throw _privateConstructorUsedError;
+  String? get WORKSHOP => throw _privateConstructorUsedError;
+  String? get LOCATION => throw _privateConstructorUsedError;
+  String? get ITEM_NO => throw _privateConstructorUsedError;
+  String? get ITEM_LOT => throw _privateConstructorUsedError;
+  int? get QUANTITY => throw _privateConstructorUsedError;
+  int? get STATE => throw _privateConstructorUsedError;
+  String? get BARCODE => throw _privateConstructorUsedError;
+  DateTime? get SCAN_DATE => throw _privateConstructorUsedError;
+  String? get SCAN_USERNM => throw _privateConstructorUsedError;
+  int? get BOX_NO => throw _privateConstructorUsedError;
   String? get PRINT_FLAG => throw _privateConstructorUsedError;
   DateTime? get PRINT_DATE => throw _privateConstructorUsedError;
   String? get PRINT_USER => throw _privateConstructorUsedError;
@@ -53,16 +53,16 @@ abstract class $PalletCopyWith<$Res> {
       _$PalletCopyWithImpl<$Res>;
   $Res call(
       {int PALLET_SEQ,
-      String WORKSHOP,
-      String LOCATION,
-      String ITEM_NO,
-      String ITEM_LOT,
-      int QUANTITY,
-      int STATE,
-      String BARCODE,
-      DateTime SCAN_DATE,
-      String SCAN_USERNM,
-      int BOX_NO,
+      String? WORKSHOP,
+      String? LOCATION,
+      String? ITEM_NO,
+      String? ITEM_LOT,
+      int? QUANTITY,
+      int? STATE,
+      String? BARCODE,
+      DateTime? SCAN_DATE,
+      String? SCAN_USERNM,
+      int? BOX_NO,
       String? PRINT_FLAG,
       DateTime? PRINT_DATE,
       String? PRINT_USER,
@@ -115,43 +115,43 @@ class _$PalletCopyWithImpl<$Res> implements $PalletCopyWith<$Res> {
       WORKSHOP: WORKSHOP == freezed
           ? _value.WORKSHOP
           : WORKSHOP // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       LOCATION: LOCATION == freezed
           ? _value.LOCATION
           : LOCATION // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       ITEM_NO: ITEM_NO == freezed
           ? _value.ITEM_NO
           : ITEM_NO // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       ITEM_LOT: ITEM_LOT == freezed
           ? _value.ITEM_LOT
           : ITEM_LOT // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       QUANTITY: QUANTITY == freezed
           ? _value.QUANTITY
           : QUANTITY // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       STATE: STATE == freezed
           ? _value.STATE
           : STATE // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       BARCODE: BARCODE == freezed
           ? _value.BARCODE
           : BARCODE // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       SCAN_DATE: SCAN_DATE == freezed
           ? _value.SCAN_DATE
           : SCAN_DATE // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       SCAN_USERNM: SCAN_USERNM == freezed
           ? _value.SCAN_USERNM
           : SCAN_USERNM // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       BOX_NO: BOX_NO == freezed
           ? _value.BOX_NO
           : BOX_NO // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       PRINT_FLAG: PRINT_FLAG == freezed
           ? _value.PRINT_FLAG
           : PRINT_FLAG // ignore: cast_nullable_to_non_nullable
@@ -197,22 +197,22 @@ class _$PalletCopyWithImpl<$Res> implements $PalletCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PalletCopyWith<$Res> implements $PalletCopyWith<$Res> {
-  factory _$PalletCopyWith(_Pallet value, $Res Function(_Pallet) then) =
-      __$PalletCopyWithImpl<$Res>;
+abstract class _$$_PalletCopyWith<$Res> implements $PalletCopyWith<$Res> {
+  factory _$$_PalletCopyWith(_$_Pallet value, $Res Function(_$_Pallet) then) =
+      __$$_PalletCopyWithImpl<$Res>;
   @override
   $Res call(
       {int PALLET_SEQ,
-      String WORKSHOP,
-      String LOCATION,
-      String ITEM_NO,
-      String ITEM_LOT,
-      int QUANTITY,
-      int STATE,
-      String BARCODE,
-      DateTime SCAN_DATE,
-      String SCAN_USERNM,
-      int BOX_NO,
+      String? WORKSHOP,
+      String? LOCATION,
+      String? ITEM_NO,
+      String? ITEM_LOT,
+      int? QUANTITY,
+      int? STATE,
+      String? BARCODE,
+      DateTime? SCAN_DATE,
+      String? SCAN_USERNM,
+      int? BOX_NO,
       String? PRINT_FLAG,
       DateTime? PRINT_DATE,
       String? PRINT_USER,
@@ -226,13 +226,13 @@ abstract class _$PalletCopyWith<$Res> implements $PalletCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PalletCopyWithImpl<$Res> extends _$PalletCopyWithImpl<$Res>
-    implements _$PalletCopyWith<$Res> {
-  __$PalletCopyWithImpl(_Pallet _value, $Res Function(_Pallet) _then)
-      : super(_value, (v) => _then(v as _Pallet));
+class __$$_PalletCopyWithImpl<$Res> extends _$PalletCopyWithImpl<$Res>
+    implements _$$_PalletCopyWith<$Res> {
+  __$$_PalletCopyWithImpl(_$_Pallet _value, $Res Function(_$_Pallet) _then)
+      : super(_value, (v) => _then(v as _$_Pallet));
 
   @override
-  _Pallet get _value => super._value as _Pallet;
+  _$_Pallet get _value => super._value as _$_Pallet;
 
   @override
   $Res call({
@@ -258,7 +258,7 @@ class __$PalletCopyWithImpl<$Res> extends _$PalletCopyWithImpl<$Res>
     Object? UPDTR_ID = freezed,
     Object? UPDT_DT = freezed,
   }) {
-    return _then(_Pallet(
+    return _then(_$_Pallet(
       PALLET_SEQ: PALLET_SEQ == freezed
           ? _value.PALLET_SEQ
           : PALLET_SEQ // ignore: cast_nullable_to_non_nullable
@@ -266,43 +266,43 @@ class __$PalletCopyWithImpl<$Res> extends _$PalletCopyWithImpl<$Res>
       WORKSHOP: WORKSHOP == freezed
           ? _value.WORKSHOP
           : WORKSHOP // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       LOCATION: LOCATION == freezed
           ? _value.LOCATION
           : LOCATION // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       ITEM_NO: ITEM_NO == freezed
           ? _value.ITEM_NO
           : ITEM_NO // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       ITEM_LOT: ITEM_LOT == freezed
           ? _value.ITEM_LOT
           : ITEM_LOT // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       QUANTITY: QUANTITY == freezed
           ? _value.QUANTITY
           : QUANTITY // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       STATE: STATE == freezed
           ? _value.STATE
           : STATE // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       BARCODE: BARCODE == freezed
           ? _value.BARCODE
           : BARCODE // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       SCAN_DATE: SCAN_DATE == freezed
           ? _value.SCAN_DATE
           : SCAN_DATE // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       SCAN_USERNM: SCAN_USERNM == freezed
           ? _value.SCAN_USERNM
           : SCAN_USERNM // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       BOX_NO: BOX_NO == freezed
           ? _value.BOX_NO
           : BOX_NO // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       PRINT_FLAG: PRINT_FLAG == freezed
           ? _value.PRINT_FLAG
           : PRINT_FLAG // ignore: cast_nullable_to_non_nullable
@@ -352,16 +352,16 @@ class __$PalletCopyWithImpl<$Res> extends _$PalletCopyWithImpl<$Res>
 class _$_Pallet implements _Pallet {
   _$_Pallet(
       {required this.PALLET_SEQ,
-      required this.WORKSHOP,
-      required this.LOCATION,
-      required this.ITEM_NO,
-      required this.ITEM_LOT,
-      required this.QUANTITY,
-      required this.STATE,
-      required this.BARCODE,
-      required this.SCAN_DATE,
-      required this.SCAN_USERNM,
-      required this.BOX_NO,
+      this.WORKSHOP,
+      this.LOCATION,
+      this.ITEM_NO,
+      this.ITEM_LOT,
+      this.QUANTITY,
+      this.STATE,
+      this.BARCODE,
+      this.SCAN_DATE,
+      this.SCAN_USERNM,
+      this.BOX_NO,
       this.PRINT_FLAG,
       this.PRINT_DATE,
       this.PRINT_USER,
@@ -379,25 +379,25 @@ class _$_Pallet implements _Pallet {
   @override
   final int PALLET_SEQ;
   @override
-  final String WORKSHOP;
+  final String? WORKSHOP;
   @override
-  final String LOCATION;
+  final String? LOCATION;
   @override
-  final String ITEM_NO;
+  final String? ITEM_NO;
   @override
-  final String ITEM_LOT;
+  final String? ITEM_LOT;
   @override
-  final int QUANTITY;
+  final int? QUANTITY;
   @override
-  final int STATE;
+  final int? STATE;
   @override
-  final String BARCODE;
+  final String? BARCODE;
   @override
-  final DateTime SCAN_DATE;
+  final DateTime? SCAN_DATE;
   @override
-  final String SCAN_USERNM;
+  final String? SCAN_USERNM;
   @override
-  final int BOX_NO;
+  final int? BOX_NO;
   @override
   final String? PRINT_FLAG;
   @override
@@ -428,7 +428,7 @@ class _$_Pallet implements _Pallet {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Pallet &&
+            other is _$_Pallet &&
             const DeepCollectionEquality()
                 .equals(other.PALLET_SEQ, PALLET_SEQ) &&
             const DeepCollectionEquality().equals(other.WORKSHOP, WORKSHOP) &&
@@ -489,8 +489,8 @@ class _$_Pallet implements _Pallet {
 
   @JsonKey(ignore: true)
   @override
-  _$PalletCopyWith<_Pallet> get copyWith =>
-      __$PalletCopyWithImpl<_Pallet>(this, _$identity);
+  _$$_PalletCopyWith<_$_Pallet> get copyWith =>
+      __$$_PalletCopyWithImpl<_$_Pallet>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -501,16 +501,16 @@ class _$_Pallet implements _Pallet {
 abstract class _Pallet implements Pallet {
   factory _Pallet(
       {required final int PALLET_SEQ,
-      required final String WORKSHOP,
-      required final String LOCATION,
-      required final String ITEM_NO,
-      required final String ITEM_LOT,
-      required final int QUANTITY,
-      required final int STATE,
-      required final String BARCODE,
-      required final DateTime SCAN_DATE,
-      required final String SCAN_USERNM,
-      required final int BOX_NO,
+      final String? WORKSHOP,
+      final String? LOCATION,
+      final String? ITEM_NO,
+      final String? ITEM_LOT,
+      final int? QUANTITY,
+      final int? STATE,
+      final String? BARCODE,
+      final DateTime? SCAN_DATE,
+      final String? SCAN_USERNM,
+      final int? BOX_NO,
       final String? PRINT_FLAG,
       final DateTime? PRINT_DATE,
       final String? PRINT_USER,
@@ -527,25 +527,25 @@ abstract class _Pallet implements Pallet {
   @override
   int get PALLET_SEQ => throw _privateConstructorUsedError;
   @override
-  String get WORKSHOP => throw _privateConstructorUsedError;
+  String? get WORKSHOP => throw _privateConstructorUsedError;
   @override
-  String get LOCATION => throw _privateConstructorUsedError;
+  String? get LOCATION => throw _privateConstructorUsedError;
   @override
-  String get ITEM_NO => throw _privateConstructorUsedError;
+  String? get ITEM_NO => throw _privateConstructorUsedError;
   @override
-  String get ITEM_LOT => throw _privateConstructorUsedError;
+  String? get ITEM_LOT => throw _privateConstructorUsedError;
   @override
-  int get QUANTITY => throw _privateConstructorUsedError;
+  int? get QUANTITY => throw _privateConstructorUsedError;
   @override
-  int get STATE => throw _privateConstructorUsedError;
+  int? get STATE => throw _privateConstructorUsedError;
   @override
-  String get BARCODE => throw _privateConstructorUsedError;
+  String? get BARCODE => throw _privateConstructorUsedError;
   @override
-  DateTime get SCAN_DATE => throw _privateConstructorUsedError;
+  DateTime? get SCAN_DATE => throw _privateConstructorUsedError;
   @override
-  String get SCAN_USERNM => throw _privateConstructorUsedError;
+  String? get SCAN_USERNM => throw _privateConstructorUsedError;
   @override
-  int get BOX_NO => throw _privateConstructorUsedError;
+  int? get BOX_NO => throw _privateConstructorUsedError;
   @override
   String? get PRINT_FLAG => throw _privateConstructorUsedError;
   @override
@@ -568,5 +568,6 @@ abstract class _Pallet implements Pallet {
   DateTime? get UPDT_DT => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PalletCopyWith<_Pallet> get copyWith => throw _privateConstructorUsedError;
+  _$$_PalletCopyWith<_$_Pallet> get copyWith =>
+      throw _privateConstructorUsedError;
 }

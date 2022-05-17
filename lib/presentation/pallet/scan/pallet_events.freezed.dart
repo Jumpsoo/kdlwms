@@ -22,8 +22,9 @@ mixin _$PalletEvent {
         listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
-    required TResult Function(Pallet pallet) updatePallet,
-    required TResult Function(Pallet pallet) deletePallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
     required TResult Function(String sQRData) scanQRData,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,8 +34,9 @@ mixin _$PalletEvent {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
   }) =>
       throw _privateConstructorUsedError;
@@ -44,8 +46,9 @@ mixin _$PalletEvent {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) =>
@@ -56,6 +59,7 @@ mixin _$PalletEvent {
     required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(ScanQRData value) scanQRData,
   }) =>
@@ -66,6 +70,7 @@ mixin _$PalletEvent {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
   }) =>
@@ -76,6 +81,7 @@ mixin _$PalletEvent {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
@@ -100,22 +106,22 @@ class _$PalletEventCopyWithImpl<$Res> implements $PalletEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $ListPalletsCopyWith<$Res> {
-  factory $ListPalletsCopyWith(
-          ListPallets value, $Res Function(ListPallets) then) =
-      _$ListPalletsCopyWithImpl<$Res>;
+abstract class _$$ListPalletsCopyWith<$Res> {
+  factory _$$ListPalletsCopyWith(
+          _$ListPallets value, $Res Function(_$ListPallets) then) =
+      __$$ListPalletsCopyWithImpl<$Res>;
   $Res call({String sWorkShop, String sLocation, int nState});
 }
 
 /// @nodoc
-class _$ListPalletsCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
-    implements $ListPalletsCopyWith<$Res> {
-  _$ListPalletsCopyWithImpl(
-      ListPallets _value, $Res Function(ListPallets) _then)
-      : super(_value, (v) => _then(v as ListPallets));
+class __$$ListPalletsCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$ListPalletsCopyWith<$Res> {
+  __$$ListPalletsCopyWithImpl(
+      _$ListPallets _value, $Res Function(_$ListPallets) _then)
+      : super(_value, (v) => _then(v as _$ListPallets));
 
   @override
-  ListPallets get _value => super._value as ListPallets;
+  _$ListPallets get _value => super._value as _$ListPallets;
 
   @override
   $Res call({
@@ -123,7 +129,7 @@ class _$ListPalletsCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
     Object? sLocation = freezed,
     Object? nState = freezed,
   }) {
-    return _then(ListPallets(
+    return _then(_$ListPallets(
       sWorkShop == freezed
           ? _value.sWorkShop
           : sWorkShop // ignore: cast_nullable_to_non_nullable
@@ -161,7 +167,7 @@ class _$ListPallets implements ListPallets {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ListPallets &&
+            other is _$ListPallets &&
             const DeepCollectionEquality().equals(other.sWorkShop, sWorkShop) &&
             const DeepCollectionEquality().equals(other.sLocation, sLocation) &&
             const DeepCollectionEquality().equals(other.nState, nState));
@@ -176,8 +182,8 @@ class _$ListPallets implements ListPallets {
 
   @JsonKey(ignore: true)
   @override
-  $ListPalletsCopyWith<ListPallets> get copyWith =>
-      _$ListPalletsCopyWithImpl<ListPallets>(this, _$identity);
+  _$$ListPalletsCopyWith<_$ListPallets> get copyWith =>
+      __$$ListPalletsCopyWithImpl<_$ListPallets>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -186,8 +192,9 @@ class _$ListPallets implements ListPallets {
         listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
-    required TResult Function(Pallet pallet) updatePallet,
-    required TResult Function(Pallet pallet) deletePallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return listPallets(sWorkShop, sLocation, nState);
@@ -200,8 +207,9 @@ class _$ListPallets implements ListPallets {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return listPallets?.call(sWorkShop, sLocation, nState);
@@ -214,8 +222,9 @@ class _$ListPallets implements ListPallets {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -232,6 +241,7 @@ class _$ListPallets implements ListPallets {
     required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
@@ -245,6 +255,7 @@ class _$ListPallets implements ListPallets {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
@@ -258,6 +269,7 @@ class _$ListPallets implements ListPallets {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
@@ -278,33 +290,34 @@ abstract class ListPallets implements PalletEvent {
   String get sLocation => throw _privateConstructorUsedError;
   int get nState => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ListPalletsCopyWith<ListPallets> get copyWith =>
+  _$$ListPalletsCopyWith<_$ListPallets> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetPalletBySeqCopyWith<$Res> {
-  factory $GetPalletBySeqCopyWith(
-          GetPalletBySeq value, $Res Function(GetPalletBySeq) then) =
-      _$GetPalletBySeqCopyWithImpl<$Res>;
+abstract class _$$GetPalletBySeqCopyWith<$Res> {
+  factory _$$GetPalletBySeqCopyWith(
+          _$GetPalletBySeq value, $Res Function(_$GetPalletBySeq) then) =
+      __$$GetPalletBySeqCopyWithImpl<$Res>;
   $Res call({int palletSeq});
 }
 
 /// @nodoc
-class _$GetPalletBySeqCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
-    implements $GetPalletBySeqCopyWith<$Res> {
-  _$GetPalletBySeqCopyWithImpl(
-      GetPalletBySeq _value, $Res Function(GetPalletBySeq) _then)
-      : super(_value, (v) => _then(v as GetPalletBySeq));
+class __$$GetPalletBySeqCopyWithImpl<$Res>
+    extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$GetPalletBySeqCopyWith<$Res> {
+  __$$GetPalletBySeqCopyWithImpl(
+      _$GetPalletBySeq _value, $Res Function(_$GetPalletBySeq) _then)
+      : super(_value, (v) => _then(v as _$GetPalletBySeq));
 
   @override
-  GetPalletBySeq get _value => super._value as GetPalletBySeq;
+  _$GetPalletBySeq get _value => super._value as _$GetPalletBySeq;
 
   @override
   $Res call({
     Object? palletSeq = freezed,
   }) {
-    return _then(GetPalletBySeq(
+    return _then(_$GetPalletBySeq(
       palletSeq == freezed
           ? _value.palletSeq
           : palletSeq // ignore: cast_nullable_to_non_nullable
@@ -330,7 +343,7 @@ class _$GetPalletBySeq implements GetPalletBySeq {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is GetPalletBySeq &&
+            other is _$GetPalletBySeq &&
             const DeepCollectionEquality().equals(other.palletSeq, palletSeq));
   }
 
@@ -340,8 +353,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
 
   @JsonKey(ignore: true)
   @override
-  $GetPalletBySeqCopyWith<GetPalletBySeq> get copyWith =>
-      _$GetPalletBySeqCopyWithImpl<GetPalletBySeq>(this, _$identity);
+  _$$GetPalletBySeqCopyWith<_$GetPalletBySeq> get copyWith =>
+      __$$GetPalletBySeqCopyWithImpl<_$GetPalletBySeq>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -350,8 +363,9 @@ class _$GetPalletBySeq implements GetPalletBySeq {
         listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
-    required TResult Function(Pallet pallet) updatePallet,
-    required TResult Function(Pallet pallet) deletePallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return getPalletBySeq(palletSeq);
@@ -364,8 +378,9 @@ class _$GetPalletBySeq implements GetPalletBySeq {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return getPalletBySeq?.call(palletSeq);
@@ -378,8 +393,9 @@ class _$GetPalletBySeq implements GetPalletBySeq {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -396,6 +412,7 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
@@ -409,6 +426,7 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
@@ -422,6 +440,7 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
@@ -438,31 +457,33 @@ abstract class GetPalletBySeq implements PalletEvent {
 
   int get palletSeq => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GetPalletBySeqCopyWith<GetPalletBySeq> get copyWith =>
+  _$$GetPalletBySeqCopyWith<_$GetPalletBySeq> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AddPalletCopyWith<$Res> {
-  factory $AddPalletCopyWith(AddPallet value, $Res Function(AddPallet) then) =
-      _$AddPalletCopyWithImpl<$Res>;
+abstract class _$$AddPalletCopyWith<$Res> {
+  factory _$$AddPalletCopyWith(
+          _$AddPallet value, $Res Function(_$AddPallet) then) =
+      __$$AddPalletCopyWithImpl<$Res>;
   $Res call({String sQRData});
 }
 
 /// @nodoc
-class _$AddPalletCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
-    implements $AddPalletCopyWith<$Res> {
-  _$AddPalletCopyWithImpl(AddPallet _value, $Res Function(AddPallet) _then)
-      : super(_value, (v) => _then(v as AddPallet));
+class __$$AddPalletCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$AddPalletCopyWith<$Res> {
+  __$$AddPalletCopyWithImpl(
+      _$AddPallet _value, $Res Function(_$AddPallet) _then)
+      : super(_value, (v) => _then(v as _$AddPallet));
 
   @override
-  AddPallet get _value => super._value as AddPallet;
+  _$AddPallet get _value => super._value as _$AddPallet;
 
   @override
   $Res call({
     Object? sQRData = freezed,
   }) {
-    return _then(AddPallet(
+    return _then(_$AddPallet(
       sQRData == freezed
           ? _value.sQRData
           : sQRData // ignore: cast_nullable_to_non_nullable
@@ -488,7 +509,7 @@ class _$AddPallet implements AddPallet {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is AddPallet &&
+            other is _$AddPallet &&
             const DeepCollectionEquality().equals(other.sQRData, sQRData));
   }
 
@@ -498,8 +519,8 @@ class _$AddPallet implements AddPallet {
 
   @JsonKey(ignore: true)
   @override
-  $AddPalletCopyWith<AddPallet> get copyWith =>
-      _$AddPalletCopyWithImpl<AddPallet>(this, _$identity);
+  _$$AddPalletCopyWith<_$AddPallet> get copyWith =>
+      __$$AddPalletCopyWithImpl<_$AddPallet>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -508,8 +529,9 @@ class _$AddPallet implements AddPallet {
         listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
-    required TResult Function(Pallet pallet) updatePallet,
-    required TResult Function(Pallet pallet) deletePallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return addPallet(sQRData);
@@ -522,8 +544,9 @@ class _$AddPallet implements AddPallet {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return addPallet?.call(sQRData);
@@ -536,8 +559,9 @@ class _$AddPallet implements AddPallet {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -554,6 +578,7 @@ class _$AddPallet implements AddPallet {
     required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
@@ -567,6 +592,7 @@ class _$AddPallet implements AddPallet {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
@@ -580,6 +606,7 @@ class _$AddPallet implements AddPallet {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
@@ -596,79 +623,74 @@ abstract class AddPallet implements PalletEvent {
 
   String get sQRData => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AddPalletCopyWith<AddPallet> get copyWith =>
+  _$$AddPalletCopyWith<_$AddPallet> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UpdatePalletCopyWith<$Res> {
-  factory $UpdatePalletCopyWith(
-          UpdatePallet value, $Res Function(UpdatePallet) then) =
-      _$UpdatePalletCopyWithImpl<$Res>;
-  $Res call({Pallet pallet});
-
-  $PalletCopyWith<$Res> get pallet;
+abstract class _$$UpdatePalletCopyWith<$Res> {
+  factory _$$UpdatePalletCopyWith(
+          _$UpdatePallet value, $Res Function(_$UpdatePallet) then) =
+      __$$UpdatePalletCopyWithImpl<$Res>;
+  $Res call({List<Pallet> pallets});
 }
 
 /// @nodoc
-class _$UpdatePalletCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
-    implements $UpdatePalletCopyWith<$Res> {
-  _$UpdatePalletCopyWithImpl(
-      UpdatePallet _value, $Res Function(UpdatePallet) _then)
-      : super(_value, (v) => _then(v as UpdatePallet));
+class __$$UpdatePalletCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$UpdatePalletCopyWith<$Res> {
+  __$$UpdatePalletCopyWithImpl(
+      _$UpdatePallet _value, $Res Function(_$UpdatePallet) _then)
+      : super(_value, (v) => _then(v as _$UpdatePallet));
 
   @override
-  UpdatePallet get _value => super._value as UpdatePallet;
+  _$UpdatePallet get _value => super._value as _$UpdatePallet;
 
   @override
   $Res call({
-    Object? pallet = freezed,
+    Object? pallets = freezed,
   }) {
-    return _then(UpdatePallet(
-      pallet == freezed
-          ? _value.pallet
-          : pallet // ignore: cast_nullable_to_non_nullable
-              as Pallet,
+    return _then(_$UpdatePallet(
+      pallets == freezed
+          ? _value._pallets
+          : pallets // ignore: cast_nullable_to_non_nullable
+              as List<Pallet>,
     ));
-  }
-
-  @override
-  $PalletCopyWith<$Res> get pallet {
-    return $PalletCopyWith<$Res>(_value.pallet, (value) {
-      return _then(_value.copyWith(pallet: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$UpdatePallet implements UpdatePallet {
-  const _$UpdatePallet(this.pallet);
+  const _$UpdatePallet(final List<Pallet> pallets) : _pallets = pallets;
 
+  final List<Pallet> _pallets;
   @override
-  final Pallet pallet;
+  List<Pallet> get pallets {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pallets);
+  }
 
   @override
   String toString() {
-    return 'PalletEvent.updatePallet(pallet: $pallet)';
+    return 'PalletEvent.updatePallet(pallets: $pallets)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is UpdatePallet &&
-            const DeepCollectionEquality().equals(other.pallet, pallet));
+            other is _$UpdatePallet &&
+            const DeepCollectionEquality().equals(other._pallets, _pallets));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(pallet));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_pallets));
 
   @JsonKey(ignore: true)
   @override
-  $UpdatePalletCopyWith<UpdatePallet> get copyWith =>
-      _$UpdatePalletCopyWithImpl<UpdatePallet>(this, _$identity);
+  _$$UpdatePalletCopyWith<_$UpdatePallet> get copyWith =>
+      __$$UpdatePalletCopyWithImpl<_$UpdatePallet>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -677,11 +699,12 @@ class _$UpdatePallet implements UpdatePallet {
         listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
-    required TResult Function(Pallet pallet) updatePallet,
-    required TResult Function(Pallet pallet) deletePallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
     required TResult Function(String sQRData) scanQRData,
   }) {
-    return updatePallet(pallet);
+    return updatePallet(pallets);
   }
 
   @override
@@ -691,11 +714,12 @@ class _$UpdatePallet implements UpdatePallet {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
   }) {
-    return updatePallet?.call(pallet);
+    return updatePallet?.call(pallets);
   }
 
   @override
@@ -705,13 +729,14 @@ class _$UpdatePallet implements UpdatePallet {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
     if (updatePallet != null) {
-      return updatePallet(pallet);
+      return updatePallet(pallets);
     }
     return orElse();
   }
@@ -723,6 +748,7 @@ class _$UpdatePallet implements UpdatePallet {
     required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
@@ -736,6 +762,7 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
@@ -749,6 +776,7 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
@@ -761,83 +789,79 @@ class _$UpdatePallet implements UpdatePallet {
 }
 
 abstract class UpdatePallet implements PalletEvent {
-  const factory UpdatePallet(final Pallet pallet) = _$UpdatePallet;
+  const factory UpdatePallet(final List<Pallet> pallets) = _$UpdatePallet;
 
-  Pallet get pallet => throw _privateConstructorUsedError;
+  List<Pallet> get pallets => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UpdatePalletCopyWith<UpdatePallet> get copyWith =>
+  _$$UpdatePalletCopyWith<_$UpdatePallet> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DeletePalletCopyWith<$Res> {
-  factory $DeletePalletCopyWith(
-          DeletePallet value, $Res Function(DeletePallet) then) =
-      _$DeletePalletCopyWithImpl<$Res>;
-  $Res call({Pallet pallet});
-
-  $PalletCopyWith<$Res> get pallet;
+abstract class _$$UpdatePalletStateCopyWith<$Res> {
+  factory _$$UpdatePalletStateCopyWith(
+          _$UpdatePalletState value, $Res Function(_$UpdatePalletState) then) =
+      __$$UpdatePalletStateCopyWithImpl<$Res>;
+  $Res call({List<Pallet> pallets});
 }
 
 /// @nodoc
-class _$DeletePalletCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
-    implements $DeletePalletCopyWith<$Res> {
-  _$DeletePalletCopyWithImpl(
-      DeletePallet _value, $Res Function(DeletePallet) _then)
-      : super(_value, (v) => _then(v as DeletePallet));
+class __$$UpdatePalletStateCopyWithImpl<$Res>
+    extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$UpdatePalletStateCopyWith<$Res> {
+  __$$UpdatePalletStateCopyWithImpl(
+      _$UpdatePalletState _value, $Res Function(_$UpdatePalletState) _then)
+      : super(_value, (v) => _then(v as _$UpdatePalletState));
 
   @override
-  DeletePallet get _value => super._value as DeletePallet;
+  _$UpdatePalletState get _value => super._value as _$UpdatePalletState;
 
   @override
   $Res call({
-    Object? pallet = freezed,
+    Object? pallets = freezed,
   }) {
-    return _then(DeletePallet(
-      pallet == freezed
-          ? _value.pallet
-          : pallet // ignore: cast_nullable_to_non_nullable
-              as Pallet,
+    return _then(_$UpdatePalletState(
+      pallets == freezed
+          ? _value._pallets
+          : pallets // ignore: cast_nullable_to_non_nullable
+              as List<Pallet>,
     ));
-  }
-
-  @override
-  $PalletCopyWith<$Res> get pallet {
-    return $PalletCopyWith<$Res>(_value.pallet, (value) {
-      return _then(_value.copyWith(pallet: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$DeletePallet implements DeletePallet {
-  const _$DeletePallet(this.pallet);
+class _$UpdatePalletState implements UpdatePalletState {
+  const _$UpdatePalletState(final List<Pallet> pallets) : _pallets = pallets;
 
+  final List<Pallet> _pallets;
   @override
-  final Pallet pallet;
+  List<Pallet> get pallets {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pallets);
+  }
 
   @override
   String toString() {
-    return 'PalletEvent.deletePallet(pallet: $pallet)';
+    return 'PalletEvent.updatePalletState(pallets: $pallets)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is DeletePallet &&
-            const DeepCollectionEquality().equals(other.pallet, pallet));
+            other is _$UpdatePalletState &&
+            const DeepCollectionEquality().equals(other._pallets, _pallets));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(pallet));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_pallets));
 
   @JsonKey(ignore: true)
   @override
-  $DeletePalletCopyWith<DeletePallet> get copyWith =>
-      _$DeletePalletCopyWithImpl<DeletePallet>(this, _$identity);
+  _$$UpdatePalletStateCopyWith<_$UpdatePalletState> get copyWith =>
+      __$$UpdatePalletStateCopyWithImpl<_$UpdatePalletState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -846,11 +870,12 @@ class _$DeletePallet implements DeletePallet {
         listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
-    required TResult Function(Pallet pallet) updatePallet,
-    required TResult Function(Pallet pallet) deletePallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
     required TResult Function(String sQRData) scanQRData,
   }) {
-    return deletePallet(pallet);
+    return updatePalletState(pallets);
   }
 
   @override
@@ -860,11 +885,12 @@ class _$DeletePallet implements DeletePallet {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
   }) {
-    return deletePallet?.call(pallet);
+    return updatePalletState?.call(pallets);
   }
 
   @override
@@ -874,13 +900,14 @@ class _$DeletePallet implements DeletePallet {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
-    if (deletePallet != null) {
-      return deletePallet(pallet);
+    if (updatePalletState != null) {
+      return updatePalletState(pallets);
     }
     return orElse();
   }
@@ -892,6 +919,178 @@ class _$DeletePallet implements DeletePallet {
     required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(ScanQRData value) scanQRData,
+  }) {
+    return updatePalletState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ListPallets value)? listPallets,
+    TResult Function(GetPalletBySeq value)? getPalletBySeq,
+    TResult Function(AddPallet value)? addPallet,
+    TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(ScanQRData value)? scanQRData,
+  }) {
+    return updatePalletState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ListPallets value)? listPallets,
+    TResult Function(GetPalletBySeq value)? getPalletBySeq,
+    TResult Function(AddPallet value)? addPallet,
+    TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(ScanQRData value)? scanQRData,
+    required TResult orElse(),
+  }) {
+    if (updatePalletState != null) {
+      return updatePalletState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdatePalletState implements PalletEvent {
+  const factory UpdatePalletState(final List<Pallet> pallets) =
+      _$UpdatePalletState;
+
+  List<Pallet> get pallets => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$UpdatePalletStateCopyWith<_$UpdatePalletState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeletePalletCopyWith<$Res> {
+  factory _$$DeletePalletCopyWith(
+          _$DeletePallet value, $Res Function(_$DeletePallet) then) =
+      __$$DeletePalletCopyWithImpl<$Res>;
+  $Res call({List<Pallet> pallets});
+}
+
+/// @nodoc
+class __$$DeletePalletCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$DeletePalletCopyWith<$Res> {
+  __$$DeletePalletCopyWithImpl(
+      _$DeletePallet _value, $Res Function(_$DeletePallet) _then)
+      : super(_value, (v) => _then(v as _$DeletePallet));
+
+  @override
+  _$DeletePallet get _value => super._value as _$DeletePallet;
+
+  @override
+  $Res call({
+    Object? pallets = freezed,
+  }) {
+    return _then(_$DeletePallet(
+      pallets == freezed
+          ? _value._pallets
+          : pallets // ignore: cast_nullable_to_non_nullable
+              as List<Pallet>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeletePallet implements DeletePallet {
+  const _$DeletePallet(final List<Pallet> pallets) : _pallets = pallets;
+
+  final List<Pallet> _pallets;
+  @override
+  List<Pallet> get pallets {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pallets);
+  }
+
+  @override
+  String toString() {
+    return 'PalletEvent.deletePallet(pallets: $pallets)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeletePallet &&
+            const DeepCollectionEquality().equals(other._pallets, _pallets));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_pallets));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$DeletePalletCopyWith<_$DeletePallet> get copyWith =>
+      __$$DeletePalletCopyWithImpl<_$DeletePallet>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
+    required TResult Function(int palletSeq) getPalletBySeq,
+    required TResult Function(String sQRData) addPallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function(String sQRData) scanQRData,
+  }) {
+    return deletePallet(pallets);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
+    TResult Function(int palletSeq)? getPalletBySeq,
+    TResult Function(String sQRData)? addPallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function(String sQRData)? scanQRData,
+  }) {
+    return deletePallet?.call(pallets);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
+    TResult Function(int palletSeq)? getPalletBySeq,
+    TResult Function(String sQRData)? addPallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function(String sQRData)? scanQRData,
+    required TResult orElse(),
+  }) {
+    if (deletePallet != null) {
+      return deletePallet(pallets);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ListPallets value) listPallets,
+    required TResult Function(GetPalletBySeq value) getPalletBySeq,
+    required TResult Function(AddPallet value) addPallet,
+    required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
@@ -905,6 +1104,7 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
@@ -918,6 +1118,7 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
@@ -930,36 +1131,37 @@ class _$DeletePallet implements DeletePallet {
 }
 
 abstract class DeletePallet implements PalletEvent {
-  const factory DeletePallet(final Pallet pallet) = _$DeletePallet;
+  const factory DeletePallet(final List<Pallet> pallets) = _$DeletePallet;
 
-  Pallet get pallet => throw _privateConstructorUsedError;
+  List<Pallet> get pallets => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DeletePalletCopyWith<DeletePallet> get copyWith =>
+  _$$DeletePalletCopyWith<_$DeletePallet> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ScanQRDataCopyWith<$Res> {
-  factory $ScanQRDataCopyWith(
-          ScanQRData value, $Res Function(ScanQRData) then) =
-      _$ScanQRDataCopyWithImpl<$Res>;
+abstract class _$$ScanQRDataCopyWith<$Res> {
+  factory _$$ScanQRDataCopyWith(
+          _$ScanQRData value, $Res Function(_$ScanQRData) then) =
+      __$$ScanQRDataCopyWithImpl<$Res>;
   $Res call({String sQRData});
 }
 
 /// @nodoc
-class _$ScanQRDataCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
-    implements $ScanQRDataCopyWith<$Res> {
-  _$ScanQRDataCopyWithImpl(ScanQRData _value, $Res Function(ScanQRData) _then)
-      : super(_value, (v) => _then(v as ScanQRData));
+class __$$ScanQRDataCopyWithImpl<$Res> extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$ScanQRDataCopyWith<$Res> {
+  __$$ScanQRDataCopyWithImpl(
+      _$ScanQRData _value, $Res Function(_$ScanQRData) _then)
+      : super(_value, (v) => _then(v as _$ScanQRData));
 
   @override
-  ScanQRData get _value => super._value as ScanQRData;
+  _$ScanQRData get _value => super._value as _$ScanQRData;
 
   @override
   $Res call({
     Object? sQRData = freezed,
   }) {
-    return _then(ScanQRData(
+    return _then(_$ScanQRData(
       sQRData == freezed
           ? _value.sQRData
           : sQRData // ignore: cast_nullable_to_non_nullable
@@ -985,7 +1187,7 @@ class _$ScanQRData implements ScanQRData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ScanQRData &&
+            other is _$ScanQRData &&
             const DeepCollectionEquality().equals(other.sQRData, sQRData));
   }
 
@@ -995,8 +1197,8 @@ class _$ScanQRData implements ScanQRData {
 
   @JsonKey(ignore: true)
   @override
-  $ScanQRDataCopyWith<ScanQRData> get copyWith =>
-      _$ScanQRDataCopyWithImpl<ScanQRData>(this, _$identity);
+  _$$ScanQRDataCopyWith<_$ScanQRData> get copyWith =>
+      __$$ScanQRDataCopyWithImpl<_$ScanQRData>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1005,8 +1207,9 @@ class _$ScanQRData implements ScanQRData {
         listPallets,
     required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(String sQRData) addPallet,
-    required TResult Function(Pallet pallet) updatePallet,
-    required TResult Function(Pallet pallet) deletePallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return scanQRData(sQRData);
@@ -1019,8 +1222,9 @@ class _$ScanQRData implements ScanQRData {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return scanQRData?.call(sQRData);
@@ -1033,8 +1237,9 @@ class _$ScanQRData implements ScanQRData {
         listPallets,
     TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(String sQRData)? addPallet,
-    TResult Function(Pallet pallet)? updatePallet,
-    TResult Function(Pallet pallet)? deletePallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -1051,6 +1256,7 @@ class _$ScanQRData implements ScanQRData {
     required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
@@ -1064,6 +1270,7 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
@@ -1077,6 +1284,7 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
@@ -1093,6 +1301,6 @@ abstract class ScanQRData implements PalletEvent {
 
   String get sQRData => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ScanQRDataCopyWith<ScanQRData> get copyWith =>
+  _$$ScanQRDataCopyWith<_$ScanQRData> get copyWith =>
       throw _privateConstructorUsedError;
 }

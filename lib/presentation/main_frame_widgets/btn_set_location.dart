@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
+import 'package:kdlwms/presentation/set_workshop/setting_workshop_page.dart';
 
 
 class BtnSetLocation extends StatelessWidget {
@@ -25,7 +26,15 @@ class BtnSetLocation extends StatelessWidget {
                 color: Colors.indigoAccent, style: BorderStyle.solid, width: 2),
           ),
           child: ElevatedButton(
-            onPressed: () async {},
+            onPressed: () async {
+              await Future.delayed(const Duration(seconds: 1));
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                    const SettingWorkShopPage(title: '팔레팅 작업(실적 입력)')),
+              );
+            },
             style: ElevatedButton.styleFrom(
               fixedSize: Size(gWidthButtonLarge, gHeightButtonLarge),
               primary: Colors.indigoAccent[200],

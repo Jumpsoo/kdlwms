@@ -10,8 +10,9 @@ abstract class PalletEvent with _$PalletEvent {
   const factory PalletEvent.getPalletBySeq(int palletSeq) = GetPalletBySeq;
 
   const factory PalletEvent.addPallet(String sQRData) = AddPallet;
-  const factory PalletEvent.updatePallet(Pallet pallet) = UpdatePallet;
-  const factory PalletEvent.deletePallet(Pallet pallet) = DeletePallet;
+  const factory PalletEvent.updatePallet(List<Pallet> pallets) = UpdatePallet;
+  const factory PalletEvent.updatePalletState(List<Pallet> pallets) = UpdatePalletState;
+  const factory PalletEvent.deletePallet(List<Pallet> pallets) = DeletePallet;
 
   const factory PalletEvent.scanQRData(String sQRData) = ScanQRData;
 

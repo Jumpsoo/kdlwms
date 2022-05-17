@@ -64,33 +64,33 @@ class _$PalletStateCopyWithImpl<$Res> implements $PalletStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PalletStateCopyWith<$Res>
+abstract class _$$_PalletStateCopyWith<$Res>
     implements $PalletStateCopyWith<$Res> {
-  factory _$PalletStateCopyWith(
-          _PalletState value, $Res Function(_PalletState) then) =
-      __$PalletStateCopyWithImpl<$Res>;
+  factory _$$_PalletStateCopyWith(
+          _$_PalletState value, $Res Function(_$_PalletState) then) =
+      __$$_PalletStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Pallet>? pallets, bool isLoading});
 }
 
 /// @nodoc
-class __$PalletStateCopyWithImpl<$Res> extends _$PalletStateCopyWithImpl<$Res>
-    implements _$PalletStateCopyWith<$Res> {
-  __$PalletStateCopyWithImpl(
-      _PalletState _value, $Res Function(_PalletState) _then)
-      : super(_value, (v) => _then(v as _PalletState));
+class __$$_PalletStateCopyWithImpl<$Res> extends _$PalletStateCopyWithImpl<$Res>
+    implements _$$_PalletStateCopyWith<$Res> {
+  __$$_PalletStateCopyWithImpl(
+      _$_PalletState _value, $Res Function(_$_PalletState) _then)
+      : super(_value, (v) => _then(v as _$_PalletState));
 
   @override
-  _PalletState get _value => super._value as _PalletState;
+  _$_PalletState get _value => super._value as _$_PalletState;
 
   @override
   $Res call({
     Object? pallets = freezed,
     Object? isLoading = freezed,
   }) {
-    return _then(_PalletState(
+    return _then(_$_PalletState(
       pallets: pallets == freezed
-          ? _value.pallets
+          ? _value._pallets
           : pallets // ignore: cast_nullable_to_non_nullable
               as List<Pallet>?,
       isLoading: isLoading == freezed
@@ -132,8 +132,8 @@ class _$_PalletState implements _PalletState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PalletState &&
-            const DeepCollectionEquality().equals(other.pallets, pallets) &&
+            other is _$_PalletState &&
+            const DeepCollectionEquality().equals(other._pallets, _pallets) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
@@ -141,13 +141,13 @@ class _$_PalletState implements _PalletState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(pallets),
+      const DeepCollectionEquality().hash(_pallets),
       const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
-  _$PalletStateCopyWith<_PalletState> get copyWith =>
-      __$PalletStateCopyWithImpl<_PalletState>(this, _$identity);
+  _$$_PalletStateCopyWith<_$_PalletState> get copyWith =>
+      __$$_PalletStateCopyWithImpl<_$_PalletState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -169,6 +169,6 @@ abstract class _PalletState implements PalletState {
   bool get isLoading => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PalletStateCopyWith<_PalletState> get copyWith =>
+  _$$_PalletStateCopyWith<_$_PalletState> get copyWith =>
       throw _privateConstructorUsedError;
 }

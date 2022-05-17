@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// 사용자 확인 다이얼로그
 Future<bool> showAlertDialogQ(BuildContext context, String sTitle, String sMsg) async {
-  await showDialog(
+  return await showDialog(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
@@ -26,7 +26,7 @@ Future<bool> showAlertDialogQ(BuildContext context, String sTitle, String sMsg) 
       );
     },
   );
-  return true;
+
 }
 
 ///알림용 다이얼로그
@@ -72,4 +72,5 @@ Future<void> _asyncConfirmDialog(BuildContext context) async {
     },
   );
 }
+
 

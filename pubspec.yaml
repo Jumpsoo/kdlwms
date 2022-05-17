@@ -37,9 +37,9 @@ dependencies:
   provider: ^6.0.2
   sqflite: ^2.0.2+1
   json_annotation: ^4.5.0
-  freezed_annotation: ^2.0.1
+  freezed_annotation: ^2.0.3
 
-  pluto_grid: ^2.9.3
+  pluto_grid: ^2.10.3
   pointmobile_scanner: ^0.0.1
   auto_size_text: ^3.0.0
   http: ^0.13.4
@@ -54,7 +54,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.4
   json_serializable: ^6.2.0
-  freezed: ^2.0.2
+  freezed: ^2.0.3+1
   build_runner: ^2.1.10
   sqflite_common_ffi: ^2.1.1
   mockito: ^5.1.0
