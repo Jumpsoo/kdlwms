@@ -25,9 +25,9 @@ enum PackGridColumnIndex {
 }
 
 class PalletScanPage extends StatefulWidget {
-  const PalletScanPage({Key? key, required this.title}) : super(key: key);
-
   final String title;
+
+  const PalletScanPage({Key? key, required this.title}) : super(key: key);
 
   @override
   State<PalletScanPage> createState() => _PalletScanPageState();
@@ -83,7 +83,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _decodeResult = "준비";
       _readLocation = '';
       isLoading = false;
-      //for test
+      //for test, 지울것
       _readLocation = 'WORK#5';
     });
     // 실제 장비 연결시 주석 해제 할것
@@ -98,7 +98,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(
-        title: const Text('팔레팅 작업(실적입력)'),
+        title: Text(widget.title),
         backgroundColor: Colors.blueGrey[900],
       ),
       body: isLoading

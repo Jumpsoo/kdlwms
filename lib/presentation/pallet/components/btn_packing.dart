@@ -9,9 +9,10 @@ class BtnPacking extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var sNo = '1';
-    var sTitle = '적재 작업';
-    var sSubTitle = '완제품의 바코드를 읽어 팔레팅 진행';
+    const String sNo = '1';
+    const String sTitle = '적재 작업';
+    const String sSubTitle = '완제품의 바코드를 읽어 팔레팅 진행';
+    const String sChildTitle = '팔레팅 작업(실적 입력)';
 
     
     return Column(
@@ -22,7 +23,7 @@ class BtnPacking extends StatelessWidget {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PalletScanPage(title: "팔레팅 작업(실적입력)")
+                builder: (context) => const PalletScanPage(title: sChildTitle)
               ),
             );
           },

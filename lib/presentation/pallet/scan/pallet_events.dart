@@ -13,6 +13,9 @@ abstract class PalletEvent with _$PalletEvent {
   const factory PalletEvent.updatePallet(List<Pallet> pallets) = UpdatePallet;
   const factory PalletEvent.updatePalletState(List<Pallet> pallets) = UpdatePalletState;
   const factory PalletEvent.deletePallet(List<Pallet> pallets) = DeletePallet;
+  const factory PalletEvent.deletePalletAll() = DeletePalletAll;
+
+  const factory PalletEvent.getPalletCountInDevice()= GetPalletCountInDevice;
 
   const factory PalletEvent.scanQRData(String sQRData) = ScanQRData;
 

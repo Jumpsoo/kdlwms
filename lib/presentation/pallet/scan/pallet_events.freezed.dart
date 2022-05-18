@@ -25,6 +25,8 @@ mixin _$PalletEvent {
     required TResult Function(List<Pallet> pallets) updatePallet,
     required TResult Function(List<Pallet> pallets) updatePalletState,
     required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,8 @@ mixin _$PalletEvent {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +53,8 @@ mixin _$PalletEvent {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) =>
@@ -61,6 +67,9 @@ mixin _$PalletEvent {
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) =>
       throw _privateConstructorUsedError;
@@ -72,6 +81,8 @@ mixin _$PalletEvent {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) =>
       throw _privateConstructorUsedError;
@@ -83,6 +94,8 @@ mixin _$PalletEvent {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) =>
@@ -195,6 +208,8 @@ class _$ListPallets implements ListPallets {
     required TResult Function(List<Pallet> pallets) updatePallet,
     required TResult Function(List<Pallet> pallets) updatePalletState,
     required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return listPallets(sWorkShop, sLocation, nState);
@@ -210,6 +225,8 @@ class _$ListPallets implements ListPallets {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return listPallets?.call(sWorkShop, sLocation, nState);
@@ -225,6 +242,8 @@ class _$ListPallets implements ListPallets {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -243,6 +262,9 @@ class _$ListPallets implements ListPallets {
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
     return listPallets(this);
@@ -257,6 +279,8 @@ class _$ListPallets implements ListPallets {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
     return listPallets?.call(this);
@@ -271,6 +295,8 @@ class _$ListPallets implements ListPallets {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) {
@@ -366,6 +392,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     required TResult Function(List<Pallet> pallets) updatePallet,
     required TResult Function(List<Pallet> pallets) updatePalletState,
     required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return getPalletBySeq(palletSeq);
@@ -381,6 +409,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return getPalletBySeq?.call(palletSeq);
@@ -396,6 +426,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -414,6 +446,9 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
     return getPalletBySeq(this);
@@ -428,6 +463,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
     return getPalletBySeq?.call(this);
@@ -442,6 +479,8 @@ class _$GetPalletBySeq implements GetPalletBySeq {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) {
@@ -532,6 +571,8 @@ class _$AddPallet implements AddPallet {
     required TResult Function(List<Pallet> pallets) updatePallet,
     required TResult Function(List<Pallet> pallets) updatePalletState,
     required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return addPallet(sQRData);
@@ -547,6 +588,8 @@ class _$AddPallet implements AddPallet {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return addPallet?.call(sQRData);
@@ -562,6 +605,8 @@ class _$AddPallet implements AddPallet {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -580,6 +625,9 @@ class _$AddPallet implements AddPallet {
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
     return addPallet(this);
@@ -594,6 +642,8 @@ class _$AddPallet implements AddPallet {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
     return addPallet?.call(this);
@@ -608,6 +658,8 @@ class _$AddPallet implements AddPallet {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) {
@@ -702,6 +754,8 @@ class _$UpdatePallet implements UpdatePallet {
     required TResult Function(List<Pallet> pallets) updatePallet,
     required TResult Function(List<Pallet> pallets) updatePalletState,
     required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return updatePallet(pallets);
@@ -717,6 +771,8 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return updatePallet?.call(pallets);
@@ -732,6 +788,8 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -750,6 +808,9 @@ class _$UpdatePallet implements UpdatePallet {
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
     return updatePallet(this);
@@ -764,6 +825,8 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
     return updatePallet?.call(this);
@@ -778,6 +841,8 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) {
@@ -873,6 +938,8 @@ class _$UpdatePalletState implements UpdatePalletState {
     required TResult Function(List<Pallet> pallets) updatePallet,
     required TResult Function(List<Pallet> pallets) updatePalletState,
     required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return updatePalletState(pallets);
@@ -888,6 +955,8 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return updatePalletState?.call(pallets);
@@ -903,6 +972,8 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -921,6 +992,9 @@ class _$UpdatePalletState implements UpdatePalletState {
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
     return updatePalletState(this);
@@ -935,6 +1009,8 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
     return updatePalletState?.call(this);
@@ -949,6 +1025,8 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) {
@@ -1044,6 +1122,8 @@ class _$DeletePallet implements DeletePallet {
     required TResult Function(List<Pallet> pallets) updatePallet,
     required TResult Function(List<Pallet> pallets) updatePalletState,
     required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return deletePallet(pallets);
@@ -1059,6 +1139,8 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return deletePallet?.call(pallets);
@@ -1074,6 +1156,8 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -1092,6 +1176,9 @@ class _$DeletePallet implements DeletePallet {
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
     return deletePallet(this);
@@ -1106,6 +1193,8 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
     return deletePallet?.call(this);
@@ -1120,6 +1209,8 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) {
@@ -1137,6 +1228,309 @@ abstract class DeletePallet implements PalletEvent {
   @JsonKey(ignore: true)
   _$$DeletePalletCopyWith<_$DeletePallet> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeletePalletAllCopyWith<$Res> {
+  factory _$$DeletePalletAllCopyWith(
+          _$DeletePalletAll value, $Res Function(_$DeletePalletAll) then) =
+      __$$DeletePalletAllCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeletePalletAllCopyWithImpl<$Res>
+    extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$DeletePalletAllCopyWith<$Res> {
+  __$$DeletePalletAllCopyWithImpl(
+      _$DeletePalletAll _value, $Res Function(_$DeletePalletAll) _then)
+      : super(_value, (v) => _then(v as _$DeletePalletAll));
+
+  @override
+  _$DeletePalletAll get _value => super._value as _$DeletePalletAll;
+}
+
+/// @nodoc
+
+class _$DeletePalletAll implements DeletePalletAll {
+  const _$DeletePalletAll();
+
+  @override
+  String toString() {
+    return 'PalletEvent.deletePalletAll()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DeletePalletAll);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
+    required TResult Function(int palletSeq) getPalletBySeq,
+    required TResult Function(String sQRData) addPallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
+    required TResult Function(String sQRData) scanQRData,
+  }) {
+    return deletePalletAll();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
+    TResult Function(int palletSeq)? getPalletBySeq,
+    TResult Function(String sQRData)? addPallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
+    TResult Function(String sQRData)? scanQRData,
+  }) {
+    return deletePalletAll?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
+    TResult Function(int palletSeq)? getPalletBySeq,
+    TResult Function(String sQRData)? addPallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
+    TResult Function(String sQRData)? scanQRData,
+    required TResult orElse(),
+  }) {
+    if (deletePalletAll != null) {
+      return deletePalletAll();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ListPallets value) listPallets,
+    required TResult Function(GetPalletBySeq value) getPalletBySeq,
+    required TResult Function(AddPallet value) addPallet,
+    required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
+    required TResult Function(ScanQRData value) scanQRData,
+  }) {
+    return deletePalletAll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ListPallets value)? listPallets,
+    TResult Function(GetPalletBySeq value)? getPalletBySeq,
+    TResult Function(AddPallet value)? addPallet,
+    TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
+    TResult Function(ScanQRData value)? scanQRData,
+  }) {
+    return deletePalletAll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ListPallets value)? listPallets,
+    TResult Function(GetPalletBySeq value)? getPalletBySeq,
+    TResult Function(AddPallet value)? addPallet,
+    TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
+    TResult Function(ScanQRData value)? scanQRData,
+    required TResult orElse(),
+  }) {
+    if (deletePalletAll != null) {
+      return deletePalletAll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeletePalletAll implements PalletEvent {
+  const factory DeletePalletAll() = _$DeletePalletAll;
+}
+
+/// @nodoc
+abstract class _$$GetPalletCountInDeviceCopyWith<$Res> {
+  factory _$$GetPalletCountInDeviceCopyWith(_$GetPalletCountInDevice value,
+          $Res Function(_$GetPalletCountInDevice) then) =
+      __$$GetPalletCountInDeviceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetPalletCountInDeviceCopyWithImpl<$Res>
+    extends _$PalletEventCopyWithImpl<$Res>
+    implements _$$GetPalletCountInDeviceCopyWith<$Res> {
+  __$$GetPalletCountInDeviceCopyWithImpl(_$GetPalletCountInDevice _value,
+      $Res Function(_$GetPalletCountInDevice) _then)
+      : super(_value, (v) => _then(v as _$GetPalletCountInDevice));
+
+  @override
+  _$GetPalletCountInDevice get _value =>
+      super._value as _$GetPalletCountInDevice;
+}
+
+/// @nodoc
+
+class _$GetPalletCountInDevice implements GetPalletCountInDevice {
+  const _$GetPalletCountInDevice();
+
+  @override
+  String toString() {
+    return 'PalletEvent.getPalletCountInDevice()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetPalletCountInDevice);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String sWorkShop, String sLocation, int nState)
+        listPallets,
+    required TResult Function(int palletSeq) getPalletBySeq,
+    required TResult Function(String sQRData) addPallet,
+    required TResult Function(List<Pallet> pallets) updatePallet,
+    required TResult Function(List<Pallet> pallets) updatePalletState,
+    required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
+    required TResult Function(String sQRData) scanQRData,
+  }) {
+    return getPalletCountInDevice();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
+    TResult Function(int palletSeq)? getPalletBySeq,
+    TResult Function(String sQRData)? addPallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
+    TResult Function(String sQRData)? scanQRData,
+  }) {
+    return getPalletCountInDevice?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String sWorkShop, String sLocation, int nState)?
+        listPallets,
+    TResult Function(int palletSeq)? getPalletBySeq,
+    TResult Function(String sQRData)? addPallet,
+    TResult Function(List<Pallet> pallets)? updatePallet,
+    TResult Function(List<Pallet> pallets)? updatePalletState,
+    TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
+    TResult Function(String sQRData)? scanQRData,
+    required TResult orElse(),
+  }) {
+    if (getPalletCountInDevice != null) {
+      return getPalletCountInDevice();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ListPallets value) listPallets,
+    required TResult Function(GetPalletBySeq value) getPalletBySeq,
+    required TResult Function(AddPallet value) addPallet,
+    required TResult Function(UpdatePallet value) updatePallet,
+    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
+    required TResult Function(ScanQRData value) scanQRData,
+  }) {
+    return getPalletCountInDevice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ListPallets value)? listPallets,
+    TResult Function(GetPalletBySeq value)? getPalletBySeq,
+    TResult Function(AddPallet value)? addPallet,
+    TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
+    TResult Function(ScanQRData value)? scanQRData,
+  }) {
+    return getPalletCountInDevice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ListPallets value)? listPallets,
+    TResult Function(GetPalletBySeq value)? getPalletBySeq,
+    TResult Function(AddPallet value)? addPallet,
+    TResult Function(UpdatePallet value)? updatePallet,
+    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
+    TResult Function(ScanQRData value)? scanQRData,
+    required TResult orElse(),
+  }) {
+    if (getPalletCountInDevice != null) {
+      return getPalletCountInDevice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetPalletCountInDevice implements PalletEvent {
+  const factory GetPalletCountInDevice() = _$GetPalletCountInDevice;
 }
 
 /// @nodoc
@@ -1210,6 +1604,8 @@ class _$ScanQRData implements ScanQRData {
     required TResult Function(List<Pallet> pallets) updatePallet,
     required TResult Function(List<Pallet> pallets) updatePalletState,
     required TResult Function(List<Pallet> pallets) deletePallet,
+    required TResult Function() deletePalletAll,
+    required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) {
     return scanQRData(sQRData);
@@ -1225,6 +1621,8 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) {
     return scanQRData?.call(sQRData);
@@ -1240,6 +1638,8 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(List<Pallet> pallets)? updatePallet,
     TResult Function(List<Pallet> pallets)? updatePalletState,
     TResult Function(List<Pallet> pallets)? deletePallet,
+    TResult Function()? deletePalletAll,
+    TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
@@ -1258,6 +1658,9 @@ class _$ScanQRData implements ScanQRData {
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
     required TResult Function(DeletePallet value) deletePallet,
+    required TResult Function(DeletePalletAll value) deletePalletAll,
+    required TResult Function(GetPalletCountInDevice value)
+        getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
     return scanQRData(this);
@@ -1272,6 +1675,8 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
     return scanQRData?.call(this);
@@ -1286,6 +1691,8 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
     TResult Function(DeletePallet value)? deletePallet,
+    TResult Function(DeletePalletAll value)? deletePalletAll,
+    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) {

@@ -81,4 +81,22 @@ class PalletDbHelper {
     }
     return true;
   }
+
+  Future<bool> deletePalletAll() async {
+    try {
+      await db.delete(
+        'TB_WH_PALLET',
+      );
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
+  Future<int> getPalletCountInDevice() async {
+    int count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM TB_WH_PALLET '))!
+    ;
+    return count;
+  }
+
 }

@@ -12,7 +12,11 @@ abstract class PalletRepository {
 
   Future<bool> deletePallet(List<Pallet> pallet);
 
+  Future<bool> deletePalletAll();
+
   Future<void> updatePallet(List<Pallet> pallets);
 
   Future<void> updatePalletState(List<Pallet> pallets);
+
+  Future<int> getPalletCountInDevice();
 }

@@ -1,7 +1,9 @@
 import 'package:kdlwms/data/data_source/pallet_db_helper.dart';
 import 'package:kdlwms/data/repository/pallet_repository_impl.dart';
 import 'package:kdlwms/domain/repository/pallet_repository.dart';
+import 'package:kdlwms/domain/use_case/pallet/delete_pallet_all_use_case.dart';
 import 'package:kdlwms/domain/use_case/pallet/get_pallet_by_seq.dart';
+import 'package:kdlwms/domain/use_case/pallet/get_pallet_count_in_device.dart';
 
 import 'package:kdlwms/domain/use_case/pallet/list_pallets_use_case.dart';
 import 'package:kdlwms/domain/use_case/pallet/add_pallet_use_case.dart';
@@ -55,7 +57,9 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     updatePallet: UpdatePalletUseCase(repository),
     updatePalletState: UpdatePalletStateUseCase(repository),
     deletePallet: DeletePalletUseCase(repository),
+    deletePalletAll: DeletePalletAllUseCase(repository),
     getPalletBySeq: GetPalletBySeq(repository),
+    getPalletCountInDevice: GetPalletCountInDevice(repository),
   );
 
   PalletViewModel palletViewModel = PalletViewModel(useCasesWms);

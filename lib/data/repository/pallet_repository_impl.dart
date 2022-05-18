@@ -53,4 +53,14 @@ class PalletRepositoryImpl implements PalletRepository {
     }
     return true;
   }
+
+  @override
+  Future<int> getPalletCountInDevice()  async {
+    return await db.getPalletCountInDevice();
+  }
+
+  @override
+  Future<bool> deletePalletAll() async {
+    return await db.deletePalletAll();
+  }
 }

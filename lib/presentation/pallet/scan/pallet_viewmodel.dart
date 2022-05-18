@@ -28,8 +28,10 @@ class PalletViewModel with ChangeNotifier {
       updatePallet: updatePallet,
       updatePalletState: updatePalletState,
       deletePallet: deletePallet,
+      deletePalletAll: deletePalletAll,
       scanQRData: scanQRData,
       getPalletBySeq: getPalletBySeq,
+      getPalletCountInDevice : getPalletCountInDevice,
     );
   }
 
@@ -66,10 +68,19 @@ class PalletViewModel with ChangeNotifier {
     return await useCasesWms.deletePallet(pallets);
   }
 
+  Future<bool> deletePalletAll() async {
+    return await useCasesWms.deletePalletAll();
+  }
+
   Future<Pallet?> getPalletBySeq(int palletSeq) async {
     Pallet? pallet = await useCasesWms.getPalletBySeq(palletSeq);
     return pallet;
   }
+
+  Future<int> getPalletCountInDevice() async {
+    return await useCasesWms.getPalletCountInDevice();
+  }
+
 
   //리딩한 값 파싱은 여기서 진행
   Pallet? scanQRData(String sQRData) {
@@ -94,4 +105,5 @@ class PalletViewModel with ChangeNotifier {
 
     return pallet;
   }
+
 }
