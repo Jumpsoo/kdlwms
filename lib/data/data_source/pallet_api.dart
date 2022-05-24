@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:kdlwms/data/data_source/result.dart';
 
+// http 통신을 위해 사용
 class PalletApi {
   final http.Client client;
 

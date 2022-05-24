@@ -1,4 +1,4 @@
-import 'package:kdlwms/domain/model/pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'pallet_events.freezed.dart';
@@ -10,9 +10,10 @@ abstract class PalletEvent with _$PalletEvent {
   const factory PalletEvent.getPalletBySeq(int palletSeq) = GetPalletBySeq;
 
   const factory PalletEvent.addPallet(String sQRData) = AddPallet;
-  const factory PalletEvent.updatePallet(List<Pallet> pallets) = UpdatePallet;
-  const factory PalletEvent.updatePalletState(List<Pallet> pallets) = UpdatePalletState;
-  const factory PalletEvent.deletePallet(List<Pallet> pallets) = DeletePallet;
+  const factory PalletEvent.updatePallet(List<TbWhPallet> pallets) = UpdatePallet;
+  const factory PalletEvent.updatePalletState(List<TbWhPallet> pallets) = UpdatePalletState;
+
+  const factory PalletEvent.deletePallet(List<TbWhPallet> pallets) = DeletePallet;
   const factory PalletEvent.deletePalletAll() = DeletePalletAll;
 
   const factory PalletEvent.getPalletCountInDevice()= GetPalletCountInDevice;

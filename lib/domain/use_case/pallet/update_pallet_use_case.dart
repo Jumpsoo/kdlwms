@@ -1,12 +1,12 @@
-import 'package:kdlwms/domain/model/pallet.dart';
-import 'package:kdlwms/domain/repository/pallet_repository.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 
 class UpdatePalletUseCase{
-  final PalletRepository repository;
+  final TbWhPalletRepo repository;
 
   UpdatePalletUseCase(this.repository);
 
-  Future<void> call (List<Pallet> pallets) async {
-    await repository.updatePallet(pallets);
+  Future<void> call (List<TbWhPallet> pallets) async {
+    await repository.updateTbWhPallet(pallets);
   }
 }

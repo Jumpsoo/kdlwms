@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kdlwms/data/data_source/pallet_db_helper.dart';
-import 'package:kdlwms/domain/model/pallet.dart';
+import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -31,9 +31,9 @@ void main() {
         ' UPDTR_ID      INTEGER,   '
         ' UPDT_DT       TIMESTAMP )');
 
-    final palletDbHelper = PalletDbHelper(db);
+    final palletDbHelper = TbWhPalletDbHelper(db);
 
-    await palletDbHelper.insertPallet(Pallet(
+    await palletDbHelper.insertTbWhPallet(TbWhPallet(
       PALLET_SEQ: 1,
       WORKSHOP: 'A001',
       LOCATION: '002',
@@ -57,21 +57,21 @@ void main() {
       UPDT_DT: DateTime.now(),
     ));
 
-    expect((await palletDbHelper.getPalletList('A001','002',1)!), 1);
+    expect((await palletDbHelper.getTbWhPalletList('A001','002',1)!), 1);
 
-    Pallet? pallet = (await palletDbHelper.getPalletBySeq(0));
+    TbWhPallet? pallet = (await palletDbHelper.getTbWhPalletBySeq(0));
     expect(pallet!.PALLET_SEQ, 1);
 
-    await palletDbHelper.updatePallet(pallet.copyWith(
+    await palletDbHelper.updateTbWhPallet(pallet.copyWith(
       LOCATION: 'ZZZ'
     ));
 
-    pallet = (await palletDbHelper.getPalletBySeq(1));
+    pallet = (await palletDbHelper.getTbWhPalletBySeq(1));
     expect(pallet!.LOCATION, 'ZZZ');
 
-    await palletDbHelper.deletePallet(pallet);
+    await palletDbHelper.deleteTbWhPallet(pallet);
 
-    expect((await palletDbHelper.getPalletList('A001', 'aa', 1))!.length, 0);
+    expect((await palletDbHelper.getTbWhPalletList('A001', 'aa', 1))!.length, 0);
 
     await db.close();
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/kdl_common/notify_frame.dart';
 
 class SettingWorkShopPage extends StatefulWidget {
@@ -12,9 +13,16 @@ class SettingWorkShopPage extends StatefulWidget {
 }
 
 class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
-  final _valueList = ['2공장 1층', '2공장 2층', '1공장 1층'];
-  var _selectedValue = '2공장 1층';
+
   String _msgData = '';
+
+  List<ComboValueType> _datas = [
+    ComboValueType(key: "Key 1", value: "2공장 1층"),
+    ComboValueType(key: "Key 2", value: "2공장 2층"),
+    ComboValueType(key: "Key 3", value: "2공장 3층"),
+    ComboValueType(key: "Key 4", value: "2공장 4층"),
+    ComboValueType(key: "Key 5", value: "2공장 5층"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +48,8 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                   children: [
                     Container(
                       height: 80,
-                      padding: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
+                      padding:
+                          EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.indigoAccent[200],
@@ -59,7 +68,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                             width: 200,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                                color: Colors.white,
                                 border: Border.all(
                                     color: Colors.white,
                                     width: 1,
@@ -69,38 +78,40 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                               data: Theme.of(context).copyWith(
                                 canvasColor: Colors.white,
                               ),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                  value: _selectedValue,
-                                  icon: const Icon(
-                                    Icons.arrow_drop_down_circle_sharp,
-                                    color: Colors.black,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Container(
+                                    width: 150,
+                                    alignment: Alignment.centerRight,
+                                    child: DropdownButton<String>(
+                                      items: _datas
+                                          .map((data) => DropdownMenuItem<String>(
+                                        child: Text(data.key),
+                                        value: data.value,
+                                      ))
+                                          .toList(),
+
+                                      icon: const Icon(
+                                        Icons.arrow_drop_down_circle_sharp,
+                                        color: Colors.black,
+                                      ),
+                                      elevation: 16,
+                                      alignment: Alignment.centerRight,
+                                      style: const TextStyle(
+                                          fontSize: 22.0,
+                                          color: Colors.black,
+                                          fontFamily: "Roboto"
+                                      ),
+                                      // icon: const Icon(
+                                      //   Icons.arrow_drop_down_circle_sharp,
+                                      //   color: Colors.black,
+                                      // ),
+                                      onChanged: (String? value){},
+                                    ),
                                   ),
-                                  elevation: 16,
-                                  style: const TextStyle(
-                                      fontSize: 22.0,
-                                      color: Colors.black,
-                                      fontFamily: "Roboto"),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.black,
-                                  ),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      _selectedValue = newValue!;
-                                    });
-                                  },
-                                  items: <String>[
-                                    '2공장 1층',
-                                    '2공장 2층',
-                                    '1공장 1층'
-                                  ].map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                                ),
+                                ],
                               ),
                             ),
                           ),

@@ -1,13 +1,13 @@
-import 'package:kdlwms/domain/model/pallet.dart';
-import 'package:kdlwms/domain/repository/pallet_repository.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 
 class DeletePalletUseCase{
-  final PalletRepository repository;
+  final TbWhPalletRepo repository;
 
   DeletePalletUseCase(this.repository);
 
-  Future<bool> call(List<Pallet> pallet) async {
-    return await repository.deletePallet(pallet);
+  Future<bool> call(List<TbWhPallet> pallet) async {
+    return await repository.deleteTbWhPallet(pallet);
   }
 
 }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pallet.dart';
+part of 'tb_wh_pallet.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

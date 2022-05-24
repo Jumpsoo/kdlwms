@@ -1,4 +1,4 @@
-import 'package:kdlwms/domain/model/pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 
@@ -55,7 +55,7 @@ List<PlutoColumn> getTopGridColumns() {
 
 // 상단 그리드
 // 데이터 로우
-List<PlutoRow> getTopGridRows(List<Pallet> pallets) {
+List<PlutoRow> getTopGridRows(List<TbWhPallet> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   for (var e in pallets) {
@@ -127,7 +127,7 @@ List<PlutoColumn> getPackGridColumns() {
 }
 // 하단 그리드
 // 데이터 로우
-List<PlutoRow> getPackGridRows(List<Pallet> pallets) {
+List<PlutoRow> getPackGridRows(List<TbWhPallet> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   for (var e in pallets) {
@@ -150,7 +150,7 @@ List<PlutoRow> getPackGridRows(List<Pallet> pallets) {
 
 // 하단 그리드
 // 데이터 로우
-PlutoRow getPackGridRow(Pallet pallets) {
+PlutoRow getPackGridRow(TbWhPallet pallets) {
 int val = pallets.PALLET_SEQ;
 
     PlutoRow row = PlutoRow(

@@ -54,3 +54,10 @@ dynamic gElevatedButtonStyleSmallSize = ElevatedButton.styleFrom(
 
 //상태
 enum LoadState { None, Pack, Confirm, Load, Arrive }
+
+class ComboValueType {
+  final String key;
+  final String value;
+
+  ComboValueType({required this.key, required this.value});
+}

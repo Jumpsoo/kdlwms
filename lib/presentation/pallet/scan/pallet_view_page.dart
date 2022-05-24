@@ -6,7 +6,7 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/kdl_common/notify_frame.dart';
 import 'package:provider/provider.dart';
 
-import 'package:kdlwms/domain/model/pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:kdlwms/presentation/pallet/components/pack_grid_top.dart';
@@ -47,7 +47,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
   int sortType = sortName;
 
   //Data 조회용
-  final List<Pallet> pallets = [];
+  final List<TbWhPallet> pallets = [];
   List<PlutoRow> topGridRows = [];
 
   late PalletViewModel viewModel;
@@ -63,6 +63,15 @@ class _PalletViewPageState extends State<PalletViewPage> {
   //창고위치 및 작업위치
   String _selectedLocation = '';
   String _selectedPalletMasterInfo = '';
+
+
+  List<ComboValueType> _datas = [
+    ComboValueType(key: "Key 1", value: "2공장 1층"),
+    ComboValueType(key: "Key 2", value: "2공장 2층"),
+    ComboValueType(key: "Key 3", value: "2공장 3층"),
+    ComboValueType(key: "Key 4", value: "2공장 4층"),
+    ComboValueType(key: "Key 5", value: "2공장 5층"),
+  ];
 
   @override
   // init에는 watch 사용 금지
@@ -305,7 +314,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
     //초기화
     topGridStateManager.rows.clear();
     //조회
-    List<Pallet>? pallets = await viewModel.useCasesWms
+    List<TbWhPallet>? pallets = await viewModel.useCasesWms
         .listPallets(sLocation, sWareHouse, LoadState.Pack.index);
     //바인딩
     if (pallets!.isEmpty) {
@@ -325,7 +334,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
     //초기화
     packGridStateManager.rows.clear();
     //조회
-    List<Pallet>? pallets = await viewModel.useCasesWms
+    List<TbWhPallet>? pallets = await viewModel.useCasesWms
         .listPallets(sLocation, sWareHouse, LoadState.Confirm.index);
     //바인딩
     if (pallets == null) {
@@ -344,10 +353,10 @@ class _PalletViewPageState extends State<PalletViewPage> {
       return;
     }
 
-    List<Pallet> pallets = [];
+    List<TbWhPallet> pallets = [];
     for (PlutoRow row in topGridStateManager.rows) {
       List<PlutoCell> cells = row.cells.values.toList();
-      pallets.add(Pallet(
+      pallets.add(TbWhPallet(
           PALLET_SEQ: cells[TopGridColumnIndex.PALLET_SEQ.index].value,
           STATE: 1));
     }

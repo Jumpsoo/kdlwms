@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kdlwms/domain/model/pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/use_case/use_cases_wms.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_events.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_state.dart';
@@ -37,7 +37,7 @@ class PalletViewModel with ChangeNotifier {
 
   Future<void> listPallets(
       String sWorkShop, String sLocation, int nState) async {
-    List<Pallet>? palletlist =
+    List<TbWhPallet>? palletlist =
         await useCasesWms.listPallets(sWorkShop, sLocation, nState);
 
     _state = state.copyWith(
@@ -48,7 +48,7 @@ class PalletViewModel with ChangeNotifier {
 
   // Future<void> _addPallet(Pallet pallet) async {
   Future<bool> addPallet(String sQRData) async {
-    Pallet? pallet = scanQRData(sQRData);
+    TbWhPallet? pallet = scanQRData(sQRData);
     if (pallet == null) {
       return false;
     }
@@ -56,15 +56,15 @@ class PalletViewModel with ChangeNotifier {
     // await listPallets(pallet.WORKSHOP);
   }
 
-  Future<void> updatePallet(List<Pallet> pallets) async {
+  Future<void> updatePallet(List<TbWhPallet> pallets) async {
     return await useCasesWms.updatePallet(pallets);
   }
 
-  Future<void> updatePalletState(List<Pallet> pallets) async {
+  Future<void> updatePalletState(List<TbWhPallet> pallets) async {
     return await useCasesWms.updatePalletState(pallets);
   }
 
-  Future<bool> deletePallet(List<Pallet> pallets) async {
+  Future<bool> deletePallet(List<TbWhPallet> pallets) async {
     return await useCasesWms.deletePallet(pallets);
   }
 
@@ -72,8 +72,8 @@ class PalletViewModel with ChangeNotifier {
     return await useCasesWms.deletePalletAll();
   }
 
-  Future<Pallet?> getPalletBySeq(int palletSeq) async {
-    Pallet? pallet = await useCasesWms.getPalletBySeq(palletSeq);
+  Future<TbWhPallet?> getPalletBySeq(int palletSeq) async {
+    TbWhPallet? pallet = await useCasesWms.getPalletBySeq(palletSeq);
     return pallet;
   }
 
@@ -83,13 +83,13 @@ class PalletViewModel with ChangeNotifier {
 
 
   //리딩한 값 파싱은 여기서 진행
-  Pallet? scanQRData(String sQRData) {
-    Pallet pallet;
+  TbWhPallet? scanQRData(String sQRData) {
+    TbWhPallet pallet;
     final convertedData = sQRData.split('\t');
     if (convertedData.isEmpty) {
       return null;
     }
-    pallet = Pallet(
+    pallet = TbWhPallet(
       PALLET_SEQ: int.parse(convertedData[0]),
       WORKSHOP: convertedData[1],
       LOCATION: convertedData[2],

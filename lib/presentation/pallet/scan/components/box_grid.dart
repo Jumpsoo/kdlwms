@@ -1,10 +1,10 @@
-import 'package:kdlwms/domain/model/pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:flutter/material.dart';
 
 class PalletGrid extends StatefulWidget {
   const PalletGrid({Key? key, required this.pallet}) : super(key: key);
-  final List<Pallet> pallet ;
+  final List<TbWhPallet> pallet ;
 
   @override
   State<PalletGrid> createState() => _PalletGridState();
@@ -12,7 +12,7 @@ class PalletGrid extends StatefulWidget {
 
 class _PalletGridState extends State<PalletGrid> {
   late PlutoGridStateManager stateManager;
-  late List<Pallet> pallets;
+  late List<TbWhPallet> pallets;
 
   @override
   Widget build(BuildContext context) {

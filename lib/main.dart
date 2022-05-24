@@ -3,12 +3,17 @@ import 'package:kdlwms/di/provider_wms_setup.dart';
 import 'package:kdlwms/presentation/main_frame.dart';
 import 'package:kdlwms/ui/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
 void main() async {
   // 플랫폼 채널의 위젯 바인딩을 보장
   WidgetsFlutterBinding.ensureInitialized();
 
-  final providers = await getWmsProviders();
+  final List<SingleChildWidget> providers = [];
+
+  providers.addAll(await getWmsProviders());
+
+  // final providers = await getWmsProviders();
 
   runApp(
     MultiProvider(

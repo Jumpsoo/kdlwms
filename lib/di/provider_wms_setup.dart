@@ -1,6 +1,6 @@
-import 'package:kdlwms/data/data_source/pallet_db_helper.dart';
-import 'package:kdlwms/data/repository/pallet_repository_impl.dart';
-import 'package:kdlwms/domain/repository/pallet_repository.dart';
+import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
+import 'package:kdlwms/data/repository/tb_wh_pallet_repo_impl.dart';
+import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/domain/use_case/pallet/delete_pallet_all_use_case.dart';
 import 'package:kdlwms/domain/use_case/pallet/get_pallet_by_seq.dart';
 import 'package:kdlwms/domain/use_case/pallet/get_pallet_count_in_device.dart';
@@ -23,6 +23,56 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     'pallet_db',
     version: 1,
     onCreate: (database, version) async {
+
+      //1. 공통코드
+      await database.execute('CREATE TABLE TB_WH_CM_CODE ( '
+          'CODE_ID    INTEGER,'
+          'GRP_CD     TEXT,'
+          'CODE_CD    TEXT,'
+          'CODE_KO_NM TEXT,'
+          'CODE_EN_NM TEXT,'
+          'CODE_JA_NM TEXT,'
+          'REF_1      TEXT,'
+          'REF_2      TEXT,'
+          'REF_3      TEXT,'
+          'REF_4      TEXT,'
+          'REF_5      TEXT,'
+          'CODE_ORDR  INTEGER,'
+          'USE_YN     TEXT,'
+          'RGSTR_ID   INTEGER,'
+          'RGST_DT    TIMESTAMP,'
+          'UPDTR_ID   INTEGER,'
+          'UPDT_DT    TIMESTAMP ) '
+      );
+
+      //2. 품목정보
+      await database.execute('CREATE TABLE TB_WH_ITEM ( '
+          'ITEM_NM         TEXT,'
+          'STANDARD        TEXT,'
+          'QT              TEXT,'
+          'ITEM_NO         TEXT,'
+          'BOX_KG          INTEGER,'
+          'LENGTH          INTEGER,'
+          'WIDTH           INTEGER,'
+          'HEIGHT          INTEGER,'
+          'WAREHOUSE_CD    TEXT,'
+          'WAREHOUSE_NM    TEXT,'
+          'WAREHOUSE_AREA  TEXT,'
+          'USE_YN          TEXT,'
+          'RGSTR_ID        INTEGER,'
+          'RGST_DT         TIMESTAMP,'
+          'UPDTR_ID        INTEGER,'
+          'UPDT_DT         TIMESTAMP )'
+      );
+
+
+      //3. 작업장 및 창고 정보
+      await database.execute('CREATE TABLE TB_CM_LOCATION ( '
+          ' WORKSHOP      TEXT,       '
+          ' LOCATION      TEXT)       '
+      );
+
+      //4. 패킹정보
       await database.execute('CREATE TABLE TB_WH_PALLET ( '
           ' PALLET_SEQ  INTEGER ,   '
           ' WORKSHOP      TEXT,       '
@@ -44,14 +94,29 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           ' RGSTR_ID      INTEGER,   '
           ' RGST_DT       TIMESTAMP,  '
           ' UPDTR_ID      INTEGER,   '
-          ' UPDT_DT       TIMESTAMP )');
+          ' UPDT_DT       TIMESTAMP )'
+      );
+
+      //5.동기화 정보( 서버 & 클라이언트), 버전, 데이터 동기화 일시
+      await database.execute('CREATE TABLE TB_CM_SYNC ( '
+          'VERSION_CODE     TEXT,'
+          'VERSION_DESC     TEXT,'
+          'DATETIME         TIMESTAMP,'
+          'CMF_1            TEXT,'
+          'CMF_2            TEXT,'
+          'CMF_3            TEXT,'
+          'CMF_4            TEXT,'
+          'CMF_5            TEXT )'
+      );
     },
+
   );
 
-  PalletDbHelper palletDbHelper = PalletDbHelper(database);
-  PalletRepository repository = PalletRepositoryImpl(palletDbHelper);
+  TbWhPalletDbHelper palletDbHelper = TbWhPalletDbHelper(database);
+  TbWhPalletRepo repository = TbWhPalletRepoImpl(palletDbHelper);
 
   UseCasesWms useCasesWms = UseCasesWms(
+    //pallet
     listPallets: ListPalletsUseCase(repository),
     addPallet: AddPalletUseCase(repository),
     updatePallet: UpdatePalletUseCase(repository),
@@ -60,7 +125,11 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     deletePalletAll: DeletePalletAllUseCase(repository),
     getPalletBySeq: GetPalletBySeq(repository),
     getPalletCountInDevice: GetPalletCountInDevice(repository),
+
+    //wh item ( 품목)
+
   );
+
 
   PalletViewModel palletViewModel = PalletViewModel(useCasesWms);
   return [

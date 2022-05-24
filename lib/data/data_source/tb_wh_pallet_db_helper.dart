@@ -1,12 +1,12 @@
-import 'package:kdlwms/domain/model/pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:sqflite/sqflite.dart';
 
-class PalletDbHelper {
+class TbWhPalletDbHelper {
+
   Database db;
+  TbWhPalletDbHelper(this.db);
 
-  PalletDbHelper(this.db);
-
-  Future<Pallet?> getPalletBySeq(int palletSeq) async {
+  Future<TbWhPallet?> getTbWhPalletBySeq(int palletSeq) async {
     // SLEECT * FRO TB_WH_PALLET WHERE ID = 1
     final List<Map<String, dynamic>> maps = await db.query(
       'TB_WH_PALLET',
@@ -14,14 +14,14 @@ class PalletDbHelper {
       whereArgs: [palletSeq],
     );
     if (maps.isNotEmpty) {
-      return Pallet.fromJson(maps.first);
+      return TbWhPallet.fromJson(maps.first);
     } else {
       return null;
     }
   }
 
   // 위치별 실적 리스트 조회
-  Future<List<Pallet>?> getPalletList(
+  Future<List<TbWhPallet>?> getTbWhPalletList(
       String sWorkShop, String sLocation, int nState) async {
     final maps = await db.query(
       'TB_WH_PALLET',
@@ -29,12 +29,12 @@ class PalletDbHelper {
       whereArgs: [sWorkShop, nState],
     );
     if (maps.isNotEmpty) {
-      return maps.map((e) => Pallet.fromJson(e)).toList();
+      return maps.map((e) => TbWhPallet.fromJson(e)).toList();
     }
     return null;
   }
 
-  Future<bool> insertPallet(Pallet pallet) async {
+  Future<bool> insertTbWhPallet(TbWhPallet pallet) async {
     try {
       await db.insert('TB_WH_PALLET', pallet.toJson());
     } catch (e) {
@@ -43,7 +43,7 @@ class PalletDbHelper {
     return true;
   }
 
-  Future<bool> updatePallet(Pallet pallet) async {
+  Future<bool> updateTbWhPallet(TbWhPallet pallet) async {
     try {
       await db.update(
         'TB_WH_PALLET',
@@ -57,7 +57,7 @@ class PalletDbHelper {
     return true;
   }
 
-  Future<bool> updatePalletState(Pallet pallet) async {
+  Future<bool> updateTbWhPalletState(TbWhPallet pallet) async {
     try {
       await db.rawQuery(
           'UPDATE TB_WH_PALLET '
@@ -69,7 +69,7 @@ class PalletDbHelper {
     return true;
   }
 
-  Future<bool> deletePallet(Pallet pallet) async {
+  Future<bool> deleteTbWhPallet(TbWhPallet pallet) async {
     try {
       await db.delete(
         'TB_WH_PALLET',
@@ -82,7 +82,7 @@ class PalletDbHelper {
     return true;
   }
 
-  Future<bool> deletePalletAll() async {
+  Future<bool> deleteTbWhPalletAll() async {
     try {
       await db.delete(
         'TB_WH_PALLET',
@@ -93,7 +93,7 @@ class PalletDbHelper {
     return true;
   }
 
-  Future<int> getPalletCountInDevice() async {
+  Future<int> getTbWhPalletCountInDevice() async {
     int count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM TB_WH_PALLET '))!
     ;
     return count;

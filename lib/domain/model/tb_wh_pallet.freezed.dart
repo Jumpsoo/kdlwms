@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'pallet.dart';
+part of 'tb_wh_pallet.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Pallet _$PalletFromJson(Map<String, dynamic> json) {
+TbWhPallet _$TbWhPalletFromJson(Map<String, dynamic> json) {
   return _Pallet.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Pallet {
+mixin _$TbWhPallet {
   int get PALLET_SEQ => throw _privateConstructorUsedError;
   String? get WORKSHOP => throw _privateConstructorUsedError;
   String? get LOCATION => throw _privateConstructorUsedError;
@@ -44,13 +44,15 @@ mixin _$Pallet {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PalletCopyWith<Pallet> get copyWith => throw _privateConstructorUsedError;
+  $TbWhPalletCopyWith<TbWhPallet> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PalletCopyWith<$Res> {
-  factory $PalletCopyWith(Pallet value, $Res Function(Pallet) then) =
-      _$PalletCopyWithImpl<$Res>;
+abstract class $TbWhPalletCopyWith<$Res> {
+  factory $TbWhPalletCopyWith(
+          TbWhPallet value, $Res Function(TbWhPallet) then) =
+      _$TbWhPalletCopyWithImpl<$Res>;
   $Res call(
       {int PALLET_SEQ,
       String? WORKSHOP,
@@ -76,12 +78,12 @@ abstract class $PalletCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PalletCopyWithImpl<$Res> implements $PalletCopyWith<$Res> {
-  _$PalletCopyWithImpl(this._value, this._then);
+class _$TbWhPalletCopyWithImpl<$Res> implements $TbWhPalletCopyWith<$Res> {
+  _$TbWhPalletCopyWithImpl(this._value, this._then);
 
-  final Pallet _value;
+  final TbWhPallet _value;
   // ignore: unused_field
-  final $Res Function(Pallet) _then;
+  final $Res Function(TbWhPallet) _then;
 
   @override
   $Res call({
@@ -197,7 +199,7 @@ class _$PalletCopyWithImpl<$Res> implements $PalletCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_PalletCopyWith<$Res> implements $PalletCopyWith<$Res> {
+abstract class _$$_PalletCopyWith<$Res> implements $TbWhPalletCopyWith<$Res> {
   factory _$$_PalletCopyWith(_$_Pallet value, $Res Function(_$_Pallet) then) =
       __$$_PalletCopyWithImpl<$Res>;
   @override
@@ -226,7 +228,7 @@ abstract class _$$_PalletCopyWith<$Res> implements $PalletCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PalletCopyWithImpl<$Res> extends _$PalletCopyWithImpl<$Res>
+class __$$_PalletCopyWithImpl<$Res> extends _$TbWhPalletCopyWithImpl<$Res>
     implements _$$_PalletCopyWith<$Res> {
   __$$_PalletCopyWithImpl(_$_Pallet _value, $Res Function(_$_Pallet) _then)
       : super(_value, (v) => _then(v as _$_Pallet));
@@ -421,7 +423,7 @@ class _$_Pallet implements _Pallet {
 
   @override
   String toString() {
-    return 'Pallet(PALLET_SEQ: $PALLET_SEQ, WORKSHOP: $WORKSHOP, LOCATION: $LOCATION, ITEM_NO: $ITEM_NO, ITEM_LOT: $ITEM_LOT, QUANTITY: $QUANTITY, STATE: $STATE, BARCODE: $BARCODE, SCAN_DATE: $SCAN_DATE, SCAN_USERNM: $SCAN_USERNM, BOX_NO: $BOX_NO, PRINT_FLAG: $PRINT_FLAG, PRINT_DATE: $PRINT_DATE, PRINT_USER: $PRINT_USER, AS400IF_FLAG: $AS400IF_FLAG, AS400IF_DATE: $AS400IF_DATE, AS400IF_USER: $AS400IF_USER, RGSTR_ID: $RGSTR_ID, RGST_DT: $RGST_DT, UPDTR_ID: $UPDTR_ID, UPDT_DT: $UPDT_DT)';
+    return 'TbWhPallet(PALLET_SEQ: $PALLET_SEQ, WORKSHOP: $WORKSHOP, LOCATION: $LOCATION, ITEM_NO: $ITEM_NO, ITEM_LOT: $ITEM_LOT, QUANTITY: $QUANTITY, STATE: $STATE, BARCODE: $BARCODE, SCAN_DATE: $SCAN_DATE, SCAN_USERNM: $SCAN_USERNM, BOX_NO: $BOX_NO, PRINT_FLAG: $PRINT_FLAG, PRINT_DATE: $PRINT_DATE, PRINT_USER: $PRINT_USER, AS400IF_FLAG: $AS400IF_FLAG, AS400IF_DATE: $AS400IF_DATE, AS400IF_USER: $AS400IF_USER, RGSTR_ID: $RGSTR_ID, RGST_DT: $RGST_DT, UPDTR_ID: $UPDTR_ID, UPDT_DT: $UPDT_DT)';
   }
 
   @override
@@ -498,7 +500,7 @@ class _$_Pallet implements _Pallet {
   }
 }
 
-abstract class _Pallet implements Pallet {
+abstract class _Pallet implements TbWhPallet {
   factory _Pallet(
       {required final int PALLET_SEQ,
       final String? WORKSHOP,

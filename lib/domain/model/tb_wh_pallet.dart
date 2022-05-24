@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'pallet.freezed.dart';
+part 'tb_wh_pallet.freezed.dart';
 
-part 'pallet.g.dart';
+part 'tb_wh_pallet.g.dart';
 
 @freezed
-class Pallet with _$Pallet {
-  factory Pallet({
+class TbWhPallet with _$TbWhPallet {
+  factory TbWhPallet({
     required int PALLET_SEQ,
     String? WORKSHOP,
     String? LOCATION,
@@ -29,5 +29,5 @@ class Pallet with _$Pallet {
     int? UPDTR_ID,
     DateTime? UPDT_DT,}) = _Pallet;
 
-  factory Pallet.fromJson(Map<String, dynamic> json) => _$PalletFromJson(json);
+  factory TbWhPallet.fromJson(Map<String, dynamic> json) => _$TbWhPalletFromJson(json);
 }
