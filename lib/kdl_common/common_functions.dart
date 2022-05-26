@@ -74,3 +74,11 @@ Future<void> _asyncConfirmDialog(BuildContext context) async {
 }
 
 
+
+Future<void> showSuccessMsg(BuildContext context) async{
+  await showAlertDialog(context, '성공적으로 처리되었습니다.');
+}
+Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async{
+  await showAlertDialog(context, '처리중 오류가 발생했습니다. 다시 시도해 주세요.' + sErrorLocation);
+}
+

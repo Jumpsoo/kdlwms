@@ -29,7 +29,11 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
           // 값이 없을 경우 에러 메시지 출력
           onPressed: () async {
             if(await checkValue('DELETE', context)){
-              await viewModel.useCasesWms.deletePalletAll();
+              if(await viewModel.useCasesWms.deletePalletAll() == false){
+                await showErrorMsg(context, '적재이력 삭제');
+              }else{
+                await showSuccessMsg(context);
+              }
             }
           },
           style: gElevatedButtonStyleMidSize,
@@ -81,9 +85,10 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
 
   //체크로직, 완료, 삭제 시
   Future<bool> checkValue(String confirm, BuildContext ownContext) async {
+
     switch (confirm) {
       case 'DELETE':
-        int nCount = viewModel.getPalletCountInDevice() as int;
+        int nCount = await viewModel.useCasesWms.getPalletCountInDevice();
 
         if (nCount == 0) {
           await showAlertDialog(ownContext, '삭제 할 데이터가 없습니다.');

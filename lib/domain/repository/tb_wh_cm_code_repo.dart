@@ -9,5 +9,6 @@ abstract class TbWhCmCodeRepo{
   Future<bool> insertTbWhCmCode(TbWhCmCode tbWhCmCode);
   Future<bool> updateTbWhCmCode(TbWhCmCode tbWhCmCode);
   Future<bool> deleteTbWhCmCode(TbWhCmCode tbWhCmCode);
+  Future<bool> deleteTbWhCmCodeAll();
   
 }

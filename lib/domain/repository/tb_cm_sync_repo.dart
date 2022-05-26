@@ -5,7 +5,8 @@ abstract class TbCmSyncRepo{
 
   Future<List<TbCmSync>?> getTbCmSyncList();
 
-  Future<bool> updatetbCmSync(TbCmSync tbCmSync);
-  Future<bool> inserttbCmSync(TbCmSync tbCmSync);
-  Future<bool> deletetbCmSync(TbCmSync tbCmSync);
+  Future<bool> updateTbCmSync(TbCmSync tbCmSync);
+  Future<bool> insertTbCmSync(TbCmSync tbCmSync);
+  Future<bool> deleteTbCmSync(TbCmSync tbCmSync);
+  Future<bool> deleteTbCmSyncAll();
 }

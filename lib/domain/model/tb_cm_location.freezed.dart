@@ -21,6 +21,7 @@ TbCmLocation _$TbCmLocationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TbCmLocation {
   String? get WORKSHOP => throw _privateConstructorUsedError;
+  String? get WORKSHOP_NM => throw _privateConstructorUsedError;
   String? get LOCATION => throw _privateConstructorUsedError;
   DateTime? get SYNC_DATETIME => throw _privateConstructorUsedError;
   String? get CMF_1 => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $TbCmLocationCopyWith<$Res> {
       _$TbCmLocationCopyWithImpl<$Res>;
   $Res call(
       {String? WORKSHOP,
+      String? WORKSHOP_NM,
       String? LOCATION,
       DateTime? SYNC_DATETIME,
       String? CMF_1,
@@ -62,6 +64,7 @@ class _$TbCmLocationCopyWithImpl<$Res> implements $TbCmLocationCopyWith<$Res> {
   @override
   $Res call({
     Object? WORKSHOP = freezed,
+    Object? WORKSHOP_NM = freezed,
     Object? LOCATION = freezed,
     Object? SYNC_DATETIME = freezed,
     Object? CMF_1 = freezed,
@@ -74,6 +77,10 @@ class _$TbCmLocationCopyWithImpl<$Res> implements $TbCmLocationCopyWith<$Res> {
       WORKSHOP: WORKSHOP == freezed
           ? _value.WORKSHOP
           : WORKSHOP // ignore: cast_nullable_to_non_nullable
+              as String?,
+      WORKSHOP_NM: WORKSHOP_NM == freezed
+          ? _value.WORKSHOP_NM
+          : WORKSHOP_NM // ignore: cast_nullable_to_non_nullable
               as String?,
       LOCATION: LOCATION == freezed
           ? _value.LOCATION
@@ -116,6 +123,7 @@ abstract class _$$_TbCmLocationCopyWith<$Res>
   @override
   $Res call(
       {String? WORKSHOP,
+      String? WORKSHOP_NM,
       String? LOCATION,
       DateTime? SYNC_DATETIME,
       String? CMF_1,
@@ -139,6 +147,7 @@ class __$$_TbCmLocationCopyWithImpl<$Res>
   @override
   $Res call({
     Object? WORKSHOP = freezed,
+    Object? WORKSHOP_NM = freezed,
     Object? LOCATION = freezed,
     Object? SYNC_DATETIME = freezed,
     Object? CMF_1 = freezed,
@@ -151,6 +160,10 @@ class __$$_TbCmLocationCopyWithImpl<$Res>
       WORKSHOP: WORKSHOP == freezed
           ? _value.WORKSHOP
           : WORKSHOP // ignore: cast_nullable_to_non_nullable
+              as String?,
+      WORKSHOP_NM: WORKSHOP_NM == freezed
+          ? _value.WORKSHOP_NM
+          : WORKSHOP_NM // ignore: cast_nullable_to_non_nullable
               as String?,
       LOCATION: LOCATION == freezed
           ? _value.LOCATION
@@ -189,6 +202,7 @@ class __$$_TbCmLocationCopyWithImpl<$Res>
 class _$_TbCmLocation implements _TbCmLocation {
   _$_TbCmLocation(
       {this.WORKSHOP,
+      this.WORKSHOP_NM,
       this.LOCATION,
       this.SYNC_DATETIME,
       this.CMF_1,
@@ -202,6 +216,8 @@ class _$_TbCmLocation implements _TbCmLocation {
 
   @override
   final String? WORKSHOP;
+  @override
+  final String? WORKSHOP_NM;
   @override
   final String? LOCATION;
   @override
@@ -219,7 +235,7 @@ class _$_TbCmLocation implements _TbCmLocation {
 
   @override
   String toString() {
-    return 'TbCmLocation(WORKSHOP: $WORKSHOP, LOCATION: $LOCATION, SYNC_DATETIME: $SYNC_DATETIME, CMF_1: $CMF_1, CMF_2: $CMF_2, CMF_3: $CMF_3, CMF_4: $CMF_4, CMF_5: $CMF_5)';
+    return 'TbCmLocation(WORKSHOP: $WORKSHOP, WORKSHOP_NM: $WORKSHOP_NM, LOCATION: $LOCATION, SYNC_DATETIME: $SYNC_DATETIME, CMF_1: $CMF_1, CMF_2: $CMF_2, CMF_3: $CMF_3, CMF_4: $CMF_4, CMF_5: $CMF_5)';
   }
 
   @override
@@ -228,6 +244,8 @@ class _$_TbCmLocation implements _TbCmLocation {
         (other.runtimeType == runtimeType &&
             other is _$_TbCmLocation &&
             const DeepCollectionEquality().equals(other.WORKSHOP, WORKSHOP) &&
+            const DeepCollectionEquality()
+                .equals(other.WORKSHOP_NM, WORKSHOP_NM) &&
             const DeepCollectionEquality().equals(other.LOCATION, LOCATION) &&
             const DeepCollectionEquality()
                 .equals(other.SYNC_DATETIME, SYNC_DATETIME) &&
@@ -243,6 +261,7 @@ class _$_TbCmLocation implements _TbCmLocation {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(WORKSHOP),
+      const DeepCollectionEquality().hash(WORKSHOP_NM),
       const DeepCollectionEquality().hash(LOCATION),
       const DeepCollectionEquality().hash(SYNC_DATETIME),
       const DeepCollectionEquality().hash(CMF_1),
@@ -265,6 +284,7 @@ class _$_TbCmLocation implements _TbCmLocation {
 abstract class _TbCmLocation implements TbCmLocation {
   factory _TbCmLocation(
       {final String? WORKSHOP,
+      final String? WORKSHOP_NM,
       final String? LOCATION,
       final DateTime? SYNC_DATETIME,
       final String? CMF_1,
@@ -278,6 +298,8 @@ abstract class _TbCmLocation implements TbCmLocation {
 
   @override
   String? get WORKSHOP => throw _privateConstructorUsedError;
+  @override
+  String? get WORKSHOP_NM => throw _privateConstructorUsedError;
   @override
   String? get LOCATION => throw _privateConstructorUsedError;
   @override

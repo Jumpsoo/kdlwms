@@ -10,8 +10,14 @@ class TbCmLocationRepoImpl implements TbCmLocationRepo{
   TbCmLocationRepoImpl(this.db);
 
   @override
-  Future<List<TbCmLocation>?> getTbCmLocationList() async {
-    return await db.getTbCmLocationList();
+  //전체 작업장 리스트 조회
+  Future<List<TbCmLocation>?> selectTbCmLocationListAll() async {
+    return await db.selectTbCmLocationListAll();
+  }
+
+  @override
+  Future<List<TbCmLocation>?> selectTbCmLocationList(TbCmLocation tbCmLocation) async {
+    return await db.selectTbCmLocationList(tbCmLocation);
   }
 
   @override
@@ -25,7 +31,13 @@ class TbCmLocationRepoImpl implements TbCmLocationRepo{
   }
 
   @override
-  Future<bool> deleteTbCmLocation(TbCmLocation tbCmLocation)async {
+  Future<bool> deleteTbCmLocation(TbCmLocation tbCmLocation) async {
     return await db.deleteTbCmLocation(tbCmLocation);
   }
+
+  @override
+  Future<bool> deleteTbCmLocationAll() async {
+    return await db.deleteTbCmLocationAll();
+  }
+
 }

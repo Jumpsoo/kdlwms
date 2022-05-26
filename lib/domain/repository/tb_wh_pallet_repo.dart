@@ -8,15 +8,18 @@ abstract class TbWhPalletRepo {
   Future<List<TbWhPallet>?> getTbWhPalletList(
       String sWorkShop, String sLocation, int nState);
 
+  Future<int> getTbWhPalletCountInDevice();
+
+  Future<List<TbWhPallet>?> selectDupleCheck(String sBarCode);
+
   Future<bool> insertTbWhPallet(TbWhPallet pallet);
-
-  Future<bool> deleteTbWhPallet(List<TbWhPallet> pallet);
-
-  Future<bool> deleteTbWhPalletAll();
 
   Future<void> updateTbWhPallet(List<TbWhPallet> pallets);
 
   Future<void> updateTbWhPalletState(List<TbWhPallet> pallets);
 
-  Future<int> getTbWhPalletCountInDevice();
+  Future<bool> deleteTbWhPallet(List<TbWhPallet> pallet);
+
+  Future<bool> deleteTbWhPalletAll();
+
 }

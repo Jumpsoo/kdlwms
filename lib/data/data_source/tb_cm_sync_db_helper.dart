@@ -53,4 +53,14 @@ class TbCmSyncDbHelper{
     return true;
   }
 
+  Future<bool> deleteTbCmSyncAll() async {
+    try {
+      await db.delete(
+        'TB_CM_SYNC',
+      );
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
 }

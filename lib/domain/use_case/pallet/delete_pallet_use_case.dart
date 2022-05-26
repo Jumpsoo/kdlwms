@@ -12,3 +12,15 @@ class DeletePalletUseCase{
 
 }
 
+class DeletePalletAllUseCase{
+  final TbWhPalletRepo repository;
+
+  DeletePalletAllUseCase(this.repository);
+
+  Future<bool> call() async {
+    return await repository.deleteTbWhPalletAll();
+  }
+
+}
+
+

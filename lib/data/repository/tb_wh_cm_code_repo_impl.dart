@@ -10,11 +10,6 @@ class TbWhCmCodeRepoImpl implements TbWhCmCodeRepo{
   TbWhCmCodeRepoImpl(this.db);
 
   @override
-  Future<bool> deleteTbWhCmCode(TbWhCmCode tbWhCmCode) async {
-    return await db.deleteTbWhCmCode(tbWhCmCode);
-  }
-
-  @override
   Future<List<TbWhCmCode>?> getTbWhCmCodeList() async {
     return await db.getTbWhCmCodeList();
   }
@@ -28,5 +23,17 @@ class TbWhCmCodeRepoImpl implements TbWhCmCodeRepo{
   Future<bool> updateTbWhCmCode(TbWhCmCode tbWhCmCode) async {
     return await db.updateTbWhCmCode(tbWhCmCode);
   }
+
+  @override
+  Future<bool> deleteTbWhCmCode(TbWhCmCode tbWhCmCode) async {
+    return await db.deleteTbWhCmCode(tbWhCmCode);
+  }
+
+  @override
+  Future<bool> deleteTbWhCmCodeAll() async {
+    return await db.deleteTbWhCmCodeAll();
+  }
+
+
 
 }

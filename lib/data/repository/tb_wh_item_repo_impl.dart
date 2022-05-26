@@ -10,11 +10,6 @@ class TbWhItemRepoImpl implements TbWhItemRepo{
   TbWhItemRepoImpl(this.db);
 
   @override
-  Future<bool> deleteTbWhItem(TbWhItem tbWhItem) async {
-    return await db.deleteTbWhItem(tbWhItem);
-  }
-
-  @override
   Future<List<TbWhItem>?> getTbWhItemList() async {
     return await db.getTbWhItemList();
   }
@@ -27,5 +22,15 @@ class TbWhItemRepoImpl implements TbWhItemRepo{
   @override
   Future<bool> updateTbWhItem(TbWhItem tbWhItem) async {
     return await db.updateTbWhItem(tbWhItem);
+  }
+
+  @override
+  Future<bool> deleteTbWhItem(TbWhItem tbWhItem) async {
+    return await db.deleteTbWhItem(tbWhItem);
+  }
+
+  @override
+  Future<bool> deleteTbWhItemAll() async {
+    return await db.deleteTbWhItemAll();
   }
 }

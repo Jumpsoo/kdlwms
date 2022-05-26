@@ -11,23 +11,28 @@ class TbCmSyncRepoImpl implements TbCmSyncRepo{
   TbCmSyncRepoImpl(this.db);
 
   @override
-  Future<bool> deletetbCmSync(TbCmSync tbCmSync) async {
-    return await db.deleteTbCmSync(tbCmSync);
-  }
-
-  @override
   Future<List<TbCmSync>?> getTbCmSyncList()  async{
     return await db.getTbCmSyncList();
   }
 
   @override
-  Future<bool> inserttbCmSync(TbCmSync tbCmSync) async {
+  Future<bool> insertTbCmSync(TbCmSync tbCmSync) async {
     return await db.insertTbCmSync(tbCmSync);
   }
 
   @override
-  Future<bool> updatetbCmSync(TbCmSync tbCmSync) async {
+  Future<bool> updateTbCmSync(TbCmSync tbCmSync) async {
     return await db.updateTbCmSync(tbCmSync);
   }
 
+
+  @override
+  Future<bool> deleteTbCmSync(TbCmSync tbCmSync) async {
+    return await db.deleteTbCmSync(tbCmSync);
+  }
+
+  @override
+  Future<bool> deleteTbCmSyncAll() async {
+    return await db.deleteTbCmSyncAll();
+  }
 }

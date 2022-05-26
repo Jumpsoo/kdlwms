@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
@@ -20,6 +21,12 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
       String sWorkShop, String sLocation, int nState) async {
     // TODO: implement getPallet
     return await db.getTbWhPalletList(sWorkShop, sLocation, nState);
+  }
+
+  @override
+  Future<List<TbWhPallet>?> selectDupleCheck(String sBarCode) async{
+    return await db.selectDupleCheck(sBarCode);
+
   }
 
   @override

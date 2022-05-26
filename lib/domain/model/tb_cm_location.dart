@@ -8,8 +8,9 @@ part 'tb_cm_location.g.dart';
 class TbCmLocation with _$TbCmLocation {
   factory TbCmLocation({
     String?  WORKSHOP    ,
+    String?  WORKSHOP_NM    ,
     String?  LOCATION    ,
-    DateTime?  SYNC_DATETIME ,
+    DateTime? SYNC_DATETIME ,
     String?  CMF_1           ,
     String?  CMF_2           ,
     String?  CMF_3           ,

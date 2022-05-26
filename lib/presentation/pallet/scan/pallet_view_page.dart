@@ -365,7 +365,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
       _setMsg('완료처리 할 내용이 없습니다.');
       return;
     }
-    viewModel.updatePalletState(pallets);
+    viewModel.useCasesWms.updatePalletState(pallets);
     showAlertDialog(ownContext, '정상처리 되었습니다.');
 
     viewAll(_selectedLocation, _selectedPalletMasterInfo);

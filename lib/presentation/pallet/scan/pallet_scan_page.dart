@@ -87,7 +87,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _readLocation = 'WORK#5';
     });
     // 실제 장비 연결시 주석 해제 할것
-    //setBarcodeScanner();
+    setBarcodeScanner();
   }
 
   @override
@@ -291,7 +291,9 @@ class _PalletScanPageState extends State<PalletScanPage> {
                     confirmPacking(),
                   }
                 else if (index == 1)
-                  {}
+                  {
+                    deletePackItem(),
+                  }
                 else if (index == 2)
                   {
                     //종료
@@ -312,7 +314,13 @@ class _PalletScanPageState extends State<PalletScanPage> {
   // 값 파싱->임시저장 -> 재조회
   void _changeReadQrData(String sQrData) {
     setState(() async {
-      if (await viewModel.addPallet(sQrData)) {
+      TbWhPallet? pallet = await viewModel.useCasesWms.scanQrCode(sQrData);
+
+      if(pallet == null){
+        _setMsg('잘못된 식별표입니다. 식별표를 다시 확인하세요.');
+        return;
+      }
+      if (await viewModel.useCasesWms.addPallet(pallet)) {
         viewTopList(_readLocation, _readPalletMasterInfo);
       }
     });
@@ -320,6 +328,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
   //작업위치 저장
   void _changeLocation(String sLocation) {
+
     setState(() {
       _readLocation = sLocation;
       viewPackingList(_readLocation, _readPalletMasterInfo);
@@ -328,6 +337,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
   //창고QR 리딩
   void _changeWarehouse(String sReadWarehouse) {
+
     setState(() {
       _readPalletMasterInfo = sReadWarehouse;
       // viewPackingList(_readLocation, _readWarehouse);
@@ -344,7 +354,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
   Future<void> viewAll(String sLocation, String sWareHouse) async {
 
     viewTopList(sLocation, sWareHouse);
-
     viewPackingList(sLocation, sWareHouse);
   }
 
@@ -352,7 +361,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   // 리스트 초기화 -> 데이터 조회 -> 바인딩
   Future<void> viewTopList(String sLocation, String sWareHouse,) async {
     //초기화
-    topGridStateManager.rows.clear();
+    topGridStateManager.removeRows(topGridStateManager.rows);
     //조회
     List<TbWhPallet>? pallets = await viewModel.useCasesWms
         .listPallets(sLocation, sWareHouse, LoadState.Pack.index);
@@ -372,7 +381,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   // 기존행 클리어 -> 조회 -> 바인딩
   Future<void> viewPackingList(String sLocation, String sWareHouse) async {
     //초기화
-    packGridStateManager.rows.clear();
+    packGridStateManager.removeRows(packGridStateManager.rows);
     //조회
     List<TbWhPallet>? pallets = await viewModel.useCasesWms
         .listPallets(sLocation, sWareHouse, LoadState.Confirm.index);
@@ -389,24 +398,28 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
   // 작업중인 내용 확정 처리
   void confirmPacking() async {
+
     if (await checkValue('CONFIRM') == false) {
       return;
     }
+
+    //상태를 2 로변경한다.
     List<TbWhPallet> pallets = [];
     for (PlutoRow row in topGridStateManager.rows) {
       List<PlutoCell> cells = row.cells.values.toList();
       pallets.add(TbWhPallet(
           PALLET_SEQ: cells[TopGridColumnIndex.PALLET_SEQ.index].value,
-          STATE: 1));
+          STATE: 2));
     }
     if (pallets.isEmpty) {
       _setMsg('완료처리 할 내용이 없습니다.');
       return;
     }
-    await viewModel.updatePalletState(pallets);
+
+    await viewModel.useCasesWms.updatePalletState(pallets);
     await showAlertDialog(ownContext, '정상처리 되었습니다.');
 
-    viewTopList(_readLocation, _readPalletMasterInfo);
+    await viewAll(_readLocation, _readPalletMasterInfo);
   }
 
   //삭제
@@ -424,11 +437,11 @@ class _PalletScanPageState extends State<PalletScanPage> {
     }
 
     if (pallets.isEmpty) {
-      _setMsg('완료처리 할 내용이 없습니다.');
+      _setMsg('삭제처리 할 내용이 없습니다.');
       return;
     }
-    viewModel.updatePalletState(pallets);
-    showAlertDialog(ownContext, '정상처리 되었습니다.');
+    viewModel.useCasesWms.deletePallet(pallets);
+    showAlertDialog(ownContext, '정상적을로 삭제되었습니다.');
 
     viewAll(_readLocation, _readPalletMasterInfo);
   }

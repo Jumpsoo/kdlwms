@@ -54,4 +54,14 @@ class TbWhItemDbHelper{
     return true;
   }
 
+  Future<bool> deleteTbWhItemAll() async {
+    try {
+      await db.delete(
+        'TB_WH_ITEM',
+      );
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
 }

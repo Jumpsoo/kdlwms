@@ -7,9 +7,11 @@ part 'pallet_events.freezed.dart';
 abstract class PalletEvent with _$PalletEvent {
 
   const factory PalletEvent.listPallets(String sWorkShop, String sLocation, int nState) = ListPallets;
+  const factory PalletEvent.selectDupleCheck(String sBarCode) = SelectDupleCheck;
   const factory PalletEvent.getPalletBySeq(int palletSeq) = GetPalletBySeq;
 
-  const factory PalletEvent.addPallet(String sQRData) = AddPallet;
+
+  const factory PalletEvent.addPallet(TbWhPallet? tbWhPallet) = AddPallet;
   const factory PalletEvent.updatePallet(List<TbWhPallet> pallets) = UpdatePallet;
   const factory PalletEvent.updatePalletState(List<TbWhPallet> pallets) = UpdatePalletState;
 

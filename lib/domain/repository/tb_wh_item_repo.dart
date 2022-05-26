@@ -7,4 +7,5 @@ abstract class TbWhItemRepo{
   Future<bool> updateTbWhItem(TbWhItem tbWhItem);
   Future<bool> insertTbWhItem(TbWhItem tbWhItem);
   Future<bool> deleteTbWhItem(TbWhItem tbWhItem);
+  Future<bool> deleteTbWhItemAll();
 }

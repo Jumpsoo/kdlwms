@@ -34,6 +34,22 @@ class TbWhPalletDbHelper {
     return null;
   }
 
+
+  // 입력된 실적 확인
+  // 어디에 입력되었는지도 알려주면 좋을거같다.
+  Future<List<TbWhPallet>?> selectDupleCheck(
+      String sBarCode) async {
+    final maps = await db.query(
+      'TB_WH_PALLET',
+      where: 'BARCODE = ? ',
+      whereArgs: [sBarCode],
+    );
+    if (maps.isNotEmpty) {
+      return maps.map((e) => TbWhPallet.fromJson(e)).toList();
+    }
+    return null;
+  }
+
   Future<bool> insertTbWhPallet(TbWhPallet pallet) async {
     try {
       await db.insert('TB_WH_PALLET', pallet.toJson());

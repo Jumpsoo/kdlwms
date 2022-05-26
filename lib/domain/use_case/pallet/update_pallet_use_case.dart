@@ -10,3 +10,13 @@ class UpdatePalletUseCase{
     await repository.updateTbWhPallet(pallets);
   }
 }
+
+class UpdatePalletStateUseCase{
+  final TbWhPalletRepo repository;
+
+  UpdatePalletStateUseCase(this.repository);
+
+  Future<void> call (List<TbWhPallet> pallets) async {
+    await repository.updateTbWhPalletState(pallets);
+  }
+}

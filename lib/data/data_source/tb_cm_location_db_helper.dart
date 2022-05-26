@@ -1,23 +1,33 @@
-
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:sqflite/sqflite.dart';
 
-class TbCmLocationDbHelper{
-
+class TbCmLocationDbHelper {
   Database db;
+
   TbCmLocationDbHelper(this.db);
 
-  Future<List<TbCmLocation>?> getTbCmLocationList() async {
+  Future<List<TbCmLocation>?> selectTbCmLocationList(TbCmLocation tbCmLocation) async {
     final maps = await db.query(
-    'TB_CM_LOCATION',
+      'TB_CM_LOCATION',
+      where: 'WORKSHOP = ? AND LOCATION = ? ',
+      whereArgs: [tbCmLocation.WORKSHOP, tbCmLocation.LOCATION],
     );
-
     if (maps.isNotEmpty) {
-    return maps.map((e) => TbCmLocation.fromJson(e)).toList();
+      return maps.map((e) => TbCmLocation.fromJson(e)).toList();
     }
     return null;
   }
 
+  Future<List<TbCmLocation>?> selectTbCmLocationListAll() async {
+    final maps = await db.query(
+      'TB_CM_LOCATION',
+    );
+    if (maps.isNotEmpty) {
+      return maps.map((e) => TbCmLocation.fromJson(e)).toList();
+    }
+    print('AAA');
+    return null;
+  }
   Future<bool> updateTbCmLocation(TbCmLocation tbCmLocation) async {
     try {
       await db.update(
@@ -54,4 +64,14 @@ class TbCmLocationDbHelper{
     return true;
   }
 
+  Future<bool> deleteTbCmLocationAll() async {
+    try {
+      await db.delete(
+        'TB_CM_LOCATION',
+      );
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
 }

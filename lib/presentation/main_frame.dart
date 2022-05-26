@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/btn_move_exit.dart';
@@ -45,6 +46,14 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  String? currentVersion = '동기화 전입니다.';
+
+  //버전정보를 저장한다.
+  void setVersion(String val) async{
+    setState(() async {
+      currentVersion = val;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,8 +127,8 @@ class _MainPageState extends State<MainPage> {
                             color: Colors.white,
                             fontFamily: "Roboto"),
                       ),
-                      Text(
-                        '2022-04-12.0001',
+                      AutoSizeText(
+                        '동기화 전입니다.',
                         style: TextStyle(
                             fontSize: 20.0,
                             color: Colors.white,
@@ -144,7 +153,7 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
       ),
-      bottomNavigationBar: navigationBarMain,
+      bottomNavigationBar: const MainFrameNavigationBarMain(),
     );
   }
 }

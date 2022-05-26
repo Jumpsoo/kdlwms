@@ -9,6 +9,7 @@ part of 'tb_cm_location.dart';
 _$_TbCmLocation _$$_TbCmLocationFromJson(Map<String, dynamic> json) =>
     _$_TbCmLocation(
       WORKSHOP: json['WORKSHOP'] as String?,
+      WORKSHOP_NM: json['WORKSHOP_NM'] as String?,
       LOCATION: json['LOCATION'] as String?,
       SYNC_DATETIME: json['SYNC_DATETIME'] == null
           ? null
@@ -23,6 +24,7 @@ _$_TbCmLocation _$$_TbCmLocationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_TbCmLocationToJson(_$_TbCmLocation instance) =>
     <String, dynamic>{
       'WORKSHOP': instance.WORKSHOP,
+      'WORKSHOP_NM': instance.WORKSHOP_NM,
       'LOCATION': instance.LOCATION,
       'SYNC_DATETIME': instance.SYNC_DATETIME?.toIso8601String(),
       'CMF_1': instance.CMF_1,

@@ -53,4 +53,15 @@ class TbWhCmCodeDbHelper{
     return true;
   }
 
+  Future<bool> deleteTbWhCmCodeAll() async {
+    try {
+      await db.delete(
+        'TB_WH_CM_CODE',
+      );
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
 }
