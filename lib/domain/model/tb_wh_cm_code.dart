@@ -7,8 +7,8 @@ part 'tb_wh_cm_code.g.dart';
 @freezed
 class TbWhCmCode with _$TbWhCmCode {
   factory TbWhCmCode({
-    int?	CODE_ID,
-    String?	GRP_CD,
+    required int	CODE_ID,
+    required String	GRP_CD,
     String?	CODE_CD,
     String?	CODE_KO_NM,
     String?	CODE_EN_NM,

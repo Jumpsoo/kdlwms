@@ -27,6 +27,7 @@ import 'package:kdlwms/domain/use_case/tb_cm_location/update_tb_cm_location.dart
 import 'package:kdlwms/domain/use_case/use_case_data_batch.dart';
 import 'package:kdlwms/domain/use_case/use_case_tb_cm_location.dart';
 import 'package:kdlwms/domain/use_case/use_case_wms.dart';
+import 'package:kdlwms/kdl_common/batch/data_sync_viewmodel.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,7 @@ import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_item.dart';
 
 Future<List<SingleChildWidget>> getWmsProviders() async {
   Database database = await openDatabase(
-    'pallet_db',
+    'wms_db',
     version: 1,
     onCreate: (database, version) async {
       //1. 공통코드
@@ -80,15 +81,22 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           'UPDTR_ID        INTEGER,'
           'UPDT_DT         TIMESTAMP )');
 
-      //3. 작업장 및 창고 정보
       await database.execute('CREATE TABLE TB_CM_LOCATION ( '
           ' WORKSHOP      TEXT,       '
-          ' WORKSHOP_NM      TEXT,'
-          ' LOCATION          TEXT )');
+          ' WORKSHOP_NM   TEXT,'
+          ' LOCATION      TEXT, '
+          ' SET_FLAG      TEXT, '
+          ' SYNC_DATETIME  TIMESTAMP ,'
+          ' CMF_1      TEXT, '
+          ' CMF_2      TEXT, '
+          ' CMF_3      TEXT, '
+          ' CMF_4      TEXT, '
+          ' CMF_5      TEXT   )' );
+
 
       //4. 패킹정보
       await database.execute('CREATE TABLE TB_WH_PALLET ( '
-          ' PALLET_SEQ  INTEGER ,   '
+          ' PALLET_SEQ    INTEGER PRIMARY KEY AUTOINCREMENT,  '
           ' WORKSHOP      TEXT,       '
           ' LOCATION      TEXT,       '
           ' ITEM_NO       TEXT,       '
@@ -114,7 +122,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
       await database.execute('CREATE TABLE TB_CM_SYNC ( '
           'VERSION_CODE     TEXT,'
           'VERSION_DESC     TEXT,'
-          'DATETIME         TIMESTAMP,'
+          'SYNC_DATETIME    TIMESTAMP,'
           'CMF_1            TEXT,'
           'CMF_2            TEXT,'
           'CMF_3            TEXT,'
@@ -123,9 +131,11 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     },
   );
 
+
   // 실적 입력 & 조회관련
   TbWhPalletDbHelper palletDbHelper = TbWhPalletDbHelper(database);
   TbWhPalletRepo repository = TbWhPalletRepoImpl(palletDbHelper);
+
   UseCaseWms useCasesWms = UseCaseWms(
     //pallet
     listPallets: ListPalletsUseCase(repository),
@@ -138,20 +148,26 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     getPalletBySeq: GetPalletBySeq(repository),
     getPalletCountInDevice: GetPalletCountInDevice(repository),
     scanQrCode: ScanQrCode(),
-  );
 
+
+    //
+  );
+  PalletViewModel palletViewModel = PalletViewModel(useCasesWms);
 
   // 기준정보등을 내려받기 위해 사용
   //공통코드
   TbWhCmCodeDbHelper tbWhCmCodeDbHelper = TbWhCmCodeDbHelper(database);
   TbWhCmCodeRepo tbWhCmCodeRepo = TbWhCmCodeRepoImpl(tbWhCmCodeDbHelper);
+
   //품목정보
   TbWhItemDbHelper tbWhItemDbHelper = TbWhItemDbHelper(database);
   TbWhItemRepo tbWhItemRepo = TbWhItemRepoImpl(tbWhItemDbHelper);
+
   //작업장 관리
   TbCmLocationDbHelper tbCmLocationDbHelper = TbCmLocationDbHelper(database);
   TbCmLocationRepo tbCmLocationRepo =
-  TbCmLocationRepoImpl(tbCmLocationDbHelper);
+      TbCmLocationRepoImpl(tbCmLocationDbHelper);
+
   //동기화 정보
   TbCmSyncDbHelper tbCmSyncDbHelper = TbCmSyncDbHelper(database);
   TbCmSyncRepo tbCmSyncRepo = TbCmSyncRepoImpl(tbCmSyncDbHelper);
@@ -162,10 +178,15 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     addTbCmLocation: AddTbCmLocation(tbCmLocationRepo),
     selectTbCmLocation: SelectTbCmLocation(tbCmLocationRepo),
     selectTbCmLocationAll: SelectTbCmLocationAll(tbCmLocationRepo),
+    selectTbCmLocationCurrentItem: SelectTbCmLocationCurrentItem(tbCmLocationRepo),
     deleteTbCmLocation: DeleteTbCmLocation(tbCmLocationRepo),
     updateTbCmLocation: UpdateTbCmLocation(tbCmLocationRepo),
-
+    updateFromSelectTbCmLocationToEnable: UpdateFromSelectTbCmLocationToEnable(tbCmLocationRepo),
+    updateFromSelectTbCmLocationToDisableAll: UpdateFromSelectTbCmLocationToDisableAll(tbCmLocationRepo),
   );
+
+  SettingWorkshopViewModel settingWorkshopViewModel =
+      SettingWorkshopViewModel(useCaseTbCmLocation);
 
   //배치 관련
   UseCaseDataBatch useCaseDataBatch = UseCaseDataBatch(
@@ -175,13 +196,13 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     migTbCmSync: MigTbCmSync(tbCmSyncRepo),
   );
 
-
-  PalletViewModel palletViewModel = PalletViewModel(useCasesWms);
-  SettingWorkshopViewModel settingWorkshopViewModel =
-      SettingWorkshopViewModel(useCaseTbCmLocation);
+  DataSyncViewModel dataSyncViewModel = DataSyncViewModel(useCaseDataBatch);
 
   return [
     ChangeNotifierProvider(create: (_) => palletViewModel),
     ChangeNotifierProvider(create: (_) => settingWorkshopViewModel),
+    ChangeNotifierProvider(create: (_) => dataSyncViewModel),
   ];
+
+
 }

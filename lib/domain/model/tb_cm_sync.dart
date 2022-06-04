@@ -7,7 +7,7 @@ part 'tb_cm_sync.g.dart';
 @freezed
 class TbCmSync with _$TbCmSync {
   factory TbCmSync({
-    String?	VERSION_CODE,
+    required String	VERSION_CODE,
     String?	VERSION_DESC,
     DateTime?	SYNC_DATETIME,
     String?	CMF_1,

@@ -39,10 +39,14 @@ dependencies:
   json_annotation: ^4.5.0
   freezed_annotation: ^2.0.3
 
-  pluto_grid: ^3.0.0-1.pre
+  pluto_grid: ^3.1.1
   pointmobile_scanner: ^0.0.1
   auto_size_text: ^3.0.0
   http: ^0.13.4
+  percent_indicator: ^4.0.1
+  progress_dialog: ^1.2.4
+  flutter_beep: ^1.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

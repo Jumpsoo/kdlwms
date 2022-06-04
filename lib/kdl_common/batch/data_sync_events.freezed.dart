@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DataSyncEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<TbWhCmCode> tbWhCmCodes) migTbWhCmCode,
+    required TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)
+        migTbWhCmCode,
     required TResult Function(List<TbWhItem> tbWhItems) migTbWhItem,
     required TResult Function(List<TbCmLocation> tbCmLocations) migTbCmLocation,
     required TResult Function(List<TbCmSync> tbCmSyncs) migTbCmSync,
@@ -26,7 +27,8 @@ mixin _$DataSyncEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
@@ -34,7 +36,8 @@ mixin _$DataSyncEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
@@ -90,7 +93,7 @@ abstract class _$$MigTbWhCmCodeCopyWith<$Res> {
   factory _$$MigTbWhCmCodeCopyWith(
           _$MigTbWhCmCode value, $Res Function(_$MigTbWhCmCode) then) =
       __$$MigTbWhCmCodeCopyWithImpl<$Res>;
-  $Res call({List<TbWhCmCode> tbWhCmCodes});
+  $Res call({List<TbWhCmCode> tbWhCmCodes, String sBatchName});
 }
 
 /// @nodoc
@@ -107,12 +110,17 @@ class __$$MigTbWhCmCodeCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tbWhCmCodes = freezed,
+    Object? sBatchName = freezed,
   }) {
     return _then(_$MigTbWhCmCode(
       tbWhCmCodes == freezed
           ? _value._tbWhCmCodes
           : tbWhCmCodes // ignore: cast_nullable_to_non_nullable
               as List<TbWhCmCode>,
+      sBatchName == freezed
+          ? _value.sBatchName
+          : sBatchName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -120,7 +128,7 @@ class __$$MigTbWhCmCodeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MigTbWhCmCode implements MigTbWhCmCode {
-  const _$MigTbWhCmCode(final List<TbWhCmCode> tbWhCmCodes)
+  const _$MigTbWhCmCode(final List<TbWhCmCode> tbWhCmCodes, this.sBatchName)
       : _tbWhCmCodes = tbWhCmCodes;
 
   final List<TbWhCmCode> _tbWhCmCodes;
@@ -131,8 +139,11 @@ class _$MigTbWhCmCode implements MigTbWhCmCode {
   }
 
   @override
+  final String sBatchName;
+
+  @override
   String toString() {
-    return 'DataSyncEvent.migTbWhCmCode(tbWhCmCodes: $tbWhCmCodes)';
+    return 'DataSyncEvent.migTbWhCmCode(tbWhCmCodes: $tbWhCmCodes, sBatchName: $sBatchName)';
   }
 
   @override
@@ -141,12 +152,16 @@ class _$MigTbWhCmCode implements MigTbWhCmCode {
         (other.runtimeType == runtimeType &&
             other is _$MigTbWhCmCode &&
             const DeepCollectionEquality()
-                .equals(other._tbWhCmCodes, _tbWhCmCodes));
+                .equals(other._tbWhCmCodes, _tbWhCmCodes) &&
+            const DeepCollectionEquality()
+                .equals(other.sBatchName, sBatchName));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_tbWhCmCodes));
+      runtimeType,
+      const DeepCollectionEquality().hash(_tbWhCmCodes),
+      const DeepCollectionEquality().hash(sBatchName));
 
   @JsonKey(ignore: true)
   @override
@@ -156,36 +171,39 @@ class _$MigTbWhCmCode implements MigTbWhCmCode {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<TbWhCmCode> tbWhCmCodes) migTbWhCmCode,
+    required TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)
+        migTbWhCmCode,
     required TResult Function(List<TbWhItem> tbWhItems) migTbWhItem,
     required TResult Function(List<TbCmLocation> tbCmLocations) migTbCmLocation,
     required TResult Function(List<TbCmSync> tbCmSyncs) migTbCmSync,
   }) {
-    return migTbWhCmCode(tbWhCmCodes);
+    return migTbWhCmCode(tbWhCmCodes, sBatchName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
   }) {
-    return migTbWhCmCode?.call(tbWhCmCodes);
+    return migTbWhCmCode?.call(tbWhCmCodes, sBatchName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
     required TResult orElse(),
   }) {
     if (migTbWhCmCode != null) {
-      return migTbWhCmCode(tbWhCmCodes);
+      return migTbWhCmCode(tbWhCmCodes, sBatchName);
     }
     return orElse();
   }
@@ -229,10 +247,12 @@ class _$MigTbWhCmCode implements MigTbWhCmCode {
 }
 
 abstract class MigTbWhCmCode implements DataSyncEvent {
-  const factory MigTbWhCmCode(final List<TbWhCmCode> tbWhCmCodes) =
+  const factory MigTbWhCmCode(
+          final List<TbWhCmCode> tbWhCmCodes, final String sBatchName) =
       _$MigTbWhCmCode;
 
   List<TbWhCmCode> get tbWhCmCodes => throw _privateConstructorUsedError;
+  String get sBatchName => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$MigTbWhCmCodeCopyWith<_$MigTbWhCmCode> get copyWith =>
       throw _privateConstructorUsedError;
@@ -308,7 +328,8 @@ class _$MigTbWhItem implements MigTbWhItem {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<TbWhCmCode> tbWhCmCodes) migTbWhCmCode,
+    required TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)
+        migTbWhCmCode,
     required TResult Function(List<TbWhItem> tbWhItems) migTbWhItem,
     required TResult Function(List<TbCmLocation> tbCmLocations) migTbCmLocation,
     required TResult Function(List<TbCmSync> tbCmSyncs) migTbCmSync,
@@ -319,7 +340,8 @@ class _$MigTbWhItem implements MigTbWhItem {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
@@ -330,7 +352,8 @@ class _$MigTbWhItem implements MigTbWhItem {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
@@ -460,7 +483,8 @@ class _$MigTbCmLocation implements MigTbCmLocation {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<TbWhCmCode> tbWhCmCodes) migTbWhCmCode,
+    required TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)
+        migTbWhCmCode,
     required TResult Function(List<TbWhItem> tbWhItems) migTbWhItem,
     required TResult Function(List<TbCmLocation> tbCmLocations) migTbCmLocation,
     required TResult Function(List<TbCmSync> tbCmSyncs) migTbCmSync,
@@ -471,7 +495,8 @@ class _$MigTbCmLocation implements MigTbCmLocation {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
@@ -482,7 +507,8 @@ class _$MigTbCmLocation implements MigTbCmLocation {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
@@ -612,7 +638,8 @@ class _$MigTbCmSync implements MigTbCmSync {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<TbWhCmCode> tbWhCmCodes) migTbWhCmCode,
+    required TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)
+        migTbWhCmCode,
     required TResult Function(List<TbWhItem> tbWhItems) migTbWhItem,
     required TResult Function(List<TbCmLocation> tbCmLocations) migTbCmLocation,
     required TResult Function(List<TbCmSync> tbCmSyncs) migTbCmSync,
@@ -623,7 +650,8 @@ class _$MigTbCmSync implements MigTbCmSync {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,
@@ -634,7 +662,8 @@ class _$MigTbCmSync implements MigTbCmSync {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<TbWhCmCode> tbWhCmCodes)? migTbWhCmCode,
+    TResult Function(List<TbWhCmCode> tbWhCmCodes, String sBatchName)?
+        migTbWhCmCode,
     TResult Function(List<TbWhItem> tbWhItems)? migTbWhItem,
     TResult Function(List<TbCmLocation> tbCmLocations)? migTbCmLocation,
     TResult Function(List<TbCmSync> tbCmSyncs)? migTbCmSync,

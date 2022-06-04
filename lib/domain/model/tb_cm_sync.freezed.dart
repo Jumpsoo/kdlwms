@@ -20,7 +20,7 @@ TbCmSync _$TbCmSyncFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TbCmSync {
-  String? get VERSION_CODE => throw _privateConstructorUsedError;
+  String get VERSION_CODE => throw _privateConstructorUsedError;
   String? get VERSION_DESC => throw _privateConstructorUsedError;
   DateTime? get SYNC_DATETIME => throw _privateConstructorUsedError;
   String? get CMF_1 => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $TbCmSyncCopyWith<$Res> {
   factory $TbCmSyncCopyWith(TbCmSync value, $Res Function(TbCmSync) then) =
       _$TbCmSyncCopyWithImpl<$Res>;
   $Res call(
-      {String? VERSION_CODE,
+      {String VERSION_CODE,
       String? VERSION_DESC,
       DateTime? SYNC_DATETIME,
       String? CMF_1,
@@ -73,7 +73,7 @@ class _$TbCmSyncCopyWithImpl<$Res> implements $TbCmSyncCopyWith<$Res> {
       VERSION_CODE: VERSION_CODE == freezed
           ? _value.VERSION_CODE
           : VERSION_CODE // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       VERSION_DESC: VERSION_DESC == freezed
           ? _value.VERSION_DESC
           : VERSION_DESC // ignore: cast_nullable_to_non_nullable
@@ -113,7 +113,7 @@ abstract class _$$_TbCmSyncCopyWith<$Res> implements $TbCmSyncCopyWith<$Res> {
       __$$_TbCmSyncCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? VERSION_CODE,
+      {String VERSION_CODE,
       String? VERSION_DESC,
       DateTime? SYNC_DATETIME,
       String? CMF_1,
@@ -148,7 +148,7 @@ class __$$_TbCmSyncCopyWithImpl<$Res> extends _$TbCmSyncCopyWithImpl<$Res>
       VERSION_CODE: VERSION_CODE == freezed
           ? _value.VERSION_CODE
           : VERSION_CODE // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       VERSION_DESC: VERSION_DESC == freezed
           ? _value.VERSION_DESC
           : VERSION_DESC // ignore: cast_nullable_to_non_nullable
@@ -185,7 +185,7 @@ class __$$_TbCmSyncCopyWithImpl<$Res> extends _$TbCmSyncCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TbCmSync implements _TbCmSync {
   _$_TbCmSync(
-      {this.VERSION_CODE,
+      {required this.VERSION_CODE,
       this.VERSION_DESC,
       this.SYNC_DATETIME,
       this.CMF_1,
@@ -198,7 +198,7 @@ class _$_TbCmSync implements _TbCmSync {
       _$$_TbCmSyncFromJson(json);
 
   @override
-  final String? VERSION_CODE;
+  final String VERSION_CODE;
   @override
   final String? VERSION_DESC;
   @override
@@ -263,7 +263,7 @@ class _$_TbCmSync implements _TbCmSync {
 
 abstract class _TbCmSync implements TbCmSync {
   factory _TbCmSync(
-      {final String? VERSION_CODE,
+      {required final String VERSION_CODE,
       final String? VERSION_DESC,
       final DateTime? SYNC_DATETIME,
       final String? CMF_1,
@@ -275,7 +275,7 @@ abstract class _TbCmSync implements TbCmSync {
   factory _TbCmSync.fromJson(Map<String, dynamic> json) = _$_TbCmSync.fromJson;
 
   @override
-  String? get VERSION_CODE => throw _privateConstructorUsedError;
+  String get VERSION_CODE => throw _privateConstructorUsedError;
   @override
   String? get VERSION_DESC => throw _privateConstructorUsedError;
   @override

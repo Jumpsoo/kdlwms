@@ -20,8 +20,8 @@ TbWhCmCode _$TbWhCmCodeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TbWhCmCode {
-  int? get CODE_ID => throw _privateConstructorUsedError;
-  String? get GRP_CD => throw _privateConstructorUsedError;
+  int get CODE_ID => throw _privateConstructorUsedError;
+  String get GRP_CD => throw _privateConstructorUsedError;
   String? get CODE_CD => throw _privateConstructorUsedError;
   String? get CODE_KO_NM => throw _privateConstructorUsedError;
   String? get CODE_EN_NM => throw _privateConstructorUsedError;
@@ -50,8 +50,8 @@ abstract class $TbWhCmCodeCopyWith<$Res> {
           TbWhCmCode value, $Res Function(TbWhCmCode) then) =
       _$TbWhCmCodeCopyWithImpl<$Res>;
   $Res call(
-      {int? CODE_ID,
-      String? GRP_CD,
+      {int CODE_ID,
+      String GRP_CD,
       String? CODE_CD,
       String? CODE_KO_NM,
       String? CODE_EN_NM,
@@ -101,11 +101,11 @@ class _$TbWhCmCodeCopyWithImpl<$Res> implements $TbWhCmCodeCopyWith<$Res> {
       CODE_ID: CODE_ID == freezed
           ? _value.CODE_ID
           : CODE_ID // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       GRP_CD: GRP_CD == freezed
           ? _value.GRP_CD
           : GRP_CD // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       CODE_CD: CODE_CD == freezed
           ? _value.CODE_CD
           : CODE_CD // ignore: cast_nullable_to_non_nullable
@@ -178,8 +178,8 @@ abstract class _$$_TbWhCmCodeCopyWith<$Res>
       __$$_TbWhCmCodeCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int? CODE_ID,
-      String? GRP_CD,
+      {int CODE_ID,
+      String GRP_CD,
       String? CODE_CD,
       String? CODE_KO_NM,
       String? CODE_EN_NM,
@@ -231,11 +231,11 @@ class __$$_TbWhCmCodeCopyWithImpl<$Res> extends _$TbWhCmCodeCopyWithImpl<$Res>
       CODE_ID: CODE_ID == freezed
           ? _value.CODE_ID
           : CODE_ID // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       GRP_CD: GRP_CD == freezed
           ? _value.GRP_CD
           : GRP_CD // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       CODE_CD: CODE_CD == freezed
           ? _value.CODE_CD
           : CODE_CD // ignore: cast_nullable_to_non_nullable
@@ -304,8 +304,8 @@ class __$$_TbWhCmCodeCopyWithImpl<$Res> extends _$TbWhCmCodeCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TbWhCmCode implements _TbWhCmCode {
   _$_TbWhCmCode(
-      {this.CODE_ID,
-      this.GRP_CD,
+      {required this.CODE_ID,
+      required this.GRP_CD,
       this.CODE_CD,
       this.CODE_KO_NM,
       this.CODE_EN_NM,
@@ -326,9 +326,9 @@ class _$_TbWhCmCode implements _TbWhCmCode {
       _$$_TbWhCmCodeFromJson(json);
 
   @override
-  final int? CODE_ID;
+  final int CODE_ID;
   @override
-  final String? GRP_CD;
+  final String GRP_CD;
   @override
   final String? CODE_CD;
   @override
@@ -427,8 +427,8 @@ class _$_TbWhCmCode implements _TbWhCmCode {
 
 abstract class _TbWhCmCode implements TbWhCmCode {
   factory _TbWhCmCode(
-      {final int? CODE_ID,
-      final String? GRP_CD,
+      {required final int CODE_ID,
+      required final String GRP_CD,
       final String? CODE_CD,
       final String? CODE_KO_NM,
       final String? CODE_EN_NM,
@@ -449,9 +449,9 @@ abstract class _TbWhCmCode implements TbWhCmCode {
       _$_TbWhCmCode.fromJson;
 
   @override
-  int? get CODE_ID => throw _privateConstructorUsedError;
+  int get CODE_ID => throw _privateConstructorUsedError;
   @override
-  String? get GRP_CD => throw _privateConstructorUsedError;
+  String get GRP_CD => throw _privateConstructorUsedError;
   @override
   String? get CODE_CD => throw _privateConstructorUsedError;
   @override

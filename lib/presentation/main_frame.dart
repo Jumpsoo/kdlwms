@@ -150,6 +150,7 @@ class _MainPageState extends State<MainPage> {
             //세번째 버튼
             const Padding(padding: EdgeInsets.only(top: 10)),
             const BtnExit(),
+
           ],
         ),
       ),

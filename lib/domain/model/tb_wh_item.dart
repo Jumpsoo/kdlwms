@@ -7,10 +7,10 @@ part 'tb_wh_item.g.dart';
 @freezed
 class TbWhItem with _$TbWhItem {
   factory TbWhItem({
-    String?	ITEM_NM,
+    required String	ITEM_NM,
     String?	STANDARD,
     String?	QT,
-    String?	ITEM_NO,
+    required String	ITEM_NO,
     int?	BOX_KG,
     int?	LENGTH,
     int?	WIDTH,

@@ -8,8 +8,8 @@ part of 'tb_wh_cm_code.dart';
 
 _$_TbWhCmCode _$$_TbWhCmCodeFromJson(Map<String, dynamic> json) =>
     _$_TbWhCmCode(
-      CODE_ID: json['CODE_ID'] as int?,
-      GRP_CD: json['GRP_CD'] as String?,
+      CODE_ID: json['CODE_ID'] as int,
+      GRP_CD: json['GRP_CD'] as String,
       CODE_CD: json['CODE_CD'] as String?,
       CODE_KO_NM: json['CODE_KO_NM'] as String?,
       CODE_EN_NM: json['CODE_EN_NM'] as String?,

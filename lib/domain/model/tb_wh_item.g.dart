@@ -7,10 +7,10 @@ part of 'tb_wh_item.dart';
 // **************************************************************************
 
 _$_TbWhItem _$$_TbWhItemFromJson(Map<String, dynamic> json) => _$_TbWhItem(
-      ITEM_NM: json['ITEM_NM'] as String?,
+      ITEM_NM: json['ITEM_NM'] as String,
       STANDARD: json['STANDARD'] as String?,
       QT: json['QT'] as String?,
-      ITEM_NO: json['ITEM_NO'] as String?,
+      ITEM_NO: json['ITEM_NO'] as String,
       BOX_KG: json['BOX_KG'] as int?,
       LENGTH: json['LENGTH'] as int?,
       WIDTH: json['WIDTH'] as int?,

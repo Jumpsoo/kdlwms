@@ -1,23 +1,24 @@
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:sqflite/sqflite.dart';
 
-class TbWhCmCodeDbHelper{
-
+class TbWhCmCodeDbHelper {
   Database db;
+
   TbWhCmCodeDbHelper(this.db);
 
-  Future<List<TbWhCmCode>?> getTbWhCmCodeList() async {
-    final maps = await db.query(
-      'TB_WH_CM_CODE',
-    );
-
-    if (maps.isNotEmpty) {
-      return maps.map((e) => TbWhCmCode.fromJson(e)).toList();
+  Future<Result<List<TbWhCmCode>>> getTbWhCmCodeList() async {
+    try {
+      final maps = await db.query(
+        'TB_WH_CM_CODE',
+      );
+      return Result.success(maps.map((e) => TbWhCmCode.fromJson(e)).toList());
+    } catch (e) {
+      return const Result.error('데이터베이스 에러');
     }
-    return null;
   }
 
-  Future<bool> updateTbWhCmCode(TbWhCmCode tbWhCmCode) async {
+  Future<Result<bool>> updateTbWhCmCode(TbWhCmCode tbWhCmCode) async {
     try {
       await db.update(
         'TB_WH_CM_CODE',
@@ -25,43 +26,49 @@ class TbWhCmCodeDbHelper{
         where: 'CODE_ID = ? ',
         whereArgs: [tbWhCmCode],
       );
+      return const Result.success(true);
     } catch (e) {
-      return false;
+      return const Result.error('데이터베이스 에러');
     }
-    return true;
   }
 
-  Future<bool> insertTbWhCmCode(TbWhCmCode tbWhCmCode) async {
+  Future<Result<bool>> insertTbWhCmCode(TbWhCmCode tbWhCmCode) async {
     try {
-      await db.insert('TB_WH_CM_CODE', tbWhCmCode.toJson());
+      int retVal = await db.insert('TB_WH_CM_CODE', tbWhCmCode.toJson());
+
+
+      if(retVal == 0) {
+        return const Result.success(true);
+      }else{
+        return const Result.error('데이터베이스 에러');
+      }
     } catch (e) {
-      return false;
+      return const Result.error('데이터베이스 에러');
     }
-    return true;
   }
 
-  Future<bool> deleteTbWhCmCode(TbWhCmCode tbWhCmCode) async {
+  Future<Result<bool>> deleteTbWhCmCode(TbWhCmCode tbWhCmCode) async {
     try {
       await db.delete(
         'TB_WH_CM_CODE',
         where: 'CODE_ID = ? ',
         whereArgs: [tbWhCmCode.CODE_ID],
       );
+      return const Result.success(true);
     } catch (e) {
-      return false;
+      return const Result.error('데이터베이스 에러');
     }
-    return true;
   }
 
-  Future<bool> deleteTbWhCmCodeAll() async {
+  Future<Result<bool>> deleteTbWhCmCodeAll() async {
     try {
       await db.delete(
         'TB_WH_CM_CODE',
       );
+      return const Result.success(true);
     } catch (e) {
-      return false;
+      print('데이터베이스 에러');
+      return Result.error('데이터베이스 에러');
     }
-    return true;
   }
-
 }

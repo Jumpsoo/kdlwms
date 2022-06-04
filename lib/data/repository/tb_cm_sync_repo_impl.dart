@@ -1,5 +1,6 @@
 
 
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/data/data_source/tb_cm_location_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_cm_sync_db_helper.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
@@ -11,28 +12,28 @@ class TbCmSyncRepoImpl implements TbCmSyncRepo{
   TbCmSyncRepoImpl(this.db);
 
   @override
-  Future<List<TbCmSync>?> getTbCmSyncList()  async{
+  Future<Result<List<TbCmSync>?>> getTbCmSyncList()  async{
     return await db.getTbCmSyncList();
   }
 
   @override
-  Future<bool> insertTbCmSync(TbCmSync tbCmSync) async {
+  Future<Result<bool>> insertTbCmSync(TbCmSync tbCmSync) async {
     return await db.insertTbCmSync(tbCmSync);
   }
 
   @override
-  Future<bool> updateTbCmSync(TbCmSync tbCmSync) async {
+  Future<Result<bool>> updateTbCmSync(TbCmSync tbCmSync) async {
     return await db.updateTbCmSync(tbCmSync);
   }
 
 
   @override
-  Future<bool> deleteTbCmSync(TbCmSync tbCmSync) async {
+  Future<Result<bool>> deleteTbCmSync(TbCmSync tbCmSync) async {
     return await db.deleteTbCmSync(tbCmSync);
   }
 
   @override
-  Future<bool> deleteTbCmSyncAll() async {
+  Future<Result<bool>> deleteTbCmSyncAll() async {
     return await db.deleteTbCmSyncAll();
   }
 }

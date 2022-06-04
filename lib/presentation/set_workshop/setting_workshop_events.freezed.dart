@@ -19,7 +19,12 @@ mixin _$SettingWorkShopEvents {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
     required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
     required TResult Function(List<TbCmLocation> tbCmLocations)
         batchInsertTbCmLocation,
@@ -28,7 +33,11 @@ mixin _$SettingWorkShopEvents {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
   }) =>
@@ -36,7 +45,11 @@ mixin _$SettingWorkShopEvents {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -46,7 +59,14 @@ mixin _$SettingWorkShopEvents {
   TResult map<TResult extends Object?>({
     required TResult Function(SelectTbCmLocationAll value)
         selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
     required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
     required TResult Function(BatchInsertTbCmLocation value)
         batchInsertTbCmLocation,
@@ -55,7 +75,14 @@ mixin _$SettingWorkShopEvents {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
   }) =>
@@ -63,7 +90,14 @@ mixin _$SettingWorkShopEvents {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -130,7 +164,12 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
     required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
     required TResult Function(List<TbCmLocation> tbCmLocations)
         batchInsertTbCmLocation,
@@ -142,7 +181,11 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
   }) {
@@ -153,7 +196,11 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -169,7 +216,14 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
   TResult map<TResult extends Object?>({
     required TResult Function(SelectTbCmLocationAll value)
         selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
     required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
     required TResult Function(BatchInsertTbCmLocation value)
         batchInsertTbCmLocation,
@@ -181,7 +235,14 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
   }) {
@@ -192,7 +253,14 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -206,6 +274,165 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
 
 abstract class SelectTbCmLocationAll implements SettingWorkShopEvents {
   const factory SelectTbCmLocationAll() = _$SelectTbCmLocationAll;
+}
+
+/// @nodoc
+abstract class _$$SelectTbCmLocationCurrentItemCopyWith<$Res> {
+  factory _$$SelectTbCmLocationCurrentItemCopyWith(
+          _$SelectTbCmLocationCurrentItem value,
+          $Res Function(_$SelectTbCmLocationCurrentItem) then) =
+      __$$SelectTbCmLocationCurrentItemCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SelectTbCmLocationCurrentItemCopyWithImpl<$Res>
+    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    implements _$$SelectTbCmLocationCurrentItemCopyWith<$Res> {
+  __$$SelectTbCmLocationCurrentItemCopyWithImpl(
+      _$SelectTbCmLocationCurrentItem _value,
+      $Res Function(_$SelectTbCmLocationCurrentItem) _then)
+      : super(_value, (v) => _then(v as _$SelectTbCmLocationCurrentItem));
+
+  @override
+  _$SelectTbCmLocationCurrentItem get _value =>
+      super._value as _$SelectTbCmLocationCurrentItem;
+}
+
+/// @nodoc
+
+class _$SelectTbCmLocationCurrentItem implements SelectTbCmLocationCurrentItem {
+  const _$SelectTbCmLocationCurrentItem();
+
+  @override
+  String toString() {
+    return 'SettingWorkShopEvents.selectTbCmLocationCurrentItem()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SelectTbCmLocationCurrentItem);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
+    required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
+    required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
+    required TResult Function(List<TbCmLocation> tbCmLocations)
+        batchInsertTbCmLocation,
+  }) {
+    return selectTbCmLocationCurrentItem();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
+    TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
+    TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
+  }) {
+    return selectTbCmLocationCurrentItem?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
+    TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
+    TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
+    required TResult orElse(),
+  }) {
+    if (selectTbCmLocationCurrentItem != null) {
+      return selectTbCmLocationCurrentItem();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectTbCmLocationAll value)
+        selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
+    required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
+    required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
+    required TResult Function(BatchInsertTbCmLocation value)
+        batchInsertTbCmLocation,
+  }) {
+    return selectTbCmLocationCurrentItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
+    TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
+    TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
+  }) {
+    return selectTbCmLocationCurrentItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
+    TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
+    TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
+    required TResult orElse(),
+  }) {
+    if (selectTbCmLocationCurrentItem != null) {
+      return selectTbCmLocationCurrentItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SelectTbCmLocationCurrentItem implements SettingWorkShopEvents {
+  const factory SelectTbCmLocationCurrentItem() =
+      _$SelectTbCmLocationCurrentItem;
 }
 
 /// @nodoc
@@ -285,7 +512,12 @@ class _$SelectTbCmLocation implements SelectTbCmLocation {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
     required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
     required TResult Function(List<TbCmLocation> tbCmLocations)
         batchInsertTbCmLocation,
@@ -297,7 +529,11 @@ class _$SelectTbCmLocation implements SelectTbCmLocation {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
   }) {
@@ -308,7 +544,11 @@ class _$SelectTbCmLocation implements SelectTbCmLocation {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -324,7 +564,14 @@ class _$SelectTbCmLocation implements SelectTbCmLocation {
   TResult map<TResult extends Object?>({
     required TResult Function(SelectTbCmLocationAll value)
         selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
     required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
     required TResult Function(BatchInsertTbCmLocation value)
         batchInsertTbCmLocation,
@@ -336,7 +583,14 @@ class _$SelectTbCmLocation implements SelectTbCmLocation {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
   }) {
@@ -347,7 +601,14 @@ class _$SelectTbCmLocation implements SelectTbCmLocation {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -367,6 +628,556 @@ abstract class SelectTbCmLocation implements SettingWorkShopEvents {
   @JsonKey(ignore: true)
   _$$SelectTbCmLocationCopyWith<_$SelectTbCmLocation> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateTbCmLocationCopyWith<$Res> {
+  factory _$$UpdateTbCmLocationCopyWith(_$UpdateTbCmLocation value,
+          $Res Function(_$UpdateTbCmLocation) then) =
+      __$$UpdateTbCmLocationCopyWithImpl<$Res>;
+  $Res call({TbCmLocation tbCmLocation});
+
+  $TbCmLocationCopyWith<$Res> get tbCmLocation;
+}
+
+/// @nodoc
+class __$$UpdateTbCmLocationCopyWithImpl<$Res>
+    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    implements _$$UpdateTbCmLocationCopyWith<$Res> {
+  __$$UpdateTbCmLocationCopyWithImpl(
+      _$UpdateTbCmLocation _value, $Res Function(_$UpdateTbCmLocation) _then)
+      : super(_value, (v) => _then(v as _$UpdateTbCmLocation));
+
+  @override
+  _$UpdateTbCmLocation get _value => super._value as _$UpdateTbCmLocation;
+
+  @override
+  $Res call({
+    Object? tbCmLocation = freezed,
+  }) {
+    return _then(_$UpdateTbCmLocation(
+      tbCmLocation == freezed
+          ? _value.tbCmLocation
+          : tbCmLocation // ignore: cast_nullable_to_non_nullable
+              as TbCmLocation,
+    ));
+  }
+
+  @override
+  $TbCmLocationCopyWith<$Res> get tbCmLocation {
+    return $TbCmLocationCopyWith<$Res>(_value.tbCmLocation, (value) {
+      return _then(_value.copyWith(tbCmLocation: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UpdateTbCmLocation implements UpdateTbCmLocation {
+  const _$UpdateTbCmLocation(this.tbCmLocation);
+
+  @override
+  final TbCmLocation tbCmLocation;
+
+  @override
+  String toString() {
+    return 'SettingWorkShopEvents.updateTbCmLocation(tbCmLocation: $tbCmLocation)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateTbCmLocation &&
+            const DeepCollectionEquality()
+                .equals(other.tbCmLocation, tbCmLocation));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(tbCmLocation));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$UpdateTbCmLocationCopyWith<_$UpdateTbCmLocation> get copyWith =>
+      __$$UpdateTbCmLocationCopyWithImpl<_$UpdateTbCmLocation>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
+    required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
+    required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
+    required TResult Function(List<TbCmLocation> tbCmLocations)
+        batchInsertTbCmLocation,
+  }) {
+    return updateTbCmLocation(tbCmLocation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
+    TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
+    TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
+  }) {
+    return updateTbCmLocation?.call(tbCmLocation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
+    TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
+    TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
+    required TResult orElse(),
+  }) {
+    if (updateTbCmLocation != null) {
+      return updateTbCmLocation(tbCmLocation);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectTbCmLocationAll value)
+        selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
+    required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
+    required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
+    required TResult Function(BatchInsertTbCmLocation value)
+        batchInsertTbCmLocation,
+  }) {
+    return updateTbCmLocation(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
+    TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
+    TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
+  }) {
+    return updateTbCmLocation?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
+    TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
+    TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
+    required TResult orElse(),
+  }) {
+    if (updateTbCmLocation != null) {
+      return updateTbCmLocation(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateTbCmLocation implements SettingWorkShopEvents {
+  const factory UpdateTbCmLocation(final TbCmLocation tbCmLocation) =
+      _$UpdateTbCmLocation;
+
+  TbCmLocation get tbCmLocation => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$UpdateTbCmLocationCopyWith<_$UpdateTbCmLocation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateFromSelectTbCmLocationToEnableCopyWith<$Res> {
+  factory _$$UpdateFromSelectTbCmLocationToEnableCopyWith(
+          _$UpdateFromSelectTbCmLocationToEnable value,
+          $Res Function(_$UpdateFromSelectTbCmLocationToEnable) then) =
+      __$$UpdateFromSelectTbCmLocationToEnableCopyWithImpl<$Res>;
+  $Res call({String sWorkShop});
+}
+
+/// @nodoc
+class __$$UpdateFromSelectTbCmLocationToEnableCopyWithImpl<$Res>
+    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    implements _$$UpdateFromSelectTbCmLocationToEnableCopyWith<$Res> {
+  __$$UpdateFromSelectTbCmLocationToEnableCopyWithImpl(
+      _$UpdateFromSelectTbCmLocationToEnable _value,
+      $Res Function(_$UpdateFromSelectTbCmLocationToEnable) _then)
+      : super(
+            _value, (v) => _then(v as _$UpdateFromSelectTbCmLocationToEnable));
+
+  @override
+  _$UpdateFromSelectTbCmLocationToEnable get _value =>
+      super._value as _$UpdateFromSelectTbCmLocationToEnable;
+
+  @override
+  $Res call({
+    Object? sWorkShop = freezed,
+  }) {
+    return _then(_$UpdateFromSelectTbCmLocationToEnable(
+      sWorkShop == freezed
+          ? _value.sWorkShop
+          : sWorkShop // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateFromSelectTbCmLocationToEnable
+    implements UpdateFromSelectTbCmLocationToEnable {
+  const _$UpdateFromSelectTbCmLocationToEnable(this.sWorkShop);
+
+  @override
+  final String sWorkShop;
+
+  @override
+  String toString() {
+    return 'SettingWorkShopEvents.updateFromSelectTbCmLocationToEnable(sWorkShop: $sWorkShop)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateFromSelectTbCmLocationToEnable &&
+            const DeepCollectionEquality().equals(other.sWorkShop, sWorkShop));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(sWorkShop));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$UpdateFromSelectTbCmLocationToEnableCopyWith<
+          _$UpdateFromSelectTbCmLocationToEnable>
+      get copyWith => __$$UpdateFromSelectTbCmLocationToEnableCopyWithImpl<
+          _$UpdateFromSelectTbCmLocationToEnable>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
+    required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
+    required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
+    required TResult Function(List<TbCmLocation> tbCmLocations)
+        batchInsertTbCmLocation,
+  }) {
+    return updateFromSelectTbCmLocationToEnable(sWorkShop);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
+    TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
+    TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
+  }) {
+    return updateFromSelectTbCmLocationToEnable?.call(sWorkShop);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
+    TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
+    TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
+    required TResult orElse(),
+  }) {
+    if (updateFromSelectTbCmLocationToEnable != null) {
+      return updateFromSelectTbCmLocationToEnable(sWorkShop);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectTbCmLocationAll value)
+        selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
+    required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
+    required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
+    required TResult Function(BatchInsertTbCmLocation value)
+        batchInsertTbCmLocation,
+  }) {
+    return updateFromSelectTbCmLocationToEnable(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
+    TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
+    TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
+  }) {
+    return updateFromSelectTbCmLocationToEnable?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
+    TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
+    TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
+    required TResult orElse(),
+  }) {
+    if (updateFromSelectTbCmLocationToEnable != null) {
+      return updateFromSelectTbCmLocationToEnable(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateFromSelectTbCmLocationToEnable
+    implements SettingWorkShopEvents {
+  const factory UpdateFromSelectTbCmLocationToEnable(final String sWorkShop) =
+      _$UpdateFromSelectTbCmLocationToEnable;
+
+  String get sWorkShop => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$UpdateFromSelectTbCmLocationToEnableCopyWith<
+          _$UpdateFromSelectTbCmLocationToEnable>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateFromSelectTbCmLocationToDisableAllCopyWith<$Res> {
+  factory _$$UpdateFromSelectTbCmLocationToDisableAllCopyWith(
+          _$UpdateFromSelectTbCmLocationToDisableAll value,
+          $Res Function(_$UpdateFromSelectTbCmLocationToDisableAll) then) =
+      __$$UpdateFromSelectTbCmLocationToDisableAllCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UpdateFromSelectTbCmLocationToDisableAllCopyWithImpl<$Res>
+    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    implements _$$UpdateFromSelectTbCmLocationToDisableAllCopyWith<$Res> {
+  __$$UpdateFromSelectTbCmLocationToDisableAllCopyWithImpl(
+      _$UpdateFromSelectTbCmLocationToDisableAll _value,
+      $Res Function(_$UpdateFromSelectTbCmLocationToDisableAll) _then)
+      : super(_value,
+            (v) => _then(v as _$UpdateFromSelectTbCmLocationToDisableAll));
+
+  @override
+  _$UpdateFromSelectTbCmLocationToDisableAll get _value =>
+      super._value as _$UpdateFromSelectTbCmLocationToDisableAll;
+}
+
+/// @nodoc
+
+class _$UpdateFromSelectTbCmLocationToDisableAll
+    implements UpdateFromSelectTbCmLocationToDisableAll {
+  const _$UpdateFromSelectTbCmLocationToDisableAll();
+
+  @override
+  String toString() {
+    return 'SettingWorkShopEvents.updateFromSelectTbCmLocationToDisableAll()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateFromSelectTbCmLocationToDisableAll);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
+    required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
+    required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
+    required TResult Function(List<TbCmLocation> tbCmLocations)
+        batchInsertTbCmLocation,
+  }) {
+    return updateFromSelectTbCmLocationToDisableAll();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
+    TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
+    TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
+  }) {
+    return updateFromSelectTbCmLocationToDisableAll?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
+    TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
+    TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
+    required TResult orElse(),
+  }) {
+    if (updateFromSelectTbCmLocationToDisableAll != null) {
+      return updateFromSelectTbCmLocationToDisableAll();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectTbCmLocationAll value)
+        selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
+    required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
+    required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
+    required TResult Function(BatchInsertTbCmLocation value)
+        batchInsertTbCmLocation,
+  }) {
+    return updateFromSelectTbCmLocationToDisableAll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
+    TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
+    TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
+  }) {
+    return updateFromSelectTbCmLocationToDisableAll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
+    TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
+    TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
+    TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
+    required TResult orElse(),
+  }) {
+    if (updateFromSelectTbCmLocationToDisableAll != null) {
+      return updateFromSelectTbCmLocationToDisableAll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateFromSelectTbCmLocationToDisableAll
+    implements SettingWorkShopEvents {
+  const factory UpdateFromSelectTbCmLocationToDisableAll() =
+      _$UpdateFromSelectTbCmLocationToDisableAll;
 }
 
 /// @nodoc
@@ -446,7 +1257,12 @@ class _$InsertTbCmLocation implements InsertTbCmLocation {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
     required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
     required TResult Function(List<TbCmLocation> tbCmLocations)
         batchInsertTbCmLocation,
@@ -458,7 +1274,11 @@ class _$InsertTbCmLocation implements InsertTbCmLocation {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
   }) {
@@ -469,7 +1289,11 @@ class _$InsertTbCmLocation implements InsertTbCmLocation {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -485,7 +1309,14 @@ class _$InsertTbCmLocation implements InsertTbCmLocation {
   TResult map<TResult extends Object?>({
     required TResult Function(SelectTbCmLocationAll value)
         selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
     required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
     required TResult Function(BatchInsertTbCmLocation value)
         batchInsertTbCmLocation,
@@ -497,7 +1328,14 @@ class _$InsertTbCmLocation implements InsertTbCmLocation {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
   }) {
@@ -508,7 +1346,14 @@ class _$InsertTbCmLocation implements InsertTbCmLocation {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -604,7 +1449,12 @@ class _$BatchInsertTbCmLocation implements BatchInsertTbCmLocation {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() selectTbCmLocationAll,
+    required TResult Function() selectTbCmLocationCurrentItem,
     required TResult Function(TbCmLocation tbCmLocation) selectTbCmLocation,
+    required TResult Function(TbCmLocation tbCmLocation) updateTbCmLocation,
+    required TResult Function(String sWorkShop)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function() updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(TbCmLocation tbCmLocation) insertTbCmLocation,
     required TResult Function(List<TbCmLocation> tbCmLocations)
         batchInsertTbCmLocation,
@@ -616,7 +1466,11 @@ class _$BatchInsertTbCmLocation implements BatchInsertTbCmLocation {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
   }) {
@@ -627,7 +1481,11 @@ class _$BatchInsertTbCmLocation implements BatchInsertTbCmLocation {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? selectTbCmLocationAll,
+    TResult Function()? selectTbCmLocationCurrentItem,
     TResult Function(TbCmLocation tbCmLocation)? selectTbCmLocation,
+    TResult Function(TbCmLocation tbCmLocation)? updateTbCmLocation,
+    TResult Function(String sWorkShop)? updateFromSelectTbCmLocationToEnable,
+    TResult Function()? updateFromSelectTbCmLocationToDisableAll,
     TResult Function(TbCmLocation tbCmLocation)? insertTbCmLocation,
     TResult Function(List<TbCmLocation> tbCmLocations)? batchInsertTbCmLocation,
     required TResult orElse(),
@@ -643,7 +1501,14 @@ class _$BatchInsertTbCmLocation implements BatchInsertTbCmLocation {
   TResult map<TResult extends Object?>({
     required TResult Function(SelectTbCmLocationAll value)
         selectTbCmLocationAll,
+    required TResult Function(SelectTbCmLocationCurrentItem value)
+        selectTbCmLocationCurrentItem,
     required TResult Function(SelectTbCmLocation value) selectTbCmLocation,
+    required TResult Function(UpdateTbCmLocation value) updateTbCmLocation,
+    required TResult Function(UpdateFromSelectTbCmLocationToEnable value)
+        updateFromSelectTbCmLocationToEnable,
+    required TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)
+        updateFromSelectTbCmLocationToDisableAll,
     required TResult Function(InsertTbCmLocation value) insertTbCmLocation,
     required TResult Function(BatchInsertTbCmLocation value)
         batchInsertTbCmLocation,
@@ -655,7 +1520,14 @@ class _$BatchInsertTbCmLocation implements BatchInsertTbCmLocation {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
   }) {
@@ -666,7 +1538,14 @@ class _$BatchInsertTbCmLocation implements BatchInsertTbCmLocation {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SelectTbCmLocationAll value)? selectTbCmLocationAll,
+    TResult Function(SelectTbCmLocationCurrentItem value)?
+        selectTbCmLocationCurrentItem,
     TResult Function(SelectTbCmLocation value)? selectTbCmLocation,
+    TResult Function(UpdateTbCmLocation value)? updateTbCmLocation,
+    TResult Function(UpdateFromSelectTbCmLocationToEnable value)?
+        updateFromSelectTbCmLocationToEnable,
+    TResult Function(UpdateFromSelectTbCmLocationToDisableAll value)?
+        updateFromSelectTbCmLocationToDisableAll,
     TResult Function(InsertTbCmLocation value)? insertTbCmLocation,
     TResult Function(BatchInsertTbCmLocation value)? batchInsertTbCmLocation,
     required TResult orElse(),

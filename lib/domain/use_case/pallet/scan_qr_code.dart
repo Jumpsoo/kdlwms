@@ -4,27 +4,49 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 class ScanQrCode {
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<TbWhPallet?> call(String sQrCode) async {
+  //분할한 값 0번은 팔레트번호로 사용하지 않음
+  Future<TbWhPallet?> call(String sQrCode, String sWorkShop, String sLocation) async {
     TbWhPallet pallet;
-    final convertedData = sQrCode.split('\t');
+    String qrCode = sQrCode;
+
+    String sItemNo = '';
+    int nQty = 0;
+    String sLotNo = '';
+    int nBoxNo = 0;
+
+    // 공백이 여러건일 경우가 있기 때문에 치환한다.
+    while(qrCode.indexOf('  ')>0) {
+      qrCode = qrCode.replaceAll('  ', ' ');
+    }
+    final convertedData = qrCode.split(' ');
     if (convertedData.isEmpty) {
       return null;
     }
+    //품번은 두번째값부터
+    sItemNo = convertedData[1];
+    //수량은 분할된 세번째 값에서 0~7 값만 취함
+    nQty = int.parse(convertedData[2].substring(0, 7));
+    //박스 순번은 세번째값에서 뒤에서 세번째
+    nBoxNo = int.parse(convertedData[2].substring(8));
+    //lot no는 네번째(작업지시번호) 에서 뒤에서 세번째값만 취함
+    sLotNo = convertedData[3].substring(convertedData[3].length-7);
+
     try{
       pallet = TbWhPallet(
-        PALLET_SEQ: int.parse(convertedData[0]),
-        WORKSHOP: convertedData[1],
-        LOCATION: convertedData[2],
-        ITEM_NO: convertedData[3],
-        ITEM_LOT: convertedData[4],
-        STATE: int.parse(convertedData[5]),
-        QUANTITY: int.parse(convertedData[6]),
+        PALLET_SEQ: 0,
+        WORKSHOP: sWorkShop,
+        LOCATION: sLocation,
+        ITEM_NO: sItemNo,
+        ITEM_LOT: sLotNo,
+        STATE: 1,
+        QUANTITY: nQty,
         BARCODE: sQrCode,
         SCAN_DATE: DateTime.now(),
         SCAN_USERNM: gDeviceName,
-        BOX_NO: int.parse(convertedData[7]),
+        BOX_NO: nBoxNo,
       );
     }catch(e){
+
       return null;
     }
     return pallet;

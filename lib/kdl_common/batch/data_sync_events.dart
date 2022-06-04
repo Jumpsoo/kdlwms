@@ -9,7 +9,7 @@ part 'data_sync_events.freezed.dart';
 @freezed
 abstract class DataSyncEvent with _$DataSyncEvent {
 
-  const factory DataSyncEvent.migTbWhCmCode(List<TbWhCmCode> tbWhCmCodes) = MigTbWhCmCode;
+  const factory DataSyncEvent.migTbWhCmCode(List<TbWhCmCode> tbWhCmCodes, String sBatchName) = MigTbWhCmCode;
   const factory DataSyncEvent.migTbWhItem(List<TbWhItem> tbWhItems) = MigTbWhItem;
   const factory DataSyncEvent.migTbCmLocation(List<TbCmLocation> tbCmLocations) = MigTbCmLocation;
   const factory DataSyncEvent.migTbCmSync(List<TbCmSync> tbCmSyncs) = MigTbCmSync;

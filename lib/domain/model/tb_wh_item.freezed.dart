@@ -20,10 +20,10 @@ TbWhItem _$TbWhItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TbWhItem {
-  String? get ITEM_NM => throw _privateConstructorUsedError;
+  String get ITEM_NM => throw _privateConstructorUsedError;
   String? get STANDARD => throw _privateConstructorUsedError;
   String? get QT => throw _privateConstructorUsedError;
-  String? get ITEM_NO => throw _privateConstructorUsedError;
+  String get ITEM_NO => throw _privateConstructorUsedError;
   int? get BOX_KG => throw _privateConstructorUsedError;
   int? get LENGTH => throw _privateConstructorUsedError;
   int? get WIDTH => throw _privateConstructorUsedError;
@@ -48,10 +48,10 @@ abstract class $TbWhItemCopyWith<$Res> {
   factory $TbWhItemCopyWith(TbWhItem value, $Res Function(TbWhItem) then) =
       _$TbWhItemCopyWithImpl<$Res>;
   $Res call(
-      {String? ITEM_NM,
+      {String ITEM_NM,
       String? STANDARD,
       String? QT,
-      String? ITEM_NO,
+      String ITEM_NO,
       int? BOX_KG,
       int? LENGTH,
       int? WIDTH,
@@ -97,7 +97,7 @@ class _$TbWhItemCopyWithImpl<$Res> implements $TbWhItemCopyWith<$Res> {
       ITEM_NM: ITEM_NM == freezed
           ? _value.ITEM_NM
           : ITEM_NM // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       STANDARD: STANDARD == freezed
           ? _value.STANDARD
           : STANDARD // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ class _$TbWhItemCopyWithImpl<$Res> implements $TbWhItemCopyWith<$Res> {
       ITEM_NO: ITEM_NO == freezed
           ? _value.ITEM_NO
           : ITEM_NO // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       BOX_KG: BOX_KG == freezed
           ? _value.BOX_KG
           : BOX_KG // ignore: cast_nullable_to_non_nullable
@@ -169,10 +169,10 @@ abstract class _$$_TbWhItemCopyWith<$Res> implements $TbWhItemCopyWith<$Res> {
       __$$_TbWhItemCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? ITEM_NM,
+      {String ITEM_NM,
       String? STANDARD,
       String? QT,
-      String? ITEM_NO,
+      String ITEM_NO,
       int? BOX_KG,
       int? LENGTH,
       int? WIDTH,
@@ -220,7 +220,7 @@ class __$$_TbWhItemCopyWithImpl<$Res> extends _$TbWhItemCopyWithImpl<$Res>
       ITEM_NM: ITEM_NM == freezed
           ? _value.ITEM_NM
           : ITEM_NM // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       STANDARD: STANDARD == freezed
           ? _value.STANDARD
           : STANDARD // ignore: cast_nullable_to_non_nullable
@@ -232,7 +232,7 @@ class __$$_TbWhItemCopyWithImpl<$Res> extends _$TbWhItemCopyWithImpl<$Res>
       ITEM_NO: ITEM_NO == freezed
           ? _value.ITEM_NO
           : ITEM_NO // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       BOX_KG: BOX_KG == freezed
           ? _value.BOX_KG
           : BOX_KG // ignore: cast_nullable_to_non_nullable
@@ -289,10 +289,10 @@ class __$$_TbWhItemCopyWithImpl<$Res> extends _$TbWhItemCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TbWhItem implements _TbWhItem {
   _$_TbWhItem(
-      {this.ITEM_NM,
+      {required this.ITEM_NM,
       this.STANDARD,
       this.QT,
-      this.ITEM_NO,
+      required this.ITEM_NO,
       this.BOX_KG,
       this.LENGTH,
       this.WIDTH,
@@ -310,13 +310,13 @@ class _$_TbWhItem implements _TbWhItem {
       _$$_TbWhItemFromJson(json);
 
   @override
-  final String? ITEM_NM;
+  final String ITEM_NM;
   @override
   final String? STANDARD;
   @override
   final String? QT;
   @override
-  final String? ITEM_NO;
+  final String ITEM_NO;
   @override
   final int? BOX_KG;
   @override
@@ -407,10 +407,10 @@ class _$_TbWhItem implements _TbWhItem {
 
 abstract class _TbWhItem implements TbWhItem {
   factory _TbWhItem(
-      {final String? ITEM_NM,
+      {required final String ITEM_NM,
       final String? STANDARD,
       final String? QT,
-      final String? ITEM_NO,
+      required final String ITEM_NO,
       final int? BOX_KG,
       final int? LENGTH,
       final int? WIDTH,
@@ -427,13 +427,13 @@ abstract class _TbWhItem implements TbWhItem {
   factory _TbWhItem.fromJson(Map<String, dynamic> json) = _$_TbWhItem.fromJson;
 
   @override
-  String? get ITEM_NM => throw _privateConstructorUsedError;
+  String get ITEM_NM => throw _privateConstructorUsedError;
   @override
   String? get STANDARD => throw _privateConstructorUsedError;
   @override
   String? get QT => throw _privateConstructorUsedError;
   @override
-  String? get ITEM_NO => throw _privateConstructorUsedError;
+  String get ITEM_NO => throw _privateConstructorUsedError;
   @override
   int? get BOX_KG => throw _privateConstructorUsedError;
   @override

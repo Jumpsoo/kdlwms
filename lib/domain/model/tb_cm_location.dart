@@ -1,15 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tb_cm_location.freezed.dart';
-
 part 'tb_cm_location.g.dart';
 
 @freezed
 class TbCmLocation with _$TbCmLocation {
   factory TbCmLocation({
-    String?  WORKSHOP    ,
+    required String  WORKSHOP    ,
     String?  WORKSHOP_NM    ,
-    String?  LOCATION    ,
+    required String  LOCATION    ,
+    String? SET_FLAG,
     DateTime? SYNC_DATETIME ,
     String?  CMF_1           ,
     String?  CMF_2           ,

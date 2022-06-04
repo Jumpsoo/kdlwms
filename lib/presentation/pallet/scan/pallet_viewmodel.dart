@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/use_case/use_case_wms.dart';
+import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_events.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_state.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -48,6 +51,7 @@ class PalletViewModel with ChangeNotifier {
   }
 
   Future<List<TbWhPallet>?> selectDupleCheck(String sBarCode) async {
+
      return await useCasesWms.selectDupleCheck(sBarCode);
   }
 
@@ -88,7 +92,7 @@ class PalletViewModel with ChangeNotifier {
   //리딩한 값 파싱은 여기서 진행
   TbWhPallet? _scanQRData(String sQRData) {
     TbWhPallet pallet;
-    final convertedData = sQRData.split('\t');
+    final convertedData = sQRData.split(gSplitCharacter);
     if (convertedData.isEmpty) {
       return null;
     }

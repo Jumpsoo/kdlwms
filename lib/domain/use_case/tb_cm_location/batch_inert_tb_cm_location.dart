@@ -1,3 +1,4 @@
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:kdlwms/domain/repository/tb_cm_location_repo.dart';
 
@@ -8,13 +9,19 @@ class BatchInsertTbCmLocation {
   BatchInsertTbCmLocation(this.repository);
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<bool> call(List<TbCmLocation> tbCmLocations) async {
+  Future<Result<bool>> call(List<TbCmLocation> tbCmLocations) async {
     //삭제 후 등록
-    await repository.deleteTbCmLocationAll();
+    Result result = await repository.deleteTbCmLocationAll();
+    result.when(success: (value){}, error: (message){
+      return Result.error(message);
+    });
     //등록
     for(TbCmLocation item in tbCmLocations){
-      await repository.insertTbCmLocation(item);
+      result = await repository.insertTbCmLocation(item);
+      result.when(success: (value){}, error: (message){
+        return Result.error(message);
+      });
     }
-    return true;
+    return const Result.success(true);
   }
 }

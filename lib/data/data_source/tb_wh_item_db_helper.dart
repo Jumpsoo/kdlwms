@@ -1,24 +1,25 @@
-
+import 'package:flutter/foundation.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:sqflite/sqflite.dart';
 
-class TbWhItemDbHelper{
-
+class TbWhItemDbHelper {
   Database db;
+
   TbWhItemDbHelper(this.db);
 
-  Future<List<TbWhItem>?> getTbWhItemList() async {
-    final maps = await db.query(
-      'TB_WH_ITEM',
-    );
-
-    if (maps.isNotEmpty) {
-      return maps.map((e) => TbWhItem.fromJson(e)).toList();
+  Future<Result<List<TbWhItem>?>> getTbWhItemList() async {
+    try {
+      final maps = await db.query(
+        'TB_WH_ITEM',
+      );
+      return Result.success(maps.map((e) => TbWhItem.fromJson(e)).toList());
+    } catch (e) {
+      return Result.error(e.toString());
     }
-    return null;
   }
 
-  Future<bool> updateTbWhItem(TbWhItem tbWhItem) async {
+  Future<Result<bool>> updateTbWhItem(TbWhItem tbWhItem) async {
     try {
       await db.update(
         'TB_WH_ITEM',
@@ -26,42 +27,42 @@ class TbWhItemDbHelper{
         where: 'ITEM_NO = ?',
         whereArgs: [tbWhItem.ITEM_NO],
       );
+      return const Result.success(true);
     } catch (e) {
-      return false;
+      return Result.error(e.toString());
     }
-    return true;
   }
 
-  Future<bool> insertTbWhItem(TbWhItem tbWhItem) async {
+  Future<Result<bool>> insertTbWhItem(TbWhItem tbWhItem) async {
     try {
       await db.insert('TB_WH_ITEM', tbWhItem.toJson());
+      return const Result.success(true);
     } catch (e) {
-      return false;
+      return Result.error(e.toString());
     }
-    return true;
   }
 
-  Future<bool> deleteTbWhItem(TbWhItem tbWhItem) async {
+  Future<Result<bool>> deleteTbWhItem(TbWhItem tbWhItem) async {
     try {
       await db.delete(
         'TB_WH_ITEM',
         where: 'ITEM_NO = ? ',
         whereArgs: [tbWhItem.ITEM_NO],
       );
+      return const Result.success(true);
     } catch (e) {
-      return false;
+      return Result.error(e.toString());
     }
-    return true;
   }
 
-  Future<bool> deleteTbWhItemAll() async {
+  Future<Result<bool>> deleteTbWhItemAll() async {
     try {
       await db.delete(
         'TB_WH_ITEM',
       );
+      return const Result.success(true);
     } catch (e) {
-      return false;
+      return Result.error(e.toString());
     }
-    return true;
   }
 }

@@ -7,7 +7,7 @@ part of 'tb_cm_sync.dart';
 // **************************************************************************
 
 _$_TbCmSync _$$_TbCmSyncFromJson(Map<String, dynamic> json) => _$_TbCmSync(
-      VERSION_CODE: json['VERSION_CODE'] as String?,
+      VERSION_CODE: json['VERSION_CODE'] as String,
       VERSION_DESC: json['VERSION_DESC'] as String?,
       SYNC_DATETIME: json['SYNC_DATETIME'] == null
           ? null

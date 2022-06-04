@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
+import 'package:kdlwms/kdl_common/batch/data_sync.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
-import 'package:kdlwms/kdl_common/notify_frame.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -20,14 +24,11 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
   List<ComboValueType> _datas = [];
   late BuildContext ownContext;
   late SettingWorkshopViewModel viewModel;
+  List<TbCmLocation>? locationList = [];
+  String sCurrentWorkShop = '';
+  StreamSubscription? _subscription;
 
-  // List<ComboValueType> _datas = [
-  //   ComboValueType(key: "Key 1", value: "2공장 1층"),
-  //   ComboValueType(key: "Key 2", value: "2공장 2층"),
-  //   ComboValueType(key: "Key 3", value: "2공장 3층"),
-  //   ComboValueType(key: "Key 4", value: "2공장 4층"),
-  //   ComboValueType(key: "Key 5", value: "2공장 5층"),
-  // ];
+  String? _selectedValue;
 
   // 상태 메세지 변경
   void _setMsg(String sMsg) {
@@ -41,30 +42,108 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
   void initState() {
     super.initState();
 
+    // Future.microtask(() {
+    //   final viewModelInit = context.read<SettingWorkshopViewModel>();
+    //   _subscription = viewModelInit.eventStream.listen((event) {
+    //     event.when(showSnackBar: (message) {
+    //       final snackBar = SnackBar(content: Text(message));
+    //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    //     });
+    //   });
+    // });
+    setLocationList();
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 
   //최초로딩시 콤보박스 세팅
   //데이터가 없는 경우 하단 알람 창에 메세지 전시
-  Future<void> setLocationList()  async {
+  Future<void> setLocationList() async {
+    viewModel = context.read<SettingWorkshopViewModel>();
+    Result? result =
+        await viewModel.useCaseTbCmLocation.selectTbCmLocationAll();
+    List<ComboValueType> comboItemList = [];
 
-    setState(() async {
-      List<TbCmLocation>? retList =
-          await viewModel.useCaseTbCmLocation.selectTbCmLocationAll();
-      if (retList != null && retList.isNotEmpty) {
-      }else{
-        _msgData = '내려받은 정보가 없습니다. 다시 내려받거나 관리자에게 문의하세요.';
+    result.when(
+        success: (c) {
+          for (TbCmLocation tb in c) {
+            ComboValueType item =
+                ComboValueType(key: tb.WORKSHOP, value: tb.WORKSHOP_NM!);
+            comboItemList.add(item);
+          }
+        },
+        error: (message) {});
 
-      }
+    _datas = comboItemList;
+  }
+
+  ///전역 작업장 설정
+  void setDefaultWorkshop(String sSelectedWorkSHop) async {
+    if (sSelectedWorkSHop.isEmpty == true) {
+      // const snackBar1 = SnackBar(content: Text('먼저 작업장을 선택하세요.'));
+      // ScaffoldMessenger.of(context).showSnackBar(snackBar1);
+
+      showCustomSnackBarWarn(context, '먼저 작업장을 선택하세요.');
+      return;
+    }
+    if (await showAlertDialogQ(
+          context,
+          '확인',
+          '선택한 정보로 설정하시겠습니까?',
+        ) ==
+        false) {
+      return;
+    }
+    //선택 한 workshop 지정
+    viewModel = context.read<SettingWorkshopViewModel>();
+    Result? result = await viewModel.useCaseTbCmLocation
+        .updateFromSelectTbCmLocationToEnable(sSelectedWorkSHop);
+
+    result.when(success: (value) {
+      showCustomSnackBarWarn(context, '성공');
+      setLocationList();
+    }, error: (message) {
+      showCustomSnackBarWarn(context, message);
     });
+  }
+
+  Widget createLocationDropDownButton(List<TbCmLocation> locationList) {
+    List<ComboValueType> menuItemList = [];
+    _datas.clear();
+
+    for (TbCmLocation item in locationList) {
+      _datas.add(ComboValueType(key: item.WORKSHOP, value: item.WORKSHOP_NM!));
+      menuItemList
+          .add(ComboValueType(key: item.WORKSHOP, value: item.WORKSHOP_NM!));
+    }
+    // menuItemList
+    //     .add(ComboValueType(key: locationList[0].WORKSHOP, value: locationList[0].WORKSHOP_NM!));
+
+    return DropdownButton<String>(
+        value: _selectedValue,
+        onChanged: (String? newValue) {
+          if (newValue != null) {
+            setState(() {
+              _selectedValue = newValue;
+
+            });
+          }},
+      items: menuItemList.map((ComboValueType item) {
+        return DropdownMenuItem<String>(
+          value: item.key,
+          child: Text(item.value),
+        );
+      }).toList(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    viewModel = context.watch<SettingWorkshopViewModel>();
     ownContext = context;
-    List<TbCmLocation> retList = [];
-    setLocationList();
-
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(
@@ -124,30 +203,8 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                                   Container(
                                     width: 150,
                                     alignment: Alignment.centerRight,
-                                    child: DropdownButton<String>(
-                                      items: _datas
-                                          .map((data) =>
-                                              DropdownMenuItem<String>(
-                                                child: Text(data.key),
-                                                value: data.value,
-                                              ))
-                                          .toList(),
-
-                                      icon: const Icon(
-                                        Icons.arrow_drop_down_circle_sharp,
-                                        color: Colors.black,
-                                      ),
-                                      elevation: 16,
-                                      alignment: Alignment.centerRight,
-                                      style: const TextStyle(
-                                          fontSize: 22.0,
-                                          color: Colors.black,
-                                          fontFamily: "Roboto"),
-                                      // icon: const Icon(
-                                      //   Icons.arrow_drop_down_circle_sharp,
-                                      //   color: Colors.black,
-                                      // ),
-                                      onChanged: (String? value) {},
+                                    child: createLocationDropDownButton(
+                                      getTbCmLocationList(),
                                     ),
                                   ),
                                 ],
@@ -162,10 +219,10 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                         const Padding(
                           padding: EdgeInsets.only(top: 160),
                         ),
-                        NotiPage(
-                          msg: _msgData,
-                          nHeight: 50,
-                        ),
+                        // NotiPage(
+                        //   msg: _msgData,
+                        //   nHeight: 50,
+                        // ),
                       ],
                     )
                   ],
@@ -198,15 +255,28 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
           ],
           onTap: (index) => {
                 if (index == 0)
-                  {}
+                  {
+                    setLocationList(),
+                  }
                 else if (index == 1)
-                  {}
+                  {
+                    setDefaultWorkshop(
+                      _selectedValue!,
+                    ),
+                  }
                 else if (index == 2)
                   {
-                    //종료
-                    Future.delayed(const Duration(seconds: 1), () async {
-                      SystemNavigator.pop();
-                    }),
+                    if (Navigator.canPop(context))
+                      {
+                        Navigator.pop(context),
+                      }
+                    else
+                      {
+                        //종료
+                        Future.delayed(const Duration(seconds: 1), () async {
+                          SystemNavigator.pop();
+                        }),
+                      }
                   }
               }),
     );

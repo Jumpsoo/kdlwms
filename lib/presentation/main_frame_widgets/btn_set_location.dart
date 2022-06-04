@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_page.dart';
 
-
 class BtnSetLocation extends StatelessWidget {
   const BtnSetLocation({Key? key}) : super(key: key);
 
@@ -31,8 +30,9 @@ class BtnSetLocation extends StatelessWidget {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                    const SettingWorkShopPage(title: '팔레팅 작업(실적 입력)')),
+                    builder: (context) => const SettingWorkShopPage(
+                          title: '작업장 설정',
+                        )),
               );
             },
             style: ElevatedButton.styleFrom(

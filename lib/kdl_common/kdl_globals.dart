@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 int gSystemUserId = 11111;
 String gDeviceName = "TEST001";
 
+String gSplitCharacter = '\r\n';
+
 bool isLoggedIn = false;
 double gMarginButtonNormal = 10.0;
 double gPaddingButtonNormal = 5.0;
@@ -26,6 +28,9 @@ double gFontSizeButtonTitle = 30;
 double gFontSizeButtonSubTitle = 14;
 
 String gblCompanyLogoText = 'DENSO';
+
+//이상일것
+int gAvailableQrLength = 140;
 
 const TextStyle textStyleButtonWhite18 = TextStyle(
     fontSize: 18.0,
@@ -61,3 +66,8 @@ class ComboValueType {
 
   ComboValueType({required this.key, required this.value});
 }
+
+
+
+
+
