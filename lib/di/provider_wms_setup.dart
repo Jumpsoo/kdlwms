@@ -103,7 +103,6 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
       await database.execute('CREATE TABLE TB_WH_PALLET ( '
                                                         ' comps         TEXT'
                                                         ',palletSeq     INT'
-                                                        ',transSeq      INT'
                                                         ',workshop      TEXT'
                                                         ',location      TEXT'
                                                         ',itemNo        TEXT'
@@ -138,8 +137,19 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           'CMF_3            TEXT,'
           'CMF_4            TEXT,'
           'CMF_5            TEXT )');
+
+      //6. 공장정보
+      await database.execute('CREATE TABLE TB_FACTORY ( '
+          'FACTORY_CD     TEXT,'
+          'FACTORY_NM     TEXT)');
+
+      //7. 현재생성한 MAX PALLET 정보
+      await database.execute('CREATE TABLE TB_PALLET_MAX_SEQ ( '
+          'MAX_SEQ     INT )');
+
     },
   );
+
 
   // 실적 입력 & 조회관련
   TbWhPalletDbHelper palletDbHelper = TbWhPalletDbHelper(database);
@@ -155,7 +165,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     selectDupleCheck: SelectDupleCheck(repository),
     addPallet: InsertPalletUseCase(repository),
     updatePallet: UpdatePalletUseCase(repository),
-    updatePalletState: UpdatePalletStateUseCase(repository),
+    updatePalletFinishUseCase: UpdatePalletFinishUseCase(repository),
     deletePallet: DeletePalletUseCase(repository),
     deletePalletAll: DeletePalletAllUseCase(repository),
     getPalletBySeq: GetPalletBySeq(repository),

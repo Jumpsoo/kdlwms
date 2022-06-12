@@ -10,7 +10,6 @@ _$_TbWhPallet _$$_TbWhPalletFromJson(Map<String, dynamic> json) =>
     _$_TbWhPallet(
       comps: json['comps'] as String?,
       palletSeq: json['palletSeq'] as int?,
-      transSeq: json['transSeq'] as int?,
       workshop: json['workshop'] as String?,
       location: json['location'] as String?,
       itemNo: json['itemNo'] as String?,
@@ -47,7 +46,6 @@ Map<String, dynamic> _$$_TbWhPalletToJson(_$_TbWhPallet instance) =>
     <String, dynamic>{
       'comps': instance.comps,
       'palletSeq': instance.palletSeq,
-      'transSeq': instance.transSeq,
       'workshop': instance.workshop,
       'location': instance.location,
       'itemNo': instance.itemNo,

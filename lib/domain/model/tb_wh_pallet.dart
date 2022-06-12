@@ -9,7 +9,6 @@ class TbWhPallet with _$TbWhPallet {
   factory TbWhPallet({
     String? comps ,
     int? palletSeq ,
-    int? transSeq,
     String? workshop,
     String? location,
     String? itemNo,

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/use_case/use_case_wms.dart';
 import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
@@ -39,8 +40,10 @@ class PalletViewModel with ChangeNotifier {
     );
   }
 
+  //현재 location 값은 불명확함
   Future<void> listPallets(
       String sWorkShop, String sLocation, int nState) async {
+
     List<TbWhPallet>? palletlist =
         await useCasesWms.listPallets(sWorkShop, sLocation, nState);
 
@@ -51,15 +54,13 @@ class PalletViewModel with ChangeNotifier {
   }
 
   Future<List<TbWhPallet>?> selectDupleCheck(String sBarCode) async {
-
-     return await useCasesWms.selectDupleCheck(sBarCode);
+    return await useCasesWms.selectDupleCheck(sBarCode);
   }
 
   // Future<void> _addPallet(Pallet pallet) async {
-  Future<bool> addPallet(TbWhPallet? pallet) async {
-
+  Future<Result<bool>> addPallet(TbWhPallet? pallet) async {
     if (pallet == null) {
-      return false;
+      return const Result.error('팔레트정보가 없습니다.');
     }
     return await useCasesWms.addPallet(pallet);
   }
@@ -68,8 +69,8 @@ class PalletViewModel with ChangeNotifier {
     return await useCasesWms.updatePallet(pallets);
   }
 
-  Future<void> _updatePalletState(List<TbWhPallet> pallets) async {
-    return await useCasesWms.updatePalletState(pallets);
+  Future<Result<bool>> _updatePalletState(List<TbWhPallet> pallets) async {
+    return await useCasesWms.updatePalletFinishUseCase(pallets);
   }
 
   Future<bool> _deletePallet(List<TbWhPallet> pallets) async {
@@ -96,7 +97,7 @@ class PalletViewModel with ChangeNotifier {
     if (convertedData.isEmpty) {
       return null;
     }
-    try{
+    try {
       pallet = TbWhPallet(
         workshop: convertedData[1],
         location: convertedData[2],
@@ -109,7 +110,7 @@ class PalletViewModel with ChangeNotifier {
         scanUsernm: gDeviceName,
         boxNo: int.parse(convertedData[7]),
       );
-    }catch(e){
+    } catch (e) {
       return null;
     }
     return pallet;

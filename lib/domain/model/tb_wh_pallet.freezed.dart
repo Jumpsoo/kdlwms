@@ -22,7 +22,6 @@ TbWhPallet _$TbWhPalletFromJson(Map<String, dynamic> json) {
 mixin _$TbWhPallet {
   String? get comps => throw _privateConstructorUsedError;
   int? get palletSeq => throw _privateConstructorUsedError;
-  int? get transSeq => throw _privateConstructorUsedError;
   String? get workshop => throw _privateConstructorUsedError;
   String? get location => throw _privateConstructorUsedError;
   String? get itemNo => throw _privateConstructorUsedError;
@@ -58,7 +57,6 @@ abstract class $TbWhPalletCopyWith<$Res> {
   $Res call(
       {String? comps,
       int? palletSeq,
-      int? transSeq,
       String? workshop,
       String? location,
       String? itemNo,
@@ -93,7 +91,6 @@ class _$TbWhPalletCopyWithImpl<$Res> implements $TbWhPalletCopyWith<$Res> {
   $Res call({
     Object? comps = freezed,
     Object? palletSeq = freezed,
-    Object? transSeq = freezed,
     Object? workshop = freezed,
     Object? location = freezed,
     Object? itemNo = freezed,
@@ -123,10 +120,6 @@ class _$TbWhPalletCopyWithImpl<$Res> implements $TbWhPalletCopyWith<$Res> {
       palletSeq: palletSeq == freezed
           ? _value.palletSeq
           : palletSeq // ignore: cast_nullable_to_non_nullable
-              as int?,
-      transSeq: transSeq == freezed
-          ? _value.transSeq
-          : transSeq // ignore: cast_nullable_to_non_nullable
               as int?,
       workshop: workshop == freezed
           ? _value.workshop
@@ -222,7 +215,6 @@ abstract class _$$_TbWhPalletCopyWith<$Res>
   $Res call(
       {String? comps,
       int? palletSeq,
-      int? transSeq,
       String? workshop,
       String? location,
       String? itemNo,
@@ -259,7 +251,6 @@ class __$$_TbWhPalletCopyWithImpl<$Res> extends _$TbWhPalletCopyWithImpl<$Res>
   $Res call({
     Object? comps = freezed,
     Object? palletSeq = freezed,
-    Object? transSeq = freezed,
     Object? workshop = freezed,
     Object? location = freezed,
     Object? itemNo = freezed,
@@ -289,10 +280,6 @@ class __$$_TbWhPalletCopyWithImpl<$Res> extends _$TbWhPalletCopyWithImpl<$Res>
       palletSeq: palletSeq == freezed
           ? _value.palletSeq
           : palletSeq // ignore: cast_nullable_to_non_nullable
-              as int?,
-      transSeq: transSeq == freezed
-          ? _value.transSeq
-          : transSeq // ignore: cast_nullable_to_non_nullable
               as int?,
       workshop: workshop == freezed
           ? _value.workshop
@@ -384,7 +371,6 @@ class _$_TbWhPallet implements _TbWhPallet {
   _$_TbWhPallet(
       {this.comps,
       this.palletSeq,
-      this.transSeq,
       this.workshop,
       this.location,
       this.itemNo,
@@ -413,8 +399,6 @@ class _$_TbWhPallet implements _TbWhPallet {
   final String? comps;
   @override
   final int? palletSeq;
-  @override
-  final int? transSeq;
   @override
   final String? workshop;
   @override
@@ -458,7 +442,7 @@ class _$_TbWhPallet implements _TbWhPallet {
 
   @override
   String toString() {
-    return 'TbWhPallet(comps: $comps, palletSeq: $palletSeq, transSeq: $transSeq, workshop: $workshop, location: $location, itemNo: $itemNo, itemLot: $itemLot, quantity: $quantity, state: $state, barcode: $barcode, scanDate: $scanDate, scanUsernm: $scanUsernm, boxNo: $boxNo, printFlag: $printFlag, printDate: $printDate, printUser: $printUser, as400IfFlag: $as400IfFlag, as400IfDate: $as400IfDate, as400IfUser: $as400IfUser, rgstrId: $rgstrId, rgstDt: $rgstDt, updtrId: $updtrId, updtDt: $updtDt)';
+    return 'TbWhPallet(comps: $comps, palletSeq: $palletSeq, workshop: $workshop, location: $location, itemNo: $itemNo, itemLot: $itemLot, quantity: $quantity, state: $state, barcode: $barcode, scanDate: $scanDate, scanUsernm: $scanUsernm, boxNo: $boxNo, printFlag: $printFlag, printDate: $printDate, printUser: $printUser, as400IfFlag: $as400IfFlag, as400IfDate: $as400IfDate, as400IfUser: $as400IfUser, rgstrId: $rgstrId, rgstDt: $rgstDt, updtrId: $updtrId, updtDt: $updtDt)';
   }
 
   @override
@@ -468,7 +452,6 @@ class _$_TbWhPallet implements _TbWhPallet {
             other is _$_TbWhPallet &&
             const DeepCollectionEquality().equals(other.comps, comps) &&
             const DeepCollectionEquality().equals(other.palletSeq, palletSeq) &&
-            const DeepCollectionEquality().equals(other.transSeq, transSeq) &&
             const DeepCollectionEquality().equals(other.workshop, workshop) &&
             const DeepCollectionEquality().equals(other.location, location) &&
             const DeepCollectionEquality().equals(other.itemNo, itemNo) &&
@@ -501,7 +484,6 @@ class _$_TbWhPallet implements _TbWhPallet {
         runtimeType,
         const DeepCollectionEquality().hash(comps),
         const DeepCollectionEquality().hash(palletSeq),
-        const DeepCollectionEquality().hash(transSeq),
         const DeepCollectionEquality().hash(workshop),
         const DeepCollectionEquality().hash(location),
         const DeepCollectionEquality().hash(itemNo),
@@ -539,7 +521,6 @@ abstract class _TbWhPallet implements TbWhPallet {
   factory _TbWhPallet(
       {final String? comps,
       final int? palletSeq,
-      final int? transSeq,
       final String? workshop,
       final String? location,
       final String? itemNo,
@@ -568,8 +549,6 @@ abstract class _TbWhPallet implements TbWhPallet {
   String? get comps => throw _privateConstructorUsedError;
   @override
   int? get palletSeq => throw _privateConstructorUsedError;
-  @override
-  int? get transSeq => throw _privateConstructorUsedError;
   @override
   String? get workshop => throw _privateConstructorUsedError;
   @override

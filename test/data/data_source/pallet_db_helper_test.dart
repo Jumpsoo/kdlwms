@@ -71,7 +71,7 @@ void main() {
 
     // await palletDbHelper.deleteTbWhPallet(pallet);
 
-    expect((await palletDbHelper.getTbWhPalletList('A001', 'aa', 1))!.length, 0);
+    // expect((await palletDbHelper.selectTbWhPalletList('A001', 'aa', 1))!.length, 0);
 
     await db.close();
 

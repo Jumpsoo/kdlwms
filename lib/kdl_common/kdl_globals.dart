@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 int gSystemUserId = 11111;
 String gDeviceName = "TEST001";
+String gFactory = 'C1';
 
 String gCurrentVersion = '동기화전 입니다.';
 

@@ -8,7 +8,7 @@ import 'package:kdlwms/domain/use_case/pallet/scan_qr_code.dart';
 class UseCaseWms {
   final InsertPalletUseCase addPallet;
   final UpdatePalletUseCase updatePallet;
-  final UpdatePalletStateUseCase updatePalletState;
+  final UpdatePalletFinishUseCase updatePalletFinishUseCase;
   final DeletePalletUseCase deletePallet;
   final DeletePalletAllUseCase deletePalletAll;
 
@@ -24,7 +24,7 @@ class UseCaseWms {
   UseCaseWms({
     required this.addPallet,
     required this.updatePallet,
-    required this.updatePalletState,
+    required this.updatePalletFinishUseCase,
     required this.deletePallet,
     required this.deletePalletAll,
     required this.listPallets,

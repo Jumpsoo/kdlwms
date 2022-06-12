@@ -1,5 +1,7 @@
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 
 class InsertPalletUseCase {
   final TbWhPalletRepo repository;
@@ -7,14 +9,7 @@ class InsertPalletUseCase {
   InsertPalletUseCase(this.repository);
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<bool> call(TbWhPallet pallet) async {
-
-    TbWhPallet? result = await repository.getTbWhPalletBySeq(pallet.palletSeq!);
-    if(result != null){
-      List<TbWhPallet> pallets = [];
-      pallets.add(pallet);
-      await repository.deleteTbWhPallet(pallets);
-    }
-    return await repository.insertTbWhPallet(pallet);
+  Future<Result<bool>> call(TbWhPallet pallet) async {
+    return await repository.upsertTbWhPallet(pallet);
   }
 }

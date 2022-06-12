@@ -1,18 +1,22 @@
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 class ListPalletsUseCase {
   final TbWhPalletRepo repository;
 
   ListPalletsUseCase(this.repository);
 
-  Future<List<TbWhPallet>?> call(String sLocation, String sWorkShop, int nPalletSeq) async {
-    return await repository.getTbWhPalletList(
-      sLocation, sWorkShop, nPalletSeq,);
+  Future<List<TbWhPallet>?> call(
+      String sWorkShop, String sLocation, int nState) async {
+
+    TbWhPallet condTbWhPallet = TbWhPallet(
+        comps: gFactory, workshop: sWorkShop, location: sLocation, state: nState);
+    return await repository.selectTbWhPalletList(condTbWhPallet);
   }
 }
 
-class GetPalletBySeq{
+class GetPalletBySeq {
   final TbWhPalletRepo repository;
 
   GetPalletBySeq(this.repository);
@@ -43,5 +47,3 @@ class SelectDupleCheck {
     return await repository.selectDupleCheck(sBarCode);
   }
 }
-
-

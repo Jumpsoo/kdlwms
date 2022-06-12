@@ -22,19 +22,18 @@ class TbWhPalletDbHelper {
   }
 
   // 위치별 실적 리스트 조회
-  Future<List<TbWhPallet>?> getTbWhPalletList(
-      String sWorkShop, String sLocation, int nState) async {
+  Future<List<TbWhPallet>?> selectTbWhPalletList(TbWhPallet tbWhPallet) async {
     final maps = await db.query(
       'TB_WH_PALLET',
-      where: 'workshop = ? and state = ?',
-      whereArgs: [sWorkShop, nState],
+      where: 'comps = ? and workshop = ? and state = ?',
+      whereArgs: [tbWhPallet.comps, tbWhPallet.workshop, tbWhPallet.state],
     );
+print(maps.map((e) => TbWhPallet.fromJson(e)).toList());
     if (maps.isNotEmpty) {
       return maps.map((e) => TbWhPallet.fromJson(e)).toList();
     }
     return null;
   }
-
 
   // 입력된 실적 확인
   // 어디에 입력되었는지도 알려주면 좋을거같다.
@@ -65,8 +64,8 @@ class TbWhPalletDbHelper {
       await db.update(
         'TB_WH_PALLET',
         pallet.toJson(),
-        where: 'palletSeq = ?',
-        whereArgs: [pallet.palletSeq],
+        where: 'comps = ? and palletSeq = ? and boxNo = ?',
+        whereArgs: [pallet.comps, pallet.palletSeq, pallet.boxNo],
       );
     } catch (e) {
       return false;
@@ -74,24 +73,27 @@ class TbWhPalletDbHelper {
     return true;
   }
 
-  Future<bool> updateTbWhPalletState(TbWhPallet pallet) async {
+  Future<Result<bool>> updateTbWhPalletState(TbWhPallet pallet) async {
+    Result result ;
     try {
       await db.rawQuery(
           'UPDATE TB_WH_PALLET '
               'SET state = ${pallet.state} '
-              'WHERE palletSeq = ${pallet.palletSeq}');
+              'WHERE comps = ${pallet.comps} and palletSeq = ${pallet.palletSeq} and boxNo = ${pallet.boxNo} ');
     } catch (e) {
-      return false;
+      return Result.error(e.toString());
     }
-    return true;
+    return const Result.success(true);
   }
+
 
   Future<bool> deleteTbWhPallet(TbWhPallet pallet) async {
     try {
-      await db.delete(
+
+      int  nRet = await db.delete(
         'TB_WH_PALLET',
-        where: 'palletSeq = ?',
-        whereArgs: [pallet.palletSeq],
+        where: 'comps = ? and palletSeq = ? and boxNo = ?',
+        whereArgs: [pallet.comps, pallet.palletSeq, pallet.boxNo],
       );
     } catch (e) {
       return false;
@@ -110,6 +112,30 @@ class TbWhPalletDbHelper {
     return true;
   }
 
+  Future<Result<bool>> upsertPallet(TbWhPallet pallet) async {
+    try {
+      final maps = await db.query(
+        'TB_WH_PALLET',
+        where: 'comps = ? and palletSeq = ? and boxNo = ?',
+        whereArgs: [pallet.comps, pallet.palletSeq, pallet.boxNo],
+      );
+
+      if(maps.map((e) => TbWhPallet.fromJson(e)).toList().isNotEmpty){
+        await db.update(
+          'TB_WH_PALLET',
+          pallet.toJson(),
+          where: 'comps = ? and palletSeq = ? and boxNo = ?',
+          whereArgs: [pallet.comps, pallet.palletSeq, pallet.boxNo],
+        );
+      }else{
+        await db.insert('TB_WH_PALLET', pallet.toJson());
+      }
+      return const Result.success(true);
+    } catch (e) {
+      return Result.error(e.toString());
+    }
+  }
+
   Future<int> getTbWhPalletCountInDevice() async {
     int count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM TB_WH_PALLET '))!
     ;
@@ -124,5 +150,6 @@ class TbWhPalletDbHelper {
     }
     return const Result.success(true);
   }
+
 
 }

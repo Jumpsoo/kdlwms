@@ -60,7 +60,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
     List<ComboValueType> comboList =
         await palletCommonGetLocationComboValueList(context);
     String? sDefaultLocation = await palletCommonGetDefaultWorkShop(context);
-
+print('sDefaultLocation : $sDefaultLocation'  );
     setState(() {
       _datas = comboList;
       _selectedValue = sDefaultLocation;

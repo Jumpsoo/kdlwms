@@ -74,16 +74,16 @@ Future<bool> checkValue(BuildContext context, String confirm,
 Future<void> palletCommonViewTopList(
     BuildContext context,
     PlutoGridStateManager gridStateManager,
-    String sLocation,
-    String sWareHouse) async {
-
+    String sWareHouse,
+    String sLocation) async {
   //초기화
   PalletViewModel viewModel = context.read<PalletViewModel>();
   gridStateManager.rows.clear();
   gridStateManager.removeRows(gridStateManager.rows);
   //조회
+
   List<TbWhPallet>? pallets = await viewModel.useCasesWms
-      .listPallets(sLocation, sWareHouse, LoadState.Pack.index);
+      .listPallets(sWareHouse, sLocation, LoadState.Pack.index);
 
   if (pallets == null) {
     showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
@@ -121,38 +121,44 @@ Future<void> palletCommonViewBottomList(
   }
 }
 
-//삭제
-void deletePackItem(
-    BuildContext context, PlutoGridStateManager gridStateManager) async {
+//선택된 항목 삭제
+Future<bool> deletePackItem(
+  BuildContext context,
+  PlutoGridStateManager gridStateManager,
+    String sWorkshop, String sLocation,
+) async {
 
   PalletViewModel viewModel = context.read<PalletViewModel>();
 
   if (await checkValue(context, 'DELETE', gridStateManager, '') == false) {
-    return;
+    return false;
   }
-  List<TbWhPallet> pallets = [];
+  List<TbWhPallet> tbWhPallets = [];
+
   for (PlutoRow row in gridStateManager.rows) {
-    List<PlutoCell> cells = row.cells.values.toList();
-    pallets.add(TbWhPallet(
-      palletSeq: cells[TopGridColumnIndex.palletSeq.index].value,
-      boxNo: cells[TopGridColumnIndex.SEQ.index].value,
-      state: 1,
-    ));
+    if (row.checked == true) {
+      List<PlutoCell> cells = row.cells.values.toList();
+      tbWhPallets.add(TbWhPallet(
+          comps: gFactory, palletSeq: cells[0].value, boxNo: cells[4].value, state: 1));
+    }
   }
-  if (pallets.isEmpty) {
+  if (tbWhPallets.isEmpty) {
     hideCircularProgressIndicator();
     showCustomSnackBarWarn(context, '완료처리 할 내용이 없습니다.');
-    return;
+    return false;
   }
-  viewModel.useCasesWms.deletePallet(pallets);
+  viewModel.useCasesWms.deletePallet(tbWhPallets);
   showCustomSnackBarSuccess(context, '정상처리 되었습니다.');
+
+  palletCommonViewTopList(context, gridStateManager,sWorkshop, sLocation);
+
+  return true;
 }
 
 //최초로딩시 콤보박스 세팅
 //데이터가 없는 경우 하단 알람 창에 메세지 전시
 Future<List<ComboValueType>> palletCommonGetLocationComboValueList(
     BuildContext context) async {
-
   SettingWorkshopViewModel viewModel = context.read<SettingWorkshopViewModel>();
   viewModel = context.read<SettingWorkshopViewModel>();
   //전체리스트 조회

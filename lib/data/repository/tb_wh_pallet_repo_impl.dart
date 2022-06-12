@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/pallet_api.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
@@ -19,46 +20,52 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   }
 
   @override
-  Future<List<TbWhPallet>?> getTbWhPalletList(
-      String sWorkShop, String sLocation, int nState) async {
+  Future<List<TbWhPallet>?> selectTbWhPalletList(TbWhPallet tbWhPallet) async {
     // TODO: implement getPallet
-    return await db.getTbWhPalletList(sWorkShop, sLocation, nState);
+    return await db.selectTbWhPalletList(tbWhPallet);
   }
 
   @override
-  Future<List<TbWhPallet>?> selectDupleCheck(String sBarCode) async{
+  Future<List<TbWhPallet>?> selectDupleCheck(String sBarCode) async {
     return await db.selectDupleCheck(sBarCode);
-
   }
 
   @override
   Future<bool> insertTbWhPallet(TbWhPallet pallet) async {
-    return await db.insertTbWhPallet(pallet);
+    return await db.updateTbWhPallet(pallet);
+  }
+
+  @override
+  Future<Result<bool>> upsertTbWhPallet(TbWhPallet pallet) async {
+    return await db.upsertPallet(pallet);
   }
 
   @override
   Future<void> updateTbWhPallet(List<TbWhPallet> pallets) async {
-    for(TbWhPallet pallet in pallets) {
+    for (TbWhPallet pallet in pallets) {
       await db.updateTbWhPallet(pallet);
     }
   }
 
   @override
-  Future<void> updateTbWhPalletState(List<TbWhPallet> pallets) async {
-    for(TbWhPallet pallet in pallets) {
-      await db.updateTbWhPalletState(pallet);
+  Future<Result<bool>> updateTbWhPalletState(List<TbWhPallet> pallets) async {
+    Result result ;
+    for (TbWhPallet pallet in pallets) {
+      result = await db.updateTbWhPalletState(pallet);
+      result.when(success: (value){}, error: (message){
+        return Result.success(message);
+      });
     }
-    PalletApi api = PalletApi();
-    api.sendPalletList(pallets);
+    return const Result.success(true);
   }
 
   @override
   Future<bool> deleteTbWhPallet(List<TbWhPallet> pallets) async {
-    try{
-      for(TbWhPallet pallet in pallets) {
+    try {
+      for (TbWhPallet pallet in pallets) {
         await db.deleteTbWhPallet(pallet);
       }
-    }catch(e){
+    } catch (e) {
       writeLog(e.toString());
       return false;
     }
@@ -66,7 +73,7 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   }
 
   @override
-  Future<int> getTbWhPalletCountInDevice()  async {
+  Future<int> getTbWhPalletCountInDevice() async {
     return await db.getTbWhPalletCountInDevice();
   }
 

@@ -250,6 +250,8 @@ class _PalletViewPageState extends State<PalletViewPage> {
                     deletePackItem(
                       context,
                       topGridStateManager,
+                        _selectedValue!,
+                      ''
                     ),
                   }
                 else if (index == 2)

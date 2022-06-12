@@ -39,7 +39,7 @@ class TbCmLocationDbHelper {
     try {
       final maps = await db.query(
         'TB_CM_LOCATION',
-        where: 'SET_FLAG = ?  ',
+        where: 'SET_FLAG = ? ',
         whereArgs: ['Y'],
       );
       return Result.success(
@@ -165,7 +165,6 @@ class TbCmLocationDbHelper {
           whereArgs: [insertItem.WORKSHOP, insertItem.LOCATION],
         );
         if (maps.map((e) => TbCmLocation.fromJson(e)).toList().isNotEmpty) {
-          print('update : $insertItem');
           await db.update(
             'TB_CM_LOCATION',
             insertItem.toJson(),
@@ -173,7 +172,6 @@ class TbCmLocationDbHelper {
             whereArgs: [insertItem.WORKSHOP, insertItem.LOCATION],
           );
         } else {
-          print('insert : $insertItem');
           await db.insert('TB_CM_LOCATION', insertItem.toJson());
 
         }

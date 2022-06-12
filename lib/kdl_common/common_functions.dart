@@ -90,6 +90,8 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
 Future<void> showCustomSnackBarWarn(
     BuildContext context, String message) async {
 
+  ScaffoldMessenger.of(context).clearSnackBars();
+
   showAlertDialog(context, message);
 
   final snackBar1 = SnackBar(

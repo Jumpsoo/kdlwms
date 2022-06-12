@@ -11,25 +11,25 @@ class PalletApi {
 
   PalletApi();
 
-  static const baseUrl = 'http://54.180.96.240:8080/api/item';
+  static const baseUrl = 'http://54.180.96.240:8080/api/insertPallet';
 
-  Future<Result<Iterable>> sendPalletList(List<TbWhPallet> palletList) async {
+  Future<Result<List<TbWhPallet>>> sendPalletList(List<TbWhPallet> palletList) async {
     try {
-      if(palletList == null){
-        return Result.error('전송할 데이터가 없습니다.');
+      if(palletList.isEmpty){
+        return const Result.error('전송할 데이터가 없습니다.');
       }
       var dataAsMap = jsonEncode(palletList.map((e) => e.toJson()).toList());
       var dataToSend = jsonEncode(dataAsMap);
 
-      writeLog('################### data send');
       writeLog(dataToSend);
-      writeLog('################### data send2');
 
       final response = await client.post(
         Uri.parse('$baseUrl'),
         headers: {"Content-Type": "application/json"},
         body: dataToSend,
       );
+
+      writeLog(response.body);
       return Result.success(palletList.toList());
     } catch (e) {
       return const Result.error('네트워크 연결 에러');
