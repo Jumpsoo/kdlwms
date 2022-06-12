@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_beep/flutter_beep.dart';
+
+late BuildContext dialogContext;
 
 /// 사용자 확인 다이얼로그
 Future<bool> showAlertDialogQ(
@@ -83,34 +86,75 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
       context, '처리중 오류가 발생했습니다. 다시 시도해 주세요.' + sErrorLocation);
 }
 
+//경고일 경우 팝업도 보여주고 하단 스낵바도 보여준다.
 Future<void> showCustomSnackBarWarn(
     BuildContext context, String message) async {
+
+  showAlertDialog(context, message);
 
   final snackBar1 = SnackBar(
     content: Text(message),
     action: SnackBarAction(
       textColor: Colors.yellow,
-      label: '',
+      label: '닫기',
       onPressed: () {
-        //
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
       },
     ),
   );
-
   ScaffoldMessenger.of(context).showSnackBar(snackBar1);
 }
 
 Future<void> showCustomSnackBarSuccess(
     BuildContext context, String message) async {
+
+  ScaffoldMessenger.of(context).clearSnackBars();
+
   final snackBar1 = SnackBar(
     content: Text(message),
     action: SnackBarAction(
       textColor: Colors.white,
-      label: '',
+      label: '닫기',
       onPressed: () {
-        //
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
       },
     ),
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar1);
+}
+
+showCircularProgressIndicator(BuildContext context) {
+
+  String sMessage = '처리중';
+  return  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      dialogContext = context;
+      return Dialog(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularProgressIndicator(),
+             Text(sMessage),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+hideCircularProgressIndicator() {
+  Navigator.pop(dialogContext);
+}
+//종료
+exitProgram(BuildContext context) async{
+  if(await showAlertDialogQ(context, '', '종료하시겠습니까?') == true){
+    SystemNavigator.pop();
+  }
+}
+
+//향후 로그저장필요시 상세 구현할것
+void writeLog(var msg){
+  print(msg);
 }

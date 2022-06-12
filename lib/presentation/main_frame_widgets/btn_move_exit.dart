@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 class BtnExit extends StatelessWidget {
@@ -12,6 +12,7 @@ class BtnExit extends StatelessWidget {
     var sTitle = '종   료';
     var sSubTitle = '프로그램을 나갑니다';
 
+    
     return Row(
       children: [
         Container(
@@ -23,13 +24,11 @@ class BtnExit extends StatelessWidget {
             color: Colors.brown[600],
             borderRadius: BorderRadius.circular(15),
             border: Border.all(
-                color: Colors.brown,
-                style: BorderStyle.solid,
-                width: 2),
+                color: Colors.brown, style: BorderStyle.solid, width: 2),
           ),
           child: ElevatedButton(
             onPressed: () async {
-              SystemNavigator.pop();
+              exitProgram(context);
             },
             style: ElevatedButton.styleFrom(
               fixedSize: Size(gWidthButtonLarge, gHeightButtonLarge),
@@ -44,7 +43,7 @@ class BtnExit extends StatelessWidget {
                   alignment: Alignment.center,
                   width: 50,
                   height: 40,
-                  child:  Text(
+                  child: Text(
                     sNo,
                     style: const TextStyle(
                         fontSize: 40.0,
@@ -59,7 +58,7 @@ class BtnExit extends StatelessWidget {
                   child: Column(
                     children: [
                       Row(
-                        children:  [
+                        children: [
                           Text(
                             sTitle,
                             style: const TextStyle(
@@ -70,7 +69,7 @@ class BtnExit extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        children:  [
+                        children: [
                           Text(
                             sSubTitle,
                             style: const TextStyle(

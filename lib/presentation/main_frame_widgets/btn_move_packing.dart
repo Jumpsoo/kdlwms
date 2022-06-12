@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/pallet_work_frame.dart';
 
-
-class BtnMovePacking extends StatelessWidget {
+class BtnMovePacking extends StatelessWidget  {
   const BtnMovePacking({Key? key}) : super(key: key);
 
   @override
@@ -25,12 +25,14 @@ class BtnMovePacking extends StatelessWidget {
           ),
           child: ElevatedButton(
             onPressed: () async {
-              await Future.delayed(const Duration(seconds: 1));
+              //진행바보이기
+              showCircularProgressIndicator(context);
+              // await Future.delayed(const Duration(seconds: 1));
               await Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                    const PltWorkPage(title: '팔레팅 작업(실적 입력)')),
+                        const PltWorkPage(title: '팔레팅 작업(실적 입력)')),
               );
             },
             style: ElevatedButton.styleFrom(
@@ -86,7 +88,7 @@ class BtnMovePacking extends StatelessWidget {
                         children: const [
                           Text(
                             '(리딩 후 저장 필수)',
-                            style:  TextStyle(
+                            style: TextStyle(
                                 fontSize: 14.0,
                                 color: Colors.white,
                                 fontFamily: "Roboto"),

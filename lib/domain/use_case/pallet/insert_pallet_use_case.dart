@@ -9,7 +9,7 @@ class InsertPalletUseCase {
   // 값조회 -> 있으면 삭제 -> 등록
   Future<bool> call(TbWhPallet pallet) async {
 
-    TbWhPallet? result = await repository.getTbWhPalletBySeq(pallet.PALLET_SEQ);
+    TbWhPallet? result = await repository.getTbWhPalletBySeq(pallet.palletSeq!);
     if(result != null){
       List<TbWhPallet> pallets = [];
       pallets.add(pallet);

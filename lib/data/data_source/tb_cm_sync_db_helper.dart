@@ -18,6 +18,23 @@ class TbCmSyncDbHelper {
     }
   }
 
+  Future<Result<TbCmSync?>> getCurrentVersionRow() async {
+    List<TbCmSync>? tbCmSync;
+    try {
+      final maps = await db.query(
+        'TB_CM_SYNC',
+      );
+      tbCmSync = maps.map((e) => TbCmSync.fromJson(e)).toList();
+      if(tbCmSync.isNotEmpty){
+        return Result.success(tbCmSync[0]);
+      }else{
+        return const Result.error('동기화 실패');
+      }
+    } catch (e) {
+      return Result.error(e.toString());
+    }
+  }
+
   Future<Result<bool>> updateTbCmSync(TbCmSync tbCmSync) async {
     try {
       await db.update(
@@ -59,7 +76,7 @@ class TbCmSyncDbHelper {
       await db.delete(
         'TB_CM_SYNC',
       );
-      return Result.success(true);
+      return const Result.success(true);
     } catch (e) {
       return Result.error(e.toString());
     }

@@ -33,17 +33,17 @@ class ScanQrCode {
 
     try{
       pallet = TbWhPallet(
-        PALLET_SEQ: 0,
-        WORKSHOP: sWorkShop,
-        LOCATION: sLocation,
-        ITEM_NO: sItemNo,
-        ITEM_LOT: sLotNo,
-        STATE: 1,
-        QUANTITY: nQty,
-        BARCODE: sQrCode,
-        SCAN_DATE: DateTime.now(),
-        SCAN_USERNM: gDeviceName,
-        BOX_NO: nBoxNo,
+        palletSeq: 2,
+        workshop: sWorkShop,
+        location: sLocation,
+        itemNo: sItemNo,
+        itemLot: sLotNo,
+        state: 1,
+        quantity: nQty,
+        barcode: sQrCode,
+        scanDate: DateTime.now(),
+        scanUsernm: gDeviceName,
+        boxNo: nBoxNo,
       );
     }catch(e){
 

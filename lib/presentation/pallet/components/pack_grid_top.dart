@@ -20,7 +20,7 @@ List<PlutoColumn> getTopGridColumns() {
     ),
     PlutoColumn(
       title: '품목 코드',
-      field: 'ITEM_NO',
+      field: 'itemNo',
       width: 110,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
@@ -30,7 +30,7 @@ List<PlutoColumn> getTopGridColumns() {
     ),
     PlutoColumn(
       title: 'LOT',
-      field: 'ITEM_LOT',
+      field: 'itemLot',
       width: 70,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
@@ -40,7 +40,7 @@ List<PlutoColumn> getTopGridColumns() {
     ),
     PlutoColumn(
       title: '수량',
-      field: 'QUANTITY',
+      field: 'quantity',
       width: 50,
       type: PlutoColumnType.number(),
       textAlign: PlutoColumnTextAlign.right,
@@ -50,7 +50,7 @@ List<PlutoColumn> getTopGridColumns() {
     ),
     PlutoColumn(
       title: 'Box',
-      field: 'BOX_NO',
+      field: 'boxNo',
       width: 50,
       type: PlutoColumnType.number(),
       textAlign: PlutoColumnTextAlign.right,
@@ -60,7 +60,7 @@ List<PlutoColumn> getTopGridColumns() {
     ),
     PlutoColumn(
       title: 'SEQNO',
-      field: 'PALLET_SEQ',
+      field: 'palletSeq',
       width: 0,
       type: PlutoColumnType.number(),
       textAlign: PlutoColumnTextAlign.right,
@@ -80,12 +80,12 @@ List<PlutoRow> getTopGridRows(List<TbWhPallet> pallets) {
     nRowNum = nRowNum + 1;
     PlutoRow row = PlutoRow(
       cells: {
-        'SEQ' : PlutoCell(value: nRowNum),
-        'ITEM_NO': PlutoCell(value: e.ITEM_NO),
-        'ITEM_LOT': PlutoCell(value: e.ITEM_LOT),
-        'QUANTITY': PlutoCell(value: e.QUANTITY),
-        'BOX_NO': PlutoCell(value: e.BOX_NO),
-        'PALLET_SEQ': PlutoCell(value: e.PALLET_SEQ),
+        'SEQ' : PlutoCell(value: e.palletSeq),
+        'itemNo': PlutoCell(value: e.itemNo),
+        'itemLot': PlutoCell(value: e.itemLot),
+        'quantity': PlutoCell(value: e.quantity),
+        'boxNo': PlutoCell(value: nRowNum),
+        'palletSeq': PlutoCell(value: e.palletSeq),
       },
     );
     rows.add(row);
@@ -111,7 +111,7 @@ List<PlutoColumn> getPackGridColumns() {
     ),
     PlutoColumn(
       title: '품목 코드',
-      field: 'ITEM_NO',
+      field: 'itemNo',
       width: 110,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
@@ -120,7 +120,7 @@ List<PlutoColumn> getPackGridColumns() {
     ),
     PlutoColumn(
       title: 'LOT',
-      field: 'ITEM_LOT',
+      field: 'itemLot',
       width: 70,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
@@ -130,7 +130,7 @@ List<PlutoColumn> getPackGridColumns() {
     ),
     PlutoColumn(
       title: '수량',
-      field: 'QUANTITY',
+      field: 'quantity',
       width: 50,
       type: PlutoColumnType.number(),
       textAlign: PlutoColumnTextAlign.right,
@@ -140,7 +140,7 @@ List<PlutoColumn> getPackGridColumns() {
     ),
     PlutoColumn(
       title: 'Box',
-      field: 'BOX_NO',
+      field: 'boxNo',
       width: 50,
       type: PlutoColumnType.number(),
       textAlign: PlutoColumnTextAlign.right,
@@ -150,7 +150,7 @@ List<PlutoColumn> getPackGridColumns() {
     ),
     PlutoColumn(
       title: 'SEQ',
-      field: 'PALLET_SEQ',
+      field: 'palletSeq',
       width: 50,
       textAlign: PlutoColumnTextAlign.center,
       type: PlutoColumnType.number(),
@@ -170,11 +170,11 @@ List<PlutoRow> getPackGridRows(List<TbWhPallet> pallets) {
     PlutoRow row = PlutoRow(
       cells: {
         'SEQ': PlutoCell(value: nRowNum),
-        'ITEM_NO': PlutoCell(value: e.ITEM_NO),
-        'ITEM_LOT': PlutoCell(value: e.ITEM_LOT),
-        'QUANTITY': PlutoCell(value: e.QUANTITY),
-        'BOX_NO': PlutoCell(value: e.BOX_NO),
-        'PALLET_SEQ': PlutoCell(value: e.PALLET_SEQ),
+        'itemNo': PlutoCell(value: e.itemNo),
+        'itemLot': PlutoCell(value: e.itemLot),
+        'quantity': PlutoCell(value: e.quantity),
+        'boxNo': PlutoCell(value: e.boxNo),
+        'palletSeq': PlutoCell(value: e.palletSeq),
       },
     );
 
@@ -186,14 +186,14 @@ List<PlutoRow> getPackGridRows(List<TbWhPallet> pallets) {
 // 하단 그리드
 // 데이터 로우
 PlutoRow getPackGridRow(TbWhPallet pallets) {
-int val = pallets.PALLET_SEQ;
+int? val = pallets.palletSeq;
 
     PlutoRow row = PlutoRow(
       cells: {
-        'PALLET_SEQ': PlutoCell(value: pallets.PALLET_SEQ),
-        'ITEM_NO': PlutoCell(value: pallets.ITEM_NO),
-        'ITEM_LOT': PlutoCell(value: pallets.ITEM_LOT),
-        'BOX_NO': PlutoCell(value: pallets.BOX_NO),
+        'palletSeq': PlutoCell(value: pallets.palletSeq),
+        'itemNo': PlutoCell(value: pallets.itemNo),
+        'itemLot': PlutoCell(value: pallets.itemLot),
+        'boxNo': PlutoCell(value: pallets.boxNo),
       },
     );
   return row;

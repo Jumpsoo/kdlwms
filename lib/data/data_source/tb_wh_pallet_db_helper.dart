@@ -1,3 +1,4 @@
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,7 +11,7 @@ class TbWhPalletDbHelper {
     // SLEECT * FRO TB_WH_PALLET WHERE ID = 1
     final List<Map<String, dynamic>> maps = await db.query(
       'TB_WH_PALLET',
-      where: 'PALLET_SEQ = ?',
+      where: 'palletSeq = ?',
       whereArgs: [palletSeq],
     );
     if (maps.isNotEmpty) {
@@ -25,7 +26,7 @@ class TbWhPalletDbHelper {
       String sWorkShop, String sLocation, int nState) async {
     final maps = await db.query(
       'TB_WH_PALLET',
-      where: 'WORKSHOP = ? and STATE = ?',
+      where: 'workshop = ? and state = ?',
       whereArgs: [sWorkShop, nState],
     );
     if (maps.isNotEmpty) {
@@ -64,8 +65,8 @@ class TbWhPalletDbHelper {
       await db.update(
         'TB_WH_PALLET',
         pallet.toJson(),
-        where: 'PALLET_SEQ = ?',
-        whereArgs: [pallet.PALLET_SEQ],
+        where: 'palletSeq = ?',
+        whereArgs: [pallet.palletSeq],
       );
     } catch (e) {
       return false;
@@ -77,8 +78,8 @@ class TbWhPalletDbHelper {
     try {
       await db.rawQuery(
           'UPDATE TB_WH_PALLET '
-              'SET STATE = ${pallet.STATE} '
-              'WHERE PALLET_SEQ = ${pallet.PALLET_SEQ}');
+              'SET state = ${pallet.state} '
+              'WHERE palletSeq = ${pallet.palletSeq}');
     } catch (e) {
       return false;
     }
@@ -89,8 +90,8 @@ class TbWhPalletDbHelper {
     try {
       await db.delete(
         'TB_WH_PALLET',
-        where: 'PALLET_SEQ = ?',
-        whereArgs: [pallet.PALLET_SEQ],
+        where: 'palletSeq = ?',
+        whereArgs: [pallet.palletSeq],
       );
     } catch (e) {
       return false;
@@ -113,6 +114,15 @@ class TbWhPalletDbHelper {
     int count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM TB_WH_PALLET '))!
     ;
     return count;
+  }
+
+  Future<Result<bool>> checkTbWhPalletDuplication(String sQrCode) async{
+    int? count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM TB_WH_PALLET WHERE qrCode = ?', [sQrCode]));
+
+    if(count != null && count > 0 ) {
+      return const Result.error('이미 입력한 식별표 입니다.');
+    }
+    return const Result.success(true);
   }
 
 }

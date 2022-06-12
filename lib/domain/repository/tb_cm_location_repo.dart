@@ -13,8 +13,9 @@ abstract class TbCmLocationRepo{
   Future<Result<bool>> updateFromSelectTbCmLocationToDisableAll();
 
   Future<Result<bool>> insertTbCmLocation(TbCmLocation tbCmLocation);
+  Future<Result<bool>> upsertTbCmLocation(List<TbCmLocation> tbCmLocations);
   Future<Result<bool>> deleteTbCmLocation(TbCmLocation tbCmLocation);
-  Future<Result<bool>> deleteTbCmLocationAll();
+  Future<Result<bool>> deleteTbCmLocationAllBySetFlag(String setFlag);
 
 
 }

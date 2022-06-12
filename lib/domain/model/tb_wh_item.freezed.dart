@@ -20,22 +20,21 @@ TbWhItem _$TbWhItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TbWhItem {
-  String get ITEM_NM => throw _privateConstructorUsedError;
-  String? get STANDARD => throw _privateConstructorUsedError;
-  String? get QT => throw _privateConstructorUsedError;
-  String get ITEM_NO => throw _privateConstructorUsedError;
-  int? get BOX_KG => throw _privateConstructorUsedError;
-  int? get LENGTH => throw _privateConstructorUsedError;
-  int? get WIDTH => throw _privateConstructorUsedError;
-  int? get HEIGHT => throw _privateConstructorUsedError;
-  String? get WAREHOUSE_CD => throw _privateConstructorUsedError;
-  String? get WAREHOUSE_NM => throw _privateConstructorUsedError;
-  String? get WAREHOUSE_AREA => throw _privateConstructorUsedError;
-  String? get USE_YN => throw _privateConstructorUsedError;
-  int? get RGSTR_ID => throw _privateConstructorUsedError;
-  DateTime? get RGST_DT => throw _privateConstructorUsedError;
-  int? get UPDTR_ID => throw _privateConstructorUsedError;
-  DateTime? get UPDT_DT => throw _privateConstructorUsedError;
+  String? get standard => throw _privateConstructorUsedError;
+  String? get qt => throw _privateConstructorUsedError;
+  String? get comps => throw _privateConstructorUsedError;
+  int? get length => throw _privateConstructorUsedError;
+  String? get warehouseNm => throw _privateConstructorUsedError;
+  String? get itemNo => throw _privateConstructorUsedError;
+  String? get itemNm => throw _privateConstructorUsedError;
+  String? get warehouseArea => throw _privateConstructorUsedError;
+  String? get warehouseCd => throw _privateConstructorUsedError;
+  int? get width => throw _privateConstructorUsedError;
+  String? get useYn => throw _privateConstructorUsedError;
+  int? get boxKg => throw _privateConstructorUsedError;
+  int? get height => throw _privateConstructorUsedError;
+  int? get rgstrId => throw _privateConstructorUsedError;
+  int? get updtrId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,22 +47,21 @@ abstract class $TbWhItemCopyWith<$Res> {
   factory $TbWhItemCopyWith(TbWhItem value, $Res Function(TbWhItem) then) =
       _$TbWhItemCopyWithImpl<$Res>;
   $Res call(
-      {String ITEM_NM,
-      String? STANDARD,
-      String? QT,
-      String ITEM_NO,
-      int? BOX_KG,
-      int? LENGTH,
-      int? WIDTH,
-      int? HEIGHT,
-      String? WAREHOUSE_CD,
-      String? WAREHOUSE_NM,
-      String? WAREHOUSE_AREA,
-      String? USE_YN,
-      int? RGSTR_ID,
-      DateTime? RGST_DT,
-      int? UPDTR_ID,
-      DateTime? UPDT_DT});
+      {String? standard,
+      String? qt,
+      String? comps,
+      int? length,
+      String? warehouseNm,
+      String? itemNo,
+      String? itemNm,
+      String? warehouseArea,
+      String? warehouseCd,
+      int? width,
+      String? useYn,
+      int? boxKg,
+      int? height,
+      int? rgstrId,
+      int? updtrId});
 }
 
 /// @nodoc
@@ -76,88 +74,83 @@ class _$TbWhItemCopyWithImpl<$Res> implements $TbWhItemCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? ITEM_NM = freezed,
-    Object? STANDARD = freezed,
-    Object? QT = freezed,
-    Object? ITEM_NO = freezed,
-    Object? BOX_KG = freezed,
-    Object? LENGTH = freezed,
-    Object? WIDTH = freezed,
-    Object? HEIGHT = freezed,
-    Object? WAREHOUSE_CD = freezed,
-    Object? WAREHOUSE_NM = freezed,
-    Object? WAREHOUSE_AREA = freezed,
-    Object? USE_YN = freezed,
-    Object? RGSTR_ID = freezed,
-    Object? RGST_DT = freezed,
-    Object? UPDTR_ID = freezed,
-    Object? UPDT_DT = freezed,
+    Object? standard = freezed,
+    Object? qt = freezed,
+    Object? comps = freezed,
+    Object? length = freezed,
+    Object? warehouseNm = freezed,
+    Object? itemNo = freezed,
+    Object? itemNm = freezed,
+    Object? warehouseArea = freezed,
+    Object? warehouseCd = freezed,
+    Object? width = freezed,
+    Object? useYn = freezed,
+    Object? boxKg = freezed,
+    Object? height = freezed,
+    Object? rgstrId = freezed,
+    Object? updtrId = freezed,
   }) {
     return _then(_value.copyWith(
-      ITEM_NM: ITEM_NM == freezed
-          ? _value.ITEM_NM
-          : ITEM_NM // ignore: cast_nullable_to_non_nullable
-              as String,
-      STANDARD: STANDARD == freezed
-          ? _value.STANDARD
-          : STANDARD // ignore: cast_nullable_to_non_nullable
+      standard: standard == freezed
+          ? _value.standard
+          : standard // ignore: cast_nullable_to_non_nullable
               as String?,
-      QT: QT == freezed
-          ? _value.QT
-          : QT // ignore: cast_nullable_to_non_nullable
+      qt: qt == freezed
+          ? _value.qt
+          : qt // ignore: cast_nullable_to_non_nullable
               as String?,
-      ITEM_NO: ITEM_NO == freezed
-          ? _value.ITEM_NO
-          : ITEM_NO // ignore: cast_nullable_to_non_nullable
-              as String,
-      BOX_KG: BOX_KG == freezed
-          ? _value.BOX_KG
-          : BOX_KG // ignore: cast_nullable_to_non_nullable
-              as int?,
-      LENGTH: LENGTH == freezed
-          ? _value.LENGTH
-          : LENGTH // ignore: cast_nullable_to_non_nullable
-              as int?,
-      WIDTH: WIDTH == freezed
-          ? _value.WIDTH
-          : WIDTH // ignore: cast_nullable_to_non_nullable
-              as int?,
-      HEIGHT: HEIGHT == freezed
-          ? _value.HEIGHT
-          : HEIGHT // ignore: cast_nullable_to_non_nullable
-              as int?,
-      WAREHOUSE_CD: WAREHOUSE_CD == freezed
-          ? _value.WAREHOUSE_CD
-          : WAREHOUSE_CD // ignore: cast_nullable_to_non_nullable
+      comps: comps == freezed
+          ? _value.comps
+          : comps // ignore: cast_nullable_to_non_nullable
               as String?,
-      WAREHOUSE_NM: WAREHOUSE_NM == freezed
-          ? _value.WAREHOUSE_NM
-          : WAREHOUSE_NM // ignore: cast_nullable_to_non_nullable
-              as String?,
-      WAREHOUSE_AREA: WAREHOUSE_AREA == freezed
-          ? _value.WAREHOUSE_AREA
-          : WAREHOUSE_AREA // ignore: cast_nullable_to_non_nullable
-              as String?,
-      USE_YN: USE_YN == freezed
-          ? _value.USE_YN
-          : USE_YN // ignore: cast_nullable_to_non_nullable
-              as String?,
-      RGSTR_ID: RGSTR_ID == freezed
-          ? _value.RGSTR_ID
-          : RGSTR_ID // ignore: cast_nullable_to_non_nullable
+      length: length == freezed
+          ? _value.length
+          : length // ignore: cast_nullable_to_non_nullable
               as int?,
-      RGST_DT: RGST_DT == freezed
-          ? _value.RGST_DT
-          : RGST_DT // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      UPDTR_ID: UPDTR_ID == freezed
-          ? _value.UPDTR_ID
-          : UPDTR_ID // ignore: cast_nullable_to_non_nullable
+      warehouseNm: warehouseNm == freezed
+          ? _value.warehouseNm
+          : warehouseNm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemNo: itemNo == freezed
+          ? _value.itemNo
+          : itemNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemNm: itemNm == freezed
+          ? _value.itemNm
+          : itemNm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseArea: warehouseArea == freezed
+          ? _value.warehouseArea
+          : warehouseArea // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseCd: warehouseCd == freezed
+          ? _value.warehouseCd
+          : warehouseCd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      width: width == freezed
+          ? _value.width
+          : width // ignore: cast_nullable_to_non_nullable
               as int?,
-      UPDT_DT: UPDT_DT == freezed
-          ? _value.UPDT_DT
-          : UPDT_DT // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      useYn: useYn == freezed
+          ? _value.useYn
+          : useYn // ignore: cast_nullable_to_non_nullable
+              as String?,
+      boxKg: boxKg == freezed
+          ? _value.boxKg
+          : boxKg // ignore: cast_nullable_to_non_nullable
+              as int?,
+      height: height == freezed
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as int?,
+      rgstrId: rgstrId == freezed
+          ? _value.rgstrId
+          : rgstrId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      updtrId: updtrId == freezed
+          ? _value.updtrId
+          : updtrId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -169,22 +162,21 @@ abstract class _$$_TbWhItemCopyWith<$Res> implements $TbWhItemCopyWith<$Res> {
       __$$_TbWhItemCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String ITEM_NM,
-      String? STANDARD,
-      String? QT,
-      String ITEM_NO,
-      int? BOX_KG,
-      int? LENGTH,
-      int? WIDTH,
-      int? HEIGHT,
-      String? WAREHOUSE_CD,
-      String? WAREHOUSE_NM,
-      String? WAREHOUSE_AREA,
-      String? USE_YN,
-      int? RGSTR_ID,
-      DateTime? RGST_DT,
-      int? UPDTR_ID,
-      DateTime? UPDT_DT});
+      {String? standard,
+      String? qt,
+      String? comps,
+      int? length,
+      String? warehouseNm,
+      String? itemNo,
+      String? itemNm,
+      String? warehouseArea,
+      String? warehouseCd,
+      int? width,
+      String? useYn,
+      int? boxKg,
+      int? height,
+      int? rgstrId,
+      int? updtrId});
 }
 
 /// @nodoc
@@ -199,88 +191,83 @@ class __$$_TbWhItemCopyWithImpl<$Res> extends _$TbWhItemCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? ITEM_NM = freezed,
-    Object? STANDARD = freezed,
-    Object? QT = freezed,
-    Object? ITEM_NO = freezed,
-    Object? BOX_KG = freezed,
-    Object? LENGTH = freezed,
-    Object? WIDTH = freezed,
-    Object? HEIGHT = freezed,
-    Object? WAREHOUSE_CD = freezed,
-    Object? WAREHOUSE_NM = freezed,
-    Object? WAREHOUSE_AREA = freezed,
-    Object? USE_YN = freezed,
-    Object? RGSTR_ID = freezed,
-    Object? RGST_DT = freezed,
-    Object? UPDTR_ID = freezed,
-    Object? UPDT_DT = freezed,
+    Object? standard = freezed,
+    Object? qt = freezed,
+    Object? comps = freezed,
+    Object? length = freezed,
+    Object? warehouseNm = freezed,
+    Object? itemNo = freezed,
+    Object? itemNm = freezed,
+    Object? warehouseArea = freezed,
+    Object? warehouseCd = freezed,
+    Object? width = freezed,
+    Object? useYn = freezed,
+    Object? boxKg = freezed,
+    Object? height = freezed,
+    Object? rgstrId = freezed,
+    Object? updtrId = freezed,
   }) {
     return _then(_$_TbWhItem(
-      ITEM_NM: ITEM_NM == freezed
-          ? _value.ITEM_NM
-          : ITEM_NM // ignore: cast_nullable_to_non_nullable
-              as String,
-      STANDARD: STANDARD == freezed
-          ? _value.STANDARD
-          : STANDARD // ignore: cast_nullable_to_non_nullable
+      standard: standard == freezed
+          ? _value.standard
+          : standard // ignore: cast_nullable_to_non_nullable
               as String?,
-      QT: QT == freezed
-          ? _value.QT
-          : QT // ignore: cast_nullable_to_non_nullable
+      qt: qt == freezed
+          ? _value.qt
+          : qt // ignore: cast_nullable_to_non_nullable
               as String?,
-      ITEM_NO: ITEM_NO == freezed
-          ? _value.ITEM_NO
-          : ITEM_NO // ignore: cast_nullable_to_non_nullable
-              as String,
-      BOX_KG: BOX_KG == freezed
-          ? _value.BOX_KG
-          : BOX_KG // ignore: cast_nullable_to_non_nullable
-              as int?,
-      LENGTH: LENGTH == freezed
-          ? _value.LENGTH
-          : LENGTH // ignore: cast_nullable_to_non_nullable
-              as int?,
-      WIDTH: WIDTH == freezed
-          ? _value.WIDTH
-          : WIDTH // ignore: cast_nullable_to_non_nullable
-              as int?,
-      HEIGHT: HEIGHT == freezed
-          ? _value.HEIGHT
-          : HEIGHT // ignore: cast_nullable_to_non_nullable
-              as int?,
-      WAREHOUSE_CD: WAREHOUSE_CD == freezed
-          ? _value.WAREHOUSE_CD
-          : WAREHOUSE_CD // ignore: cast_nullable_to_non_nullable
+      comps: comps == freezed
+          ? _value.comps
+          : comps // ignore: cast_nullable_to_non_nullable
               as String?,
-      WAREHOUSE_NM: WAREHOUSE_NM == freezed
-          ? _value.WAREHOUSE_NM
-          : WAREHOUSE_NM // ignore: cast_nullable_to_non_nullable
-              as String?,
-      WAREHOUSE_AREA: WAREHOUSE_AREA == freezed
-          ? _value.WAREHOUSE_AREA
-          : WAREHOUSE_AREA // ignore: cast_nullable_to_non_nullable
-              as String?,
-      USE_YN: USE_YN == freezed
-          ? _value.USE_YN
-          : USE_YN // ignore: cast_nullable_to_non_nullable
-              as String?,
-      RGSTR_ID: RGSTR_ID == freezed
-          ? _value.RGSTR_ID
-          : RGSTR_ID // ignore: cast_nullable_to_non_nullable
+      length: length == freezed
+          ? _value.length
+          : length // ignore: cast_nullable_to_non_nullable
               as int?,
-      RGST_DT: RGST_DT == freezed
-          ? _value.RGST_DT
-          : RGST_DT // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      UPDTR_ID: UPDTR_ID == freezed
-          ? _value.UPDTR_ID
-          : UPDTR_ID // ignore: cast_nullable_to_non_nullable
+      warehouseNm: warehouseNm == freezed
+          ? _value.warehouseNm
+          : warehouseNm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemNo: itemNo == freezed
+          ? _value.itemNo
+          : itemNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemNm: itemNm == freezed
+          ? _value.itemNm
+          : itemNm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseArea: warehouseArea == freezed
+          ? _value.warehouseArea
+          : warehouseArea // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseCd: warehouseCd == freezed
+          ? _value.warehouseCd
+          : warehouseCd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      width: width == freezed
+          ? _value.width
+          : width // ignore: cast_nullable_to_non_nullable
               as int?,
-      UPDT_DT: UPDT_DT == freezed
-          ? _value.UPDT_DT
-          : UPDT_DT // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+      useYn: useYn == freezed
+          ? _value.useYn
+          : useYn // ignore: cast_nullable_to_non_nullable
+              as String?,
+      boxKg: boxKg == freezed
+          ? _value.boxKg
+          : boxKg // ignore: cast_nullable_to_non_nullable
+              as int?,
+      height: height == freezed
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as int?,
+      rgstrId: rgstrId == freezed
+          ? _value.rgstrId
+          : rgstrId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      updtrId: updtrId == freezed
+          ? _value.updtrId
+          : updtrId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -289,62 +276,59 @@ class __$$_TbWhItemCopyWithImpl<$Res> extends _$TbWhItemCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TbWhItem implements _TbWhItem {
   _$_TbWhItem(
-      {required this.ITEM_NM,
-      this.STANDARD,
-      this.QT,
-      required this.ITEM_NO,
-      this.BOX_KG,
-      this.LENGTH,
-      this.WIDTH,
-      this.HEIGHT,
-      this.WAREHOUSE_CD,
-      this.WAREHOUSE_NM,
-      this.WAREHOUSE_AREA,
-      this.USE_YN,
-      this.RGSTR_ID,
-      this.RGST_DT,
-      this.UPDTR_ID,
-      this.UPDT_DT});
+      {this.standard,
+      this.qt,
+      this.comps,
+      this.length,
+      this.warehouseNm,
+      this.itemNo,
+      this.itemNm,
+      this.warehouseArea,
+      this.warehouseCd,
+      this.width,
+      this.useYn,
+      this.boxKg,
+      this.height,
+      this.rgstrId,
+      this.updtrId});
 
   factory _$_TbWhItem.fromJson(Map<String, dynamic> json) =>
       _$$_TbWhItemFromJson(json);
 
   @override
-  final String ITEM_NM;
+  final String? standard;
   @override
-  final String? STANDARD;
+  final String? qt;
   @override
-  final String? QT;
+  final String? comps;
   @override
-  final String ITEM_NO;
+  final int? length;
   @override
-  final int? BOX_KG;
+  final String? warehouseNm;
   @override
-  final int? LENGTH;
+  final String? itemNo;
   @override
-  final int? WIDTH;
+  final String? itemNm;
   @override
-  final int? HEIGHT;
+  final String? warehouseArea;
   @override
-  final String? WAREHOUSE_CD;
+  final String? warehouseCd;
   @override
-  final String? WAREHOUSE_NM;
+  final int? width;
   @override
-  final String? WAREHOUSE_AREA;
+  final String? useYn;
   @override
-  final String? USE_YN;
+  final int? boxKg;
   @override
-  final int? RGSTR_ID;
+  final int? height;
   @override
-  final DateTime? RGST_DT;
+  final int? rgstrId;
   @override
-  final int? UPDTR_ID;
-  @override
-  final DateTime? UPDT_DT;
+  final int? updtrId;
 
   @override
   String toString() {
-    return 'TbWhItem(ITEM_NM: $ITEM_NM, STANDARD: $STANDARD, QT: $QT, ITEM_NO: $ITEM_NO, BOX_KG: $BOX_KG, LENGTH: $LENGTH, WIDTH: $WIDTH, HEIGHT: $HEIGHT, WAREHOUSE_CD: $WAREHOUSE_CD, WAREHOUSE_NM: $WAREHOUSE_NM, WAREHOUSE_AREA: $WAREHOUSE_AREA, USE_YN: $USE_YN, RGSTR_ID: $RGSTR_ID, RGST_DT: $RGST_DT, UPDTR_ID: $UPDTR_ID, UPDT_DT: $UPDT_DT)';
+    return 'TbWhItem(standard: $standard, qt: $qt, comps: $comps, length: $length, warehouseNm: $warehouseNm, itemNo: $itemNo, itemNm: $itemNm, warehouseArea: $warehouseArea, warehouseCd: $warehouseCd, width: $width, useYn: $useYn, boxKg: $boxKg, height: $height, rgstrId: $rgstrId, updtrId: $updtrId)';
   }
 
   @override
@@ -352,47 +336,45 @@ class _$_TbWhItem implements _TbWhItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TbWhItem &&
-            const DeepCollectionEquality().equals(other.ITEM_NM, ITEM_NM) &&
-            const DeepCollectionEquality().equals(other.STANDARD, STANDARD) &&
-            const DeepCollectionEquality().equals(other.QT, QT) &&
-            const DeepCollectionEquality().equals(other.ITEM_NO, ITEM_NO) &&
-            const DeepCollectionEquality().equals(other.BOX_KG, BOX_KG) &&
-            const DeepCollectionEquality().equals(other.LENGTH, LENGTH) &&
-            const DeepCollectionEquality().equals(other.WIDTH, WIDTH) &&
-            const DeepCollectionEquality().equals(other.HEIGHT, HEIGHT) &&
+            const DeepCollectionEquality().equals(other.standard, standard) &&
+            const DeepCollectionEquality().equals(other.qt, qt) &&
+            const DeepCollectionEquality().equals(other.comps, comps) &&
+            const DeepCollectionEquality().equals(other.length, length) &&
             const DeepCollectionEquality()
-                .equals(other.WAREHOUSE_CD, WAREHOUSE_CD) &&
+                .equals(other.warehouseNm, warehouseNm) &&
+            const DeepCollectionEquality().equals(other.itemNo, itemNo) &&
+            const DeepCollectionEquality().equals(other.itemNm, itemNm) &&
             const DeepCollectionEquality()
-                .equals(other.WAREHOUSE_NM, WAREHOUSE_NM) &&
+                .equals(other.warehouseArea, warehouseArea) &&
             const DeepCollectionEquality()
-                .equals(other.WAREHOUSE_AREA, WAREHOUSE_AREA) &&
-            const DeepCollectionEquality().equals(other.USE_YN, USE_YN) &&
-            const DeepCollectionEquality().equals(other.RGSTR_ID, RGSTR_ID) &&
-            const DeepCollectionEquality().equals(other.RGST_DT, RGST_DT) &&
-            const DeepCollectionEquality().equals(other.UPDTR_ID, UPDTR_ID) &&
-            const DeepCollectionEquality().equals(other.UPDT_DT, UPDT_DT));
+                .equals(other.warehouseCd, warehouseCd) &&
+            const DeepCollectionEquality().equals(other.width, width) &&
+            const DeepCollectionEquality().equals(other.useYn, useYn) &&
+            const DeepCollectionEquality().equals(other.boxKg, boxKg) &&
+            const DeepCollectionEquality().equals(other.height, height) &&
+            const DeepCollectionEquality().equals(other.rgstrId, rgstrId) &&
+            const DeepCollectionEquality().equals(other.updtrId, updtrId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(ITEM_NM),
-      const DeepCollectionEquality().hash(STANDARD),
-      const DeepCollectionEquality().hash(QT),
-      const DeepCollectionEquality().hash(ITEM_NO),
-      const DeepCollectionEquality().hash(BOX_KG),
-      const DeepCollectionEquality().hash(LENGTH),
-      const DeepCollectionEquality().hash(WIDTH),
-      const DeepCollectionEquality().hash(HEIGHT),
-      const DeepCollectionEquality().hash(WAREHOUSE_CD),
-      const DeepCollectionEquality().hash(WAREHOUSE_NM),
-      const DeepCollectionEquality().hash(WAREHOUSE_AREA),
-      const DeepCollectionEquality().hash(USE_YN),
-      const DeepCollectionEquality().hash(RGSTR_ID),
-      const DeepCollectionEquality().hash(RGST_DT),
-      const DeepCollectionEquality().hash(UPDTR_ID),
-      const DeepCollectionEquality().hash(UPDT_DT));
+      const DeepCollectionEquality().hash(standard),
+      const DeepCollectionEquality().hash(qt),
+      const DeepCollectionEquality().hash(comps),
+      const DeepCollectionEquality().hash(length),
+      const DeepCollectionEquality().hash(warehouseNm),
+      const DeepCollectionEquality().hash(itemNo),
+      const DeepCollectionEquality().hash(itemNm),
+      const DeepCollectionEquality().hash(warehouseArea),
+      const DeepCollectionEquality().hash(warehouseCd),
+      const DeepCollectionEquality().hash(width),
+      const DeepCollectionEquality().hash(useYn),
+      const DeepCollectionEquality().hash(boxKg),
+      const DeepCollectionEquality().hash(height),
+      const DeepCollectionEquality().hash(rgstrId),
+      const DeepCollectionEquality().hash(updtrId));
 
   @JsonKey(ignore: true)
   @override
@@ -407,57 +389,54 @@ class _$_TbWhItem implements _TbWhItem {
 
 abstract class _TbWhItem implements TbWhItem {
   factory _TbWhItem(
-      {required final String ITEM_NM,
-      final String? STANDARD,
-      final String? QT,
-      required final String ITEM_NO,
-      final int? BOX_KG,
-      final int? LENGTH,
-      final int? WIDTH,
-      final int? HEIGHT,
-      final String? WAREHOUSE_CD,
-      final String? WAREHOUSE_NM,
-      final String? WAREHOUSE_AREA,
-      final String? USE_YN,
-      final int? RGSTR_ID,
-      final DateTime? RGST_DT,
-      final int? UPDTR_ID,
-      final DateTime? UPDT_DT}) = _$_TbWhItem;
+      {final String? standard,
+      final String? qt,
+      final String? comps,
+      final int? length,
+      final String? warehouseNm,
+      final String? itemNo,
+      final String? itemNm,
+      final String? warehouseArea,
+      final String? warehouseCd,
+      final int? width,
+      final String? useYn,
+      final int? boxKg,
+      final int? height,
+      final int? rgstrId,
+      final int? updtrId}) = _$_TbWhItem;
 
   factory _TbWhItem.fromJson(Map<String, dynamic> json) = _$_TbWhItem.fromJson;
 
   @override
-  String get ITEM_NM => throw _privateConstructorUsedError;
+  String? get standard => throw _privateConstructorUsedError;
   @override
-  String? get STANDARD => throw _privateConstructorUsedError;
+  String? get qt => throw _privateConstructorUsedError;
   @override
-  String? get QT => throw _privateConstructorUsedError;
+  String? get comps => throw _privateConstructorUsedError;
   @override
-  String get ITEM_NO => throw _privateConstructorUsedError;
+  int? get length => throw _privateConstructorUsedError;
   @override
-  int? get BOX_KG => throw _privateConstructorUsedError;
+  String? get warehouseNm => throw _privateConstructorUsedError;
   @override
-  int? get LENGTH => throw _privateConstructorUsedError;
+  String? get itemNo => throw _privateConstructorUsedError;
   @override
-  int? get WIDTH => throw _privateConstructorUsedError;
+  String? get itemNm => throw _privateConstructorUsedError;
   @override
-  int? get HEIGHT => throw _privateConstructorUsedError;
+  String? get warehouseArea => throw _privateConstructorUsedError;
   @override
-  String? get WAREHOUSE_CD => throw _privateConstructorUsedError;
+  String? get warehouseCd => throw _privateConstructorUsedError;
   @override
-  String? get WAREHOUSE_NM => throw _privateConstructorUsedError;
+  int? get width => throw _privateConstructorUsedError;
   @override
-  String? get WAREHOUSE_AREA => throw _privateConstructorUsedError;
+  String? get useYn => throw _privateConstructorUsedError;
   @override
-  String? get USE_YN => throw _privateConstructorUsedError;
+  int? get boxKg => throw _privateConstructorUsedError;
   @override
-  int? get RGSTR_ID => throw _privateConstructorUsedError;
+  int? get height => throw _privateConstructorUsedError;
   @override
-  DateTime? get RGST_DT => throw _privateConstructorUsedError;
+  int? get rgstrId => throw _privateConstructorUsedError;
   @override
-  int? get UPDTR_ID => throw _privateConstructorUsedError;
-  @override
-  DateTime? get UPDT_DT => throw _privateConstructorUsedError;
+  int? get updtrId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TbWhItemCopyWith<_$_TbWhItem> get copyWith =>

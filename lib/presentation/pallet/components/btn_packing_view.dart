@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_view_page.dart';
 
@@ -17,11 +18,13 @@ class BtnPackingView extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () async {
-            await Future.delayed(const Duration(seconds: 1));
+            showCircularProgressIndicator(context);
+            // await Future.delayed(const Duration(seconds: 1));
             await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const PalletViewPage(title: sChildTitle)),
+                  builder: (context) =>
+                      const PalletViewPage(title: sChildTitle)),
             );
           },
           style: gElevatedButtonStyleMidSize,

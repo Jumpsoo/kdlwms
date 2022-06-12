@@ -63,12 +63,17 @@ class TbCmLocationRepoImpl implements TbCmLocationRepo {
   }
 
   @override
+  Future<Result<bool>> upsertTbCmLocation(List<TbCmLocation> tbCmLocations) async {
+    return await db.upsertTbCmLocation(tbCmLocations);
+  }
+
+  @override
   Future<Result<bool>> deleteTbCmLocation(TbCmLocation tbCmLocation) async {
     return await db.deleteTbCmLocation(tbCmLocation);
   }
 
   @override
-  Future<Result<bool>> deleteTbCmLocationAll() async {
-    return await db.deleteTbCmLocationAll();
+  Future<Result<bool>> deleteTbCmLocationAllBySetFlag(String setFlag) async {
+    return await db.deleteTbCmLocationAll(setFlag);
   }
 }

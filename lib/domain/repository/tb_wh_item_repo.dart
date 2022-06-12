@@ -6,6 +6,7 @@ abstract class TbWhItemRepo{
   Future<Result<List<TbWhItem>?>> getTbWhItemList();
   Future<Result<bool>> updateTbWhItem(TbWhItem tbWhItem);
   Future<Result<bool>> insertTbWhItem(TbWhItem tbWhItem);
+  Future<Result<bool>> deleteAndInsertTbWhItemBatch(List<TbWhItem> tbWhItem);
   Future<Result<bool>> deleteTbWhItem(TbWhItem tbWhItem);
   Future<Result<bool>> deleteTbWhItemAll();
 }

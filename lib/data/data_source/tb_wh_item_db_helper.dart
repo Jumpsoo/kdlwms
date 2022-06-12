@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:sqflite/sqflite.dart';
@@ -24,8 +23,8 @@ class TbWhItemDbHelper {
       await db.update(
         'TB_WH_ITEM',
         tbWhItem.toJson(),
-        where: 'ITEM_NO = ?',
-        whereArgs: [tbWhItem.ITEM_NO],
+        where: 'itemNo = ?',
+        whereArgs: [tbWhItem.itemNo],
       );
       return const Result.success(true);
     } catch (e) {
@@ -46,8 +45,8 @@ class TbWhItemDbHelper {
     try {
       await db.delete(
         'TB_WH_ITEM',
-        where: 'ITEM_NO = ? ',
-        whereArgs: [tbWhItem.ITEM_NO],
+        where: 'itemNo = ? ',
+        whereArgs: [tbWhItem.itemNo],
       );
       return const Result.success(true);
     } catch (e) {

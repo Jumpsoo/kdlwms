@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_page.dart';
 
@@ -26,7 +27,8 @@ class BtnSetLocation extends StatelessWidget {
           ),
           child: ElevatedButton(
             onPressed: () async {
-              await Future.delayed(const Duration(seconds: 1));
+              showCircularProgressIndicator(context);
+              // await Future.delayed(const Duration(seconds: 1));
               await Navigator.push(
                 context,
                 MaterialPageRoute(

@@ -15,32 +15,34 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 TbWhPallet _$TbWhPalletFromJson(Map<String, dynamic> json) {
-  return _Pallet.fromJson(json);
+  return _TbWhPallet.fromJson(json);
 }
 
 /// @nodoc
 mixin _$TbWhPallet {
-  int get PALLET_SEQ => throw _privateConstructorUsedError;
-  String? get WORKSHOP => throw _privateConstructorUsedError;
-  String? get LOCATION => throw _privateConstructorUsedError;
-  String? get ITEM_NO => throw _privateConstructorUsedError;
-  String? get ITEM_LOT => throw _privateConstructorUsedError;
-  int? get QUANTITY => throw _privateConstructorUsedError;
-  int? get STATE => throw _privateConstructorUsedError;
-  String? get BARCODE => throw _privateConstructorUsedError;
-  DateTime? get SCAN_DATE => throw _privateConstructorUsedError;
-  String? get SCAN_USERNM => throw _privateConstructorUsedError;
-  int? get BOX_NO => throw _privateConstructorUsedError;
-  String? get PRINT_FLAG => throw _privateConstructorUsedError;
-  DateTime? get PRINT_DATE => throw _privateConstructorUsedError;
-  String? get PRINT_USER => throw _privateConstructorUsedError;
-  String? get AS400IF_FLAG => throw _privateConstructorUsedError;
-  DateTime? get AS400IF_DATE => throw _privateConstructorUsedError;
-  String? get AS400IF_USER => throw _privateConstructorUsedError;
-  int? get RGSTR_ID => throw _privateConstructorUsedError;
-  DateTime? get RGST_DT => throw _privateConstructorUsedError;
-  int? get UPDTR_ID => throw _privateConstructorUsedError;
-  DateTime? get UPDT_DT => throw _privateConstructorUsedError;
+  String? get comps => throw _privateConstructorUsedError;
+  int? get palletSeq => throw _privateConstructorUsedError;
+  int? get transSeq => throw _privateConstructorUsedError;
+  String? get workshop => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  String? get itemNo => throw _privateConstructorUsedError;
+  String? get itemLot => throw _privateConstructorUsedError;
+  int? get quantity => throw _privateConstructorUsedError;
+  int? get state => throw _privateConstructorUsedError;
+  String? get barcode => throw _privateConstructorUsedError;
+  DateTime? get scanDate => throw _privateConstructorUsedError;
+  String? get scanUsernm => throw _privateConstructorUsedError;
+  int? get boxNo => throw _privateConstructorUsedError;
+  String? get printFlag => throw _privateConstructorUsedError;
+  DateTime? get printDate => throw _privateConstructorUsedError;
+  String? get printUser => throw _privateConstructorUsedError;
+  String? get as400IfFlag => throw _privateConstructorUsedError;
+  DateTime? get as400IfDate => throw _privateConstructorUsedError;
+  String? get as400IfUser => throw _privateConstructorUsedError;
+  int? get rgstrId => throw _privateConstructorUsedError;
+  DateTime? get rgstDt => throw _privateConstructorUsedError;
+  int? get updtrId => throw _privateConstructorUsedError;
+  DateTime? get updtDt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,27 +56,29 @@ abstract class $TbWhPalletCopyWith<$Res> {
           TbWhPallet value, $Res Function(TbWhPallet) then) =
       _$TbWhPalletCopyWithImpl<$Res>;
   $Res call(
-      {int PALLET_SEQ,
-      String? WORKSHOP,
-      String? LOCATION,
-      String? ITEM_NO,
-      String? ITEM_LOT,
-      int? QUANTITY,
-      int? STATE,
-      String? BARCODE,
-      DateTime? SCAN_DATE,
-      String? SCAN_USERNM,
-      int? BOX_NO,
-      String? PRINT_FLAG,
-      DateTime? PRINT_DATE,
-      String? PRINT_USER,
-      String? AS400IF_FLAG,
-      DateTime? AS400IF_DATE,
-      String? AS400IF_USER,
-      int? RGSTR_ID,
-      DateTime? RGST_DT,
-      int? UPDTR_ID,
-      DateTime? UPDT_DT});
+      {String? comps,
+      int? palletSeq,
+      int? transSeq,
+      String? workshop,
+      String? location,
+      String? itemNo,
+      String? itemLot,
+      int? quantity,
+      int? state,
+      String? barcode,
+      DateTime? scanDate,
+      String? scanUsernm,
+      int? boxNo,
+      String? printFlag,
+      DateTime? printDate,
+      String? printUser,
+      String? as400IfFlag,
+      DateTime? as400IfDate,
+      String? as400IfUser,
+      int? rgstrId,
+      DateTime? rgstDt,
+      int? updtrId,
+      DateTime? updtDt});
 }
 
 /// @nodoc
@@ -87,263 +91,288 @@ class _$TbWhPalletCopyWithImpl<$Res> implements $TbWhPalletCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? PALLET_SEQ = freezed,
-    Object? WORKSHOP = freezed,
-    Object? LOCATION = freezed,
-    Object? ITEM_NO = freezed,
-    Object? ITEM_LOT = freezed,
-    Object? QUANTITY = freezed,
-    Object? STATE = freezed,
-    Object? BARCODE = freezed,
-    Object? SCAN_DATE = freezed,
-    Object? SCAN_USERNM = freezed,
-    Object? BOX_NO = freezed,
-    Object? PRINT_FLAG = freezed,
-    Object? PRINT_DATE = freezed,
-    Object? PRINT_USER = freezed,
-    Object? AS400IF_FLAG = freezed,
-    Object? AS400IF_DATE = freezed,
-    Object? AS400IF_USER = freezed,
-    Object? RGSTR_ID = freezed,
-    Object? RGST_DT = freezed,
-    Object? UPDTR_ID = freezed,
-    Object? UPDT_DT = freezed,
+    Object? comps = freezed,
+    Object? palletSeq = freezed,
+    Object? transSeq = freezed,
+    Object? workshop = freezed,
+    Object? location = freezed,
+    Object? itemNo = freezed,
+    Object? itemLot = freezed,
+    Object? quantity = freezed,
+    Object? state = freezed,
+    Object? barcode = freezed,
+    Object? scanDate = freezed,
+    Object? scanUsernm = freezed,
+    Object? boxNo = freezed,
+    Object? printFlag = freezed,
+    Object? printDate = freezed,
+    Object? printUser = freezed,
+    Object? as400IfFlag = freezed,
+    Object? as400IfDate = freezed,
+    Object? as400IfUser = freezed,
+    Object? rgstrId = freezed,
+    Object? rgstDt = freezed,
+    Object? updtrId = freezed,
+    Object? updtDt = freezed,
   }) {
     return _then(_value.copyWith(
-      PALLET_SEQ: PALLET_SEQ == freezed
-          ? _value.PALLET_SEQ
-          : PALLET_SEQ // ignore: cast_nullable_to_non_nullable
-              as int,
-      WORKSHOP: WORKSHOP == freezed
-          ? _value.WORKSHOP
-          : WORKSHOP // ignore: cast_nullable_to_non_nullable
+      comps: comps == freezed
+          ? _value.comps
+          : comps // ignore: cast_nullable_to_non_nullable
               as String?,
-      LOCATION: LOCATION == freezed
-          ? _value.LOCATION
-          : LOCATION // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ITEM_NO: ITEM_NO == freezed
-          ? _value.ITEM_NO
-          : ITEM_NO // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ITEM_LOT: ITEM_LOT == freezed
-          ? _value.ITEM_LOT
-          : ITEM_LOT // ignore: cast_nullable_to_non_nullable
-              as String?,
-      QUANTITY: QUANTITY == freezed
-          ? _value.QUANTITY
-          : QUANTITY // ignore: cast_nullable_to_non_nullable
+      palletSeq: palletSeq == freezed
+          ? _value.palletSeq
+          : palletSeq // ignore: cast_nullable_to_non_nullable
               as int?,
-      STATE: STATE == freezed
-          ? _value.STATE
-          : STATE // ignore: cast_nullable_to_non_nullable
+      transSeq: transSeq == freezed
+          ? _value.transSeq
+          : transSeq // ignore: cast_nullable_to_non_nullable
               as int?,
-      BARCODE: BARCODE == freezed
-          ? _value.BARCODE
-          : BARCODE // ignore: cast_nullable_to_non_nullable
+      workshop: workshop == freezed
+          ? _value.workshop
+          : workshop // ignore: cast_nullable_to_non_nullable
               as String?,
-      SCAN_DATE: SCAN_DATE == freezed
-          ? _value.SCAN_DATE
-          : SCAN_DATE // ignore: cast_nullable_to_non_nullable
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemNo: itemNo == freezed
+          ? _value.itemNo
+          : itemNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemLot: itemLot == freezed
+          ? _value.itemLot
+          : itemLot // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quantity: quantity == freezed
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as int?,
+      barcode: barcode == freezed
+          ? _value.barcode
+          : barcode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      scanDate: scanDate == freezed
+          ? _value.scanDate
+          : scanDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      SCAN_USERNM: SCAN_USERNM == freezed
-          ? _value.SCAN_USERNM
-          : SCAN_USERNM // ignore: cast_nullable_to_non_nullable
+      scanUsernm: scanUsernm == freezed
+          ? _value.scanUsernm
+          : scanUsernm // ignore: cast_nullable_to_non_nullable
               as String?,
-      BOX_NO: BOX_NO == freezed
-          ? _value.BOX_NO
-          : BOX_NO // ignore: cast_nullable_to_non_nullable
+      boxNo: boxNo == freezed
+          ? _value.boxNo
+          : boxNo // ignore: cast_nullable_to_non_nullable
               as int?,
-      PRINT_FLAG: PRINT_FLAG == freezed
-          ? _value.PRINT_FLAG
-          : PRINT_FLAG // ignore: cast_nullable_to_non_nullable
+      printFlag: printFlag == freezed
+          ? _value.printFlag
+          : printFlag // ignore: cast_nullable_to_non_nullable
               as String?,
-      PRINT_DATE: PRINT_DATE == freezed
-          ? _value.PRINT_DATE
-          : PRINT_DATE // ignore: cast_nullable_to_non_nullable
+      printDate: printDate == freezed
+          ? _value.printDate
+          : printDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      PRINT_USER: PRINT_USER == freezed
-          ? _value.PRINT_USER
-          : PRINT_USER // ignore: cast_nullable_to_non_nullable
+      printUser: printUser == freezed
+          ? _value.printUser
+          : printUser // ignore: cast_nullable_to_non_nullable
               as String?,
-      AS400IF_FLAG: AS400IF_FLAG == freezed
-          ? _value.AS400IF_FLAG
-          : AS400IF_FLAG // ignore: cast_nullable_to_non_nullable
+      as400IfFlag: as400IfFlag == freezed
+          ? _value.as400IfFlag
+          : as400IfFlag // ignore: cast_nullable_to_non_nullable
               as String?,
-      AS400IF_DATE: AS400IF_DATE == freezed
-          ? _value.AS400IF_DATE
-          : AS400IF_DATE // ignore: cast_nullable_to_non_nullable
+      as400IfDate: as400IfDate == freezed
+          ? _value.as400IfDate
+          : as400IfDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      AS400IF_USER: AS400IF_USER == freezed
-          ? _value.AS400IF_USER
-          : AS400IF_USER // ignore: cast_nullable_to_non_nullable
+      as400IfUser: as400IfUser == freezed
+          ? _value.as400IfUser
+          : as400IfUser // ignore: cast_nullable_to_non_nullable
               as String?,
-      RGSTR_ID: RGSTR_ID == freezed
-          ? _value.RGSTR_ID
-          : RGSTR_ID // ignore: cast_nullable_to_non_nullable
+      rgstrId: rgstrId == freezed
+          ? _value.rgstrId
+          : rgstrId // ignore: cast_nullable_to_non_nullable
               as int?,
-      RGST_DT: RGST_DT == freezed
-          ? _value.RGST_DT
-          : RGST_DT // ignore: cast_nullable_to_non_nullable
+      rgstDt: rgstDt == freezed
+          ? _value.rgstDt
+          : rgstDt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      UPDTR_ID: UPDTR_ID == freezed
-          ? _value.UPDTR_ID
-          : UPDTR_ID // ignore: cast_nullable_to_non_nullable
+      updtrId: updtrId == freezed
+          ? _value.updtrId
+          : updtrId // ignore: cast_nullable_to_non_nullable
               as int?,
-      UPDT_DT: UPDT_DT == freezed
-          ? _value.UPDT_DT
-          : UPDT_DT // ignore: cast_nullable_to_non_nullable
+      updtDt: updtDt == freezed
+          ? _value.updtDt
+          : updtDt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_PalletCopyWith<$Res> implements $TbWhPalletCopyWith<$Res> {
-  factory _$$_PalletCopyWith(_$_Pallet value, $Res Function(_$_Pallet) then) =
-      __$$_PalletCopyWithImpl<$Res>;
+abstract class _$$_TbWhPalletCopyWith<$Res>
+    implements $TbWhPalletCopyWith<$Res> {
+  factory _$$_TbWhPalletCopyWith(
+          _$_TbWhPallet value, $Res Function(_$_TbWhPallet) then) =
+      __$$_TbWhPalletCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int PALLET_SEQ,
-      String? WORKSHOP,
-      String? LOCATION,
-      String? ITEM_NO,
-      String? ITEM_LOT,
-      int? QUANTITY,
-      int? STATE,
-      String? BARCODE,
-      DateTime? SCAN_DATE,
-      String? SCAN_USERNM,
-      int? BOX_NO,
-      String? PRINT_FLAG,
-      DateTime? PRINT_DATE,
-      String? PRINT_USER,
-      String? AS400IF_FLAG,
-      DateTime? AS400IF_DATE,
-      String? AS400IF_USER,
-      int? RGSTR_ID,
-      DateTime? RGST_DT,
-      int? UPDTR_ID,
-      DateTime? UPDT_DT});
+      {String? comps,
+      int? palletSeq,
+      int? transSeq,
+      String? workshop,
+      String? location,
+      String? itemNo,
+      String? itemLot,
+      int? quantity,
+      int? state,
+      String? barcode,
+      DateTime? scanDate,
+      String? scanUsernm,
+      int? boxNo,
+      String? printFlag,
+      DateTime? printDate,
+      String? printUser,
+      String? as400IfFlag,
+      DateTime? as400IfDate,
+      String? as400IfUser,
+      int? rgstrId,
+      DateTime? rgstDt,
+      int? updtrId,
+      DateTime? updtDt});
 }
 
 /// @nodoc
-class __$$_PalletCopyWithImpl<$Res> extends _$TbWhPalletCopyWithImpl<$Res>
-    implements _$$_PalletCopyWith<$Res> {
-  __$$_PalletCopyWithImpl(_$_Pallet _value, $Res Function(_$_Pallet) _then)
-      : super(_value, (v) => _then(v as _$_Pallet));
+class __$$_TbWhPalletCopyWithImpl<$Res> extends _$TbWhPalletCopyWithImpl<$Res>
+    implements _$$_TbWhPalletCopyWith<$Res> {
+  __$$_TbWhPalletCopyWithImpl(
+      _$_TbWhPallet _value, $Res Function(_$_TbWhPallet) _then)
+      : super(_value, (v) => _then(v as _$_TbWhPallet));
 
   @override
-  _$_Pallet get _value => super._value as _$_Pallet;
+  _$_TbWhPallet get _value => super._value as _$_TbWhPallet;
 
   @override
   $Res call({
-    Object? PALLET_SEQ = freezed,
-    Object? WORKSHOP = freezed,
-    Object? LOCATION = freezed,
-    Object? ITEM_NO = freezed,
-    Object? ITEM_LOT = freezed,
-    Object? QUANTITY = freezed,
-    Object? STATE = freezed,
-    Object? BARCODE = freezed,
-    Object? SCAN_DATE = freezed,
-    Object? SCAN_USERNM = freezed,
-    Object? BOX_NO = freezed,
-    Object? PRINT_FLAG = freezed,
-    Object? PRINT_DATE = freezed,
-    Object? PRINT_USER = freezed,
-    Object? AS400IF_FLAG = freezed,
-    Object? AS400IF_DATE = freezed,
-    Object? AS400IF_USER = freezed,
-    Object? RGSTR_ID = freezed,
-    Object? RGST_DT = freezed,
-    Object? UPDTR_ID = freezed,
-    Object? UPDT_DT = freezed,
+    Object? comps = freezed,
+    Object? palletSeq = freezed,
+    Object? transSeq = freezed,
+    Object? workshop = freezed,
+    Object? location = freezed,
+    Object? itemNo = freezed,
+    Object? itemLot = freezed,
+    Object? quantity = freezed,
+    Object? state = freezed,
+    Object? barcode = freezed,
+    Object? scanDate = freezed,
+    Object? scanUsernm = freezed,
+    Object? boxNo = freezed,
+    Object? printFlag = freezed,
+    Object? printDate = freezed,
+    Object? printUser = freezed,
+    Object? as400IfFlag = freezed,
+    Object? as400IfDate = freezed,
+    Object? as400IfUser = freezed,
+    Object? rgstrId = freezed,
+    Object? rgstDt = freezed,
+    Object? updtrId = freezed,
+    Object? updtDt = freezed,
   }) {
-    return _then(_$_Pallet(
-      PALLET_SEQ: PALLET_SEQ == freezed
-          ? _value.PALLET_SEQ
-          : PALLET_SEQ // ignore: cast_nullable_to_non_nullable
-              as int,
-      WORKSHOP: WORKSHOP == freezed
-          ? _value.WORKSHOP
-          : WORKSHOP // ignore: cast_nullable_to_non_nullable
+    return _then(_$_TbWhPallet(
+      comps: comps == freezed
+          ? _value.comps
+          : comps // ignore: cast_nullable_to_non_nullable
               as String?,
-      LOCATION: LOCATION == freezed
-          ? _value.LOCATION
-          : LOCATION // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ITEM_NO: ITEM_NO == freezed
-          ? _value.ITEM_NO
-          : ITEM_NO // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ITEM_LOT: ITEM_LOT == freezed
-          ? _value.ITEM_LOT
-          : ITEM_LOT // ignore: cast_nullable_to_non_nullable
-              as String?,
-      QUANTITY: QUANTITY == freezed
-          ? _value.QUANTITY
-          : QUANTITY // ignore: cast_nullable_to_non_nullable
+      palletSeq: palletSeq == freezed
+          ? _value.palletSeq
+          : palletSeq // ignore: cast_nullable_to_non_nullable
               as int?,
-      STATE: STATE == freezed
-          ? _value.STATE
-          : STATE // ignore: cast_nullable_to_non_nullable
+      transSeq: transSeq == freezed
+          ? _value.transSeq
+          : transSeq // ignore: cast_nullable_to_non_nullable
               as int?,
-      BARCODE: BARCODE == freezed
-          ? _value.BARCODE
-          : BARCODE // ignore: cast_nullable_to_non_nullable
+      workshop: workshop == freezed
+          ? _value.workshop
+          : workshop // ignore: cast_nullable_to_non_nullable
               as String?,
-      SCAN_DATE: SCAN_DATE == freezed
-          ? _value.SCAN_DATE
-          : SCAN_DATE // ignore: cast_nullable_to_non_nullable
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemNo: itemNo == freezed
+          ? _value.itemNo
+          : itemNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemLot: itemLot == freezed
+          ? _value.itemLot
+          : itemLot // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quantity: quantity == freezed
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as int?,
+      barcode: barcode == freezed
+          ? _value.barcode
+          : barcode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      scanDate: scanDate == freezed
+          ? _value.scanDate
+          : scanDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      SCAN_USERNM: SCAN_USERNM == freezed
-          ? _value.SCAN_USERNM
-          : SCAN_USERNM // ignore: cast_nullable_to_non_nullable
+      scanUsernm: scanUsernm == freezed
+          ? _value.scanUsernm
+          : scanUsernm // ignore: cast_nullable_to_non_nullable
               as String?,
-      BOX_NO: BOX_NO == freezed
-          ? _value.BOX_NO
-          : BOX_NO // ignore: cast_nullable_to_non_nullable
+      boxNo: boxNo == freezed
+          ? _value.boxNo
+          : boxNo // ignore: cast_nullable_to_non_nullable
               as int?,
-      PRINT_FLAG: PRINT_FLAG == freezed
-          ? _value.PRINT_FLAG
-          : PRINT_FLAG // ignore: cast_nullable_to_non_nullable
+      printFlag: printFlag == freezed
+          ? _value.printFlag
+          : printFlag // ignore: cast_nullable_to_non_nullable
               as String?,
-      PRINT_DATE: PRINT_DATE == freezed
-          ? _value.PRINT_DATE
-          : PRINT_DATE // ignore: cast_nullable_to_non_nullable
+      printDate: printDate == freezed
+          ? _value.printDate
+          : printDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      PRINT_USER: PRINT_USER == freezed
-          ? _value.PRINT_USER
-          : PRINT_USER // ignore: cast_nullable_to_non_nullable
+      printUser: printUser == freezed
+          ? _value.printUser
+          : printUser // ignore: cast_nullable_to_non_nullable
               as String?,
-      AS400IF_FLAG: AS400IF_FLAG == freezed
-          ? _value.AS400IF_FLAG
-          : AS400IF_FLAG // ignore: cast_nullable_to_non_nullable
+      as400IfFlag: as400IfFlag == freezed
+          ? _value.as400IfFlag
+          : as400IfFlag // ignore: cast_nullable_to_non_nullable
               as String?,
-      AS400IF_DATE: AS400IF_DATE == freezed
-          ? _value.AS400IF_DATE
-          : AS400IF_DATE // ignore: cast_nullable_to_non_nullable
+      as400IfDate: as400IfDate == freezed
+          ? _value.as400IfDate
+          : as400IfDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      AS400IF_USER: AS400IF_USER == freezed
-          ? _value.AS400IF_USER
-          : AS400IF_USER // ignore: cast_nullable_to_non_nullable
+      as400IfUser: as400IfUser == freezed
+          ? _value.as400IfUser
+          : as400IfUser // ignore: cast_nullable_to_non_nullable
               as String?,
-      RGSTR_ID: RGSTR_ID == freezed
-          ? _value.RGSTR_ID
-          : RGSTR_ID // ignore: cast_nullable_to_non_nullable
+      rgstrId: rgstrId == freezed
+          ? _value.rgstrId
+          : rgstrId // ignore: cast_nullable_to_non_nullable
               as int?,
-      RGST_DT: RGST_DT == freezed
-          ? _value.RGST_DT
-          : RGST_DT // ignore: cast_nullable_to_non_nullable
+      rgstDt: rgstDt == freezed
+          ? _value.rgstDt
+          : rgstDt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      UPDTR_ID: UPDTR_ID == freezed
-          ? _value.UPDTR_ID
-          : UPDTR_ID // ignore: cast_nullable_to_non_nullable
+      updtrId: updtrId == freezed
+          ? _value.updtrId
+          : updtrId // ignore: cast_nullable_to_non_nullable
               as int?,
-      UPDT_DT: UPDT_DT == freezed
-          ? _value.UPDT_DT
-          : UPDT_DT // ignore: cast_nullable_to_non_nullable
+      updtDt: updtDt == freezed
+          ? _value.updtDt
+          : updtDt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -351,225 +380,238 @@ class __$$_PalletCopyWithImpl<$Res> extends _$TbWhPalletCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Pallet implements _Pallet {
-  _$_Pallet(
-      {required this.PALLET_SEQ,
-      this.WORKSHOP,
-      this.LOCATION,
-      this.ITEM_NO,
-      this.ITEM_LOT,
-      this.QUANTITY,
-      this.STATE,
-      this.BARCODE,
-      this.SCAN_DATE,
-      this.SCAN_USERNM,
-      this.BOX_NO,
-      this.PRINT_FLAG,
-      this.PRINT_DATE,
-      this.PRINT_USER,
-      this.AS400IF_FLAG,
-      this.AS400IF_DATE,
-      this.AS400IF_USER,
-      this.RGSTR_ID,
-      this.RGST_DT,
-      this.UPDTR_ID,
-      this.UPDT_DT});
+class _$_TbWhPallet implements _TbWhPallet {
+  _$_TbWhPallet(
+      {this.comps,
+      this.palletSeq,
+      this.transSeq,
+      this.workshop,
+      this.location,
+      this.itemNo,
+      this.itemLot,
+      this.quantity,
+      this.state,
+      this.barcode,
+      this.scanDate,
+      this.scanUsernm,
+      this.boxNo,
+      this.printFlag,
+      this.printDate,
+      this.printUser,
+      this.as400IfFlag,
+      this.as400IfDate,
+      this.as400IfUser,
+      this.rgstrId,
+      this.rgstDt,
+      this.updtrId,
+      this.updtDt});
 
-  factory _$_Pallet.fromJson(Map<String, dynamic> json) =>
-      _$$_PalletFromJson(json);
+  factory _$_TbWhPallet.fromJson(Map<String, dynamic> json) =>
+      _$$_TbWhPalletFromJson(json);
 
   @override
-  final int PALLET_SEQ;
+  final String? comps;
   @override
-  final String? WORKSHOP;
+  final int? palletSeq;
   @override
-  final String? LOCATION;
+  final int? transSeq;
   @override
-  final String? ITEM_NO;
+  final String? workshop;
   @override
-  final String? ITEM_LOT;
+  final String? location;
   @override
-  final int? QUANTITY;
+  final String? itemNo;
   @override
-  final int? STATE;
+  final String? itemLot;
   @override
-  final String? BARCODE;
+  final int? quantity;
   @override
-  final DateTime? SCAN_DATE;
+  final int? state;
   @override
-  final String? SCAN_USERNM;
+  final String? barcode;
   @override
-  final int? BOX_NO;
+  final DateTime? scanDate;
   @override
-  final String? PRINT_FLAG;
+  final String? scanUsernm;
   @override
-  final DateTime? PRINT_DATE;
+  final int? boxNo;
   @override
-  final String? PRINT_USER;
+  final String? printFlag;
   @override
-  final String? AS400IF_FLAG;
+  final DateTime? printDate;
   @override
-  final DateTime? AS400IF_DATE;
+  final String? printUser;
   @override
-  final String? AS400IF_USER;
+  final String? as400IfFlag;
   @override
-  final int? RGSTR_ID;
+  final DateTime? as400IfDate;
   @override
-  final DateTime? RGST_DT;
+  final String? as400IfUser;
   @override
-  final int? UPDTR_ID;
+  final int? rgstrId;
   @override
-  final DateTime? UPDT_DT;
+  final DateTime? rgstDt;
+  @override
+  final int? updtrId;
+  @override
+  final DateTime? updtDt;
 
   @override
   String toString() {
-    return 'TbWhPallet(PALLET_SEQ: $PALLET_SEQ, WORKSHOP: $WORKSHOP, LOCATION: $LOCATION, ITEM_NO: $ITEM_NO, ITEM_LOT: $ITEM_LOT, QUANTITY: $QUANTITY, STATE: $STATE, BARCODE: $BARCODE, SCAN_DATE: $SCAN_DATE, SCAN_USERNM: $SCAN_USERNM, BOX_NO: $BOX_NO, PRINT_FLAG: $PRINT_FLAG, PRINT_DATE: $PRINT_DATE, PRINT_USER: $PRINT_USER, AS400IF_FLAG: $AS400IF_FLAG, AS400IF_DATE: $AS400IF_DATE, AS400IF_USER: $AS400IF_USER, RGSTR_ID: $RGSTR_ID, RGST_DT: $RGST_DT, UPDTR_ID: $UPDTR_ID, UPDT_DT: $UPDT_DT)';
+    return 'TbWhPallet(comps: $comps, palletSeq: $palletSeq, transSeq: $transSeq, workshop: $workshop, location: $location, itemNo: $itemNo, itemLot: $itemLot, quantity: $quantity, state: $state, barcode: $barcode, scanDate: $scanDate, scanUsernm: $scanUsernm, boxNo: $boxNo, printFlag: $printFlag, printDate: $printDate, printUser: $printUser, as400IfFlag: $as400IfFlag, as400IfDate: $as400IfDate, as400IfUser: $as400IfUser, rgstrId: $rgstrId, rgstDt: $rgstDt, updtrId: $updtrId, updtDt: $updtDt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Pallet &&
+            other is _$_TbWhPallet &&
+            const DeepCollectionEquality().equals(other.comps, comps) &&
+            const DeepCollectionEquality().equals(other.palletSeq, palletSeq) &&
+            const DeepCollectionEquality().equals(other.transSeq, transSeq) &&
+            const DeepCollectionEquality().equals(other.workshop, workshop) &&
+            const DeepCollectionEquality().equals(other.location, location) &&
+            const DeepCollectionEquality().equals(other.itemNo, itemNo) &&
+            const DeepCollectionEquality().equals(other.itemLot, itemLot) &&
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.state, state) &&
+            const DeepCollectionEquality().equals(other.barcode, barcode) &&
+            const DeepCollectionEquality().equals(other.scanDate, scanDate) &&
             const DeepCollectionEquality()
-                .equals(other.PALLET_SEQ, PALLET_SEQ) &&
-            const DeepCollectionEquality().equals(other.WORKSHOP, WORKSHOP) &&
-            const DeepCollectionEquality().equals(other.LOCATION, LOCATION) &&
-            const DeepCollectionEquality().equals(other.ITEM_NO, ITEM_NO) &&
-            const DeepCollectionEquality().equals(other.ITEM_LOT, ITEM_LOT) &&
-            const DeepCollectionEquality().equals(other.QUANTITY, QUANTITY) &&
-            const DeepCollectionEquality().equals(other.STATE, STATE) &&
-            const DeepCollectionEquality().equals(other.BARCODE, BARCODE) &&
-            const DeepCollectionEquality().equals(other.SCAN_DATE, SCAN_DATE) &&
+                .equals(other.scanUsernm, scanUsernm) &&
+            const DeepCollectionEquality().equals(other.boxNo, boxNo) &&
+            const DeepCollectionEquality().equals(other.printFlag, printFlag) &&
+            const DeepCollectionEquality().equals(other.printDate, printDate) &&
+            const DeepCollectionEquality().equals(other.printUser, printUser) &&
             const DeepCollectionEquality()
-                .equals(other.SCAN_USERNM, SCAN_USERNM) &&
-            const DeepCollectionEquality().equals(other.BOX_NO, BOX_NO) &&
+                .equals(other.as400IfFlag, as400IfFlag) &&
             const DeepCollectionEquality()
-                .equals(other.PRINT_FLAG, PRINT_FLAG) &&
+                .equals(other.as400IfDate, as400IfDate) &&
             const DeepCollectionEquality()
-                .equals(other.PRINT_DATE, PRINT_DATE) &&
-            const DeepCollectionEquality()
-                .equals(other.PRINT_USER, PRINT_USER) &&
-            const DeepCollectionEquality()
-                .equals(other.AS400IF_FLAG, AS400IF_FLAG) &&
-            const DeepCollectionEquality()
-                .equals(other.AS400IF_DATE, AS400IF_DATE) &&
-            const DeepCollectionEquality()
-                .equals(other.AS400IF_USER, AS400IF_USER) &&
-            const DeepCollectionEquality().equals(other.RGSTR_ID, RGSTR_ID) &&
-            const DeepCollectionEquality().equals(other.RGST_DT, RGST_DT) &&
-            const DeepCollectionEquality().equals(other.UPDTR_ID, UPDTR_ID) &&
-            const DeepCollectionEquality().equals(other.UPDT_DT, UPDT_DT));
+                .equals(other.as400IfUser, as400IfUser) &&
+            const DeepCollectionEquality().equals(other.rgstrId, rgstrId) &&
+            const DeepCollectionEquality().equals(other.rgstDt, rgstDt) &&
+            const DeepCollectionEquality().equals(other.updtrId, updtrId) &&
+            const DeepCollectionEquality().equals(other.updtDt, updtDt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(PALLET_SEQ),
-        const DeepCollectionEquality().hash(WORKSHOP),
-        const DeepCollectionEquality().hash(LOCATION),
-        const DeepCollectionEquality().hash(ITEM_NO),
-        const DeepCollectionEquality().hash(ITEM_LOT),
-        const DeepCollectionEquality().hash(QUANTITY),
-        const DeepCollectionEquality().hash(STATE),
-        const DeepCollectionEquality().hash(BARCODE),
-        const DeepCollectionEquality().hash(SCAN_DATE),
-        const DeepCollectionEquality().hash(SCAN_USERNM),
-        const DeepCollectionEquality().hash(BOX_NO),
-        const DeepCollectionEquality().hash(PRINT_FLAG),
-        const DeepCollectionEquality().hash(PRINT_DATE),
-        const DeepCollectionEquality().hash(PRINT_USER),
-        const DeepCollectionEquality().hash(AS400IF_FLAG),
-        const DeepCollectionEquality().hash(AS400IF_DATE),
-        const DeepCollectionEquality().hash(AS400IF_USER),
-        const DeepCollectionEquality().hash(RGSTR_ID),
-        const DeepCollectionEquality().hash(RGST_DT),
-        const DeepCollectionEquality().hash(UPDTR_ID),
-        const DeepCollectionEquality().hash(UPDT_DT)
+        const DeepCollectionEquality().hash(comps),
+        const DeepCollectionEquality().hash(palletSeq),
+        const DeepCollectionEquality().hash(transSeq),
+        const DeepCollectionEquality().hash(workshop),
+        const DeepCollectionEquality().hash(location),
+        const DeepCollectionEquality().hash(itemNo),
+        const DeepCollectionEquality().hash(itemLot),
+        const DeepCollectionEquality().hash(quantity),
+        const DeepCollectionEquality().hash(state),
+        const DeepCollectionEquality().hash(barcode),
+        const DeepCollectionEquality().hash(scanDate),
+        const DeepCollectionEquality().hash(scanUsernm),
+        const DeepCollectionEquality().hash(boxNo),
+        const DeepCollectionEquality().hash(printFlag),
+        const DeepCollectionEquality().hash(printDate),
+        const DeepCollectionEquality().hash(printUser),
+        const DeepCollectionEquality().hash(as400IfFlag),
+        const DeepCollectionEquality().hash(as400IfDate),
+        const DeepCollectionEquality().hash(as400IfUser),
+        const DeepCollectionEquality().hash(rgstrId),
+        const DeepCollectionEquality().hash(rgstDt),
+        const DeepCollectionEquality().hash(updtrId),
+        const DeepCollectionEquality().hash(updtDt)
       ]);
 
   @JsonKey(ignore: true)
   @override
-  _$$_PalletCopyWith<_$_Pallet> get copyWith =>
-      __$$_PalletCopyWithImpl<_$_Pallet>(this, _$identity);
+  _$$_TbWhPalletCopyWith<_$_TbWhPallet> get copyWith =>
+      __$$_TbWhPalletCopyWithImpl<_$_TbWhPallet>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PalletToJson(this);
+    return _$$_TbWhPalletToJson(this);
   }
 }
 
-abstract class _Pallet implements TbWhPallet {
-  factory _Pallet(
-      {required final int PALLET_SEQ,
-      final String? WORKSHOP,
-      final String? LOCATION,
-      final String? ITEM_NO,
-      final String? ITEM_LOT,
-      final int? QUANTITY,
-      final int? STATE,
-      final String? BARCODE,
-      final DateTime? SCAN_DATE,
-      final String? SCAN_USERNM,
-      final int? BOX_NO,
-      final String? PRINT_FLAG,
-      final DateTime? PRINT_DATE,
-      final String? PRINT_USER,
-      final String? AS400IF_FLAG,
-      final DateTime? AS400IF_DATE,
-      final String? AS400IF_USER,
-      final int? RGSTR_ID,
-      final DateTime? RGST_DT,
-      final int? UPDTR_ID,
-      final DateTime? UPDT_DT}) = _$_Pallet;
+abstract class _TbWhPallet implements TbWhPallet {
+  factory _TbWhPallet(
+      {final String? comps,
+      final int? palletSeq,
+      final int? transSeq,
+      final String? workshop,
+      final String? location,
+      final String? itemNo,
+      final String? itemLot,
+      final int? quantity,
+      final int? state,
+      final String? barcode,
+      final DateTime? scanDate,
+      final String? scanUsernm,
+      final int? boxNo,
+      final String? printFlag,
+      final DateTime? printDate,
+      final String? printUser,
+      final String? as400IfFlag,
+      final DateTime? as400IfDate,
+      final String? as400IfUser,
+      final int? rgstrId,
+      final DateTime? rgstDt,
+      final int? updtrId,
+      final DateTime? updtDt}) = _$_TbWhPallet;
 
-  factory _Pallet.fromJson(Map<String, dynamic> json) = _$_Pallet.fromJson;
+  factory _TbWhPallet.fromJson(Map<String, dynamic> json) =
+      _$_TbWhPallet.fromJson;
 
   @override
-  int get PALLET_SEQ => throw _privateConstructorUsedError;
+  String? get comps => throw _privateConstructorUsedError;
   @override
-  String? get WORKSHOP => throw _privateConstructorUsedError;
+  int? get palletSeq => throw _privateConstructorUsedError;
   @override
-  String? get LOCATION => throw _privateConstructorUsedError;
+  int? get transSeq => throw _privateConstructorUsedError;
   @override
-  String? get ITEM_NO => throw _privateConstructorUsedError;
+  String? get workshop => throw _privateConstructorUsedError;
   @override
-  String? get ITEM_LOT => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
   @override
-  int? get QUANTITY => throw _privateConstructorUsedError;
+  String? get itemNo => throw _privateConstructorUsedError;
   @override
-  int? get STATE => throw _privateConstructorUsedError;
+  String? get itemLot => throw _privateConstructorUsedError;
   @override
-  String? get BARCODE => throw _privateConstructorUsedError;
+  int? get quantity => throw _privateConstructorUsedError;
   @override
-  DateTime? get SCAN_DATE => throw _privateConstructorUsedError;
+  int? get state => throw _privateConstructorUsedError;
   @override
-  String? get SCAN_USERNM => throw _privateConstructorUsedError;
+  String? get barcode => throw _privateConstructorUsedError;
   @override
-  int? get BOX_NO => throw _privateConstructorUsedError;
+  DateTime? get scanDate => throw _privateConstructorUsedError;
   @override
-  String? get PRINT_FLAG => throw _privateConstructorUsedError;
+  String? get scanUsernm => throw _privateConstructorUsedError;
   @override
-  DateTime? get PRINT_DATE => throw _privateConstructorUsedError;
+  int? get boxNo => throw _privateConstructorUsedError;
   @override
-  String? get PRINT_USER => throw _privateConstructorUsedError;
+  String? get printFlag => throw _privateConstructorUsedError;
   @override
-  String? get AS400IF_FLAG => throw _privateConstructorUsedError;
+  DateTime? get printDate => throw _privateConstructorUsedError;
   @override
-  DateTime? get AS400IF_DATE => throw _privateConstructorUsedError;
+  String? get printUser => throw _privateConstructorUsedError;
   @override
-  String? get AS400IF_USER => throw _privateConstructorUsedError;
+  String? get as400IfFlag => throw _privateConstructorUsedError;
   @override
-  int? get RGSTR_ID => throw _privateConstructorUsedError;
+  DateTime? get as400IfDate => throw _privateConstructorUsedError;
   @override
-  DateTime? get RGST_DT => throw _privateConstructorUsedError;
+  String? get as400IfUser => throw _privateConstructorUsedError;
   @override
-  int? get UPDTR_ID => throw _privateConstructorUsedError;
+  int? get rgstrId => throw _privateConstructorUsedError;
   @override
-  DateTime? get UPDT_DT => throw _privateConstructorUsedError;
+  DateTime? get rgstDt => throw _privateConstructorUsedError;
+  @override
+  int? get updtrId => throw _privateConstructorUsedError;
+  @override
+  DateTime? get updtDt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_PalletCopyWith<_$_Pallet> get copyWith =>
+  _$$_TbWhPalletCopyWith<_$_TbWhPallet> get copyWith =>
       throw _privateConstructorUsedError;
 }

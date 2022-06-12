@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 int gSystemUserId = 11111;
 String gDeviceName = "TEST001";
 
+String gCurrentVersion = '동기화전 입니다.';
+
+const String gServiceURL = 'http://54.180.96.240:8080/api/';
+
 String gSplitCharacter = '\r\n';
 
 bool isLoggedIn = false;

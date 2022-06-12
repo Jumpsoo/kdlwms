@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
@@ -6,6 +9,9 @@ import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:kdlwms/kdl_common/batch/data_sync_viewmodel.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
+import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
+import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 
@@ -23,26 +29,33 @@ class _DataSyncState extends State<DataSync> {
   }
 }
 
-Future<bool> syncData(BuildContext context) async {
+Future<bool> syncData(BuildContext context, bool ignoreMsg) async {
+  const double nTotalPercent = 100;
+  const double nIncreaseUnit = 100/4;
   double percentage = 0.0;
   String sBatchName = '공통코드';
-  int delayTime = 500;
 
   DataSyncViewModel viewModel = context.read<DataSyncViewModel>();
 
-  if (await showAlertDialogQ(
-        context,
-        '확인',
-        '전체 중요정보를 \r\n 새로 받으시겠습니까?',
-      ) ==
-      false) {
-    return false;
+  //실적조회용 : 차후 삭제할것
+  PalletViewModel palletViewModel = context.read<PalletViewModel>();
+  SettingWorkshopViewModel viewModelshop = context.read<SettingWorkshopViewModel>();
+
+  if (ignoreMsg == false) {
+    if (await showAlertDialogQ(
+          context,
+          '확인',
+          '전체 정보를 새로 받으시겠습니까?',
+        ) ==
+        false) {
+      return false;
+    }
   }
 
   ProgressDialog progressDialog = ProgressDialog(
     context,
     type: ProgressDialogType.Download,
-    textDirection: TextDirection.rtl,
+    textDirection: TextDirection.ltr,
     isDismissible: true,
 //      customBody: LinearProgressIndicator(
 //        valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
@@ -62,215 +75,140 @@ Future<bool> syncData(BuildContext context) async {
     maxProgress: 100.0,
     progressTextStyle: const TextStyle(
         color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
-    messageTextStyle: TextStyle(
+    messageTextStyle: const TextStyle(
         color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600),
   );
-
   await progressDialog.show();
 
-  //### 01. 공통코드 리스트 처리
-  sBatchName = '공통 코드';
-  Result result = await viewModel.useCaseDataBatch.migTbWhCmCode(
-    getTbWhCmCodeList(),
-    sBatchName,
-  );
-  await result.when(success: (value) async {
-    percentage = percentage + 20.0;
-    updateProgressBar(progressDialog, percentage, '[$sBatchName].. 내려받는 중');
-    await Future.delayed(Duration(milliseconds: delayTime), () {});
-  }, error: (message) async {
-    await showAlertDialog(context, message);
-    progressDialog.hide();
+  sBatchName = '01.공통 코드';
+  writeLog('$sBatchName');
+  TbWhCmCode condTbWhCmCode = TbWhCmCode();
+  if (await _getBatchItem(
+        context,
+        sBatchName,
+        await viewModel.useCaseDataBatch
+            .migTbWhCmCode(condTbWhCmCode, sBatchName),
+        progressDialog,
+        percentage,
+      ) ==
+      false) {
     return false;
-  });
+  } // 01.공통코드 완료
 
-  //### 02. 품목정보 리스트
-  sBatchName = '품목 정보';
-  result = await viewModel.useCaseDataBatch.migTbWhItem(
-    getTbWhItemList(),
-  );
-  await result.when(success: (value) async {
-    percentage = percentage + 20.0;
-    updateProgressBar(progressDialog, percentage, '[$sBatchName].. 내려받는 중');
-    await Future.delayed(Duration(milliseconds: delayTime), () {});
-  }, error: (message) async {
-    await showAlertDialog(context, message);
-    progressDialog.hide();
+  progressDialog.hide();
+
+  sBatchName = '02.품목정보';
+  writeLog('$sBatchName');
+  //조건이있을 경우 추가 할 것
+  TbWhItem condTbWhItem = TbWhItem();
+  percentage = percentage + nIncreaseUnit;
+  if (await _getBatchItem(
+        context,
+        sBatchName,
+        await viewModel.useCaseDataBatch.migTbWhItem(condTbWhItem),
+        progressDialog,
+        percentage,
+      ) ==
+      false) {
     return false;
-  });
-
-  // 03. 작업장 정보 리스트
-  sBatchName = '작업장정보';
-  result = await viewModel.useCaseDataBatch.migTbCmLocation(
-    getTbCmLocationList(),
-  );
-  await result.when(success: (value) async {
-    percentage = percentage + 20.0;
-    updateProgressBar(progressDialog, percentage, '[$sBatchName].. 내려받는 중');
-    await Future.delayed(Duration(milliseconds: delayTime), () {});
-  }, error: (message) async {
-    await showAlertDialog(context, message);
-    progressDialog.hide();
-    return false;
-  });
-
-  // 04. 동기화 정보 리스트
-  sBatchName = '버전 정보';
-  result = await viewModel.useCaseDataBatch.migTbCmSync(
-    getTbCmSyncList(),
-  );
-  await result.when(success: (value) async {
-    percentage = percentage + 20.0;
-    updateProgressBar(progressDialog, percentage, '[$sBatchName].. 내려받는 중');
-    await Future.delayed(Duration(milliseconds: delayTime), () {});
-  }, error: (message) async {
-    await showAlertDialog(context, message);
-    progressDialog.hide();
-    return false;
-  });
-
-  percentage = percentage + 20.0;
-  updateProgressBar(progressDialog, percentage, '정리 중..');
-  await Future.delayed(Duration(milliseconds: delayTime), () {});
-
-  if (percentage >= 100.0) {
-    progressDialog.hide();
   }
+
+  Result resultItem = await palletViewModel.useCasesWms.selectItemList();
+  writeLog(resultItem);
+  resultItem.when(success: (itemList){
+    print(itemList);
+  }, error: (messge){});
+
+  sBatchName = '03.작업장정보&팔레트정보';
+  writeLog('$sBatchName');
+  percentage = percentage + nIncreaseUnit;
+  if (await _getBatchItem(
+        context,
+        sBatchName,
+        await viewModel.useCaseDataBatch.migTbCmLocation(),
+        progressDialog,
+        percentage,
+      ) ==
+    false) {
+    return false;
+  }
+
+
+
+  // sBatchName = '04.버전정보 동기화중..';
+  // writeLog('$sBatchName');
+  // percentage = percentage + nIncreaseUnit;
+  // if (await _getBatchItem(
+  //   context,
+  //   sBatchName,
+  //   await viewModel.useCaseDataBatch.getCurrentVersionRow(),
+  //   progressDialog,
+  //   percentage,
+  // ) ==
+  //     false) {
+  //   _exitInitialProgram();
+  //
+  // }
+
+  progressDialog.hide();
   return true;
+}
+
+//인터페이스 실패시 강제 종료
+void _exitInitialProgram(){
+  if (Platform.isIOS) {
+    exit(0);
+  } else {
+    // SystemNavigator.pop();
+    writeLog('종료됨: 구현후 주석해제할것');
+  }
 }
 
 void updateProgressBar(
     ProgressDialog progressDialog, double dCurrentPercent, String sMsg) {
   progressDialog.update(
     progress: dCurrentPercent,
-    message: "$sMsg",
+    message: '$sMsg',
     progressWidget: Container(
-        padding: EdgeInsets.all(8.0), child: CircularProgressIndicator()),
+        padding: const EdgeInsets.all(8.0), child: const CircularProgressIndicator()),
     maxProgress: 100.0,
-    progressTextStyle: TextStyle(
+    progressTextStyle: const TextStyle(
         color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w400),
-    messageTextStyle: TextStyle(
+    messageTextStyle: const TextStyle(
         color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w600),
   );
 }
 
-Future<void> probeResult(Result resultFrom) async {
+//### 02. 품목정보 리스트
+Future<bool> _getBatchItem(BuildContext context, String sBatchName,
+    Result result, ProgressDialog progressDialog, double percentage) async {
+  int delayTime = 500;
+  bool retVal = false;
+  writeLog('$sBatchName : 시작');
+  DataSyncViewModel viewModel = context.read<DataSyncViewModel>();
 
+  try {
+    result.when(success: (value)  async {
+      updateProgressBar(progressDialog, percentage, '[$sBatchName].. 내려받는 중');
+      Future.delayed(Duration(milliseconds: delayTime), () {});
+      writeLog('$sBatchName : 성공');
+      retVal =  true;
+    }, error: (message) {
+      showAlertDialog(context, message);
+      showAlertDialog(context, '동기화 실패로 종료됩니다. 시스템 관리자에게 문의하세요.');
+      progressDialog.hide();
+      writeLog('$sBatchName : 오류 [$message]');
+      retVal = false;
+      //실패시 프로그램 강제 종료
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => _exitInitialProgram);
+    });
+  } catch (e) {
+    writeLog('$sBatchName : 오류 + [$e]');
+    retVal = false;
+  }
+  return retVal;
 }
 
-//▼ import 용 데이터 정비
-// 01. 공통코드 리스트
-List<TbWhCmCode> getTbWhCmCodeList() {
-  List<TbWhCmCode> retList = [];
-  TbWhCmCode item = TbWhCmCode(
-      CODE_ID: 1,
-      GRP_CD: 'GRP_CD',
-      CODE_CD: 'CODE_CD',
-      CODE_KO_NM: 'CODE_KO_NM',
-      CODE_EN_NM: 'CODE_EN_NM',
-      CODE_JA_NM: 'CODE_JA_NM',
-      REF_1: 'REF_1',
-      REF_2: 'REF_2',
-      REF_3: 'REF_3',
-      REF_4: 'REF_4',
-      REF_5: 'REF_5',
-      CODE_ORDR: 2,
-      USE_YN: 'Y',
-      RGSTR_ID: 9999,
-      RGST_DT: null,
-      UPDTR_ID: 9999,
-      UPDT_DT: null);
-  retList.add(item);
-  return retList;
-}
+Future<void> probeResult(Result resultFrom) async {}
 
-// 02. 품목정보 리스트
-List<TbWhItem> getTbWhItemList() {
-  List<TbWhItem> retList = [];
-  TbWhItem item = TbWhItem(
-      ITEM_NM: 'ITEM_NM',
-      STANDARD: 'STANDARD',
-      QT: 'QT',
-      ITEM_NO: 'ITEM_NO',
-      BOX_KG: 15,
-      LENGTH: 90,
-      WIDTH: 200,
-      HEIGHT: 100,
-      WAREHOUSE_CD: 'WAREHOUSE_CD',
-      WAREHOUSE_NM: 'WAREHOUSE_NM',
-      WAREHOUSE_AREA: 'WAREHOUSE_AREA',
-      USE_YN: 'Y',
-      RGSTR_ID: 999,
-      RGST_DT: null,
-      UPDTR_ID: 999,
-      UPDT_DT: null);
-
-  retList.add(item);
-  return retList;
-}
-
-// 03. 작업장 정보 리스트
-List<TbCmLocation> getTbCmLocationList() {
-
-  List<TbCmLocation> retList = [];
-
-  TbCmLocation item = TbCmLocation(
-    WORKSHOP: 'WORK001',
-    WORKSHOP_NM: 'WORKSHOP#4',
-    LOCATION: '001',
-    SYNC_DATETIME: DateTime.now(),
-    SET_FLAG: 'N',
-    CMF_1: ' ',
-    CMF_2: ' ',
-    CMF_3: ' ',
-    CMF_4: ' ',
-    CMF_5: ' ',
-  );
-  TbCmLocation item1 = TbCmLocation(
-    WORKSHOP: 'WORK002',
-    WORKSHOP_NM: 'WORKSHOP#5',
-    LOCATION: '002',
-    SYNC_DATETIME: DateTime.now(),
-    SET_FLAG: 'N',
-    CMF_1: ' ',
-    CMF_2: ' ',
-    CMF_3: ' ',
-    CMF_4: ' ',
-    CMF_5: ' ',
-  );
-  TbCmLocation item2 = TbCmLocation(
-    WORKSHOP: 'WORK003',
-    WORKSHOP_NM: 'WORKSHOP#6',
-    LOCATION: '003',
-    SYNC_DATETIME: DateTime.now(),
-    SET_FLAG: 'N',
-    CMF_1: ' ',
-    CMF_2: ' ',
-    CMF_3: ' ',
-    CMF_4: ' ',
-    CMF_5: ' ',
-  );
-
-  retList.add(item);
-  retList.add(item1);
-  retList.add(item2);
-
-  return retList;
-}
-
-// 04. 동기화 정보 리스트
-List<TbCmSync> getTbCmSyncList() {
-  List<TbCmSync> retList = [];
-  TbCmSync item = TbCmSync(
-    VERSION_CODE: 'VERSION_CODE',
-    VERSION_DESC: 'VERSION_DESC',
-    SYNC_DATETIME: null,
-    CMF_1: 'CMF_1',
-    CMF_2: 'CMF_2',
-    CMF_3: 'CMF_3',
-    CMF_4: 'CMF_4',
-    CMF_5: 'CMF_5',
-  );
-  retList.add(item);
-  return retList;
-}

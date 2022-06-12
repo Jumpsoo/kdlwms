@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kdlwms/kdl_common/batch/data_sync.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 
 class MainFrameNavigationBarMain extends StatelessWidget {
   const MainFrameNavigationBarMain({Key? key}) : super(key: key);
@@ -21,14 +22,11 @@ class MainFrameNavigationBarMain extends StatelessWidget {
                     //화면 갱신하면서 버전정보 수정
                     // 버전정보 최신화가 안되면 강제 종료 "정보 초기화 실패"
                     //loadSyncDataPage(context),
-                    syncData(context),
-
+                    syncData(context, false),
                   }
                 else if (index == 1)
                   {
-                    Future.delayed(const Duration(seconds: 1), () async {
-                      SystemNavigator.pop();
-                    }),
+                    exitProgram(context),
                   }
               },
           items: const [

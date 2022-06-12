@@ -17,6 +17,11 @@ class TbCmSyncRepoImpl implements TbCmSyncRepo{
   }
 
   @override
+  Future<Result<TbCmSync?>> getCurrentVersionRow()  async{
+    return await db.getCurrentVersionRow();
+  }
+
+  @override
   Future<Result<bool>> insertTbCmSync(TbCmSync tbCmSync) async {
     return await db.insertTbCmSync(tbCmSync);
   }

@@ -7,6 +7,7 @@ import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:kdlwms/kdl_common/batch/data_sync.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
+import 'package:kdlwms/presentation/pallet/scan/pallet_common_function.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -42,16 +43,9 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
   void initState() {
     super.initState();
 
-    // Future.microtask(() {
-    //   final viewModelInit = context.read<SettingWorkshopViewModel>();
-    //   _subscription = viewModelInit.eventStream.listen((event) {
-    //     event.when(showSnackBar: (message) {
-    //       final snackBar = SnackBar(content: Text(message));
-    //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    //     });
-    //   });
-    // });
     setLocationList();
+
+    hideCircularProgressIndicator();
   }
 
   @override
@@ -63,22 +57,14 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
   //최초로딩시 콤보박스 세팅
   //데이터가 없는 경우 하단 알람 창에 메세지 전시
   Future<void> setLocationList() async {
-    viewModel = context.read<SettingWorkshopViewModel>();
-    Result? result =
-        await viewModel.useCaseTbCmLocation.selectTbCmLocationAll();
-    List<ComboValueType> comboItemList = [];
+    List<ComboValueType> comboList =
+        await palletCommonGetLocationComboValueList(context);
+    String? sDefaultLocation = await palletCommonGetDefaultWorkShop(context);
 
-    result.when(
-        success: (c) {
-          for (TbCmLocation tb in c) {
-            ComboValueType item =
-                ComboValueType(key: tb.WORKSHOP, value: tb.WORKSHOP_NM!);
-            comboItemList.add(item);
-          }
-        },
-        error: (message) {});
-
-    _datas = comboItemList;
+    setState(() {
+      _datas = comboList;
+      _selectedValue = sDefaultLocation;
+    });
   }
 
   ///전역 작업장 설정
@@ -104,40 +90,55 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
         .updateFromSelectTbCmLocationToEnable(sSelectedWorkSHop);
 
     result.when(success: (value) {
-      showCustomSnackBarWarn(context, '성공');
+      showCustomSnackBarSuccess(context, '성공');
       setLocationList();
     }, error: (message) {
       showCustomSnackBarWarn(context, message);
     });
   }
 
-  Widget createLocationDropDownButton(List<TbCmLocation> locationList) {
-    List<ComboValueType> menuItemList = [];
-    _datas.clear();
-
-    for (TbCmLocation item in locationList) {
-      _datas.add(ComboValueType(key: item.WORKSHOP, value: item.WORKSHOP_NM!));
-      menuItemList
-          .add(ComboValueType(key: item.WORKSHOP, value: item.WORKSHOP_NM!));
-    }
-    // menuItemList
-    //     .add(ComboValueType(key: locationList[0].WORKSHOP, value: locationList[0].WORKSHOP_NM!));
-
-    return DropdownButton<String>(
-        value: _selectedValue,
-        onChanged: (String? newValue) {
-          if (newValue != null) {
-            setState(() {
-              _selectedValue = newValue;
-
-            });
-          }},
-      items: menuItemList.map((ComboValueType item) {
-        return DropdownMenuItem<String>(
-          value: item.key,
-          child: Text(item.value),
-        );
-      }).toList(),
+  Widget createLocationDropDownButton(List<ComboValueType> locationList) {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          color: Colors.white60,
+          border: Border.all(
+              color: Colors.black12, width: 1, style: BorderStyle.solid),
+          borderRadius: BorderRadius.circular(8)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerRight,
+            child: DropdownButton<String>(
+              iconSize: 20,
+              elevation: 16,
+              value: _selectedValue ?? "",
+              style: const TextStyle(color: Colors.black, fontSize: 16.0),
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  setState(() {
+                    _selectedValue = newValue;
+                  });
+                }
+              },
+              selectedItemBuilder: (BuildContext context) {
+                return locationList.map<Widget>((ComboValueType item) {
+                  return Text(item.value);
+                }).toList();
+              },
+              items: locationList.map((ComboValueType item) {
+                return DropdownMenuItem<String>(
+                  value: item.key,
+                  child: Text(item.value),
+                );
+              }).toList(),
+              hint: const Text('-선택-'),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -204,7 +205,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                                     width: 150,
                                     alignment: Alignment.centerRight,
                                     child: createLocationDropDownButton(
-                                      getTbCmLocationList(),
+                                      _datas,
                                     ),
                                   ),
                                 ],
@@ -215,8 +216,8 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                       ),
                     ),
                     Column(
-                      children: [
-                        const Padding(
+                      children: const [
+                        Padding(
                           padding: EdgeInsets.only(top: 160),
                         ),
                         // NotiPage(
@@ -256,7 +257,8 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
           onTap: (index) => {
                 if (index == 0)
                   {
-                    setLocationList(),
+                    //setLocationList(),
+                    showCircularProgressIndicator(context),
                   }
                 else if (index == 1)
                   {

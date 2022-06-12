@@ -1,5 +1,6 @@
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TbWhCmCodeDbHelper {
@@ -23,7 +24,7 @@ class TbWhCmCodeDbHelper {
       await db.update(
         'TB_WH_CM_CODE',
         tbWhCmCode.toJson(),
-        where: 'CODE_ID = ? ',
+        where: 'codeID = ? ',
         whereArgs: [tbWhCmCode],
       );
       return const Result.success(true);
@@ -51,8 +52,8 @@ class TbWhCmCodeDbHelper {
     try {
       await db.delete(
         'TB_WH_CM_CODE',
-        where: 'CODE_ID = ? ',
-        whereArgs: [tbWhCmCode.CODE_ID],
+        where: 'codeID = ? ',
+        whereArgs: [tbWhCmCode.codeId],
       );
       return const Result.success(true);
     } catch (e) {
@@ -67,8 +68,9 @@ class TbWhCmCodeDbHelper {
       );
       return const Result.success(true);
     } catch (e) {
-      print('데이터베이스 에러');
-      return Result.error('데이터베이스 에러');
+      writeLog('데이터베이스 에러');
+
+      return const Result.error('데이터베이스 에러');
     }
   }
 }

@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/presentation/pallet/components/btn_packing.dart';
 import 'package:kdlwms/presentation/pallet/components/btn_packing_delete.dart';
 import 'package:kdlwms/presentation/pallet/components/btn_packing_view.dart';
@@ -52,15 +52,23 @@ class PltWorkPage extends StatefulWidget {
 }
 
 class _SubMainPagState extends State<PltWorkPage> {
-
   String? localMsg = "준비";
 
+  @override
+  void initState(){
+    super.initState();
+    hideCircularProgressIndicator();
+  }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
   //생성자
   @override
   Widget build(BuildContext context) {
+    double value = 0;
 
-    double value  = 0;
 
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
@@ -69,51 +77,50 @@ class _SubMainPagState extends State<PltWorkPage> {
         backgroundColor: Colors.blueGrey[900],
       ),
       body: Padding(
-        padding:
-            const EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
-        child: Column(
-          children: [
-            const BtnPacking(),
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
-            const BtnPrintLabel(),
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
-            const BtnPackingView(),
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
-            const BtnPackingDelete(),
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
-            const BtnMovePrevious(),
-            const Padding(padding: EdgeInsets.only(bottom: 5)),
-            Container(
-              color: Colors.black,
-              padding: const EdgeInsets.only(left: 0),
-              alignment: Alignment.centerLeft,
-              width: 320,
-              height: 80,
-              child: Row(
-                children: [
-                  Column(
-                    children: const [
-                      Icon(Icons.circle_notifications,
-                          color: Colors.white, size: 30.0),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      AutoSizeText(
-                        localMsg!,
-                        style: const TextStyle(
-                            fontSize: 12.0,
-                            color: Colors.white,
-                            fontFamily: "Roboto"),
-                      ),
-                    ],
-                  ),
-                ],
+          padding:
+              const EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
+          child: Column(
+            children: [
+              const BtnPacking(),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
+              const BtnPrintLabel(),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
+              const BtnPackingView(),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
+              const BtnPackingDelete(),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
+              const BtnMovePrevious(),
+              const Padding(padding: EdgeInsets.only(bottom: 5)),
+              Container(
+                color: Colors.black,
+                padding: const EdgeInsets.only(left: 0),
+                alignment: Alignment.centerLeft,
+                width: 320,
+                height: 80,
+                child: Row(
+                  children: [
+                    Column(
+                      children: const [
+                        Icon(Icons.circle_notifications,
+                            color: Colors.white, size: 30.0),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        AutoSizeText(
+                          localMsg!,
+                          style: const TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.white,
+                              fontFamily: "Roboto"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        )
-      ),
+            ],
+          )),
     );
   }
 }

@@ -39,8 +39,9 @@ class DataSyncViewModel with ChangeNotifier {
     );
   }
 
-  Future<Result<bool>> _migTbWhCmCode( List<TbWhCmCode> tbWhCmCodes, String sBachName) async {
-    Result result = await useCaseDataBatch.migTbWhCmCode(tbWhCmCodes, '[공통코드]');
+  Future<Result<bool>> _migTbWhCmCode(TbWhCmCode condTbWhCmCode, String sBachName) async {
+
+    Result result = await useCaseDataBatch.migTbWhCmCode(condTbWhCmCode, '[공통코드]');
     result.when(success: (message) {
       _eventController.add(CommUiEvents.showSnackBar(message));
     }, error: (message) {
@@ -50,7 +51,9 @@ class DataSyncViewModel with ChangeNotifier {
   }
 
   Future<Result<bool>> _migTbWhItem(List<TbWhItem> tbWhItems) async {
-    Result result = await useCaseDataBatch.migTbWhItem(tbWhItems);
+    //조건이있을 경우 추가 할 것
+    TbWhItem condTbWhItem = TbWhItem();
+    Result result = await useCaseDataBatch.migTbWhItem(condTbWhItem);
     result.when(success: (value){}, error: (message){
       return Result.error(message);
     });
@@ -58,7 +61,7 @@ class DataSyncViewModel with ChangeNotifier {
   }
 
   Future<Result<bool>> _migTbCmLocation(List<TbCmLocation> tbCmLocations) async {
-    Result result = await useCaseDataBatch.migTbCmLocation(tbCmLocations);
+    Result result = await useCaseDataBatch.migTbCmLocation();
     result.when(success: (value){}, error: (message){
       return Result.error(message);
     });
@@ -72,4 +75,16 @@ class DataSyncViewModel with ChangeNotifier {
     });
     return const Result.success(true);
   }
+
+  // 버전 저회
+  Future<Result<TbCmSync>> _getCurrentVersionRow() async {
+    Result result = await useCaseDataBatch.getCurrentVersionRow();
+    result.when(success: (value){
+      return Result.success(value);
+    }, error: (message){
+      return Result.error(message);
+    });
+    return Result.error('에러');
+  }
+
 }

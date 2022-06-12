@@ -98,17 +98,16 @@ class PalletViewModel with ChangeNotifier {
     }
     try{
       pallet = TbWhPallet(
-        PALLET_SEQ: int.parse(convertedData[0]),
-        WORKSHOP: convertedData[1],
-        LOCATION: convertedData[2],
-        ITEM_NO: convertedData[3],
-        ITEM_LOT: convertedData[4],
-        STATE: int.parse(convertedData[5]),
-        QUANTITY: int.parse(convertedData[6]),
-        BARCODE: sQRData,
-        SCAN_DATE: DateTime.now(),
-        SCAN_USERNM: gDeviceName,
-        BOX_NO: int.parse(convertedData[7]),
+        workshop: convertedData[1],
+        location: convertedData[2],
+        itemNo: convertedData[3],
+        itemLot: convertedData[4],
+        state: int.parse(convertedData[5]),
+        quantity: int.parse(convertedData[6]),
+        barcode: sQRData,
+        scanDate: DateTime.now(),
+        scanUsernm: gDeviceName,
+        boxNo: int.parse(convertedData[7]),
       );
     }catch(e){
       return null;

@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 
 class TbWhPalletRepoImpl implements TbWhPalletRepo {
   final TbWhPalletDbHelper db;
@@ -46,6 +48,8 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
     for(TbWhPallet pallet in pallets) {
       await db.updateTbWhPalletState(pallet);
     }
+    PalletApi api = PalletApi();
+    api.sendPalletList(pallets);
   }
 
   @override
@@ -55,7 +59,7 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
         await db.deleteTbWhPallet(pallet);
       }
     }catch(e){
-      print(e);
+      writeLog(e.toString());
       return false;
     }
     return true;

@@ -1,9 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:kdlwms/kdl_common/batch/data_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/btn_move_exit.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/navigation_bar_main.dart';
-
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'main_frame_widgets/btn_move_packing.dart';
 import 'main_frame_widgets/btn_set_location.dart';
 
@@ -46,14 +47,27 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  String? currentVersion = '동기화 전입니다.';
 
-  //버전정보를 저장한다.
-  void setVersion(String val) async{
-    setState(() async {
-      currentVersion = val;
-    });
+   @override
+  void initState() {
+    super.initState();
+    //접속 시 동기화
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => syncData(context, true));
+
+
   }
+
+  String getVersion(){
+     String sCurrentVersion = '';
+     sCurrentVersion = gCurrentVersion;
+     if(sCurrentVersion != null && sCurrentVersion.length > 9){
+       return sCurrentVersion.substring(0,10);
+     }else{
+       return '버전 동기화 필요함';
+     }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,8 +133,8 @@ class _MainPageState extends State<MainPage> {
                   width: 250.0,
                   height: 50.0,
                   child: Row(
-                    children: const [
-                      Text(
+                    children:  [
+                      const Text(
                         '현재버전: ',
                         style: TextStyle(
                             fontSize: 20.0,
@@ -128,8 +142,8 @@ class _MainPageState extends State<MainPage> {
                             fontFamily: "Roboto"),
                       ),
                       AutoSizeText(
-                        '동기화 전입니다.',
-                        style: TextStyle(
+                        getVersion(),
+                        style: const TextStyle(
                             fontSize: 20.0,
                             color: Colors.white,
                             fontFamily: "Roboto"),
@@ -150,7 +164,6 @@ class _MainPageState extends State<MainPage> {
             //세번째 버튼
             const Padding(padding: EdgeInsets.only(top: 10)),
             const BtnExit(),
-
           ],
         ),
       ),

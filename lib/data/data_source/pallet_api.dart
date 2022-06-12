@@ -2,23 +2,35 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 
 // http 통신을 위해 사용
 class PalletApi {
-  final http.Client client;
+  final http.Client client = http.Client();
 
-  PalletApi(this.client);
+  PalletApi();
 
-  static const baseUrl = 'https://pixabay.com/api/';
-  static const key = '10711147-dc41758b93b263957026bdadb';
+  static const baseUrl = 'http://54.180.96.240:8080/api/item';
 
-  Future<Result<Iterable>> fetch(String query) async {
+  Future<Result<Iterable>> sendPalletList(List<TbWhPallet> palletList) async {
     try {
-      final response = await client
-          .get(Uri.parse('$baseUrl?key=$key&q=$query&image_type=photo'));
-      Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-      Iterable hits = jsonResponse['hits'];
-      return Result.success(hits);
+      if(palletList == null){
+        return Result.error('전송할 데이터가 없습니다.');
+      }
+      var dataAsMap = jsonEncode(palletList.map((e) => e.toJson()).toList());
+      var dataToSend = jsonEncode(dataAsMap);
+
+      writeLog('################### data send');
+      writeLog(dataToSend);
+      writeLog('################### data send2');
+
+      final response = await client.post(
+        Uri.parse('$baseUrl'),
+        headers: {"Content-Type": "application/json"},
+        body: dataToSend,
+      );
+      return Result.success(palletList.toList());
     } catch (e) {
       return const Result.error('네트워크 연결 에러');
     }

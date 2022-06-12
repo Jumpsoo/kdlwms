@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:sqflite/sqflite.dart';
@@ -15,6 +17,7 @@ class TbCmLocationDbHelper {
         where: 'WORKSHOP = ? AND LOCATION = ? ',
         whereArgs: [tbCmLocation.WORKSHOP, tbCmLocation.LOCATION],
       );
+
       return Result.success(maps.map((e) => TbCmLocation.fromJson(e)).toList());
     } catch (e) {
       return Result.error(e.toString());
@@ -31,6 +34,7 @@ class TbCmLocationDbHelper {
       return Result.error(e.toString());
     }
   }
+
   Future<Result<TbCmLocation?>> selectTbCmLocationCurrentItem() async {
     try {
       final maps = await db.query(
@@ -38,7 +42,8 @@ class TbCmLocationDbHelper {
         where: 'SET_FLAG = ?  ',
         whereArgs: ['Y'],
       );
-      return Result.success(maps.map((e) => TbCmLocation.fromJson(e)).toList()[0]);
+      return Result.success(
+          maps.map((e) => TbCmLocation.fromJson(e)).toList()[0]);
     } catch (e) {
       return Result.error(e.toString());
     }
@@ -69,7 +74,7 @@ class TbCmLocationDbHelper {
       );
 
       List<TbCmLocation> retList =
-      maps.map((e) => TbCmLocation.fromJson(e)).toList();
+          maps.map((e) => TbCmLocation.fromJson(e)).toList();
       if (retList.isEmpty) {
         return const Result.error('수정 할 데이터가 없습니다.');
       }
@@ -95,7 +100,7 @@ class TbCmLocationDbHelper {
         'TB_CM_LOCATION',
       );
       List<TbCmLocation> retList =
-      maps.map((e) => TbCmLocation.fromJson(e)).toList();
+          maps.map((e) => TbCmLocation.fromJson(e)).toList();
       if (retList.isEmpty) {
         return const Result.error('수정 할 데이터가 없습니다.');
       }
@@ -137,10 +142,12 @@ class TbCmLocationDbHelper {
     }
   }
 
-  Future<Result<bool>> deleteTbCmLocationAll() async {
+  Future<Result<bool>> deleteTbCmLocationAll(String setFlag) async {
     try {
       await db.delete(
         'TB_CM_LOCATION',
+        where: 'SET_FLAG = ?',
+        whereArgs: [setFlag],
       );
       return const Result.success(true);
     } catch (e) {
@@ -148,4 +155,32 @@ class TbCmLocationDbHelper {
     }
   }
 
+  Future<Result<bool>> upsertTbCmLocation(List<TbCmLocation> insertList) async {
+    try {
+
+      for (TbCmLocation insertItem in insertList) {
+        final maps = await db.query(
+          'TB_CM_LOCATION',
+          where: 'WORKSHOP = ? AND LOCATION = ? ',
+          whereArgs: [insertItem.WORKSHOP, insertItem.LOCATION],
+        );
+        if (maps.map((e) => TbCmLocation.fromJson(e)).toList().isNotEmpty) {
+          print('update : $insertItem');
+          await db.update(
+            'TB_CM_LOCATION',
+            insertItem.toJson(),
+            where: 'WORKSHOP = ? AND LOCATION = ? ',
+            whereArgs: [insertItem.WORKSHOP, insertItem.LOCATION],
+          );
+        } else {
+          print('insert : $insertItem');
+          await db.insert('TB_CM_LOCATION', insertItem.toJson());
+
+        }
+      }
+      return const Result.success(true);
+    } catch (e) {
+      return Result.error(e.toString());
+    }
+  }
 }

@@ -6,60 +6,66 @@ part of 'tb_wh_pallet.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Pallet _$$_PalletFromJson(Map<String, dynamic> json) => _$_Pallet(
-      PALLET_SEQ: json['PALLET_SEQ'] as int,
-      WORKSHOP: json['WORKSHOP'] as String?,
-      LOCATION: json['LOCATION'] as String?,
-      ITEM_NO: json['ITEM_NO'] as String?,
-      ITEM_LOT: json['ITEM_LOT'] as String?,
-      QUANTITY: json['QUANTITY'] as int?,
-      STATE: json['STATE'] as int?,
-      BARCODE: json['BARCODE'] as String?,
-      SCAN_DATE: json['SCAN_DATE'] == null
+_$_TbWhPallet _$$_TbWhPalletFromJson(Map<String, dynamic> json) =>
+    _$_TbWhPallet(
+      comps: json['comps'] as String?,
+      palletSeq: json['palletSeq'] as int?,
+      transSeq: json['transSeq'] as int?,
+      workshop: json['workshop'] as String?,
+      location: json['location'] as String?,
+      itemNo: json['itemNo'] as String?,
+      itemLot: json['itemLot'] as String?,
+      quantity: json['quantity'] as int?,
+      state: json['state'] as int?,
+      barcode: json['barcode'] as String?,
+      scanDate: json['scanDate'] == null
           ? null
-          : DateTime.parse(json['SCAN_DATE'] as String),
-      SCAN_USERNM: json['SCAN_USERNM'] as String?,
-      BOX_NO: json['BOX_NO'] as int?,
-      PRINT_FLAG: json['PRINT_FLAG'] as String?,
-      PRINT_DATE: json['PRINT_DATE'] == null
+          : DateTime.parse(json['scanDate'] as String),
+      scanUsernm: json['scanUsernm'] as String?,
+      boxNo: json['boxNo'] as int?,
+      printFlag: json['printFlag'] as String?,
+      printDate: json['printDate'] == null
           ? null
-          : DateTime.parse(json['PRINT_DATE'] as String),
-      PRINT_USER: json['PRINT_USER'] as String?,
-      AS400IF_FLAG: json['AS400IF_FLAG'] as String?,
-      AS400IF_DATE: json['AS400IF_DATE'] == null
+          : DateTime.parse(json['printDate'] as String),
+      printUser: json['printUser'] as String?,
+      as400IfFlag: json['as400IfFlag'] as String?,
+      as400IfDate: json['as400IfDate'] == null
           ? null
-          : DateTime.parse(json['AS400IF_DATE'] as String),
-      AS400IF_USER: json['AS400IF_USER'] as String?,
-      RGSTR_ID: json['RGSTR_ID'] as int?,
-      RGST_DT: json['RGST_DT'] == null
+          : DateTime.parse(json['as400IfDate'] as String),
+      as400IfUser: json['as400IfUser'] as String?,
+      rgstrId: json['rgstrId'] as int?,
+      rgstDt: json['rgstDt'] == null
           ? null
-          : DateTime.parse(json['RGST_DT'] as String),
-      UPDTR_ID: json['UPDTR_ID'] as int?,
-      UPDT_DT: json['UPDT_DT'] == null
+          : DateTime.parse(json['rgstDt'] as String),
+      updtrId: json['updtrId'] as int?,
+      updtDt: json['updtDt'] == null
           ? null
-          : DateTime.parse(json['UPDT_DT'] as String),
+          : DateTime.parse(json['updtDt'] as String),
     );
 
-Map<String, dynamic> _$$_PalletToJson(_$_Pallet instance) => <String, dynamic>{
-      'PALLET_SEQ': instance.PALLET_SEQ,
-      'WORKSHOP': instance.WORKSHOP,
-      'LOCATION': instance.LOCATION,
-      'ITEM_NO': instance.ITEM_NO,
-      'ITEM_LOT': instance.ITEM_LOT,
-      'QUANTITY': instance.QUANTITY,
-      'STATE': instance.STATE,
-      'BARCODE': instance.BARCODE,
-      'SCAN_DATE': instance.SCAN_DATE?.toIso8601String(),
-      'SCAN_USERNM': instance.SCAN_USERNM,
-      'BOX_NO': instance.BOX_NO,
-      'PRINT_FLAG': instance.PRINT_FLAG,
-      'PRINT_DATE': instance.PRINT_DATE?.toIso8601String(),
-      'PRINT_USER': instance.PRINT_USER,
-      'AS400IF_FLAG': instance.AS400IF_FLAG,
-      'AS400IF_DATE': instance.AS400IF_DATE?.toIso8601String(),
-      'AS400IF_USER': instance.AS400IF_USER,
-      'RGSTR_ID': instance.RGSTR_ID,
-      'RGST_DT': instance.RGST_DT?.toIso8601String(),
-      'UPDTR_ID': instance.UPDTR_ID,
-      'UPDT_DT': instance.UPDT_DT?.toIso8601String(),
+Map<String, dynamic> _$$_TbWhPalletToJson(_$_TbWhPallet instance) =>
+    <String, dynamic>{
+      'comps': instance.comps,
+      'palletSeq': instance.palletSeq,
+      'transSeq': instance.transSeq,
+      'workshop': instance.workshop,
+      'location': instance.location,
+      'itemNo': instance.itemNo,
+      'itemLot': instance.itemLot,
+      'quantity': instance.quantity,
+      'state': instance.state,
+      'barcode': instance.barcode,
+      'scanDate': instance.scanDate?.toIso8601String(),
+      'scanUsernm': instance.scanUsernm,
+      'boxNo': instance.boxNo,
+      'printFlag': instance.printFlag,
+      'printDate': instance.printDate?.toIso8601String(),
+      'printUser': instance.printUser,
+      'as400IfFlag': instance.as400IfFlag,
+      'as400IfDate': instance.as400IfDate?.toIso8601String(),
+      'as400IfUser': instance.as400IfUser,
+      'rgstrId': instance.rgstrId,
+      'rgstDt': instance.rgstDt?.toIso8601String(),
+      'updtrId': instance.updtrId,
+      'updtDt': instance.updtDt?.toIso8601String(),
     };

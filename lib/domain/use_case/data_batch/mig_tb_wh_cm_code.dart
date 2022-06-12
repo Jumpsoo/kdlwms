@@ -9,13 +9,16 @@ class MigTbWhCmCode {
   MigTbWhCmCode(this.repository);
 
   //기존데이터 삭제 -> 재등록
-  Future<Result<String>> call(List<TbWhCmCode> tbWhCmCodes, String sBatchName) async {
+  Future<Result<String>> call(TbWhCmCode tbWhCmCode, String sBatchName) async {
 
+    // 서비스 통해서 가져올것
     Result result = await repository.deleteTbWhCmCodeAll();
-    result.when(success: (value) {
+    result.when(success: (value) async {
     }, error: (message) {
       Result.error(message);
     });
+
+    List<TbWhCmCode> tbWhCmCodes = [];
 
     for (TbWhCmCode item in tbWhCmCodes) {
       result = await repository.insertTbWhCmCode(item);

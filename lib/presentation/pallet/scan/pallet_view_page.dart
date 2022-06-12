@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_common_function.dart';
 import 'package:provider/provider.dart';
@@ -40,10 +41,6 @@ class _PalletViewPageState extends State<PalletViewPage> {
   late final PlutoGridStateManager topGridStateManager;
   late final PlutoGridStateManager packGridStateManager;
 
-  bool isLoading = true;
-
-  String? _msgData = "OK";
-
   //창고위치 및 작업위치
   String _selectedPalletMasterInfo = '';
   String? _selectedValue;
@@ -60,6 +57,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
 
     //작업장 불러오기
     setLocationList();
+    hideCircularProgressIndicator();
   }
 
   @override
@@ -207,7 +205,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
                 // columnGroups: columnGroups,
                 onLoaded: (PlutoGridOnLoadedEvent event) {
                   packGridStateManager = event.stateManager;
-                   palletCommonViewPackingList(context, packGridStateManager,
+                   palletCommonViewBottomList(context, packGridStateManager,
                       _selectedValue ?? "", _selectedPalletMasterInfo);
                 },
                 onChanged: (PlutoGridOnChangedEvent event) {
@@ -266,6 +264,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
   }
 
   Widget createLocationDropDownButton(List<ComboValueType> locationList) {
+
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -288,6 +287,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
                 if (newValue != null) {
                   setState(() {
                     _selectedValue = newValue;
+                    viewAll('', _selectedValue ?? '');
                   });
                 }
               },
@@ -311,10 +311,12 @@ class _PalletViewPageState extends State<PalletViewPage> {
   }
 
   Future<void> viewAll(String sLocation, String sWareHouse) async {
+
     palletCommonViewTopList(
         context, topGridStateManager, sLocation, sWareHouse);
-    palletCommonViewPackingList(
+    palletCommonViewBottomList(
         context, packGridStateManager, sLocation, sWareHouse);
+
   }
 
   //최초로딩시 콤보박스 세팅

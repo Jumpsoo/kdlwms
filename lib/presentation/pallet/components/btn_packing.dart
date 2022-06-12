@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/di/provider_wms_setup.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_scan_page.dart';
 
@@ -19,7 +20,8 @@ class BtnPacking extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () async {
-            await Future.delayed(const Duration(seconds: 1));
+            showCircularProgressIndicator(context);
+            // await Future.delayed(const Duration(seconds: 1));
             await Navigator.push(
               context,
               MaterialPageRoute(
