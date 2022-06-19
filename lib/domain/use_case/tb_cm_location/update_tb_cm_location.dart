@@ -1,6 +1,8 @@
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:kdlwms/domain/repository/tb_cm_location_repo.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 
 class UpdateTbCmLocation {

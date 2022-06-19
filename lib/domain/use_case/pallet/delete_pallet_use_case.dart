@@ -6,8 +6,8 @@ class DeletePalletUseCase{
 
   DeletePalletUseCase(this.repository);
 
-  Future<bool> call(List<TbWhPallet> pallet) async {
-    return await repository.deleteTbWhPallet(pallet);
+  Future<bool> call(List<TbWhPallet> pallets) async {
+    return await repository.deleteTbWhPallet(pallets);
   }
 
 }

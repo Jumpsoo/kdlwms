@@ -1,6 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_beep/flutter_beep.dart';
+import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/domain/model/tb_cm_sync.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
+import 'package:kdlwms/kdl_common/web_sync/data_sync_viewmodel.dart';
+import 'package:provider/provider.dart';
+import 'package:restart_app/restart_app.dart';
 
 late BuildContext dialogContext;
 
@@ -160,3 +167,35 @@ exitProgram(BuildContext context) async{
 void writeLog(var msg){
   print(msg);
 }
+
+
+Future<bool> checkSyncStatus(BuildContext context) async{
+
+  DataSyncViewModel dataSyncViewModel = gTransitContext.read<DataSyncViewModel>();
+  Result resultSyncStatus = await dataSyncViewModel.useCaseDataBatch.getLastSyncInfo();
+  resultSyncStatus.when(success: (value){
+
+    TbCmSync tbCmSync = value;
+    String localSyncDate = tbCmSync.SYNC_DATETIME!.month.toString() + tbCmSync.SYNC_DATETIME!.day.toString();
+    DateTime currDate = DateTime.now();
+    String currentDate = currDate.month.toString() + currDate.day.toString();
+
+    if(localSyncDate == currentDate){
+      gSync = true;
+    }else{
+      gSync = false;
+    }
+
+  }, error: (message){
+    gSync = false;
+  });
+  if(!gSync){
+    await showAlertDialog(context, "서버와 동기와 필요. \r\n 프로그램을 다시 실행하세요.");
+    Restart.restartApp();
+  }
+  return gSync;
+}
+
+
+
+

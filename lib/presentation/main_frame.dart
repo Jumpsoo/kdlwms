@@ -1,18 +1,23 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:kdlwms/kdl_common/batch/data_sync.dart';
+import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/btn_move_exit.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/navigation_bar_main.dart';
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'main_frame_widgets/btn_move_packing.dart';
 import 'main_frame_widgets/btn_set_location.dart';
 
 class MainFrame extends StatelessWidget {
+  final String localVersion = '';
+
   const MainFrame({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    //글로벌 context 지정
+    gTransitContext = context;
+
     return MaterialApp(
       title: '창고 이동관리',
       theme: ThemeData(
@@ -51,26 +56,13 @@ class _MainPageState extends State<MainPage> {
    @override
   void initState() {
     super.initState();
-    //접속 시 동기화
     WidgetsBinding.instance
-        .addPostFrameCallback((_) => syncData(context, true));
-
-
-  }
-
-  String getVersion(){
-     String sCurrentVersion = '';
-     sCurrentVersion = gCurrentVersion;
-     if(sCurrentVersion != null && sCurrentVersion.length > 9){
-       return sCurrentVersion.substring(0,10);
-     }else{
-       return '버전 동기화 필요함';
-     }
-  }
+        .addPostFrameCallback((_)=>syncData(true));
+   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       body: Padding(
         padding:
@@ -142,7 +134,7 @@ class _MainPageState extends State<MainPage> {
                             fontFamily: "Roboto"),
                       ),
                       AutoSizeText(
-                        getVersion(),
+                        gCurrentVersion,
                         style: const TextStyle(
                             fontSize: 20.0,
                             color: Colors.white,

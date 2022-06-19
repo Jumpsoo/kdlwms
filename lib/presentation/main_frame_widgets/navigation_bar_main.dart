@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:kdlwms/kdl_common/batch/data_sync.dart';
+import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 
 class MainFrameNavigationBarMain extends StatelessWidget {
@@ -22,7 +21,7 @@ class MainFrameNavigationBarMain extends StatelessWidget {
                     //화면 갱신하면서 버전정보 수정
                     // 버전정보 최신화가 안되면 강제 종료 "정보 초기화 실패"
                     //loadSyncDataPage(context),
-                    syncData(context, false),
+                    _syncData(context),
                   }
                 else if (index == 1)
                   {
@@ -47,5 +46,16 @@ class MainFrameNavigationBarMain extends StatelessWidget {
             ),
           ]),
     );
+  }
+
+  void _syncData(BuildContext context) async {
+    if (await showAlertDialogQ(
+          context,
+          '확인',
+          '전체 정보를 새로 받으시겠습니까?',
+        ) ==
+        true) {
+      syncData(false);
+    }
   }
 }

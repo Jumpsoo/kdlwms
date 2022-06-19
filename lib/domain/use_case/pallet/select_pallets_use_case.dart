@@ -11,7 +11,7 @@ class ListPalletsUseCase {
       String sWorkShop, String sLocation, int nState) async {
 
     TbWhPallet condTbWhPallet = TbWhPallet(
-        comps: gFactory, workshop: sWorkShop, location: sLocation, state: nState);
+        comps: gComps, workshop: sWorkShop, location: sLocation, state: nState);
     return await repository.selectTbWhPalletList(condTbWhPallet);
   }
 }

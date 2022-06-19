@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
-import 'package:kdlwms/kdl_common/batch/data_sync.dart';
+import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_common_function.dart';
@@ -24,7 +24,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
   String _msgData = '';
   List<ComboValueType> _datas = [];
   late BuildContext ownContext;
-  late SettingWorkshopViewModel viewModel;
+  late SettingInfoViewModel viewModel;
   List<TbCmLocation>? locationList = [];
   String sCurrentWorkShop = '';
   StreamSubscription? _subscription;
@@ -46,6 +46,8 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
     setLocationList();
 
     hideCircularProgressIndicator();
+
+    checkSyncStatus(context);
   }
 
   @override
@@ -60,7 +62,6 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
     List<ComboValueType> comboList =
         await palletCommonGetLocationComboValueList(context);
     String? sDefaultLocation = await palletCommonGetDefaultWorkShop(context);
-print('sDefaultLocation : $sDefaultLocation'  );
     setState(() {
       _datas = comboList;
       _selectedValue = sDefaultLocation;
@@ -85,8 +86,8 @@ print('sDefaultLocation : $sDefaultLocation'  );
       return;
     }
     //선택 한 workshop 지정
-    viewModel = context.read<SettingWorkshopViewModel>();
-    Result? result = await viewModel.useCaseTbCmLocation
+    viewModel = context.read<SettingInfoViewModel>();
+    Result? result = await viewModel.useCaseCommonInfo
         .updateFromSelectTbCmLocationToEnable(sSelectedWorkSHop);
 
     result.when(success: (value) {

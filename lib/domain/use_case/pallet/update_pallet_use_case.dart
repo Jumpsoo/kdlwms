@@ -22,9 +22,9 @@ class UpdatePalletFinishUseCase{
   UpdatePalletFinishUseCase(this.repository);
    // 변경 후 서버전송
   Future<Result<bool>> call(List<TbWhPallet> pallets) async {
-
-    Result<List<TbWhPallet>> result = await api.sendPalletList(pallets);
+    Result result = await api.sendPalletList(pallets);
     result.when(success: (savedList) async{
+
       //전송이 성공한 경우 업데이트
       Result resultUpd = await repository.updateTbWhPalletState(savedList);
       resultUpd.when(success: (value){}, error: (message){

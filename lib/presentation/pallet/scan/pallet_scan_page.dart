@@ -64,7 +64,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   List<PlutoRow> topGridRows = [];
 
   late PalletViewModel viewModel;
-  late SettingWorkshopViewModel viewModelShop;
+  late SettingInfoViewModel viewModelShop;
 
   // 그리드메니저
   late final PlutoGridStateManager topGridStateManager;
@@ -82,7 +82,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
       isLoading = false;
       //for test, 지울것
 
-      gFactory = 'C1';
+      gComps = 'C1';
     });
     // 실제 장비 연결시 주석 해제 할것
     // 실제장비가 아닌경우 shutdown 되기 때문에, 연결장비에 따라 분기한다.
@@ -110,7 +110,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
             ? const CircularProgressIndicator()
             : Padding(
                 padding: const EdgeInsets.only(
-                    left: 5, right: 10, top: 10, bottom: 10),
+                    left: 0, right: 0, top: 10, bottom: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -127,17 +127,14 @@ class _PalletScanPageState extends State<PalletScanPage> {
                                 alignment: Alignment.center,
                                 child: ElevatedButton(
                                   onPressed: () async {
+                                    //서버 동기화 체크
+                                    await checkSyncStatus(context);
+
                                     // _setMsg("팔레트위치 QR을 읽히세요.");
                                     //해당버튼을 누르면 창고위치로 값을 넘겨준다
                                     _sReadItemGbn = sLOC;
-
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const PalletScanPage(
-                                                  title: '팔레팅 작업(실적 입력)')),
-                                    );
+                                    showCustomSnackBarSuccess(
+                                        context, '작업위치 바코드를 읽히세요.');
                                   },
                                   style: ElevatedButton.styleFrom(
                                     fixedSize: const Size(85, 40),
@@ -181,6 +178,9 @@ class _PalletScanPageState extends State<PalletScanPage> {
                                 width: 70.0,
                                 child: ElevatedButton(
                                   onPressed: () async {
+                                    //서버 동기화 체크
+                                    await checkSyncStatus(context);
+
                                     //해당버튼을 누르면 창고위치로 값을 넘겨준다
                                     _sReadItemGbn = sWH;
                                     _setMsg('창고 QR을 입력하세요.');
@@ -291,9 +291,14 @@ class _PalletScanPageState extends State<PalletScanPage> {
                     {confirmPacking()} //완료, 완료처리및 서벚전송
                   else if (index == 1)
                     {
-                      if(deletePackItem(context, topGridStateManager, _readWorkShop, _readLocation) == true){
-                        viewAll(_readWorkShop, _readLocation)
-                      }
+                      if (deletePackItem(
+                            context,
+                            topGridStateManager,
+                            _readWorkShop,
+                            _readLocation,
+                          ) ==
+                          true)
+                        {viewAll(_readWorkShop, _readLocation)}
                     }
                   else if (index == 2)
                     {
@@ -331,6 +336,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   void _changeLocation(String sLocation) {
     setState(() {
       _readWorkShop = sLocation;
+      _selectedValue = sLocation;
       palletCommonViewBottomList(
           context, packGridStateManager, _readWorkShop, _readLocation);
     });
@@ -353,8 +359,10 @@ class _PalletScanPageState extends State<PalletScanPage> {
   }
 
   Future<void> viewAll(String sWareHouse, String sLocation) async {
+
     palletCommonViewTopList(
         context, topGridStateManager, sWareHouse, sLocation);
+
     palletCommonViewBottomList(
         context, packGridStateManager, sWareHouse, sLocation);
   }
@@ -367,20 +375,17 @@ class _PalletScanPageState extends State<PalletScanPage> {
       return;
     }
     //상태를 2 로변경한다.
-    List<TbWhPallet> pallets = [];
-    for (PlutoRow row in topGridStateManager.rows) {
-      List<PlutoCell> cells = row.cells.values.toList();
+    //화면에서가 아닌 데이터 조회 후 전송한다.
 
-      pallets.add(
-        TbWhPallet(palletSeq: cells[0].value, boxNo: cells[4].value, state: 2),
-      );
-    }
+    List<TbWhPallet>? pallets = await viewModel.useCasesWms
+        .listPallets(_readWorkShop, _readLocation, LoadState.Pack.index);
 
-    if (pallets.isEmpty) {
+    if (pallets!.isEmpty) {
       showCustomSnackBarWarn(context, '완료처리 할 내용이 없습니다.');
       return;
     }
     // 확정 처리 성공 시   서버전송
+
     await viewModel.useCasesWms.updatePalletFinishUseCase(pallets);
 
     await showCustomSnackBarSuccess(ownContext, '정상처리 되었습니다.');
@@ -476,7 +481,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   //바코드 관련 이벤트 및 함수 선언부분
   Future<void> _onBarcodeScannerHandler(MethodCall call) async {
     //공장코드 미설정 시 작업장 화면에서 설정하도록 할것
-    if (gFactory.isEmpty) {
+    if (gComps.isEmpty) {
       showAlertDialog(context, '(진행불가) 공장 정보 미설정. \r\n 작업장 설정 화면에서 설정필요 ');
       return;
     }
@@ -497,6 +502,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   void _onDecode(MethodCall call) {
     final List lDecodeResult = call.arguments;
     String? sVal = lDecodeResult[1];
+
     setState(() {
       switch (_sReadItemGbn) {
         case sQR:
@@ -511,12 +517,21 @@ class _PalletScanPageState extends State<PalletScanPage> {
           }
           break;
         case sLOC:
-          _readWorkShop = sVal ?? '';
-          _changeLocation(_readWorkShop);
+          if (sVal != null && sVal.length > 10) {
+            showCustomSnackBarWarn(context, '스캔한 작업 코드가 부적절합니다.');
+          } else {
+            _readWorkShop = sVal ?? '';
+            _changeLocation(_readWorkShop);
+          }
           break;
         case sWH:
-          _readLocation = sVal ?? '';
-          _changeWarehouse(_readLocation);
+          if (sVal != null && sVal.length > 10) {
+            showCustomSnackBarWarn(context, '스캔한 창고 코드가 부적절합니다.');
+          } else {
+            //길이 체크
+            _readLocation = sVal ?? '';
+            _changeWarehouse(_readLocation);
+          }
           break;
         default:
           _readQRData = sVal ?? '';

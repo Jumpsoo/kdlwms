@@ -13,12 +13,12 @@ import 'package:provider/provider.dart';
 import 'dart:convert';
 
 Future<String?> palletCommonGetDefaultWorkShop(BuildContext context) async {
-  SettingWorkshopViewModel viewModelShop =
-      context.read<SettingWorkshopViewModel>();
+  SettingInfoViewModel viewModelShop =
+      context.read<SettingInfoViewModel>();
   String? defaultLocation;
 //기본 창고값 가져오기
   Result? resultSetFlag =
-      await viewModelShop.useCaseTbCmLocation.selectTbCmLocationCurrentItem();
+      await viewModelShop.useCaseCommonInfo.selectTbCmLocationCurrentItem();
   resultSetFlag.when(success: (val) {
     defaultLocation = val.WORKSHOP;
   }, error: (message) {
@@ -76,6 +76,7 @@ Future<void> palletCommonViewTopList(
     PlutoGridStateManager gridStateManager,
     String sWareHouse,
     String sLocation) async {
+
   //초기화
   PalletViewModel viewModel = context.read<PalletViewModel>();
   gridStateManager.rows.clear();
@@ -109,8 +110,7 @@ Future<void> palletCommonViewBottomList(
   //조회
   List<TbWhPallet>? pallets = await viewModel.useCasesWms
       .listPallets(sLocation, sWareHouse, LoadState.Confirm.index);
-  //바인딩
-  writeLog(pallets);
+
   if (pallets == null) {
     // _setMsg('해당 작업위치에 입력완료한 실적이 없습니다.');
   } else {
@@ -139,14 +139,18 @@ Future<bool> deletePackItem(
     if (row.checked == true) {
       List<PlutoCell> cells = row.cells.values.toList();
       tbWhPallets.add(TbWhPallet(
-          comps: gFactory, palletSeq: cells[0].value, boxNo: cells[4].value, state: 1));
+          comps: gComps, palletSeq: cells[0].value, itemNo: cells[1].value, itemLot: cells[2].value, quantity: cells[3].value, boxNo: cells[4].value, state: 1));
     }
   }
+  print('@@@@@');
+  print(tbWhPallets);
+
   if (tbWhPallets.isEmpty) {
     hideCircularProgressIndicator();
     showCustomSnackBarWarn(context, '완료처리 할 내용이 없습니다.');
     return false;
   }
+
   viewModel.useCasesWms.deletePallet(tbWhPallets);
   showCustomSnackBarSuccess(context, '정상처리 되었습니다.');
 
@@ -159,10 +163,10 @@ Future<bool> deletePackItem(
 //데이터가 없는 경우 하단 알람 창에 메세지 전시
 Future<List<ComboValueType>> palletCommonGetLocationComboValueList(
     BuildContext context) async {
-  SettingWorkshopViewModel viewModel = context.read<SettingWorkshopViewModel>();
-  viewModel = context.read<SettingWorkshopViewModel>();
+  SettingInfoViewModel viewModel = context.read<SettingInfoViewModel>();
+  viewModel = context.read<SettingInfoViewModel>();
   //전체리스트 조회
-  Result? result = await viewModel.useCaseTbCmLocation.selectTbCmLocationAll();
+  Result? result = await viewModel.useCaseCommonInfo.selectTbCmLocationAll();
   List<ComboValueType> comboItemList = [];
 
   result.when(

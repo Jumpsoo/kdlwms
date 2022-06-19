@@ -18,14 +18,43 @@ class TbWhCmCodeDbHelper {
       return const Result.error('데이터베이스 에러');
     }
   }
+  Future<Result<List<TbWhCmCode>>> selectTbWhCmCodeListByGrpCd(TbWhCmCode tbWhCmCode) async {
+    try {
+      final maps = await db.query(
+        'TB_WH_CM_CODE',
+        where: ' grpCd = ?',
+         whereArgs: [tbWhCmCode.grpCd], //버전은 통합관리하도록 공장코드를 조건에섲 제외함
+        
+        // where: 'comps=? and grpCd = ?',        
+        // whereArgs: [tbWhCmCode.comps, tbWhCmCode.grpCd],
+      );
+
+      return Result.success(maps.map((e) => TbWhCmCode.fromJson(e)).toList());
+    } catch (e) {
+      return const Result.error('데이터베이스 에러');
+    }
+  }
+  Future<Result<List<TbWhCmCode>>> selectTbWhCmCodeListByCodeCd(TbWhCmCode tbWhCmCode) async {
+    try {
+      final maps = await db.query(
+          'TB_WH_CM_CODE',
+          where: 'comps=? and grpCd = ? and codeCd = ?',
+        whereArgs: [tbWhCmCode.comps, tbWhCmCode.grpCd, tbWhCmCode.codeCd],
+      );
+      return Result.success(maps.map((e) => TbWhCmCode.fromJson(e)).toList());
+    } catch (e) {
+      return const Result.error('데이터베이스 에러');
+    }
+  }
+
 
   Future<Result<bool>> updateTbWhCmCode(TbWhCmCode tbWhCmCode) async {
     try {
       await db.update(
         'TB_WH_CM_CODE',
         tbWhCmCode.toJson(),
-        where: 'codeID = ? ',
-        whereArgs: [tbWhCmCode],
+        where: 'grpCd = ? and codeID = ? ',
+        whereArgs: [tbWhCmCode.grpCd, tbWhCmCode.codeId],
       );
       return const Result.success(true);
     } catch (e) {
@@ -73,4 +102,5 @@ class TbWhCmCodeDbHelper {
       return const Result.error('데이터베이스 에러');
     }
   }
+
 }

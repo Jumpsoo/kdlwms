@@ -1,5 +1,6 @@
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TbCmSyncDbHelper {
@@ -18,16 +19,16 @@ class TbCmSyncDbHelper {
     }
   }
 
-  Future<Result<TbCmSync?>> getCurrentVersionRow() async {
+  Future<Result<TbCmSync?>> getLastSyncInfo() async {
     List<TbCmSync>? tbCmSync;
     try {
       final maps = await db.query(
         'TB_CM_SYNC',
       );
       tbCmSync = maps.map((e) => TbCmSync.fromJson(e)).toList();
-      if(tbCmSync.isNotEmpty){
+      if (tbCmSync.isNotEmpty) {
         return Result.success(tbCmSync[0]);
-      }else{
+      } else {
         return const Result.error('동기화 실패');
       }
     } catch (e) {
@@ -58,6 +59,16 @@ class TbCmSyncDbHelper {
     }
   }
 
+  Future<Result<bool>> mergeTbCmSync(TbCmSync tbCmSync) async {
+    try {
+      await deleteTbCmSyncAll();
+      await db.insert('TB_CM_SYNC', tbCmSync.toJson());
+      return const Result.success(true);
+    } catch (e) {
+      return Result.error(e.toString());
+    }
+  }
+
   Future<Result<bool>> deleteTbCmSync(TbCmSync tbCmSync) async {
     try {
       await db.delete(
@@ -70,7 +81,6 @@ class TbCmSyncDbHelper {
       return Result.error(e.toString());
     }
   }
-
   Future<Result<bool>> deleteTbCmSyncAll() async {
     try {
       await db.delete(

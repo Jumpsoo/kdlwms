@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 
 int gSystemUserId = 11111;
 String gDeviceName = "TEST001";
-String gFactory = 'C1';
+String gComps = 'C1';
 
 String gCurrentVersion = '동기화전 입니다.';
 
+bool gSync = false;
+
 const String gServiceURL = 'http://54.180.96.240:8080/api/';
+
+late BuildContext gTransitContext;
 
 String gSplitCharacter = '\r\n';
 
@@ -62,7 +66,7 @@ dynamic gElevatedButtonStyleSmallSize = ElevatedButton.styleFrom(
   ),
 );
 
-//상태
+//상태, 1:적재, 2:적재확인, 3:상차, 4:도착완료
 enum LoadState { None, Pack, Confirm, Load, Arrive }
 
 class ComboValueType {

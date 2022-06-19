@@ -51,7 +51,7 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   Future<Result<bool>> updateTbWhPalletState(List<TbWhPallet> pallets) async {
     Result result ;
     for (TbWhPallet pallet in pallets) {
-      result = await db.updateTbWhPalletState(pallet);
+      result = db.updateTbWhPalletState(pallet);
       result.when(success: (value){}, error: (message){
         return Result.success(message);
       });
@@ -63,7 +63,7 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   Future<bool> deleteTbWhPallet(List<TbWhPallet> pallets) async {
     try {
       for (TbWhPallet pallet in pallets) {
-        await db.deleteTbWhPallet(pallet);
+        db.deleteTbWhPallet(pallet);
       }
     } catch (e) {
       writeLog(e.toString());

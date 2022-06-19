@@ -17,8 +17,8 @@ class TbCmSyncRepoImpl implements TbCmSyncRepo{
   }
 
   @override
-  Future<Result<TbCmSync?>> getCurrentVersionRow()  async{
-    return await db.getCurrentVersionRow();
+  Future<Result<TbCmSync?>> getLastSyncInfo()  async{
+    return await db.getLastSyncInfo();
   }
 
   @override
@@ -29,6 +29,10 @@ class TbCmSyncRepoImpl implements TbCmSyncRepo{
   @override
   Future<Result<bool>> updateTbCmSync(TbCmSync tbCmSync) async {
     return await db.updateTbCmSync(tbCmSync);
+  }
+  @override
+  Future<Result<bool>> mergeTbCmSync(TbCmSync tbCmSync) async {
+    return await db.mergeTbCmSync(tbCmSync);
   }
 
 

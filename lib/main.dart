@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kdlwms/di/provider_wms_setup.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
+import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/presentation/main_frame.dart';
 import 'package:kdlwms/ui/colors.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +14,6 @@ void main() async {
   final List<SingleChildWidget> providers = [];
 
   providers.addAll(await getWmsProviders());
-
-  // final providers = await getWmsProviders();
 
   runApp(
     MultiProvider(

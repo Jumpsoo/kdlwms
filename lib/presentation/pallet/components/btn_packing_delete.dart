@@ -28,6 +28,9 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
           // 값 유무 체크 후 삭제
           // 값이 없을 경우 에러 메시지 출력
           onPressed: () async {
+            //서버 동기화 체크
+            await checkSyncStatus(context);
+
             if(await checkValue('DELETE', context)){
               if(await viewModel.useCasesWms.deletePalletAll() == false){
                 await showErrorMsg(context, '적재이력 삭제');

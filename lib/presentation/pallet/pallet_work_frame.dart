@@ -81,15 +81,15 @@ class _SubMainPagState extends State<PltWorkPage> {
               const EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
           child: Column(
             children: [
-              const BtnPacking(),
+              const BtnPacking(),//1.적재작업
               const Padding(padding: EdgeInsets.only(bottom: 10)),
-              const BtnPrintLabel(),
+              const BtnPrintLabel(),//2.라벨발행
               const Padding(padding: EdgeInsets.only(bottom: 10)),
-              const BtnPackingView(),
+              const BtnPackingView(),//3.실적조회
               const Padding(padding: EdgeInsets.only(bottom: 10)),
-              const BtnPackingDelete(),
+              const BtnPackingDelete(),//5.적재이력삭제
               const Padding(padding: EdgeInsets.only(bottom: 10)),
-              const BtnMovePrevious(),
+              const BtnMovePrevious(), //6.이전화면
               const Padding(padding: EdgeInsets.only(bottom: 5)),
               Container(
                 color: Colors.black,

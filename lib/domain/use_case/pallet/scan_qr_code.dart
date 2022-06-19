@@ -34,8 +34,8 @@ class ScanQrCode {
       sLotNo = convertedData[3].substring(convertedData[3].length - 7);
 
       pallet = TbWhPallet(
-        comps: gFactory,
-        palletSeq: 2,
+        comps: gComps,
+        palletSeq: 0,
         workshop: sWorkShop,
         location: sLocation,
         itemNo: sItemNo,

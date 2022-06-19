@@ -20,6 +20,9 @@ class BtnPacking extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () async {
+            //서버 동기화 체크
+            await checkSyncStatus(context);
+
             showCircularProgressIndicator(context);
             // await Future.delayed(const Duration(seconds: 1));
             await Navigator.push(

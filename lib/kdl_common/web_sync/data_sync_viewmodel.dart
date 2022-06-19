@@ -6,13 +6,13 @@ import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
 import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/model/tb_wh_item.dart';
-import 'package:kdlwms/domain/use_case/use_case_data_batch.dart';
-import 'package:kdlwms/kdl_common/batch/data_sync_events.dart';
-import 'package:kdlwms/kdl_common/batch/data_sync_state.dart';
+import 'package:kdlwms/domain/use_case/use_case_data_sync.dart';
+import 'package:kdlwms/kdl_common/web_sync/data_sync_events.dart';
+import 'package:kdlwms/kdl_common/web_sync/data_sync_state.dart';
 import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
 
 class DataSyncViewModel with ChangeNotifier {
-  final UseCaseDataBatch useCaseDataBatch;
+  final UseCaseDataSync useCaseDataBatch;
 
   final DataSyncState _state = DataSyncState(
     isLoading: true,
@@ -76,15 +76,5 @@ class DataSyncViewModel with ChangeNotifier {
     return const Result.success(true);
   }
 
-  // 버전 저회
-  Future<Result<TbCmSync>> _getCurrentVersionRow() async {
-    Result result = await useCaseDataBatch.getCurrentVersionRow();
-    result.when(success: (value){
-      return Result.success(value);
-    }, error: (message){
-      return Result.error(message);
-    });
-    return Result.error('에러');
-  }
 
 }
