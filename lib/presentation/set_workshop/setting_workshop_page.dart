@@ -60,7 +60,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
   //데이터가 없는 경우 하단 알람 창에 메세지 전시
   Future<void> setLocationList() async {
     List<ComboValueType> comboList =
-        await palletCommonGetLocationComboValueList(context);
+        await getWorkshopComboValueList(context);
     String? sDefaultLocation = await palletCommonGetDefaultWorkShop(context);
     setState(() {
       _datas = comboList;
@@ -98,7 +98,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
     });
   }
 
-  Widget createLocationDropDownButton(List<ComboValueType> locationList) {
+  Widget createWorkshopDropDownButton(List<ComboValueType> workshopList) {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -125,11 +125,11 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                 }
               },
               selectedItemBuilder: (BuildContext context) {
-                return locationList.map<Widget>((ComboValueType item) {
+                return workshopList.map<Widget>((ComboValueType item) {
                   return Text(item.value);
                 }).toList();
               },
-              items: locationList.map((ComboValueType item) {
+              items: workshopList.map((ComboValueType item) {
                 return DropdownMenuItem<String>(
                   value: item.key,
                   child: Text(item.value),
@@ -205,7 +205,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                                   Container(
                                     width: 150,
                                     alignment: Alignment.centerRight,
-                                    child: createLocationDropDownButton(
+                                    child: createWorkshopDropDownButton(
                                       _datas,
                                     ),
                                   ),

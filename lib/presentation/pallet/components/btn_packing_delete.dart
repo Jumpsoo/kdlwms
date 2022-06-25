@@ -17,7 +17,7 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
 
   @override
   Widget build(BuildContext context) {
-    const String sNo = '4';
+    const String sNo = '5';
     const String sTitle = '적재이력 삭제';
     const String sSubTitle = '미완료 상차 실적을 삭제합니다.';
     viewModel = context.watch<PalletViewModel>();
@@ -32,11 +32,16 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
             await checkSyncStatus(context);
 
             if(await checkValue('DELETE', context)){
+
+              showCircularProgressIndicator(context);
+              await Future.delayed(const Duration(milliseconds: 500));
+
               if(await viewModel.useCasesWms.deletePalletAll() == false){
                 await showErrorMsg(context, '적재이력 삭제');
               }else{
                 await showSuccessMsg(context);
               }
+              hideCircularProgressIndicator();
             }
           },
           style: gElevatedButtonStyleMidSize,

@@ -30,7 +30,8 @@ class BtnMovePacking extends StatelessWidget  {
               await checkSyncStatus(context);
 
               showCircularProgressIndicator(context);
-              // await Future.delayed(const Duration(seconds: 1));
+              await Future.delayed(const Duration(milliseconds: 500));
+
               await Navigator.push(
                 context,
                 MaterialPageRoute(

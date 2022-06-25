@@ -16,11 +16,12 @@ class PalletApi {
   static const baseUrl = 'http://54.180.96.240:8080/api/insertPallet';
 
   Future<Result<List<TbWhPallet>>> sendPalletList(
-      List<TbWhPallet> palletList) async {
+      List<TbWhPallet> palletList, int nState) async {
     try {
       if (palletList.isEmpty) {
         return const Result.error('전송할 데이터가 없습니다.');
       }
+
       List<TbWhPallet> retList = [];
 
       var dataAsMap = jsonEncode(palletList.map((e) => e.toJson()).toList());
@@ -40,8 +41,8 @@ class PalletApi {
           String retSeq = resData['data'].toString();
           int nPalletSeq = int.parse(retSeq);
 
-          for(TbWhPallet item in palletList){
-            retList.add(item.copyWith(palletSeq: nPalletSeq, state: LoadState.Confirm.index));
+          for (TbWhPallet item in palletList) {
+            retList.add(item.copyWith(palletSeq: nPalletSeq, state: nState));
           }
         } else {
           return Result.error('에러발생 : ${res.statusCode}');
@@ -50,18 +51,7 @@ class PalletApi {
         writeLog("sendPalletList 예외: ");
         writeLog(e);
       }
-
       return Result.success(retList);
-
-      //
-      // final response = await client.post(
-      //   Uri.parse('$baseUrl'),
-      //   headers: {"Content-Type": "application/json"},
-      //   body: dataToSend,
-      // );
-
-      // writeLog(response.body);
-      return Result.success(palletList.toList());
     } catch (e) {
       return const Result.error('네트워크 연결 에러');
     }

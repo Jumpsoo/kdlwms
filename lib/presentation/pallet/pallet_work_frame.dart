@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/presentation/pallet/components/btn_packing.dart';
 import 'package:kdlwms/presentation/pallet/components/btn_packing_delete.dart';
+import 'package:kdlwms/presentation/pallet/components/btn_packing_load.dart';
 import 'package:kdlwms/presentation/pallet/components/btn_packing_view.dart';
 import 'package:kdlwms/presentation/pallet/components/btn_print_label.dart';
 
@@ -80,29 +81,31 @@ class _SubMainPagState extends State<PltWorkPage> {
           padding:
               const EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
           child: Column(
-            children: [
-              const BtnPacking(),//1.적재작업
-              const Padding(padding: EdgeInsets.only(bottom: 10)),
-              const BtnPrintLabel(),//2.라벨발행
-              const Padding(padding: EdgeInsets.only(bottom: 10)),
-              const BtnPackingView(),//3.실적조회
-              const Padding(padding: EdgeInsets.only(bottom: 10)),
-              const BtnPackingDelete(),//5.적재이력삭제
-              const Padding(padding: EdgeInsets.only(bottom: 10)),
-              const BtnMovePrevious(), //6.이전화면
-              const Padding(padding: EdgeInsets.only(bottom: 5)),
+            children:  [
+              BtnPacking(),//1.적재작업
+              Padding(padding: EdgeInsets.only(bottom: 10)),
+              BtnPrintLabel(),//2.라벨발행
+              Padding(padding: EdgeInsets.only(bottom: 10)),
+              BtnPackingView(),//3.실적조회
+              Padding(padding: EdgeInsets.only(bottom: 10)),
+              BtnPackingLoad(),//4.상차화면
+              Padding(padding: EdgeInsets.only(bottom: 10)),
+              BtnPackingDelete(),//5.적재이력삭제
+              Padding(padding: EdgeInsets.only(bottom: 10)),
+              BtnMovePrevious(), //6.이전화면
+              Padding(padding: EdgeInsets.only(bottom: 5)),
               Container(
                 color: Colors.black,
                 padding: const EdgeInsets.only(left: 0),
                 alignment: Alignment.centerLeft,
                 width: 320,
-                height: 80,
+                height: 20,
                 child: Row(
                   children: [
                     Column(
                       children: const [
                         Icon(Icons.circle_notifications,
-                            color: Colors.white, size: 30.0),
+                            color: Colors.white, size: 20.0),
                       ],
                     ),
                     Column(

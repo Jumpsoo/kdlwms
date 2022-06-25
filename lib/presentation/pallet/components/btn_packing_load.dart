@@ -2,17 +2,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
-import 'package:kdlwms/presentation/pallet/scan/pallet_view_page.dart';
 
-class BtnPackingView extends StatelessWidget {
-  const BtnPackingView({Key? key}) : super(key: key);
+import 'package:kdlwms/presentation/pallet/scan/pallet_load_page.dart';
+
+class BtnPackingLoad extends StatelessWidget {
+  const BtnPackingLoad({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const String sNo = '3';
-    const String sTitle = '실적 조회';
-    const String sChildTitle = '팔레팅 작업(실적 조회)';
-    const String sSubTitle = '팔레팅 처리 내역을 확인합니다.';
+    const String sNo = '4';
+    const String sTitle = '상차 완료';
+    const String sChildTitle = '팔레팅 작업(상차 완료)';
+    const String sSubTitle = '팔레팅 완료한 제품을 상차처리합니다.';
 
     return Column(
       children: [
@@ -23,11 +24,12 @@ class BtnPackingView extends StatelessWidget {
 
             showCircularProgressIndicator(context);
             await Future.delayed(const Duration(milliseconds: 500));
+
             await Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      const PalletViewPage(title: sChildTitle)),
+                      const PalletLoadPage(title: sChildTitle)),
             );
           },
           style: gElevatedButtonStyleMidSize,

@@ -46,9 +46,13 @@ Future<bool> syncData( bool ignoreMsg) async {
   sServerVersion = await dataSyncViewModel.useCaseDataBatch.getServerVersion();
   writeLog('로컬버전 / 서버버전 : $gCurrentVersion / $sServerVersion');
 
+  gCurrentVersion = sServerVersion;
+  
   if(ignoreMsg == true && gCurrentVersion == sServerVersion){
     //동기화 하지 않음
-    return false;
+    if(await checkSyncStatusNoAlert() == true) {
+      return false;
+    }
   }
 
   ProgressDialog progressDialog = ProgressDialog(

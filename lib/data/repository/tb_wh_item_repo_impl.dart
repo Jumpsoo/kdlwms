@@ -14,6 +14,7 @@ class TbWhItemRepoImpl implements TbWhItemRepo {
     return await db.getTbWhItemList();
   }
 
+
   @override
   Future<Result<bool>> insertTbWhItem(TbWhItem tbWhItem) async {
     return await db.insertTbWhItem(tbWhItem);

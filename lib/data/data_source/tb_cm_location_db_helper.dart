@@ -164,16 +164,8 @@ class TbCmLocationDbHelper {
           where: 'WORKSHOP = ? AND LOCATION = ? ',
           whereArgs: [insertItem.WORKSHOP, insertItem.LOCATION],
         );
-        if (maps.map((e) => TbCmLocation.fromJson(e)).toList().isNotEmpty) {
-          await db.update(
-            'TB_CM_LOCATION',
-            insertItem.toJson(),
-            where: 'WORKSHOP = ? AND LOCATION = ? ',
-            whereArgs: [insertItem.WORKSHOP, insertItem.LOCATION],
-          );
-        } else {
+        if (maps.map((e) => TbCmLocation.fromJson(e)).toList().isEmpty) {
           await db.insert('TB_CM_LOCATION', insertItem.toJson());
-
         }
       }
       return const Result.success(true);

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -14,7 +13,7 @@ import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:kdlwms/presentation/pallet/components/pack_grid_top.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
-import 'package:kdlwms/domain/model/tb_cm_location.dart';
+
 
 class PalletViewPage extends StatefulWidget {
   final String title;
@@ -41,6 +40,10 @@ class _PalletViewPageState extends State<PalletViewPage> {
 
   //창고는 콤보박스
 
+  String? _selectedWorkshopValue = 'A';
+  String? _selectedLocationValue = 'A';
+  List<ComboValueType> _dataWorkshop = [];
+  List<ComboValueType> _dataLocation = [];
   //창고위치 및 작업위치
   String _readWorkShop = '';
   String _readLocation = '';
@@ -86,6 +89,8 @@ class _PalletViewPageState extends State<PalletViewPage> {
     });
     hideCircularProgressIndicator();
     //작업장 불러오기
+    setWorkShopList();
+
     setLocationList();
   }
 
@@ -130,7 +135,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
                                   context, '작업위치 바코드를 읽히세요.');
                             },
                             style: ElevatedButton.styleFrom(
-                              fixedSize: const Size(85, 40),
+                              fixedSize: const Size(100, 40),
                               primary: Colors.teal[300],
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
@@ -154,66 +159,19 @@ class _PalletViewPageState extends State<PalletViewPage> {
                           padding:
                           const EdgeInsets.only(left: 5, right: 5),
                           width: 200,
-                          height: 30,
+                          height: 40,
                           alignment: Alignment.centerLeft,
                           child: createLocationDropDownButton(
-                            _datas,
+                            _dataLocation,
                           ),
                         ),
                       ],
                     ),
-                    // Padding(padding: EdgeInsets.only(left: 5)),
-                    // Column(
-                    //   children: [
-                    //     Container(
-                    //       padding: const EdgeInsets.only(right: 10),
-                    //       alignment: Alignment.centerLeft,
-                    //       width: 70.0,
-                    //       child: ElevatedButton(
-                    //         onPressed: () async {
-                    //           //해당버튼을 누르면 창고위치로 값을 넘겨준다
-                    //           _sReadItemGbn = sWH;
-                    //           _setMsg('창고 QR을 입력하세요.');
-                    //         },
-                    //         style: ElevatedButton.styleFrom(
-                    //           fixedSize: const Size(70, 40),
-                    //           primary: Colors.teal[300],
-                    //           shape: RoundedRectangleBorder(
-                    //             borderRadius: BorderRadius.circular(5),
-                    //           ),
-                    //         ),
-                    //         child: const AutoSizeText(
-                    //           '창고',
-                    //           style: TextStyle(
-                    //               fontSize: 18.0,
-                    //               color: Colors.white,
-                    //               fontFamily: "Roboto"),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // Column(
-                    //   children: [
-                    //     Container(
-                    //       alignment: Alignment.centerLeft,
-                    //       width: 40,
-                    //       child: AutoSizeText(
-                    //         _readLocation == '' ? '-' : _readLocation,
-                    //         style: const TextStyle(
-                    //             fontSize: 16.0,
-                    //             color: Colors.white,
-                    //             fontFamily: "Roboto"),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),
               const Padding(padding: EdgeInsets.only(top: 5)),
               //하단그리드
-
               Container(
                 height: 190,
                 child: PlutoGrid(
@@ -224,7 +182,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
                   onLoaded: (PlutoGridOnLoadedEvent event) {
                     topGridStateManager = event.stateManager;
                     palletCommonViewTopList(context, topGridStateManager,
-                        _selectedValue ?? "", _readLocation);
+                        _selectedValue ?? "", _readLocation, LoadState.Pack.index);
                   },
                   onChanged: (PlutoGridOnChangedEvent event) {
                     //to do
@@ -251,7 +209,8 @@ class _PalletViewPageState extends State<PalletViewPage> {
                         context,
                         packGridStateManager,
                         _readWorkShop,
-                        _readLocation);
+                        _readLocation,
+                    LoadState.Confirm.index,);
                   },
                   onChanged: (PlutoGridOnChangedEvent event) {
                     //to do
@@ -297,13 +256,15 @@ class _PalletViewPageState extends State<PalletViewPage> {
                     context,
                     topGridStateManager,
                     _selectedValue!,
-                    ''
+                    '',
+                  LoadState.Pack.index,
                 ),
               }
             else if (index == 2)
                 {
                   //종료
                   Future.delayed(const Duration(seconds: 1), () async {
+                    ScaffoldMessenger.of(context).clearSnackBars();
                     Navigator.pop(context);
                   }),
                 }
@@ -324,7 +285,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
       Result result = await viewModel.useCasesWms.addPallet(pallet);
       result.when(success: (value) {
         palletCommonViewTopList(
-            context, topGridStateManager, _readWorkShop, _readLocation);
+            context, topGridStateManager, _readWorkShop, _readLocation, LoadState.Pack.index);
       }, error: (message) {
         showCustomSnackBarWarn(context, message);
       });
@@ -339,7 +300,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
       _readWorkShop = sLocation;
       _selectedValue = sLocation;
       palletCommonViewBottomList(
-          context, packGridStateManager, _readWorkShop, _readLocation);
+          context, packGridStateManager, _readWorkShop, _readLocation, LoadState.Confirm.index);
     });
   }
   //
@@ -361,57 +322,37 @@ class _PalletViewPageState extends State<PalletViewPage> {
 
   Future<void> viewAll(String sWareHouse, String sLocation) async {
     palletCommonViewTopList(
-        context, topGridStateManager, sWareHouse, sLocation);
+        context, topGridStateManager, sWareHouse, sLocation, LoadState.Pack.index);
 
     palletCommonViewBottomList(
-        context, packGridStateManager, sWareHouse, sLocation);
-  }
-
-  // 작업중인 내용 확정 처리
-  // 확정 후 확정 리스트 서버로 송신
-  void confirmPacking() async {
-    if (await checkValue(context, 'CONFIRM', topGridStateManager, '') ==
-        false) {
-      return;
-    }
-    //상태를 2 로변경한다.
-    //화면에서가 아닌 데이터 조회 후 전송한다.
-
-    List<TbWhPallet>? pallets = await viewModel.useCasesWms
-        .listPallets(_readWorkShop, _readLocation, LoadState.Pack.index);
-
-    if (pallets!.isEmpty) {
-      showCustomSnackBarWarn(context, '완료처리 할 내용이 없습니다.');
-      return;
-    }
-    // 확정 처리 성공 시   서버전송
-
-    await viewModel.useCasesWms.updatePalletFinishUseCase(pallets);
-
-    await showCustomSnackBarSuccess(ownContext, '정상처리 되었습니다.');
-    await viewAll(_readWorkShop, _readLocation);
+        context, packGridStateManager, sWareHouse, sLocation, LoadState.Confirm.index);
   }
 
   //최초로딩시 콤보박스 세팅
   //데이터가 없는 경우 하단 알람 창에 메세지 전시
-  Future<void> setLocationList() async {
+  Future<void> setWorkShopList() async {
     List<ComboValueType> comboList =
-    await palletCommonGetLocationComboValueList(context);
+    await getWorkshopComboValueList(context);
     String? sDefaultLocation = await palletCommonGetDefaultWorkShop(context);
 
     setState(() {
       _datas = comboList;
 
       _selectedValue = sDefaultLocation;
+      _readWorkShop = sDefaultLocation!;
 
       if (sDefaultLocation != null) {
         _readWorkShop = sDefaultLocation;
         viewAll(_readWorkShop, _readLocation);
       }
+
+      if(sDefaultLocation == ''){
+        showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
+      }
     });
   }
 
-  Widget createLocationDropDownButton(List<ComboValueType> locationList) {
+  Widget createWorkshopDropDownButton(List<ComboValueType> workshopList) {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -440,11 +381,11 @@ class _PalletViewPageState extends State<PalletViewPage> {
                 }
               },
               selectedItemBuilder: (BuildContext context) {
-                return locationList.map<Widget>((ComboValueType item) {
+                return workshopList.map<Widget>((ComboValueType item) {
                   return Text(item.value);
                 }).toList();
               },
-              items: locationList.map((ComboValueType item) {
+              items: workshopList.map((ComboValueType item) {
                 return DropdownMenuItem<String>(
                   value: item.key,
                   child: Text(item.value),
@@ -458,6 +399,63 @@ class _PalletViewPageState extends State<PalletViewPage> {
     );
   }
 
+  //창고 콤보박스
+  Widget createLocationDropDownButton(List<ComboValueType> workshopList) {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+              color: Colors.black87, width: 1, style: BorderStyle.solid),
+          borderRadius: BorderRadius.circular(8)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerRight,
+            child: DropdownButton<String>(
+              iconSize: 20,
+              elevation: 15,
+              value: _selectedLocationValue,
+              style: const TextStyle(color: Colors.black, fontSize: 16.0),
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  setState(() {
+                    _selectedLocationValue = newValue;
+                    _readLocation = newValue;
+                    viewAll(_readWorkShop, _selectedLocationValue ?? '');
+                  });
+                }
+              },
+              selectedItemBuilder: (BuildContext context) {
+                return workshopList.map<Widget>((ComboValueType item) {
+                  return Text(item.value);
+                }).toList();
+              },
+              items: workshopList.map((ComboValueType item) {
+                return DropdownMenuItem<String>(
+                  value: item.key,
+                  child: Text(item.value),
+                );
+              }).toList(),
+              hint: const Text('-선택-'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  Future<void> setLocationList() async {
+    List<ComboValueType> comboList = await getLocationComboValueList(context);
+
+    setState(() {
+      _dataLocation = comboList;
+      _selectedLocationValue = '';
+    });
+  }
   @override
   void dispose() {
     // TODO: implement dispose

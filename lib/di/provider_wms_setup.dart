@@ -16,6 +16,7 @@ import 'package:kdlwms/domain/repository/tb_cm_sync_repo.dart';
 import 'package:kdlwms/domain/repository/tb_wh_cm_code_repo.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_cm_code.dart';
+import 'package:kdlwms/domain/use_case/pallet/printing_pallet_use_case.dart';
 import 'package:kdlwms/domain/use_case/pallet/scan_qr_code.dart';
 import 'package:kdlwms/domain/use_case/pallet/select_master_info.dart';
 import 'package:kdlwms/domain/use_case/pallet/select_pallets_use_case.dart';
@@ -152,7 +153,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
 
   // 실적 입력 & 조회관련
   TbWhPalletDbHelper palletDbHelper = TbWhPalletDbHelper(database);
-  TbWhPalletRepo repository = TbWhPalletRepoImpl(palletDbHelper);
+  TbWhPalletRepo palletRepository = TbWhPalletRepoImpl(palletDbHelper);
 
   //마스터 정보관련 (품목)
   TbWhItemDbHelper tbWhItemDbHelper = TbWhItemDbHelper(database);
@@ -160,17 +161,23 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
 
   UseCaseWms useCasesWms = UseCaseWms(
     //pallet
-    listPallets: ListPalletsUseCase(repository),
-    selectDupleCheck: SelectDupleCheck(repository),
-    addPallet: InsertPalletUseCase(repository),
-    updatePallet: UpdatePalletUseCase(repository),
-    updatePalletFinishUseCase: UpdatePalletFinishUseCase(repository),
-    deletePallet: DeletePalletUseCase(repository),
-    deletePalletAll: DeletePalletAllUseCase(repository),
-    getPalletBySeq: GetPalletBySeq(repository),
-    getPalletCountInDevice: GetPalletCountInDevice(repository),
+    selectPackingList: SelectPackingListUseCase(palletRepository),
+    selectCheckValue: SelectCheckValue(palletRepository),
+    addPallet: InsertPalletUseCase(palletRepository),
+    updatePallet: UpdatePalletUseCase(palletRepository),
+    updatePalletFinishUseCase: UpdatePalletFinishUseCase(palletRepository),
+    deletePallet: DeletePalletUseCase(palletRepository),
+    deletePalletAll: DeletePalletAllUseCase(palletRepository),
+    getPalletBySeq: GetPalletBySeq(palletRepository),
+    getPalletCountInDevice: GetPalletCountInDevice(palletRepository),
     scanQrCode: ScanQrCode(),
     selectItemList: SelectItemList(tbWhItemRepo),
+    selectPrintingList: SelectPrintingList(palletRepository),
+    printingPalletUseCase: PrintingPalletUseCase(),
+    selectTbWhPalletGroup: SelectTbWhPalletGroup(palletRepository),
+    selectTbWhPalletListByLocation:
+        SelectTbWhPalletListByLocation(palletRepository),
+
     //
   );
 

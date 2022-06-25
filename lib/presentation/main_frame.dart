@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/btn_move_exit.dart';
@@ -55,9 +56,11 @@ class _MainPageState extends State<MainPage> {
 
    @override
   void initState() {
+
     super.initState();
     WidgetsBinding.instance
         .addPostFrameCallback((_)=>syncData(true));
+
    }
 
   @override

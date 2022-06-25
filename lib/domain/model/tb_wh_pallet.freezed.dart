@@ -594,3 +594,220 @@ abstract class _TbWhPallet implements TbWhPallet {
   _$$_TbWhPalletCopyWith<_$_TbWhPallet> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+TbWhPalletGroup _$TbWhPalletGroupFromJson(Map<String, dynamic> json) {
+  return _TbWhPalletGroup.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TbWhPalletGroup {
+  String? get comps => throw _privateConstructorUsedError;
+  String? get itemNo => throw _privateConstructorUsedError;
+  String? get itemLot => throw _privateConstructorUsedError;
+  int? get quantity => throw _privateConstructorUsedError;
+  int? get boxCnt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TbWhPalletGroupCopyWith<TbWhPalletGroup> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TbWhPalletGroupCopyWith<$Res> {
+  factory $TbWhPalletGroupCopyWith(
+          TbWhPalletGroup value, $Res Function(TbWhPalletGroup) then) =
+      _$TbWhPalletGroupCopyWithImpl<$Res>;
+  $Res call(
+      {String? comps,
+      String? itemNo,
+      String? itemLot,
+      int? quantity,
+      int? boxCnt});
+}
+
+/// @nodoc
+class _$TbWhPalletGroupCopyWithImpl<$Res>
+    implements $TbWhPalletGroupCopyWith<$Res> {
+  _$TbWhPalletGroupCopyWithImpl(this._value, this._then);
+
+  final TbWhPalletGroup _value;
+  // ignore: unused_field
+  final $Res Function(TbWhPalletGroup) _then;
+
+  @override
+  $Res call({
+    Object? comps = freezed,
+    Object? itemNo = freezed,
+    Object? itemLot = freezed,
+    Object? quantity = freezed,
+    Object? boxCnt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      comps: comps == freezed
+          ? _value.comps
+          : comps // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemNo: itemNo == freezed
+          ? _value.itemNo
+          : itemNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemLot: itemLot == freezed
+          ? _value.itemLot
+          : itemLot // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quantity: quantity == freezed
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+      boxCnt: boxCnt == freezed
+          ? _value.boxCnt
+          : boxCnt // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_TbWhPalletGroupCopyWith<$Res>
+    implements $TbWhPalletGroupCopyWith<$Res> {
+  factory _$$_TbWhPalletGroupCopyWith(
+          _$_TbWhPalletGroup value, $Res Function(_$_TbWhPalletGroup) then) =
+      __$$_TbWhPalletGroupCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? comps,
+      String? itemNo,
+      String? itemLot,
+      int? quantity,
+      int? boxCnt});
+}
+
+/// @nodoc
+class __$$_TbWhPalletGroupCopyWithImpl<$Res>
+    extends _$TbWhPalletGroupCopyWithImpl<$Res>
+    implements _$$_TbWhPalletGroupCopyWith<$Res> {
+  __$$_TbWhPalletGroupCopyWithImpl(
+      _$_TbWhPalletGroup _value, $Res Function(_$_TbWhPalletGroup) _then)
+      : super(_value, (v) => _then(v as _$_TbWhPalletGroup));
+
+  @override
+  _$_TbWhPalletGroup get _value => super._value as _$_TbWhPalletGroup;
+
+  @override
+  $Res call({
+    Object? comps = freezed,
+    Object? itemNo = freezed,
+    Object? itemLot = freezed,
+    Object? quantity = freezed,
+    Object? boxCnt = freezed,
+  }) {
+    return _then(_$_TbWhPalletGroup(
+      comps: comps == freezed
+          ? _value.comps
+          : comps // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemNo: itemNo == freezed
+          ? _value.itemNo
+          : itemNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itemLot: itemLot == freezed
+          ? _value.itemLot
+          : itemLot // ignore: cast_nullable_to_non_nullable
+              as String?,
+      quantity: quantity == freezed
+          ? _value.quantity
+          : quantity // ignore: cast_nullable_to_non_nullable
+              as int?,
+      boxCnt: boxCnt == freezed
+          ? _value.boxCnt
+          : boxCnt // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_TbWhPalletGroup implements _TbWhPalletGroup {
+  _$_TbWhPalletGroup(
+      {this.comps, this.itemNo, this.itemLot, this.quantity, this.boxCnt});
+
+  factory _$_TbWhPalletGroup.fromJson(Map<String, dynamic> json) =>
+      _$$_TbWhPalletGroupFromJson(json);
+
+  @override
+  final String? comps;
+  @override
+  final String? itemNo;
+  @override
+  final String? itemLot;
+  @override
+  final int? quantity;
+  @override
+  final int? boxCnt;
+
+  @override
+  String toString() {
+    return 'TbWhPalletGroup(comps: $comps, itemNo: $itemNo, itemLot: $itemLot, quantity: $quantity, boxCnt: $boxCnt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TbWhPalletGroup &&
+            const DeepCollectionEquality().equals(other.comps, comps) &&
+            const DeepCollectionEquality().equals(other.itemNo, itemNo) &&
+            const DeepCollectionEquality().equals(other.itemLot, itemLot) &&
+            const DeepCollectionEquality().equals(other.quantity, quantity) &&
+            const DeepCollectionEquality().equals(other.boxCnt, boxCnt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(comps),
+      const DeepCollectionEquality().hash(itemNo),
+      const DeepCollectionEquality().hash(itemLot),
+      const DeepCollectionEquality().hash(quantity),
+      const DeepCollectionEquality().hash(boxCnt));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_TbWhPalletGroupCopyWith<_$_TbWhPalletGroup> get copyWith =>
+      __$$_TbWhPalletGroupCopyWithImpl<_$_TbWhPalletGroup>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TbWhPalletGroupToJson(this);
+  }
+}
+
+abstract class _TbWhPalletGroup implements TbWhPalletGroup {
+  factory _TbWhPalletGroup(
+      {final String? comps,
+      final String? itemNo,
+      final String? itemLot,
+      final int? quantity,
+      final int? boxCnt}) = _$_TbWhPalletGroup;
+
+  factory _TbWhPalletGroup.fromJson(Map<String, dynamic> json) =
+      _$_TbWhPalletGroup.fromJson;
+
+  @override
+  String? get comps => throw _privateConstructorUsedError;
+  @override
+  String? get itemNo => throw _privateConstructorUsedError;
+  @override
+  String? get itemLot => throw _privateConstructorUsedError;
+  @override
+  int? get quantity => throw _privateConstructorUsedError;
+  @override
+  int? get boxCnt => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TbWhPalletGroupCopyWith<_$_TbWhPalletGroup> get copyWith =>
+      throw _privateConstructorUsedError;
+}

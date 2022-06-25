@@ -5,6 +5,7 @@ import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/use_case/use_case_wms.dart';
 import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_events.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_state.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -27,9 +28,9 @@ class PalletViewModel with ChangeNotifier {
 
   void onEvent(PalletEvent event) {
     event.when(
-      listPallets: listPallets,
-      selectDupleCheck: selectDupleCheck,
-      addPallet: addPallet,
+      listPallets: _listPallets,
+      selectCheckValue: _selectCheckValue,
+      addPallet: _addPallet,
       updatePallet: _updatePallet,
       updatePalletState: _updatePalletState,
       deletePallet: _deletePallet,
@@ -41,11 +42,11 @@ class PalletViewModel with ChangeNotifier {
   }
 
   //현재 location 값은 불명확함
-  Future<void> listPallets(
+  Future<void> _listPallets(
       String sWorkShop, String sLocation, int nState) async {
 
     List<TbWhPallet>? palletlist =
-        await useCasesWms.listPallets(sWorkShop, sLocation, nState);
+        await useCasesWms.selectPackingList(sWorkShop, sLocation, nState);
 
     _state = state.copyWith(
       pallets: palletlist,
@@ -53,12 +54,12 @@ class PalletViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<TbWhPallet>?> selectDupleCheck(String sBarCode) async {
-    return await useCasesWms.selectDupleCheck(sBarCode);
+  Future<Result<bool>?> _selectCheckValue(TbWhPallet tbWhPallet) async {
+    return await useCasesWms.selectCheckValue(tbWhPallet);
   }
 
   // Future<void> _addPallet(Pallet pallet) async {
-  Future<Result<bool>> addPallet(TbWhPallet? pallet) async {
+  Future<Result<bool>> _addPallet(TbWhPallet? pallet) async {
     if (pallet == null) {
       return const Result.error('팔레트정보가 없습니다.');
     }
@@ -69,8 +70,8 @@ class PalletViewModel with ChangeNotifier {
     return await useCasesWms.updatePallet(pallets);
   }
 
-  Future<Result<bool>> _updatePalletState(List<TbWhPallet> pallets) async {
-    return await useCasesWms.updatePalletFinishUseCase(pallets);
+  Future<Result<bool>> _updatePalletState(List<TbWhPallet> pallets, int nState) async {
+    return await useCasesWms.updatePalletFinishUseCase(pallets, nState);
   }
 
   Future<bool> _deletePallet(List<TbWhPallet> pallets) async {

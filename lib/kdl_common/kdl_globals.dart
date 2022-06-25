@@ -25,7 +25,7 @@ double gPaddingButtonMax = 15.0;
 
 //중간메뉴버튼ㄴ
 double gWidthButtonNormal = 320;
-double gHeightButtonNormal = 80;
+double gHeightButtonNormal = 70;
 
 double gWidthButtonSmall = 100;
 double gHeightButtonSmall = 25;
@@ -38,8 +38,8 @@ double gFontSizeButtonSubTitle = 14;
 
 String gblCompanyLogoText = 'DENSO';
 
-//이상일것
-int gAvailableQrLength = 140;
+//QR 코드 크기 체크
+int gAvailableQrLength = 100;
 
 const TextStyle textStyleButtonWhite18 = TextStyle(
     fontSize: 18.0,

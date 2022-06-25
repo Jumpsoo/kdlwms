@@ -3,6 +3,7 @@ import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 
 class UpdatePalletUseCase{
   final TbWhPalletRepo repository;
@@ -21,8 +22,20 @@ class UpdatePalletFinishUseCase{
 
   UpdatePalletFinishUseCase(this.repository);
    // 변경 후 서버전송
-  Future<Result<bool>> call(List<TbWhPallet> pallets) async {
-    Result result = await api.sendPalletList(pallets);
+  Future<Result<bool>> call(List<TbWhPallet> pallets,  int nState) async {
+    List<TbWhPallet> targetList = [];
+
+    //데이터 조회 후 전송
+    for(TbWhPallet item in pallets) {
+      Result result = await repository.selectTbWhPalletInto(item);
+      result.when(success: (selectedItem){
+        targetList.add(selectedItem!);
+      }, error: (message){
+        print('UpdatePalletFinishUseCase : $message');
+      });
+    }
+
+    Result result = await api.sendPalletList(targetList, nState);
     result.when(success: (savedList) async{
 
       //전송이 성공한 경우 업데이트

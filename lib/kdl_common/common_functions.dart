@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_beep/flutter_beep.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -94,30 +95,34 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
 }
 
 //경고일 경우 팝업도 보여주고 하단 스낵바도 보여준다.
-Future<void> showCustomSnackBarWarn(
-    BuildContext context, String message) async {
+void showCustomSnackBarWarn(
+    BuildContext context, String message)  async {
 
   ScaffoldMessenger.of(context).clearSnackBars();
 
-  showAlertDialog(context, message);
+  FlutterBeep.beep(false);
+
+  // await showAlertDialog(context, message);
 
   final snackBar1 = SnackBar(
     content: Text(message),
     action: SnackBarAction(
       textColor: Colors.yellow,
-      label: '닫기',
+      label: '',
       onPressed: () {
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).clearSnackBars();
       },
     ),
   );
-  ScaffoldMessenger.of(context).showSnackBar(snackBar1);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar1);
 }
 
-Future<void> showCustomSnackBarSuccess(
-    BuildContext context, String message) async {
+void showCustomSnackBarSuccess(
+    BuildContext context, String message)  {
 
   ScaffoldMessenger.of(context).clearSnackBars();
+
+  FlutterBeep.beep();
 
   final snackBar1 = SnackBar(
     content: Text(message),
@@ -154,12 +159,14 @@ showCircularProgressIndicator(BuildContext context) {
 }
 
 hideCircularProgressIndicator() {
+
   Navigator.pop(dialogContext);
+
 }
 //종료
 exitProgram(BuildContext context) async{
   if(await showAlertDialogQ(context, '', '종료하시겠습니까?') == true){
-    SystemNavigator.pop();
+    exit(0);
   }
 }
 
@@ -196,6 +203,49 @@ Future<bool> checkSyncStatus(BuildContext context) async{
   return gSync;
 }
 
+
+Future<bool> checkSyncStatusNoAlert() async{
+
+  DataSyncViewModel dataSyncViewModel = gTransitContext.read<DataSyncViewModel>();
+  Result resultSyncStatus = await dataSyncViewModel.useCaseDataBatch.getLastSyncInfo();
+  resultSyncStatus.when(success: (value){
+
+    TbCmSync tbCmSync = value;
+    String localSyncDate = tbCmSync.SYNC_DATETIME!.month.toString() + tbCmSync.SYNC_DATETIME!.day.toString();
+    DateTime currDate = DateTime.now();
+    String currentDate = currDate.month.toString() + currDate.day.toString();
+
+    if(localSyncDate == currentDate){
+      gSync = true;
+    }else{
+      gSync = false;
+    }
+
+  }, error: (message){
+    gSync = false;
+  });
+  return gSync;
+}
+
+Map<T, List<S>> groupBy<S, T>(Iterable<S> values, T Function(S) key) {
+  var map = <T, List<S>>{};
+  for (var element in values) {
+    (map[key(element)] ??= []).add(element);
+  }
+  return map;
+}
+
+Map<K, V> mergeMaps<K, V>(Map<K, V> map1, Map<K, V> map2,
+    {V Function(V, V)? value}) {
+  var result = Map<K, V>.of(map1);
+  if (value == null) return result..addAll(map2);
+
+  map2.forEach((key, mapValue) {
+    result[key] =
+    result.containsKey(key) ? value(result[key] as V, mapValue) : mapValue;
+  });
+  return result;
+}
 
 
 

@@ -1,28 +1,28 @@
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:pluto_grid/pluto_grid.dart';
-
+import "package:collection/collection.dart";
 
 // 상단 그리드 입력창용
 // 컬럼 리스트 지정
 // max => 180
 List<PlutoColumn> getTopGridColumns() {
-  return <PlutoColumn>[
+  List<PlutoColumn> cols = <PlutoColumn>[
 
     PlutoColumn(
       title: 'SEQ',
-      field: 'palletSeq',
-      width: 70,
-      textAlign: PlutoColumnTextAlign.left,
+      field: 'SEQ',
+      width: 50,
+      textAlign: PlutoColumnTextAlign.center,
       type: PlutoColumnType.number(),
       enableColumnDrag: false,
       enableContextMenu: false,
       enableEditingMode: false,
-      enableRowChecked: true,
     ),
     PlutoColumn(
       title: '품목 코드',
       field: 'itemNo',
-      width: 110,
+      width: 120,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
       enableColumnDrag: false,
@@ -31,9 +31,9 @@ List<PlutoColumn> getTopGridColumns() {
     PlutoColumn(
       title: 'LOT',
       field: 'itemLot',
-      width: 70,
+      width: 50,
       type: PlutoColumnType.text(),
-      textAlign: PlutoColumnTextAlign.left,
+      textAlign: PlutoColumnTextAlign.center,
       enableColumnDrag: false,
       enableContextMenu: false,
       enableEditingMode: false,
@@ -41,7 +41,7 @@ List<PlutoColumn> getTopGridColumns() {
     PlutoColumn(
       title: '수량',
       field: 'quantity',
-      width: 50,
+      width: 60,
       type: PlutoColumnType.number(),
       textAlign: PlutoColumnTextAlign.right,
       enableColumnDrag: false,
@@ -50,8 +50,8 @@ List<PlutoColumn> getTopGridColumns() {
     ),
     PlutoColumn(
       title: 'Box',
-      field: 'boxNo',
-      width: 50,
+      field: 'boxCnt',
+      width: 60,
       type: PlutoColumnType.number(),
       textAlign: PlutoColumnTextAlign.right,
       enableColumnDrag: false,
@@ -59,25 +59,49 @@ List<PlutoColumn> getTopGridColumns() {
       enableEditingMode: false,
     ),
   ];
+  return cols;
 }
 
 // 상단 그리드
 // 데이터 로우
 List<PlutoRow> getTopGridRows(List<TbWhPallet> pallets) {
+
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   for (var e in pallets) {
     nRowNum = nRowNum + 1;
     PlutoRow row = PlutoRow(
       cells: {
-        'SEQ' : PlutoCell(value: e.palletSeq),
+        'SEQ' : PlutoCell(value: nRowNum),
+        'itemNo': PlutoCell(value: e.itemNo),
+        'itemLot': PlutoCell(value: e.itemLot),
+        'palletSeq': PlutoCell(value: e.palletSeq),
+        'quantity': PlutoCell(value: e.quantity),
+        'boxNo': PlutoCell(value: e.boxNo),
+      },
+    );
+    rows.add(row);
+  }
+  return rows;
+}
+
+// 상단 그리드
+// 데이터 로우
+List<PlutoRow> getTopGridRowsGrouping(List<TbWhPalletGroup> pallets) {
+
+  List<PlutoRow> rows = List.empty(growable: true);
+  int nRowNum = 0;
+  for (var e in pallets) {
+    PlutoRow row = PlutoRow(
+      cells: {
+        'SEQ' : PlutoCell(value: nRowNum),
         'itemNo': PlutoCell(value: e.itemNo),
         'itemLot': PlutoCell(value: e.itemLot),
         'quantity': PlutoCell(value: e.quantity),
-        'boxNo': PlutoCell(value: e.boxNo),
-        'palletSeq': PlutoCell(value: e.palletSeq),
+        'boxCnt': PlutoCell(value: e.boxCnt),
       },
     );
+    nRowNum = nRowNum + 1;
     rows.add(row);
   }
   return rows;
@@ -93,8 +117,8 @@ List<PlutoColumn> getPackGridColumns() {
     PlutoColumn(
       title: 'SEQ',
       field: 'palletSeq',
-      width: 70,
-      textAlign: PlutoColumnTextAlign.left,
+      width: 50,
+      textAlign: PlutoColumnTextAlign.center,
       type: PlutoColumnType.number(),
       enableColumnDrag: false,
       enableContextMenu: false,
@@ -103,7 +127,7 @@ List<PlutoColumn> getPackGridColumns() {
     PlutoColumn(
       title: '품목 코드',
       field: 'itemNo',
-      width: 110,
+      width: 120,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
       enableColumnDrag: false,
@@ -112,9 +136,19 @@ List<PlutoColumn> getPackGridColumns() {
     PlutoColumn(
       title: 'LOT',
       field: 'itemLot',
+      width: 50,
+      type: PlutoColumnType.text(),
+      textAlign: PlutoColumnTextAlign.center,
+      enableColumnDrag: false,
+      enableContextMenu: false,
+      enableEditingMode: false,
+    ),
+    PlutoColumn(
+      title: 'SEQNO',
+      field: 'boxNo',
       width: 70,
       type: PlutoColumnType.text(),
-      textAlign: PlutoColumnTextAlign.left,
+      textAlign: PlutoColumnTextAlign.right,
       enableColumnDrag: false,
       enableContextMenu: false,
       enableEditingMode: false,
@@ -130,10 +164,10 @@ List<PlutoColumn> getPackGridColumns() {
       enableEditingMode: false,
     ),
     PlutoColumn(
-      title: 'Box',
-      field: 'boxNo',
-      width: 50,
-      type: PlutoColumnType.number(),
+      title: 'QR',
+      field: 'barcode',
+      width: 0,
+      type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.right,
       enableColumnDrag: false,
       enableContextMenu: false,
@@ -147,43 +181,24 @@ List<PlutoRow> getPackGridRows(List<TbWhPallet> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   try{
-print(pallets);
-    for (var e in pallets) {
 
+    int nRowNum = 0;
+    for (var e in pallets) {
+      nRowNum = nRowNum + 1;
       PlutoRow row = PlutoRow(
         cells: {
-          'SEQ' : PlutoCell(value: e.palletSeq),
+          'palletSeq' : PlutoCell(value: nRowNum),
           'itemNo': PlutoCell(value: e.itemNo),
           'itemLot': PlutoCell(value: e.itemLot),
           'quantity': PlutoCell(value: e.quantity),
           'boxNo': PlutoCell(value: e.boxNo),
-          'palletSeq': PlutoCell(value: e.palletSeq),
+          'barcode': PlutoCell(value: e.barcode),
         },
       );
-print(row);
       rows.add(row);
     }
   }catch(e){
-    print(e);
+    writeLog(e.toString());
   }
   return rows;
-}
-
-// 하단 그리드
-// 데이터 로우
-PlutoRow getPackGridRow(TbWhPallet pallets) {
-int? val = pallets.palletSeq;
-
-    PlutoRow row = PlutoRow(
-      cells: {
-        'SEQ' : PlutoCell(value: pallets.palletSeq),
-        'itemNo': PlutoCell(value: pallets.itemNo),
-        'itemLot': PlutoCell(value: pallets.itemLot),
-        'quantity': PlutoCell(value:pallets.quantity),
-        'boxNo': PlutoCell(value: pallets.boxNo),
-        'palletSeq': PlutoCell(value: pallets.palletSeq),
-      },
-
-    );
-  return row;
 }

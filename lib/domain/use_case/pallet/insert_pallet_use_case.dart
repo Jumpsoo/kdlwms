@@ -10,6 +10,7 @@ class InsertPalletUseCase {
 
   // 값조회 -> 있으면 삭제 -> 등록
   Future<Result<bool>> call(TbWhPallet pallet) async {
+    // Result resultChk = repository.
     return await repository.upsertTbWhPallet(pallet);
   }
 }

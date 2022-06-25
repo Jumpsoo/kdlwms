@@ -67,3 +67,21 @@ Map<String, dynamic> _$$_TbWhPalletToJson(_$_TbWhPallet instance) =>
       'updtrId': instance.updtrId,
       'updtDt': instance.updtDt?.toIso8601String(),
     };
+
+_$_TbWhPalletGroup _$$_TbWhPalletGroupFromJson(Map<String, dynamic> json) =>
+    _$_TbWhPalletGroup(
+      comps: json['comps'] as String?,
+      itemNo: json['itemNo'] as String?,
+      itemLot: json['itemLot'] as String?,
+      quantity: json['quantity'] as int?,
+      boxCnt: json['boxCnt'] as int?,
+    );
+
+Map<String, dynamic> _$$_TbWhPalletGroupToJson(_$_TbWhPalletGroup instance) =>
+    <String, dynamic>{
+      'comps': instance.comps,
+      'itemNo': instance.itemNo,
+      'itemLot': instance.itemLot,
+      'quantity': instance.quantity,
+      'boxCnt': instance.boxCnt,
+    };

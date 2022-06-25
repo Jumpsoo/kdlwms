@@ -23,8 +23,11 @@ class GetCurrentLocalVersion {
     TbWhCmCode tbWhCmCode = TbWhCmCode(grpCd: _grpCd, comps: gComps);
     Result result = await repository.selectTbWhCmCodeListByGrpCd(tbWhCmCode);
     result.when(success: (value){
-      TbWhCmCode code = value[0];
-      version = code.codeCd!;
+      List<TbWhCmCode> retList = value;
+      if(retList.isNotEmpty) {
+        TbWhCmCode code = retList[0];
+        version = code.codeCd!;
+      }
     }, error: (message){
       return Result.error(message);
     });

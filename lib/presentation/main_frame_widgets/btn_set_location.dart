@@ -27,8 +27,9 @@ class BtnSetLocation extends StatelessWidget {
           ),
           child: ElevatedButton(
             onPressed: () async {
+              //진행바
               showCircularProgressIndicator(context);
-              // await Future.delayed(const Duration(seconds: 1));
+              await Future.delayed(const Duration(milliseconds: 500));
               await Navigator.push(
                 context,
                 MaterialPageRoute(

@@ -33,3 +33,18 @@ class TbWhPallet with _$TbWhPallet {
 
   factory TbWhPallet.fromJson(Map<String, dynamic> json) => _$TbWhPalletFromJson(json);
 }
+
+
+@freezed
+class TbWhPalletGroup with _$TbWhPalletGroup {
+  factory TbWhPalletGroup({
+    String? comps ,
+    String? itemNo,
+    String? itemLot ,
+    int? quantity,
+    int? boxCnt,
+  }) = _TbWhPalletGroup;
+
+  factory TbWhPalletGroup.fromJson(Map<String, dynamic> json) => _$TbWhPalletGroupFromJson(json);
+}
+
