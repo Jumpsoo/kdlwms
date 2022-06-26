@@ -31,7 +31,6 @@ class UpdatePalletFinishUseCase{
       result.when(success: (selectedItem){
         targetList.add(selectedItem!);
       }, error: (message){
-        print('UpdatePalletFinishUseCase : $message');
       });
     }
 

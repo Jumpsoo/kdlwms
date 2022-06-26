@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
-import 'package:kdlwms/presentation/pallet/printing/printing_labels.dart';
+import 'package:kdlwms/presentation/pallet/scan/pallet_printing_label_page.dart';
 
 class BtnPrintLabel extends StatelessWidget {
   const BtnPrintLabel({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class BtnPrintLabel extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                  PrintingLabels(title: sTitle)),
+                  PalletPrintingLabelPage(title: sTitle)),
             );
 
           },

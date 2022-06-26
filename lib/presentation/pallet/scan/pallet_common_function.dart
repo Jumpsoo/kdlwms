@@ -5,13 +5,10 @@ import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
-import 'package:kdlwms/presentation/pallet/components/pack_grid_top.dart';
-import 'package:kdlwms/presentation/pallet/scan/pallet_local_variables.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
 
 Future<String?> palletCommonGetDefaultWorkShop(BuildContext context) async {
   SettingInfoViewModel viewModelShop = context.read<SettingInfoViewModel>();
@@ -55,11 +52,6 @@ Future<bool> checkValue(BuildContext context, String confirm,
         return false;
       }
 
-      if (gridStateManager.currentCell == null) {
-        await showAlertDialog(context, '선택된 항목이 없습니다. \r\n 먼저 항목을 체크하세요.');
-        return false;
-      }
-
       if (await showAlertDialogQ(
             context,
             '확인',
@@ -94,8 +86,13 @@ Future<bool> checkValue(BuildContext context, String confirm,
         showCustomSnackBarWarn(context, '인쇄할 항목이 없습니다.');
         return false;
       }
+      for (PlutoRow row in gridStateManager.rows) {
+        if (row.checked == true) {
+          nCheckedItemCnt = nCheckedItemCnt + 1;
+        }
+      }
 
-      if (gridStateManager.currentCell == null) {
+      if (nCheckedItemCnt == 0) {
         await showAlertDialog(context, '선택된 항목이 없습니다. \r\n 먼저 항목을 체크하세요.');
         return false;
       }
@@ -119,85 +116,6 @@ Future<bool> checkValue(BuildContext context, String confirm,
       break;
   }
   return true;
-}
-
-//작업위치, 창고별 조회
-// 리스트 초기화 -> 데이터 조회 -> 바인딩
-Future<void> palletCommonViewTopList(
-    BuildContext context,
-    PlutoGridStateManager gridStateManager,
-    String sWareHouse,
-    String sLocation,
-    int nState) async {
-  //초기화
-  PalletViewModel viewModel = context.read<PalletViewModel>();
-  gridStateManager.rows.clear();
-  gridStateManager.removeRows(gridStateManager.rows);
-  //조회
-
-  List<TbWhPallet>? pallets =
-      await viewModel.useCasesWms.selectPackingList(sWareHouse, sLocation, nState);
-
-  if (pallets == null) {
-    showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
-  } else {
-    gridStateManager.appendRows(
-      getTopGridRows(pallets),
-    );
-    gridStateManager.notifyListeners();
-  }
-}
-
-//작업위치, 창고별 조회, 그루핑
-// 리스트 초기화 -> 데이터 조회 -> 바인딩
-Future<void> palletCommonViewTopListGrouping(
-    BuildContext context,
-    PlutoGridStateManager gridStateManager,
-    String sWareHouse,
-    String sLocation,
-    int nState) async {
-  //초기화
-  PalletViewModel viewModel = context.read<PalletViewModel>();
-  gridStateManager.rows.clear();
-  gridStateManager.removeRows(gridStateManager.rows);
-  //조회
-
-  List<TbWhPalletGroup>? pallets =
-  await viewModel.useCasesWms.selectTbWhPalletGroup(gComps, sWareHouse, sLocation);
-  if (pallets != null){
-    gridStateManager.appendRows(
-      getTopGridRowsGrouping(pallets),
-    );
-    gridStateManager.notifyListeners();
-  }
-}
-
-// 하단그리드용 그리드 조회 메서드
-// 상태가 입력(packing) 중인 항목만 조회된다.
-// 기존행 클리어 -> 조회 -> 바인딩
-Future<void> palletCommonViewBottomList(
-    BuildContext context,
-    PlutoGridStateManager gridStateManager,
-    String sLocation,
-    String sWareHouse,
-    int nState) async {
-
-  //초기화
-  PalletViewModel viewModel = context.read<PalletViewModel>();
-  gridStateManager.removeRows(gridStateManager.rows);
-  //조회
-  List<TbWhPallet>? pallets =
-      await viewModel.useCasesWms.selectPackingList(sLocation, sWareHouse, nState);
-
-  if (pallets == null) {
-    // _setMsg('해당 작업위치에 입력완료한 실적이 없습니다.');
-  } else {
-
-    gridStateManager.appendRows(
-      getPackGridRows(pallets),
-    );
-    gridStateManager.notifyListeners();
-  }
 }
 
 //선택된 항목 삭제
@@ -289,4 +207,15 @@ Future<List<ComboValueType>> getLocationComboValueList(
   //빈값 추가
   comboItemList.add(ComboValueType(key: '', value: '선택'));
   return comboItemList;
+}
+
+PlutoGridConfiguration getGridStyle1() {
+  return const PlutoGridConfiguration(
+      enterKeyAction: PlutoGridEnterKeyAction.none,
+      enableColumnBorder: true,
+      rowHeight: 30,
+      columnHeight: 30,
+      scrollbarConfig:
+          PlutoGridScrollbarConfig(isAlwaysShown: true, scrollbarThickness: 5),
+      cellTextStyle: TextStyle(fontSize: 12));
 }

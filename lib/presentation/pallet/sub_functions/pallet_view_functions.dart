@@ -1,12 +1,72 @@
+
+// 01. 실적입력화면 세부 함수
+import 'package:flutter/material.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+
 import 'package:kdlwms/kdl_common/common_functions.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
+import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:pluto_grid/pluto_grid.dart';
-import "package:collection/collection.dart";
+import 'package:provider/provider.dart';
+
+
+// 02.  실적 조회 화면
+// 작업위치, 창고별 조회, 그루핑
+// 상태무관하게 조회 : 상태, 품번, lot
+Future<void> createPalletingTopGridView(
+    BuildContext context,
+    PlutoGridStateManager gridStateManager,
+    String sWareHouse,
+    String sLocation) async {
+  //초기화
+  PalletViewModel viewModel = context.read<PalletViewModel>();
+  gridStateManager.rows.clear();
+  gridStateManager.removeRows(gridStateManager.rows);
+  //조회
+
+  List<TbWhPalletGroup>? pallets =
+  await viewModel.useCasesWms.selectPalletingSummaryUseCase(gComps, sWareHouse, sLocation);
+  if (pallets != null){
+    gridStateManager.appendRows(
+      getViewTopGridRowsGrouping(pallets),
+    );
+
+    if(gridStateManager.rows.length == 1){
+      //데이터가 없습니다는 한군데에서만
+      showCustomSnackBarWarn(context, '입력 중인 데이터가 없습니다.');
+    }
+    gridStateManager.notifyListeners();
+  }
+}
+
+Future<void> createPalletingButtomGridView(
+    BuildContext context,
+    PlutoGridStateManager gridStateManager,
+    String sWareHouse,
+    String sLocation) async {
+  //초기화
+  PalletViewModel viewModel = context.read<PalletViewModel>();
+  gridStateManager.rows.clear();
+  gridStateManager.removeRows(gridStateManager.rows);
+  //조회
+
+  List<TbWhPallet>? pallets =
+  await viewModel.useCasesWms.selectPalletingListUseCase(gComps, sWareHouse, sLocation);
+
+  if (pallets == null) {
+    showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
+  } else {
+    gridStateManager.appendRows(
+      getViewButtomGridRows(pallets),
+    );
+    gridStateManager.notifyListeners();
+  }
+}
 
 // 상단 그리드 입력창용
 // 컬럼 리스트 지정
 // max => 180
-List<PlutoColumn> getTopGridColumns() {
+List<PlutoColumn> getViewTopGridColumns() {
   List<PlutoColumn> cols = <PlutoColumn>[
 
     PlutoColumn(
@@ -64,7 +124,7 @@ List<PlutoColumn> getTopGridColumns() {
 
 // 상단 그리드
 // 데이터 로우
-List<PlutoRow> getTopGridRows(List<TbWhPallet> pallets) {
+List<PlutoRow> getViewTopGridRows(List<TbWhPallet> pallets) {
 
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
@@ -87,7 +147,7 @@ List<PlutoRow> getTopGridRows(List<TbWhPallet> pallets) {
 
 // 상단 그리드
 // 데이터 로우
-List<PlutoRow> getTopGridRowsGrouping(List<TbWhPalletGroup> pallets) {
+List<PlutoRow> getViewTopGridRowsGrouping(List<TbWhPalletGroup> pallets) {
 
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
@@ -177,7 +237,7 @@ List<PlutoColumn> getPackGridColumns() {
 }
 // 하단 그리드
 // 데이터 로우
-List<PlutoRow> getPackGridRows(List<TbWhPallet> pallets) {
+List<PlutoRow> getViewButtomGridRows(List<TbWhPallet> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   try{
@@ -202,3 +262,4 @@ List<PlutoRow> getPackGridRows(List<TbWhPallet> pallets) {
   }
   return rows;
 }
+

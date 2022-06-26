@@ -36,7 +36,6 @@ class PalletViewModel with ChangeNotifier {
       deletePallet: _deletePallet,
       deletePalletAll: _deletePalletAll,
       scanQRData: _scanQRData,
-      getPalletBySeq: _getPalletBySeq,
       getPalletCountInDevice: _getPalletCountInDevice,
     );
   }
@@ -46,7 +45,7 @@ class PalletViewModel with ChangeNotifier {
       String sWorkShop, String sLocation, int nState) async {
 
     List<TbWhPallet>? palletlist =
-        await useCasesWms.selectPackingList(sWorkShop, sLocation, nState);
+        await useCasesWms.selectPackingListUseCase(sWorkShop, sLocation, nState);
 
     _state = state.copyWith(
       pallets: palletlist,
@@ -80,11 +79,6 @@ class PalletViewModel with ChangeNotifier {
 
   Future<bool> _deletePalletAll() async {
     return await useCasesWms.deletePalletAll();
-  }
-
-  Future<TbWhPallet?> _getPalletBySeq(int palletSeq) async {
-    TbWhPallet? pallet = await useCasesWms.getPalletBySeq(palletSeq);
-    return pallet;
   }
 
   Future<int> _getPalletCountInDevice() async {

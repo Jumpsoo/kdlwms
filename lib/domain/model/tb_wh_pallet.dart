@@ -39,6 +39,7 @@ class TbWhPallet with _$TbWhPallet {
 class TbWhPalletGroup with _$TbWhPalletGroup {
   factory TbWhPalletGroup({
     String? comps ,
+    int? palletSeq,
     String? itemNo,
     String? itemLot ,
     int? quantity,

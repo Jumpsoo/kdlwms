@@ -602,6 +602,7 @@ TbWhPalletGroup _$TbWhPalletGroupFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TbWhPalletGroup {
   String? get comps => throw _privateConstructorUsedError;
+  int? get palletSeq => throw _privateConstructorUsedError;
   String? get itemNo => throw _privateConstructorUsedError;
   String? get itemLot => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
@@ -620,6 +621,7 @@ abstract class $TbWhPalletGroupCopyWith<$Res> {
       _$TbWhPalletGroupCopyWithImpl<$Res>;
   $Res call(
       {String? comps,
+      int? palletSeq,
       String? itemNo,
       String? itemLot,
       int? quantity,
@@ -638,6 +640,7 @@ class _$TbWhPalletGroupCopyWithImpl<$Res>
   @override
   $Res call({
     Object? comps = freezed,
+    Object? palletSeq = freezed,
     Object? itemNo = freezed,
     Object? itemLot = freezed,
     Object? quantity = freezed,
@@ -648,6 +651,10 @@ class _$TbWhPalletGroupCopyWithImpl<$Res>
           ? _value.comps
           : comps // ignore: cast_nullable_to_non_nullable
               as String?,
+      palletSeq: palletSeq == freezed
+          ? _value.palletSeq
+          : palletSeq // ignore: cast_nullable_to_non_nullable
+              as int?,
       itemNo: itemNo == freezed
           ? _value.itemNo
           : itemNo // ignore: cast_nullable_to_non_nullable
@@ -677,6 +684,7 @@ abstract class _$$_TbWhPalletGroupCopyWith<$Res>
   @override
   $Res call(
       {String? comps,
+      int? palletSeq,
       String? itemNo,
       String? itemLot,
       int? quantity,
@@ -697,6 +705,7 @@ class __$$_TbWhPalletGroupCopyWithImpl<$Res>
   @override
   $Res call({
     Object? comps = freezed,
+    Object? palletSeq = freezed,
     Object? itemNo = freezed,
     Object? itemLot = freezed,
     Object? quantity = freezed,
@@ -707,6 +716,10 @@ class __$$_TbWhPalletGroupCopyWithImpl<$Res>
           ? _value.comps
           : comps // ignore: cast_nullable_to_non_nullable
               as String?,
+      palletSeq: palletSeq == freezed
+          ? _value.palletSeq
+          : palletSeq // ignore: cast_nullable_to_non_nullable
+              as int?,
       itemNo: itemNo == freezed
           ? _value.itemNo
           : itemNo // ignore: cast_nullable_to_non_nullable
@@ -731,13 +744,20 @@ class __$$_TbWhPalletGroupCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TbWhPalletGroup implements _TbWhPalletGroup {
   _$_TbWhPalletGroup(
-      {this.comps, this.itemNo, this.itemLot, this.quantity, this.boxCnt});
+      {this.comps,
+      this.palletSeq,
+      this.itemNo,
+      this.itemLot,
+      this.quantity,
+      this.boxCnt});
 
   factory _$_TbWhPalletGroup.fromJson(Map<String, dynamic> json) =>
       _$$_TbWhPalletGroupFromJson(json);
 
   @override
   final String? comps;
+  @override
+  final int? palletSeq;
   @override
   final String? itemNo;
   @override
@@ -749,7 +769,7 @@ class _$_TbWhPalletGroup implements _TbWhPalletGroup {
 
   @override
   String toString() {
-    return 'TbWhPalletGroup(comps: $comps, itemNo: $itemNo, itemLot: $itemLot, quantity: $quantity, boxCnt: $boxCnt)';
+    return 'TbWhPalletGroup(comps: $comps, palletSeq: $palletSeq, itemNo: $itemNo, itemLot: $itemLot, quantity: $quantity, boxCnt: $boxCnt)';
   }
 
   @override
@@ -758,6 +778,7 @@ class _$_TbWhPalletGroup implements _TbWhPalletGroup {
         (other.runtimeType == runtimeType &&
             other is _$_TbWhPalletGroup &&
             const DeepCollectionEquality().equals(other.comps, comps) &&
+            const DeepCollectionEquality().equals(other.palletSeq, palletSeq) &&
             const DeepCollectionEquality().equals(other.itemNo, itemNo) &&
             const DeepCollectionEquality().equals(other.itemLot, itemLot) &&
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
@@ -769,6 +790,7 @@ class _$_TbWhPalletGroup implements _TbWhPalletGroup {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(comps),
+      const DeepCollectionEquality().hash(palletSeq),
       const DeepCollectionEquality().hash(itemNo),
       const DeepCollectionEquality().hash(itemLot),
       const DeepCollectionEquality().hash(quantity),
@@ -788,6 +810,7 @@ class _$_TbWhPalletGroup implements _TbWhPalletGroup {
 abstract class _TbWhPalletGroup implements TbWhPalletGroup {
   factory _TbWhPalletGroup(
       {final String? comps,
+      final int? palletSeq,
       final String? itemNo,
       final String? itemLot,
       final int? quantity,
@@ -798,6 +821,8 @@ abstract class _TbWhPalletGroup implements TbWhPalletGroup {
 
   @override
   String? get comps => throw _privateConstructorUsedError;
+  @override
+  int? get palletSeq => throw _privateConstructorUsedError;
   @override
   String? get itemNo => throw _privateConstructorUsedError;
   @override

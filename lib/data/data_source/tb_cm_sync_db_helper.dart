@@ -1,6 +1,5 @@
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TbCmSyncDbHelper {

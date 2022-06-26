@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 // http 통신을 위해 사용
 class PalletApi {
@@ -25,8 +24,7 @@ class PalletApi {
       List<TbWhPallet> retList = [];
 
       var dataAsMap = jsonEncode(palletList.map((e) => e.toJson()).toList());
-      var dataToSend = jsonEncode(dataAsMap);
-
+print(dataAsMap);
       http.Response res = await http.post(
         Uri.parse(baseUrl),
         body: dataAsMap,

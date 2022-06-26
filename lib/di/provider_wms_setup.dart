@@ -49,7 +49,7 @@ import 'package:kdlwms/domain/use_case/data_batch/mig_tb_cm_sync.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_item.dart';
 
 Future<List<SingleChildWidget>> getWmsProviders() async {
-  //deleteDatabase('wms_db_local');
+  // deleteDatabase('wms_db_local');
 
   Database database = await openDatabase(
     'wms_db_local',
@@ -161,22 +161,24 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
 
   UseCaseWms useCasesWms = UseCaseWms(
     //pallet
-    selectPackingList: SelectPackingListUseCase(palletRepository),
+    selectPackingListUseCase: SelectPackingListUseCase(palletRepository),
     selectCheckValue: SelectCheckValue(palletRepository),
     addPallet: InsertPalletUseCase(palletRepository),
     updatePallet: UpdatePalletUseCase(palletRepository),
     updatePalletFinishUseCase: UpdatePalletFinishUseCase(palletRepository),
     deletePallet: DeletePalletUseCase(palletRepository),
     deletePalletAll: DeletePalletAllUseCase(palletRepository),
-    getPalletBySeq: GetPalletBySeq(palletRepository),
     getPalletCountInDevice: GetPalletCountInDevice(palletRepository),
     scanQrCode: ScanQrCode(),
     selectItemList: SelectItemList(tbWhItemRepo),
     selectPrintingList: SelectPrintingList(palletRepository),
     printingPalletUseCase: PrintingPalletUseCase(),
-    selectTbWhPalletGroup: SelectTbWhPalletGroup(palletRepository),
-    selectTbWhPalletListByLocation:
-        SelectTbWhPalletListByLocation(palletRepository),
+    selectPackingSummaryUseCase: SelectPackingSummaryUseCase(palletRepository),
+    selectLoadingSummaryUseCase: SelectLoadingSummaryUseCase(palletRepository),
+    selectLoadingListUseCase: SelectLoadingListUseCase(palletRepository),
+    selectPalletingListUseCase: SelectPalletingListUseCase(palletRepository),
+    selectPalletingSummaryUseCase:
+        SelectPalletingSummaryUseCase(palletRepository),
 
     //
   );

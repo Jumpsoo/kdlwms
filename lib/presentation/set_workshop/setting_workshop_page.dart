@@ -113,7 +113,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
           Container(
             alignment: Alignment.centerRight,
             child: DropdownButton<String>(
-              iconSize: 20,
+              iconSize: 30,
               elevation: 16,
               value: _selectedValue ?? "",
               style: const TextStyle(color: Colors.black, fontSize: 16.0),

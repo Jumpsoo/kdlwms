@@ -9,14 +9,12 @@ import 'package:kdlwms/kdl_common/common_functions.dart';
 class TbWhPalletRepoImpl implements TbWhPalletRepo {
   final TbWhPalletDbHelper db;
 
-
-
   TbWhPalletRepoImpl(this.db);
 
   @override
-  Future<TbWhPallet?> getTbWhPalletBySeq(int palletSeq) async {
-    // TODO: implement getNoteBySeq
-    return await db.getTbWhPalletBySeq(palletSeq);
+  Future<List<TbWhPalletGroup>?> selectPackingSummary(
+      TbWhPallet tbWhPallet) async {
+    return await db.selectPackingSummary(tbWhPallet);
   }
 
   @override
@@ -26,38 +24,50 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   }
 
   @override
-  Future<Result<TbWhPallet?>>  selectTbWhPalletInto (TbWhPallet tbWhPallet) async {
+  Future<List<TbWhPalletGroup>?> selectPalletingSummary(
+      TbWhPallet tbWhPallet) async {
+    return await db.selectPalletingSummary(tbWhPallet);
+  }
+
+  @override
+  Future<List<TbWhPallet>?> selectPalletingList(TbWhPallet tbWhPallet) async {
+    return await db.selectPalletingList(tbWhPallet);
+  }
+
+  @override
+  Future<List<TbWhPalletGroup>?> selectPrintingList(TbWhPallet tbWhPallet) async {
+    return await db.selectPrintingList(tbWhPallet);
+  }
+
+  @override
+  Future<List<TbWhPallet>?> selectLoadingList(TbWhPallet tbWhPallet) async {
+    // TODO: implement getPallet
+    return await db.selectLoadingList(tbWhPallet);
+  }
+
+  @override
+  Future<List<TbWhPalletGroup>?> selectLoadingSummary(
+      TbWhPallet tbWhPallet) async {
+    return await db.selectLoadingSummary(tbWhPallet);
+  }
+
+  @override
+  Future<Result<TbWhPallet?>> selectTbWhPalletInto(
+      TbWhPallet tbWhPallet) async {
     // TODO: implement getPallet
     return await db.selectTbWhPalletInto(tbWhPallet);
-  }
-
-  @override
-  Future<List<TbWhPallet>?> selectTbWhPalletListByLocation(TbWhPallet tbWhPallet) async {
-    // TODO: implement getPallet
-    return await db.selectTbWhPalletListByLocation(tbWhPallet);
-  }
-
-  @override
-  Future<List<TbWhPalletGroup>?> selectTbWhPalletGroup(TbWhPallet tbWhPallet) async{
-    return await db.selectTbWhPalletGroup(tbWhPallet);
   }
 
   @override
   Future<Result<bool>> selectDupleCheck(String sBarCode) async {
     List<TbWhPallet>? retList = await db.selectDupleCheck(sBarCode);
 
-    if(retList != null && retList.isNotEmpty){
+    if (retList != null && retList.isNotEmpty) {
       return Result.error('이미 입력 한 식별표입니다.');
-    }else{
+    } else {
       return Result.success(true);
     }
   }
-
-  @override
-  Future<List<TbWhPallet>?> selectPrintingList(int nState) async {
-    return await db.selectPrintingList(nState);
-  }
-
 
   @override
   Future<bool> insertTbWhPallet(TbWhPallet pallet) async {
@@ -78,12 +88,14 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
 
   @override
   Future<Result<bool>> updateTbWhPalletState(List<TbWhPallet> pallets) async {
-    Result result ;
+    Result result;
     for (TbWhPallet pallet in pallets) {
-      result = db.updateTbWhPalletState(pallet);
-      result.when(success: (value){}, error: (message){
-        return Result.success(message);
-      });
+      result = await db.updateTbWhPalletState(pallet);
+      result.when(
+          success: (value) {},
+          error: (message) {
+            return Result.success(message);
+          });
     }
     return const Result.success(true);
   }
@@ -111,9 +123,14 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
     return await db.deleteTbWhPalletAll();
   }
 
+  @override
+  Future<Result<bool>> selectCheckValue(TbWhPallet pallet) async {
+    return await db.selectCheckValue(pallet);
+  }
 
   @override
-  Future<Result<bool>> selectCheckValue(TbWhPallet pallet) async{
-    return await db.selectCheckValue(pallet);
+  Future<TbWhPallet?> getTbWhPalletBySeq(int palletSeq) async {
+    // TODO: implement getNoteBySeq
+    return await db.getTbWhPalletBySeq(palletSeq);
   }
 }

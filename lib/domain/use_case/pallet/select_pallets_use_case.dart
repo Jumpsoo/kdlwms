@@ -3,6 +3,23 @@ import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
+//01-01. 실적처리 화면 상단 데이터 조회(집계)
+class SelectPackingSummaryUseCase {
+  final TbWhPalletRepo repository;
+
+  SelectPackingSummaryUseCase(this.repository);
+
+  Future<List<TbWhPalletGroup>?> call(
+      String sComps, String sWareHouse, String sLocation) async {
+
+    TbWhPallet tbWhPallet =
+        TbWhPallet(comps: sComps, workshop: sWareHouse, location: sLocation);
+
+    return await repository.selectPackingSummary(tbWhPallet);
+  }
+}
+
+//01-02. 실적처리 화면 하단 데이터 조회(상세)
 class SelectPackingListUseCase {
   final TbWhPalletRepo repository;
 
@@ -16,16 +33,67 @@ class SelectPackingListUseCase {
   }
 }
 
-class GetPalletBySeq {
+//02. 실적 조회 화면 쿼리
+//02-01. 상단 집계
+class SelectPalletingSummaryUseCase {
   final TbWhPalletRepo repository;
 
-  GetPalletBySeq(this.repository);
+  SelectPalletingSummaryUseCase(this.repository);
 
-  Future<TbWhPallet?> call(int palletSeq) async {
-    return await repository.getTbWhPalletBySeq(palletSeq);
+  Future<List<TbWhPalletGroup>?> call(
+      String sComps, String sWareHouse, String sLocation) async {
+    TbWhPallet tbWhPallet =
+        TbWhPallet(comps: sComps, workshop: sWareHouse, location: sLocation);
+    return await repository.selectPalletingSummary(tbWhPallet);
   }
 }
 
+//02-01. 하단 상세
+class SelectPalletingListUseCase {
+  final TbWhPalletRepo repository;
+
+  SelectPalletingListUseCase(this.repository);
+
+  Future<List<TbWhPallet>?> call(
+      String sComps, String sWareHouse, String sLocation) async {
+
+    TbWhPallet tbWhPallet =
+    TbWhPallet(comps: sComps, workshop: sWareHouse, location: sLocation);
+
+    return await repository.selectPalletingList(tbWhPallet);
+  }
+}
+
+//04-01. 상차완료 상단 데이터 조회(집계)
+class SelectLoadingSummaryUseCase {
+  final TbWhPalletRepo repository;
+
+  SelectLoadingSummaryUseCase(this.repository);
+
+  Future<List<TbWhPalletGroup>?> call(
+      String sComps, String sWareHouse, String sLocation) async {
+    TbWhPallet tbWhPallet =
+        TbWhPallet(comps: sComps, workshop: sWareHouse, location: sLocation);
+
+    return await repository.selectLoadingSummary(tbWhPallet);
+  }
+}
+
+//04-02. 상차완료 하단 데이터 조회(상세)
+class SelectLoadingListUseCase {
+  final TbWhPalletRepo repository;
+
+  SelectLoadingListUseCase(this.repository);
+
+  Future<List<TbWhPallet>?> call(
+      String sComps, String sWorkShop, String sLocation) async {
+    TbWhPallet tbWhPallet =
+        TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
+    return await repository.selectLoadingList(tbWhPallet);
+  }
+}
+
+//05. 실적 이력 삭제 전 데이터 존재여부확인
 class GetPalletCountInDevice {
   final TbWhPalletRepo repository;
 
@@ -37,6 +105,9 @@ class GetPalletCountInDevice {
   }
 }
 
+//00. 데이터 벨리데이션
+// - 기실적여부 체크
+// - 품번 유효성 체크
 class SelectCheckValue {
   final TbWhPalletRepo repository;
 
@@ -55,33 +126,35 @@ class SelectPrintingList {
   SelectPrintingList(this.repository);
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<List<TbWhPallet>?> call(int nState) async {
-    return await repository.selectPrintingList(nState);
-  }
-}
+  Future<List<TbWhPalletGroup>?> call(String comps, String sWorkShop, String sLocation) async {
 
-//실적처리 화면 상단 조회
-class SelectTbWhPalletGroup {
-  final TbWhPalletRepo repository;
-
-  SelectTbWhPalletGroup(this.repository);
-
-  Future<List<TbWhPalletGroup>?> call(
-      String sComps, String sWareHouse, String sLocation) async {
     TbWhPallet tbWhPallet =
-        TbWhPallet(comps: sComps, workshop: sWareHouse, location: sLocation);
-
-    return await repository.selectTbWhPalletGroup(tbWhPallet);
+    TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
+    return await repository.selectPrintingList(tbWhPallet);
   }
-}
 
-//실적처리 화면 하단 조회
-class SelectTbWhPalletListByLocation {
-  final TbWhPalletRepo repository;
+//
+// class SelectConfirmListUseCase {
+//   final TbWhPalletRepo repository;
+//
+//   SelectConfirmListUseCase(this.repository);
+//
+//   Future<List<TbWhPallet>?> call(String sWorkShop, String sLocation,
+//       int nState) async {
+//     TbWhPallet condTbWhPallet = TbWhPallet(
+//         comps: gComps, workshop: sWorkShop, location: sLocation, state: nState);
+//     return await repository.selectLoadingList(condTbWhPallet);
+//   }
+// }
 
-  SelectTbWhPalletListByLocation(this.repository);
+// class GetPalletBySeq {
+//   final TbWhPalletRepo repository;
+//
+//   GetPalletBySeq(this.repository);
+//
+//   Future<TbWhPallet?> call(int palletSeq) async {
+//     return await repository.getTbWhPalletBySeq(palletSeq);
+//   }
+// }
 
-  Future<List<TbWhPallet>?> call(TbWhPallet tbWhPallet) async {
-    return await repository.selectTbWhPalletListByLocation(tbWhPallet);
-  }
 }

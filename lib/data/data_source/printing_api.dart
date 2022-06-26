@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 // http 통신을 위해 사용
 class PrintingApi {
@@ -23,8 +22,7 @@ class PrintingApi {
     }
     
     var dataAsMap = jsonEncode(palletList.map((e) => e.toJson()).toList());
-    var dataToSend = jsonEncode(dataAsMap);
-
+print(dataAsMap);
     http.Response res = await http.post(
       Uri.parse(baseUrl),
       body: dataAsMap,
@@ -37,8 +35,6 @@ class PrintingApi {
       if (res.statusCode == 200) {
         Map<String, dynamic> resData = convert
             .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
-        String retSeq = resData['data'].toString();
-        int nPalletSeq = int.parse(retSeq);
 
       } else {
 
@@ -48,6 +44,6 @@ class PrintingApi {
       writeLog("sendPalletList 예외: ");
       writeLog(e);
     }
-    return Result.success(true);
+    return const Result.success(true);
   }
 }

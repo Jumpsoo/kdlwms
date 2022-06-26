@@ -21,7 +21,6 @@ mixin _$PalletEvent {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -37,7 +36,6 @@ mixin _$PalletEvent {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -52,7 +50,6 @@ mixin _$PalletEvent {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -67,7 +64,6 @@ mixin _$PalletEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -82,7 +78,6 @@ mixin _$PalletEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -96,7 +91,6 @@ mixin _$PalletEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -211,7 +205,6 @@ class _$ListPallets implements ListPallets {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -230,7 +223,6 @@ class _$ListPallets implements ListPallets {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -248,7 +240,6 @@ class _$ListPallets implements ListPallets {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -269,7 +260,6 @@ class _$ListPallets implements ListPallets {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -287,7 +277,6 @@ class _$ListPallets implements ListPallets {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -304,7 +293,6 @@ class _$ListPallets implements ListPallets {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -412,7 +400,6 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -431,7 +418,6 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -449,7 +435,6 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -470,7 +455,6 @@ class _$SelectDupleCheck implements SelectDupleCheck {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -488,7 +472,6 @@ class _$SelectDupleCheck implements SelectDupleCheck {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -505,7 +488,6 @@ class _$SelectDupleCheck implements SelectDupleCheck {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -529,193 +511,6 @@ abstract class SelectDupleCheck implements PalletEvent {
   TbWhPallet get tbWhPallet => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$SelectDupleCheckCopyWith<_$SelectDupleCheck> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GetPalletBySeqCopyWith<$Res> {
-  factory _$$GetPalletBySeqCopyWith(
-          _$GetPalletBySeq value, $Res Function(_$GetPalletBySeq) then) =
-      __$$GetPalletBySeqCopyWithImpl<$Res>;
-  $Res call({int palletSeq});
-}
-
-/// @nodoc
-class __$$GetPalletBySeqCopyWithImpl<$Res>
-    extends _$PalletEventCopyWithImpl<$Res>
-    implements _$$GetPalletBySeqCopyWith<$Res> {
-  __$$GetPalletBySeqCopyWithImpl(
-      _$GetPalletBySeq _value, $Res Function(_$GetPalletBySeq) _then)
-      : super(_value, (v) => _then(v as _$GetPalletBySeq));
-
-  @override
-  _$GetPalletBySeq get _value => super._value as _$GetPalletBySeq;
-
-  @override
-  $Res call({
-    Object? palletSeq = freezed,
-  }) {
-    return _then(_$GetPalletBySeq(
-      palletSeq == freezed
-          ? _value.palletSeq
-          : palletSeq // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetPalletBySeq implements GetPalletBySeq {
-  const _$GetPalletBySeq(this.palletSeq);
-
-  @override
-  final int palletSeq;
-
-  @override
-  String toString() {
-    return 'PalletEvent.getPalletBySeq(palletSeq: $palletSeq)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetPalletBySeq &&
-            const DeepCollectionEquality().equals(other.palletSeq, palletSeq));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(palletSeq));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$GetPalletBySeqCopyWith<_$GetPalletBySeq> get copyWith =>
-      __$$GetPalletBySeqCopyWithImpl<_$GetPalletBySeq>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String sWorkShop, String sLocation, int nState)
-        listPallets,
-    required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
-    required TResult Function(TbWhPallet? tbWhPallet) addPallet,
-    required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
-    required TResult Function(List<TbWhPallet> pallets) deletePallet,
-    required TResult Function() deletePalletAll,
-    required TResult Function() getPalletCountInDevice,
-    required TResult Function(String sQRData) scanQRData,
-  }) {
-    return getPalletBySeq(palletSeq);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String sWorkShop, String sLocation, int nState)?
-        listPallets,
-    TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
-    TResult Function(TbWhPallet? tbWhPallet)? addPallet,
-    TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
-    TResult Function(List<TbWhPallet> pallets)? deletePallet,
-    TResult Function()? deletePalletAll,
-    TResult Function()? getPalletCountInDevice,
-    TResult Function(String sQRData)? scanQRData,
-  }) {
-    return getPalletBySeq?.call(palletSeq);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String sWorkShop, String sLocation, int nState)?
-        listPallets,
-    TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
-    TResult Function(TbWhPallet? tbWhPallet)? addPallet,
-    TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
-    TResult Function(List<TbWhPallet> pallets)? deletePallet,
-    TResult Function()? deletePalletAll,
-    TResult Function()? getPalletCountInDevice,
-    TResult Function(String sQRData)? scanQRData,
-    required TResult orElse(),
-  }) {
-    if (getPalletBySeq != null) {
-      return getPalletBySeq(palletSeq);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ListPallets value) listPallets,
-    required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
-    required TResult Function(AddPallet value) addPallet,
-    required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
-    required TResult Function(DeletePallet value) deletePallet,
-    required TResult Function(DeletePalletAll value) deletePalletAll,
-    required TResult Function(GetPalletCountInDevice value)
-        getPalletCountInDevice,
-    required TResult Function(ScanQRData value) scanQRData,
-  }) {
-    return getPalletBySeq(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ListPallets value)? listPallets,
-    TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
-    TResult Function(AddPallet value)? addPallet,
-    TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
-    TResult Function(DeletePallet value)? deletePallet,
-    TResult Function(DeletePalletAll value)? deletePalletAll,
-    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
-    TResult Function(ScanQRData value)? scanQRData,
-  }) {
-    return getPalletBySeq?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ListPallets value)? listPallets,
-    TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
-    TResult Function(AddPallet value)? addPallet,
-    TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
-    TResult Function(DeletePallet value)? deletePallet,
-    TResult Function(DeletePalletAll value)? deletePalletAll,
-    TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
-    TResult Function(ScanQRData value)? scanQRData,
-    required TResult orElse(),
-  }) {
-    if (getPalletBySeq != null) {
-      return getPalletBySeq(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetPalletBySeq implements PalletEvent {
-  const factory GetPalletBySeq(final int palletSeq) = _$GetPalletBySeq;
-
-  int get palletSeq => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$$GetPalletBySeqCopyWith<_$GetPalletBySeq> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -800,7 +595,6 @@ class _$AddPallet implements AddPallet {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -819,7 +613,6 @@ class _$AddPallet implements AddPallet {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -837,7 +630,6 @@ class _$AddPallet implements AddPallet {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -858,7 +650,6 @@ class _$AddPallet implements AddPallet {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -876,7 +667,6 @@ class _$AddPallet implements AddPallet {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -893,7 +683,6 @@ class _$AddPallet implements AddPallet {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -990,7 +779,6 @@ class _$UpdatePallet implements UpdatePallet {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -1009,7 +797,6 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1027,7 +814,6 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1048,7 +834,6 @@ class _$UpdatePallet implements UpdatePallet {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -1066,7 +851,6 @@ class _$UpdatePallet implements UpdatePallet {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1083,7 +867,6 @@ class _$UpdatePallet implements UpdatePallet {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1193,7 +976,6 @@ class _$UpdatePalletState implements UpdatePalletState {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -1212,7 +994,6 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1230,7 +1011,6 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1251,7 +1031,6 @@ class _$UpdatePalletState implements UpdatePalletState {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -1269,7 +1048,6 @@ class _$UpdatePalletState implements UpdatePalletState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1286,7 +1064,6 @@ class _$UpdatePalletState implements UpdatePalletState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1385,7 +1162,6 @@ class _$DeletePallet implements DeletePallet {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -1404,7 +1180,6 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1422,7 +1197,6 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1443,7 +1217,6 @@ class _$DeletePallet implements DeletePallet {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -1461,7 +1234,6 @@ class _$DeletePallet implements DeletePallet {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1478,7 +1250,6 @@ class _$DeletePallet implements DeletePallet {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1548,7 +1319,6 @@ class _$DeletePalletAll implements DeletePalletAll {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -1567,7 +1337,6 @@ class _$DeletePalletAll implements DeletePalletAll {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1585,7 +1354,6 @@ class _$DeletePalletAll implements DeletePalletAll {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1606,7 +1374,6 @@ class _$DeletePalletAll implements DeletePalletAll {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -1624,7 +1391,6 @@ class _$DeletePalletAll implements DeletePalletAll {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1641,7 +1407,6 @@ class _$DeletePalletAll implements DeletePalletAll {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1707,7 +1472,6 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -1726,7 +1490,6 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1744,7 +1507,6 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1765,7 +1527,6 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -1783,7 +1544,6 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1800,7 +1560,6 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1888,7 +1647,6 @@ class _$ScanQRData implements ScanQRData {
     required TResult Function(String sWorkShop, String sLocation, int nState)
         listPallets,
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
-    required TResult Function(int palletSeq) getPalletBySeq,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
     required TResult Function(List<TbWhPallet> pallets, int nState)
@@ -1907,7 +1665,6 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1925,7 +1682,6 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(String sWorkShop, String sLocation, int nState)?
         listPallets,
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
-    TResult Function(int palletSeq)? getPalletBySeq,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
     TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
@@ -1946,7 +1702,6 @@ class _$ScanQRData implements ScanQRData {
   TResult map<TResult extends Object?>({
     required TResult Function(ListPallets value) listPallets,
     required TResult Function(SelectDupleCheck value) selectCheckValue,
-    required TResult Function(GetPalletBySeq value) getPalletBySeq,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
     required TResult Function(UpdatePalletState value) updatePalletState,
@@ -1964,7 +1719,6 @@ class _$ScanQRData implements ScanQRData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,
@@ -1981,7 +1735,6 @@ class _$ScanQRData implements ScanQRData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ListPallets value)? listPallets,
     TResult Function(SelectDupleCheck value)? selectCheckValue,
-    TResult Function(GetPalletBySeq value)? getPalletBySeq,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
     TResult Function(UpdatePalletState value)? updatePalletState,

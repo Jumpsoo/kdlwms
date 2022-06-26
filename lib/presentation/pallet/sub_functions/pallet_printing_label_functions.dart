@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
+//03. 라벨인쇄 화면
 // 상단 그리드 입력창용
 // 컬럼 리스트 지정
-// max => 180
+// 상태무관하게 조회됨
 List<PlutoColumn> getPrintItemColumns() {
   List<PlutoColumn> cols = <PlutoColumn>[
     PlutoColumn(
@@ -13,42 +14,61 @@ List<PlutoColumn> getPrintItemColumns() {
       field: 'check',
       width: 70,
       textAlign: PlutoColumnTextAlign.right,
-      type: PlutoColumnType.number(),
+      type: PlutoColumnType.text(),
       enableColumnDrag: false,
       enableContextMenu: false,
       enableEditingMode: false,
       enableRowChecked: true,
     ),
     PlutoColumn(
-      title: '작업장',
-      field: 'workshop',
-      width: 100,
+      title: '품목 코드',
+      field: 'itemNo',
+      width: 120,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
       enableColumnDrag: false,
       enableContextMenu: false,
     ),
     PlutoColumn(
-      title: 'SEQ',
-      field: 'palletSeq',
-      width: 70,
-      textAlign: PlutoColumnTextAlign.right,
-      type: PlutoColumnType.number(),
-      enableColumnDrag: false,
-      enableContextMenu: false,
-      enableEditingMode: false,
-      // enableRowChecked: true,
-    ),
-    PlutoColumn(
-      title: '창고',
-      field: 'location',
-      width: 70,
+      title: 'LOT',
+      field: 'itemLot',
+      width: 50,
       textAlign: PlutoColumnTextAlign.right,
       type: PlutoColumnType.text(),
       enableColumnDrag: false,
       enableContextMenu: false,
       enableEditingMode: false,
       // enableRowChecked: true,
+    ),
+    PlutoColumn(
+      title: '수량',
+      field: 'quantity',
+      width: 60,
+      type: PlutoColumnType.number(),
+      textAlign: PlutoColumnTextAlign.right,
+      enableColumnDrag: false,
+      enableContextMenu: false,
+      enableEditingMode: false,
+    ),
+    PlutoColumn(
+      title: 'Box',
+      field: 'boxCnt',
+      width: 60,
+      type: PlutoColumnType.number(),
+      textAlign: PlutoColumnTextAlign.right,
+      enableColumnDrag: false,
+      enableContextMenu: false,
+      enableEditingMode: false,
+    ),
+    PlutoColumn(
+      title: 'palletSeq',
+      field: 'palletSeq',
+      width: 0,
+      type: PlutoColumnType.number(),
+      textAlign: PlutoColumnTextAlign.right,
+      enableColumnDrag: false,
+      enableContextMenu: false,
+      enableEditingMode: false,
     ),
   ];
   return cols;
@@ -56,32 +76,23 @@ List<PlutoColumn> getPrintItemColumns() {
 
 // 상단 그리드
 // 데이터 로우
-List<PlutoRow> getPrintGridRows(List<TbWhPallet> pallets) {
+List<PlutoRow> getPrintGridRowsGroup(List<TbWhPalletGroup> pallets) {
+
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
-
   for (var e in pallets) {
     PlutoRow row = PlutoRow(
       cells: {
-        'check': PlutoCell(value: 0),
-        'workshop': PlutoCell(value: e.workshop),
+        'check': PlutoCell(value: false),
+        'itemNo': PlutoCell(value: e.itemNo),
+        'itemLot': PlutoCell(value: e.itemLot),
+        'quantity': PlutoCell(value: e.quantity),
+        'boxCnt': PlutoCell(value: e.boxCnt),
         'palletSeq': PlutoCell(value: e.palletSeq),
-        'location': PlutoCell(value: e.location),
-        // 'scanDate' : PlutoCell(value: e.scanDate),
       },
     );
+    nRowNum = nRowNum + 1;
     rows.add(row);
   }
   return rows;
-}
-
-PlutoGridConfiguration getGridStyle1() {
-  return const PlutoGridConfiguration(
-    enterKeyAction: PlutoGridEnterKeyAction.none,
-    enableColumnBorder: true,
-    rowHeight: 30,
-    columnHeight: 30,
-    scrollbarConfig: PlutoGridScrollbarConfig(isAlwaysShown: true, scrollbarThickness: 5),
-    cellTextStyle: TextStyle(fontSize: 12)
-  );
 }

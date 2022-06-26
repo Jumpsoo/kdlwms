@@ -71,6 +71,7 @@ Map<String, dynamic> _$$_TbWhPalletToJson(_$_TbWhPallet instance) =>
 _$_TbWhPalletGroup _$$_TbWhPalletGroupFromJson(Map<String, dynamic> json) =>
     _$_TbWhPalletGroup(
       comps: json['comps'] as String?,
+      palletSeq: json['palletSeq'] as int?,
       itemNo: json['itemNo'] as String?,
       itemLot: json['itemLot'] as String?,
       quantity: json['quantity'] as int?,
@@ -80,6 +81,7 @@ _$_TbWhPalletGroup _$$_TbWhPalletGroupFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_TbWhPalletGroupToJson(_$_TbWhPalletGroup instance) =>
     <String, dynamic>{
       'comps': instance.comps,
+      'palletSeq': instance.palletSeq,
       'itemNo': instance.itemNo,
       'itemLot': instance.itemLot,
       'quantity': instance.quantity,

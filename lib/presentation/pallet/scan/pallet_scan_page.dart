@@ -8,10 +8,10 @@ import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
-import 'package:kdlwms/presentation/pallet/components/pack_grid_top.dart';
-import 'package:kdlwms/presentation/pallet/components/print_grid.dart';
+
 import 'package:kdlwms/presentation/pallet/scan/pallet_common_function.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
+import 'package:kdlwms/presentation/pallet/sub_functions/pallet_scan_functions.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:pointmobile_scanner/pointmobile_scanner.dart';
@@ -156,7 +156,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                         Container(
                           padding:
                           const EdgeInsets.only(left: 5, right: 5),
-                          width: 200,
+                          width: 250,
                           height: 40,
                           alignment: Alignment.center,
                           child: createLocationDropDownButton(
@@ -337,7 +337,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
   //상단 리스트 조회
   void viewTopList() {
-    palletCommonViewTopListGrouping(
+    createPackingTopGridView(
       context,
       topGridStateManager,
       _readWorkShop,
@@ -348,7 +348,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
   //하단 리스트 조회
   void viewBottomList() {
-    palletCommonViewBottomList(
+    createPackingButtomGridView(
       context,
       downGridStateManager,
       _readWorkShop,
@@ -459,7 +459,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
           Container(
             alignment: Alignment.centerRight,
             child: DropdownButton<String>(
-              iconSize: 20,
+              iconSize: 30,
               elevation: 15,
               value: _readWorkShop,
               style: const TextStyle(color: Colors.black, fontSize: 16.0),
@@ -508,7 +508,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
           Container(
             alignment: Alignment.centerRight,
             child: DropdownButton<String>(
-              iconSize: 20,
+              iconSize: 30,
               elevation: 15,
               value: _readLocation,
               style: const TextStyle(color: Colors.black, fontSize: 16.0),

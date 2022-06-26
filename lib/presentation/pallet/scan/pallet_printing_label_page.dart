@@ -1,31 +1,31 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_common_function.dart';
-import 'package:kdlwms/presentation/pallet/sub_functions/pallet_view_functions.dart';
+import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
+import 'package:kdlwms/presentation/pallet/sub_functions/pallet_printing_label_functions.dart';
+import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
+import 'package:pluto_grid/pluto_grid.dart';
 import 'package:pointmobile_scanner/pointmobile_scanner.dart';
 import 'package:provider/provider.dart';
 
-import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
-import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
-import 'package:pluto_grid/pluto_grid.dart';
-import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
-
-class PalletViewPage extends StatefulWidget {
+class PalletPrintingLabelPage extends StatefulWidget {
   final String title;
 
-  const PalletViewPage({Key? key, required this.title}) : super(key: key);
+  const PalletPrintingLabelPage({Key? key, required this.title})
+      : super(key: key);
 
   @override
-  State<PalletViewPage> createState() => _PalletViewPageState();
+  State<PalletPrintingLabelPage> createState() =>
+      _PalletPrintingLabelPageState();
 }
 
-class _PalletViewPageState extends State<PalletViewPage> {
+class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
   late BuildContext ownContext;
 
   static const int sortName = 0;
@@ -45,7 +45,6 @@ class _PalletViewPageState extends State<PalletViewPage> {
 
   String _readQRData = "";
   final _controller = TextEditingController();
-  StreamSubscription? _subscription;
 
   //Data 조회용
   final List<TbWhPallet> pallets = [];
@@ -211,37 +210,29 @@ class _PalletViewPageState extends State<PalletViewPage> {
             //하단그리드
 
             Container(
-              height: 180,
+              height: 400,
               child: PlutoGrid(
-                columns: getViewTopGridColumns(),
+                columns: getPrintItemColumns(),
                 mode: PlutoGridMode.select,
                 rows: [],
                 // columnGroups: columnGroups,
                 onLoaded: (PlutoGridOnLoadedEvent event) {
                   topGridStateManager = event.stateManager;
-                  viewTopList();
+                  viewPrintingList(
+                    context,
+                    topGridStateManager,
+                  );
                 },
                 onChanged: (PlutoGridOnChangedEvent event) {
                   //to do
                 },
-                configuration: getGridStyle1(),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(top: 5)),
-            Container(
-              height: 230,
-              child: PlutoGrid(
-                columns: getPackGridColumns(),
-                rows: [],
-                // columnGroups: columnGroups,
-                onLoaded: (PlutoGridOnLoadedEvent event) {
-                  downGridStateManager = event.stateManager;
-                  viewBottomList();
-                },
-                onChanged: (PlutoGridOnChangedEvent event) {
-                  //to do
-                },
-                configuration: getGridStyle1(),
+                configuration: const PlutoGridConfiguration(
+                  enterKeyAction: PlutoGridEnterKeyAction.none,
+                  enableColumnBorder: true,
+                  rowHeight: 50,
+                  columnHeight: 50,
+                  cellTextStyle: TextStyle(fontSize: 14),
+                ),
               ),
             ),
           ],
@@ -256,8 +247,8 @@ class _PalletViewPageState extends State<PalletViewPage> {
               label: '조회',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.clear),
-              label: '삭제',
+              icon: Icon(Icons.print_outlined),
+              label: '발행',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.arrow_back),
@@ -268,11 +259,17 @@ class _PalletViewPageState extends State<PalletViewPage> {
                 if (index == 0)
                   {
                     //조회
-                    viewAll(_readWorkShop, _readLocation),
+                    viewPrintingList(
+                      context,
+                      topGridStateManager,
+                    ),
                   }
                 else if (index == 1)
                   {
-                    deletePackedPallet(),
+                    pringtingPalletList(
+                      context,
+                      topGridStateManager,
+                    ),
                   }
                 else if (index == 2)
                   {
@@ -286,12 +283,49 @@ class _PalletViewPageState extends State<PalletViewPage> {
     );
   }
 
+  // 작업중인 내용 확정 처리
+  // 확정 후 확정 리스트 서버로 송신
+  void loadPacking() async {
+    if (await checkValue(context, 'LOAD', downGridStateManager, '') == false) {
+      return;
+    }
+    //상태를 3 로변경한다.
+    //화면에서가 아닌 데이터 조회 후 전송한다.
+    List<TbWhPallet> tbWhPallets = [];
+    for (PlutoRow row in downGridStateManager.rows) {
+      List<PlutoCell> cells = row.cells.values.toList();
+      tbWhPallets.add(TbWhPallet(
+        comps: gComps,
+        palletSeq: cells[0].value,
+        itemNo: cells[1].value,
+        itemLot: cells[2].value,
+        boxNo: cells[3].value,
+        quantity: cells[4].value,
+        barcode: cells[5].value,
+      ));
+    }
+    // 서버로 전송 및 로컬디비 데이터 수정
+    // 상태 변경
+
+    await viewModel.useCasesWms
+        .updatePalletFinishUseCase(tbWhPallets, LoadState.Load.index);
+
+    showCustomSnackBarSuccess(ownContext, '정상처리 되었습니다.');
+    viewPrintingList(
+      context,
+      topGridStateManager,
+    );
+  }
+
   void deletePackedPallet() async {
     bool bRet = await deletePackItem(context, downGridStateManager,
         _readWorkShop, _readLocation, LoadState.Pack.index);
 
     if (bRet) {
-      viewAll(_readWorkShop, _readLocation);
+      viewPrintingList(
+        context,
+        topGridStateManager,
+      );
     }
   }
 
@@ -314,32 +348,16 @@ class _PalletViewPageState extends State<PalletViewPage> {
     }
   }
 
-  //상단 리스트 조회
-  void viewTopList() {
-    createPalletingTopGridView(
-      context,
-      topGridStateManager,
-      _readWorkShop,
-      _readLocation,
-    );
-  }
-
-  //하단 리스트 조회
-  void viewBottomList() {
-    createPalletingButtomGridView(
-      context,
-      downGridStateManager,
-      _readWorkShop,
-      _readLocation,
-    );
-  }
-
   //
   // 저장
   void _changeWorkshop(String sLocation) {
     setState(() {
       _readWorkShop = sLocation;
-      viewBottomList();
+
+      pringtingPalletList(
+        context,
+        topGridStateManager,
+      );
     });
   }
 
@@ -348,12 +366,10 @@ class _PalletViewPageState extends State<PalletViewPage> {
     setState(() {
       _readLocation = sReadLocation;
     });
-    viewAll(_readWorkShop, _readLocation);
-  }
-
-  Future<void> viewAll(String? sWareHouse, String? sLocation) async {
-    viewTopList();
-    viewBottomList();
+    viewPrintingList(
+      context,
+      topGridStateManager,
+    );
   }
 
   //최초로딩시 콤보박스 세팅
@@ -408,7 +424,10 @@ class _PalletViewPageState extends State<PalletViewPage> {
                 if (newValue != null) {
                   setState(() {
                     _readWorkShop = newValue;
-                    viewAll(_readWorkShop, _readWorkShop);
+                    viewPrintingList(
+                      context,
+                      topGridStateManager,
+                    );
                   });
                 }
               },
@@ -455,7 +474,10 @@ class _PalletViewPageState extends State<PalletViewPage> {
                 if (newValue != null) {
                   setState(() {
                     _readLocation = newValue;
-                    viewAll(_readWorkShop, _readLocation);
+                    viewPrintingList(
+                      context,
+                      topGridStateManager,
+                    );
                   });
                 }
               },
@@ -481,7 +503,6 @@ class _PalletViewPageState extends State<PalletViewPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    _subscription?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -554,5 +575,68 @@ class _PalletViewPageState extends State<PalletViewPage> {
   void _onExit() {
     PointmobileScanner.disableScanner();
     Navigator.pop(context);
+  }
+
+//선택된 항목 인쇄
+  Future<bool> pringtingPalletList(
+    BuildContext context,
+    PlutoGridStateManager gridStateManager,
+  ) async {
+    if (await checkValue(context, 'PRINT', gridStateManager, '') == false) {
+      return false;
+    }
+    PalletViewModel viewModel = context.read<PalletViewModel>();
+
+    List<TbWhPallet> tbWhPallets = [];
+    for (PlutoRow row in gridStateManager.rows) {
+      if (row.checked == true) {
+        List<PlutoCell> cells = row.cells.values.toList();
+        tbWhPallets.add(TbWhPallet(
+          comps: gComps,
+          workshop: _readWorkShop,
+          location: _readLocation,
+          palletSeq: cells[5].value,
+          itemNo: cells[1].value,
+          quantity: cells[3].value,
+        ));
+      }
+    }
+
+    if (tbWhPallets.isEmpty) {
+      hideCircularProgressIndicator();
+      showCustomSnackBarWarn(context, '인쇄 할 내용이 없습니다.');
+      return false;
+    }
+
+    viewModel.useCasesWms
+        .printingPalletUseCase(tbWhPallets, LoadState.Confirm.index);
+    showCustomSnackBarSuccess(context, '인쇄할 내용이 전송되었습니다..');
+
+    return true;
+  }
+
+  //인쇄 대상 조회
+  Future<void> viewPrintingList(
+      BuildContext context, PlutoGridStateManager gridStateManager) async {
+    //초기화
+    PalletViewModel viewModel = context.read<PalletViewModel>();
+    gridStateManager.rows.clear();
+    gridStateManager.removeRows(gridStateManager.rows);
+
+    //조회
+    // List<TbWhPallet>? pallets =
+    //     await viewModel.useCasesWms.selectPrintingList(gComps, _readWorkShop, _readLocation);
+
+    List<TbWhPalletGroup>? pallets = await viewModel.useCasesWms
+        .selectPrintingList(gComps, _readWorkShop, _readLocation);
+
+    if (pallets == null) {
+      showCustomSnackBarSuccess(context, '해당 작업위치에 입력 완료한 실적이 없습니다.');
+    } else {
+      List<PlutoRow> rows = getPrintGridRowsGroup(pallets);
+
+      gridStateManager.appendRows(rows);
+      gridStateManager.notifyListeners();
+    }
   }
 }
