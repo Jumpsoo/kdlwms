@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/domain/model/tb_server_info.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 class SettingProperty extends StatefulWidget {
   final String title;
@@ -32,6 +34,8 @@ class _SettingPropertyState extends State<SettingProperty> {
 
     _textFieldControllerServerUrl.text = gServiceURL;
     _textFieldControllerDeviceId.text = gDeviceId;
+
+    _nVibrateState = gVibrateEnable;
   }
 
   @override
@@ -186,6 +190,7 @@ class _SettingPropertyState extends State<SettingProperty> {
                                 setState((){
                                   _nVibrateState = index!;
                                 });
+                                Vibration.vibrate(duration: 200);
                               }),
                           Expanded(
                             child: Text('진동'),
@@ -204,6 +209,7 @@ class _SettingPropertyState extends State<SettingProperty> {
                                 setState((){
                                   _nVibrateState = index!;
                                 });
+                                Vibration.vibrate(duration: 50);
 
                               }),
                           Expanded(
@@ -265,11 +271,11 @@ class _SettingPropertyState extends State<SettingProperty> {
     gDeviceId = _textFieldControllerDeviceId.text;
     gVibrateEnable = _nVibrateState;
 
-    _saveServerUrl(context, gServiceURL, gDeviceId, gVibrateEnable);
+    _saveServerProperty(context, gServiceURL, gDeviceId, gVibrateEnable);
   }
 
   //
-  void _saveServerUrl(
+  void _saveServerProperty(
       BuildContext context, String sUrl, String sDeviceId, int nVibrateEnable) async {
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
@@ -283,4 +289,6 @@ class _SettingPropertyState extends State<SettingProperty> {
         },
         error: (message) {});
   }
+
+
 }

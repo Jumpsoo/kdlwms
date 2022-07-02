@@ -59,13 +59,11 @@ class TbWhPalletLoadDbHelper {
         'TB_WH_PALLET_LOAD',
         where: 'comps = ? '
             'and workshop = ? '
-            'and location = ?'
-            'and state >=  ? ',
+            'and location = ?',
         whereArgs: [
           tbWhPalletLoad.comps,
           tbWhPalletLoad.workshop,
           tbWhPalletLoad.location,
-          LoadState.Confirm.index,
         ],
         orderBy: 'palletSeq ASC',
       );

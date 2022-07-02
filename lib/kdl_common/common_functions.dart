@@ -110,7 +110,7 @@ void showCustomSnackBarWarn(BuildContext context, String message) async {
     content: Text(message),
     action: SnackBarAction(
       textColor: Colors.yellow,
-      label: '',
+      label: '닫기',
       onPressed: () {
         ScaffoldMessenger.of(context).clearSnackBars();
       },

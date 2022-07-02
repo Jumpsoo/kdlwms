@@ -12,7 +12,7 @@ abstract class PalletEvent with _$PalletEvent {
 
   const factory PalletEvent.addPallet(TbWhPallet? tbWhPallet) = AddPallet;
   const factory PalletEvent.updatePallet(List<TbWhPallet> pallets) = UpdatePallet;
-  const factory PalletEvent.updatePalletLoadState(List<TbWhPalletLoad> pallets, int nState) = UpdatePalletLoadState;
+  const factory PalletEvent.updatePalletLoadState(List<TbWhPalletLoad> pallets, String sState) = UpdatePalletLoadState;
 
   const factory PalletEvent.deletePallet(List<TbWhPallet> pallets) = DeletePallet;
   const factory PalletEvent.deletePalletAll() = DeletePalletAll;

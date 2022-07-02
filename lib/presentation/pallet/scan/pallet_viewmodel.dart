@@ -71,8 +71,8 @@ class PalletViewModel with ChangeNotifier {
   }
 
   //상차완료시 상태변경
-  Future<Result<bool>> _updatePalletLoadState(List<TbWhPalletLoad> pallets, int nState) async {
-    return await useCasesWms.loadingPalletFinishUseCase(pallets, nState);
+  Future<Result<bool>> _updatePalletLoadState(List<TbWhPalletLoad> pallets, String sState) async {
+    return await useCasesWms.loadingPalletFinishUseCase(pallets, sState);
   }
 
   Future<Result<bool>> _deletePallet(List<TbWhPallet> pallets) async {
@@ -100,7 +100,7 @@ class PalletViewModel with ChangeNotifier {
         location: convertedData[2],
         itemNo: convertedData[3],
         itemLot: convertedData[4],
-        state: int.parse(convertedData[5]),
+        state: convertedData[5],
         quantity: int.parse(convertedData[6]),
         barcode: sQRData,
         scanDate: DateTime.now(),

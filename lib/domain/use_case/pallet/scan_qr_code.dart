@@ -8,7 +8,7 @@ class ScanQrCode {
   Future<TbWhPallet?> call(String sQrCode, String sWorkShop,
       String sLocation) async {
     TbWhPallet pallet;
-    String qrCode = sQrCode;
+    String qrCode = sQrCode.replaceAll(' ', '@');
 
     String sItemNo = '';
     String sLotNo = '';
@@ -20,24 +20,23 @@ class ScanQrCode {
     int nPalletSeq = 0;
 
     // 공백이 여러건일 경우가 있기 때문에 치환한다.
-    while (qrCode.indexOf('  ') > 0) {
-      qrCode = qrCode.replaceAll('  ', ' ');
-    }
-    final convertedData = qrCode.split(' ');
-    if (convertedData.isEmpty) {
-      return null;
-    }
+    
     try {
       //품번은 두번째값부터
-      sItemNo = convertedData[1];
+      //91
+      sItemNo = qrCode.substring(91,106);
+      String sQty = qrCode.substring(107,113);
       //수량은 분할된 세번째 값에서 0~7 값만 취함
-      nQty = int.parse(convertedData[2].substring(0, 7));
+      nQty = int.parse(sQty);
       //박스 순번은 세번째값에서 뒤에서 세번째
-      sResultDate = convertedData[3];
-      sResultDate = sResultDate.substring(4, 8);
+      sResultDate = qrCode.substring(118, 126);
       //lot no는 네번째(작업지시번호) 에서 뒤에서 세번째값만 취함
-      sLotNo = convertLotToNumber(sResultDate);
-      nBoxNo = int.parse(convertedData[3].substring(convertedData[3].length - 7));
+      sLotNo = convertLotToNumber(sResultDate.substring(4,8));
+
+      String sBoxNo = qrCode.substring(143,150);
+
+      print('sBoxNo : $sBoxNo');
+      nBoxNo = int.parse(sBoxNo);
 
       pallet = TbWhPallet(
         comps: gComps,
@@ -45,7 +44,7 @@ class ScanQrCode {
         location: sLocation,
         itemNo: sItemNo,
         itemLot: sLotNo,
-        state: 1,
+        state: '01',
         quantity: nQty,
         barcode: sQrCode,
         scanDate: DateTime.now(),

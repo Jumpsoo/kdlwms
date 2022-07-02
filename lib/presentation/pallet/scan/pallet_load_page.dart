@@ -310,7 +310,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
           comps: gComps,
           workshop: _readWorkShop,
           location: _readLocation,
-          palletSeq: cells[0].value,
+          palletSeq: cells[6].value,
           itemNo: cells[1].value,
           itemLot: cells[2].value,
           boxNo: cells[3].value,
@@ -318,9 +318,12 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
           barcode: cells[5].value,
         ));
     }
+
+
+
     // 서버로 전송 및 로컬디비 데이터 수정
     // 데이터 삭제
-    await viewModel.useCasesWms.loadingPalletFinishUseCase(tbWhPallets, LoadState.Load.index);
+    await viewModel.useCasesWms.loadingPalletFinishUseCase(tbWhPallets, LoadState.Load.index.toString().padLeft(2,'0'));
 
     showCustomSnackBarSuccess(ownContext, gSuccessMsg);
     await viewAll(_readWorkShop, _readLocation);
@@ -328,7 +331,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
 
   void deletePackedPallet() async {
     bool bRet = await deletePackItem(context, downGridStateManager,
-        _readWorkShop, _readLocation, LoadState.Pack.index);
+        _readWorkShop, _readLocation);
 
     if (bRet) {
       viewAll(_readWorkShop, _readLocation);
@@ -534,12 +537,15 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
   void setBarcodeScanner() {
     PointmobileScanner.channel.setMethodCallHandler(_onBarcodeScannerHandler);
     PointmobileScanner.initScanner();
+    PointmobileScanner.triggerOn();
+
     PointmobileScanner.enableScanner();
     PointmobileScanner.enableBeep();
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_CODE128);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_EAN13);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_QR);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_UPCA);
+
   }
 
   //바코드 관련 이벤트 및 함수 선언부분
@@ -597,6 +603,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
   }
 
   void _onExit() {
+
     PointmobileScanner.disableScanner();
     Navigator.pop(context);
   }

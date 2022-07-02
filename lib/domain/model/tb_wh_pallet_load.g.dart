@@ -15,7 +15,7 @@ _$_TbWhPalletLoad _$$_TbWhPalletLoadFromJson(Map<String, dynamic> json) =>
       itemNo: json['itemNo'] as String?,
       itemLot: json['itemLot'] as String?,
       quantity: json['quantity'] as int?,
-      state: json['state'] as int?,
+      state: json['state'] as String?,
       barcode: json['barcode'] as String?,
       scanDate: json['scanDate'] == null
           ? null

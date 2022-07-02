@@ -27,7 +27,7 @@ mixin _$TbWhPalletLoad {
   String? get itemNo => throw _privateConstructorUsedError;
   String? get itemLot => throw _privateConstructorUsedError;
   int? get quantity => throw _privateConstructorUsedError;
-  int? get state => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
   String? get barcode => throw _privateConstructorUsedError;
   DateTime? get scanDate => throw _privateConstructorUsedError;
   String? get scanUsernm => throw _privateConstructorUsedError;
@@ -62,7 +62,7 @@ abstract class $TbWhPalletLoadCopyWith<$Res> {
       String? itemNo,
       String? itemLot,
       int? quantity,
-      int? state,
+      String? state,
       String? barcode,
       DateTime? scanDate,
       String? scanUsernm,
@@ -145,7 +145,7 @@ class _$TbWhPalletLoadCopyWithImpl<$Res>
       state: state == freezed
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       barcode: barcode == freezed
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
@@ -221,7 +221,7 @@ abstract class _$$_TbWhPalletLoadCopyWith<$Res>
       String? itemNo,
       String? itemLot,
       int? quantity,
-      int? state,
+      String? state,
       String? barcode,
       DateTime? scanDate,
       String? scanUsernm,
@@ -306,7 +306,7 @@ class __$$_TbWhPalletLoadCopyWithImpl<$Res>
       state: state == freezed
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       barcode: barcode == freezed
           ? _value.barcode
           : barcode // ignore: cast_nullable_to_non_nullable
@@ -412,7 +412,7 @@ class _$_TbWhPalletLoad implements _TbWhPalletLoad {
   @override
   final int? quantity;
   @override
-  final int? state;
+  final String? state;
   @override
   final String? barcode;
   @override
@@ -528,7 +528,7 @@ abstract class _TbWhPalletLoad implements TbWhPalletLoad {
       final String? itemNo,
       final String? itemLot,
       final int? quantity,
-      final int? state,
+      final String? state,
       final String? barcode,
       final DateTime? scanDate,
       final String? scanUsernm,
@@ -562,7 +562,7 @@ abstract class _TbWhPalletLoad implements TbWhPalletLoad {
   @override
   int? get quantity => throw _privateConstructorUsedError;
   @override
-  int? get state => throw _privateConstructorUsedError;
+  String? get state => throw _privateConstructorUsedError;
   @override
   String? get barcode => throw _privateConstructorUsedError;
   @override

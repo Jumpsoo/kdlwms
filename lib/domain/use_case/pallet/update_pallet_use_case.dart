@@ -30,7 +30,7 @@ class ConfirmPalletFinishUseCase {
     List<TbWhPallet> updList = [];
 
     for(TbWhPallet item in palletList){
-      updList.add(item.copyWith(state:nState));
+      updList.add(item.copyWith(state:nState.toString().padLeft(2, "0")));
     }
 
     Result resultUpd = await repository.updateTbWhPalletState(updList);
@@ -49,10 +49,17 @@ class LoadingPalletFinishUseCase{
 
   LoadingPalletFinishUseCase(this.repository);
    // 변경 후 서버전송
-  Future<Result<bool>> call(List<TbWhPalletLoad> palletList,  int nState) async {
+  Future<Result<bool>> call(List<TbWhPalletLoad> palletList,  String sState) async {
 
     // 상태만 변경한다.
-    Result result = await api.sendPalletLoadList(palletList, nState);
+    List<TbWhPalletLoad> sendList = [];
+    if(palletList.isNotEmpty){
+      for(TbWhPalletLoad item in palletList){
+        sendList.add(item.copyWith(state: sState));
+      }
+    }
+
+    Result result = await api.sendPalletLoadList(sendList);
     result.when(success: (savedList) async{
 
       //전송이 성공한 경우 업데이트

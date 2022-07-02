@@ -14,7 +14,7 @@ class TbWhPalletLoad with _$TbWhPalletLoad {
     String? itemNo,
     String? itemLot ,
     int? quantity,
-    int? state ,
+    String? state ,
     String? barcode ,
     DateTime? scanDate,
     String? scanUsernm,

@@ -17,8 +17,10 @@ class PrintingPalletUseCase {
   PrintingPalletUseCase(this.repository, this.repositoryPallet);
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<Result<bool>> call(List<TbWhPallet> palletLists, int nState) async {
-    Result result = await api.sendPrintingList(palletLists, nState);
+  Future<Result<bool>> call(List<TbWhPallet> palletLists) async {
+
+    Result result = await api.sendPrintingList(palletLists);
+
     result.when(success: (value) async {
       //처리 완료되면 : 상차테이블로 복사
       //대상 삭제
@@ -29,7 +31,8 @@ class PrintingPalletUseCase {
       for (TbWhPallet item in palletLists) {
         TbWhPalletLoad newItem = TbWhPalletLoad(
           comps: item.comps,
-          palletSeq: item.palletSeq,
+          // 팔레트번호 업데이트 후 상차테이블로 넘길것
+          palletSeq: value,
           workshop: item.workshop,
           location: item.location,
           itemNo: item.itemNo,
@@ -55,57 +58,20 @@ class PrintingPalletUseCase {
       }
 
       Result resultMig = await repository.upsertTbWhPalletLoad(migList);
-      resultMig.when(success: (value) {
-        return Result.success(true);
+      resultMig.when(success: (value) async {
+
+        //최종내역 삭제
+        Result resultDel = await repositoryPallet.deleteTbWhPallet(palletLists);
+        resultDel.when(success: (value){
+
+          return Result.success(true);
+        }, error: (message){
+          return Result.error(message);
+        });
       }, error: (message) {
         return Result.error(message);
       });
     }, error: (message) async {
-      //테스트용 삭제할것
-
-      List<TbWhPalletLoad> migList = [];
-      for (TbWhPallet item in palletLists) {
-        TbWhPalletLoad newItem = TbWhPalletLoad(
-          comps: item.comps,
-          palletSeq: item.palletSeq,
-          workshop: item.workshop,
-          location: item.location,
-          itemNo: item.itemNo,
-          itemLot: item.itemLot,
-          quantity: item.quantity,
-          state: item.state,
-          barcode: item.barcode,
-          scanDate: item.scanDate,
-          scanUsernm: item.scanUsernm,
-          boxNo: item.boxNo,
-          printFlag: item.printFlag,
-          printDate: item.printDate,
-          printUser: item.printUser,
-          as400IfFlag: item.as400IfFlag,
-          as400IfDate: item.as400IfDate,
-          as400IfUser: item.as400IfUser,
-          rgstrId: item.rgstrId,
-          rgstDt: item.rgstDt,
-          updtrId: item.updtrId,
-          updtDt: item.updtDt,
-        );
-        migList.add(newItem);
-      }
-      //상차리스트로 이동
-      Result resultMig = await repository.upsertTbWhPalletLoad(migList);
-      resultMig.when(success: (value) async {
-        //인쇄 완료한 항목은 삭제
-        Result resultDel = await repositoryPallet.deleteTbWhPallet(palletLists);
-        resultDel.when(
-            success: (value) {
-              return const Result.success(true);
-            },
-            error: (message) {
-              return Result.error(message);
-            });
-      }, error: (message) {
-        return Result.error(message);
-      });
       return Result.error(message);
     });
     return const Result.success(true);

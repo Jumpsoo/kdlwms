@@ -28,6 +28,8 @@ Future<void> createLoadingTopGridView(
   Result result = await viewModel.useCasesWms
       .selectLoadingSummaryUseCase(gComps, sWareHouse, sLocation);
   result.when(success: (valueList) {
+
+
     List<TbWhPalletLoadGroup>? pallets = valueList;
     if (pallets != null) {
       gridStateManager.appendRows(
@@ -53,6 +55,7 @@ Future<void> createLoadingButtomGridView(
   Result result = await viewModel.useCasesWms
       .selectLoadingListUseCase(gComps, sWareHouse, sLocation);
   result.when(success: (valueList) {
+
     List<TbWhPalletLoad>? pallets = valueList;
 
     if (pallets == null) {
@@ -183,7 +186,7 @@ List<PlutoColumn> getPackGridColumns() {
 
     PlutoColumn(
       title: 'SEQ',
-      field: 'palletSeq',
+      field: 'SEQ',
       width: 50,
       textAlign: PlutoColumnTextAlign.center,
       type: PlutoColumnType.number(),
@@ -240,6 +243,16 @@ List<PlutoColumn> getPackGridColumns() {
       enableContextMenu: false,
       enableEditingMode: false,
     ),
+    PlutoColumn(
+      title: 'palletSeq',
+      field: 'palletSeq',
+      width: 0,
+      type: PlutoColumnType.number(),
+      textAlign: PlutoColumnTextAlign.right,
+      enableColumnDrag: false,
+      enableContextMenu: false,
+      enableEditingMode: false,
+    ),
   ];
 }
 
@@ -254,12 +267,13 @@ List<PlutoRow> getLoadButtomGridRows(List<TbWhPalletLoad> pallets) {
       nRowNum = nRowNum + 1;
       PlutoRow row = PlutoRow(
         cells: {
-          'palletSeq': PlutoCell(value: nRowNum),
+          'SEQ' : PlutoCell(value: nRowNum) ,
           'itemNo': PlutoCell(value: e.itemNo),
           'itemLot': PlutoCell(value: e.itemLot),
           'quantity': PlutoCell(value: e.quantity),
           'boxNo': PlutoCell(value: e.boxNo),
           'barcode': PlutoCell(value: e.barcode),
+          'palletSeq': PlutoCell(value:e.palletSeq),
         },
       );
       rows.add(row);

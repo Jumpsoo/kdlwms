@@ -34,7 +34,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Future<String> varUrl = _getUrl(context) ;
+print(varUrl);
     varUrl.then((val) {
+print(val);
       if(val.isNotEmpty){
         gServiceURL = val;
       }else{
@@ -55,6 +57,7 @@ class MyApp extends StatelessWidget {
       //
     });
 
+    _getPropertyInfo(context);
 
     return MaterialApp(
       title: 'Flutter Demo',
@@ -97,6 +100,7 @@ class MyApp extends StatelessWidget {
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
     Result result  = await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+
     result.when(success: (value){
 
       TbServerInfo info = value;

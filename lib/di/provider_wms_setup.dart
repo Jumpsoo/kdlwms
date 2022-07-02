@@ -122,7 +122,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           ',itemNo        TEXT'
           ',itemLot       TEXT'
           ',quantity      INT'
-          ',state         INT'
+          ',state         TEXT'
           ',barcode       TEXT'
           ',scanDate      TIMESTAMP'
           ',scanUsernm    TEXT'
@@ -147,7 +147,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           ',itemNo        TEXT'
           ',itemLot       TEXT'
           ',quantity      INT'
-          ',state         INT'
+          ',state         TEXT'
           ',barcode       TEXT'
           ',scanDate      TIMESTAMP'
           ',scanUsernm    TEXT'
@@ -193,9 +193,14 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     },
   );
 
+  // 기준정보등을 내려받기 위해 사용
+  //공통코드
+  TbWhCmCodeDbHelper tbWhCmCodeDbHelper = TbWhCmCodeDbHelper(database);
+  TbWhCmCodeRepo tbWhCmCodeRepo = TbWhCmCodeRepoImpl(tbWhCmCodeDbHelper);
+
   // 실적 입력 & 조회관련
   TbWhPalletDbHelper palletDbHelper = TbWhPalletDbHelper(database);
-  TbWhPalletRepo palletRepository = TbWhPalletRepoImpl(palletDbHelper);
+  TbWhPalletRepo palletRepository = TbWhPalletRepoImpl(palletDbHelper, tbWhCmCodeDbHelper);
   TbWhPalletLoadDbHelper palletLoadDbHelper = TbWhPalletLoadDbHelper(database);
   TbWhPalletLoadRepo palletLoadRepository =
       TbWhPalletLoadRepoImpl(palletLoadDbHelper);
@@ -241,10 +246,6 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
 
   PalletViewModel palletViewModel = PalletViewModel(useCasesWms);
 
-  // 기준정보등을 내려받기 위해 사용
-  //공통코드
-  TbWhCmCodeDbHelper tbWhCmCodeDbHelper = TbWhCmCodeDbHelper(database);
-  TbWhCmCodeRepo tbWhCmCodeRepo = TbWhCmCodeRepoImpl(tbWhCmCodeDbHelper);
 
   //작업장 관리
   TbCmLocationDbHelper tbCmLocationDbHelper = TbCmLocationDbHelper(database);

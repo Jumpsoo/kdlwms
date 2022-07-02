@@ -1,4 +1,5 @@
 import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -20,13 +21,11 @@ class TbWhPalletDbHelper {
         ' from TB_WH_PALLET '
         ' where comps = ? '
         '   and workshop = ? '
-        '   and location = ?'
-        '   and state <=  ? ',
+        '   and location = ?',
         [
           tbWhPallet.comps!,
           tbWhPallet.workshop!,
           tbWhPallet.location!,
-          LoadState.Confirm.index,
         ]);
     final maps2 = await db.rawQuery(
         'SELECT itemNo, itemLot, sum(quantity) as quantity, count(*) as boxCnt '
@@ -34,13 +33,11 @@ class TbWhPalletDbHelper {
         ' where comps = ? '
         '   and workshop = ? '
         '   and location = ?'
-        '   and state <=  ? '
         ' group by comps, workshop, location, itemNo, itemLot ',
         [
           tbWhPallet.comps!,
           tbWhPallet.workshop!,
           tbWhPallet.location!,
-          LoadState.Confirm.index,
         ]);
     final mapRet = {...maps1, ...maps2};
     return mapRet.map((e) => TbWhPalletGroup.fromJson(e)).toList();
@@ -50,7 +47,7 @@ class TbWhPalletDbHelper {
   //상차전인 항목 표시
   //상태값이 0, 1인 항목만 보 여줄것
   Future<List<TbWhPallet>?> selectPackingList(TbWhPallet tbWhPallet) async {
-    try{
+    try {
       final maps = await db.query(
         'TB_WH_PALLET',
         where: 'comps = ? '
@@ -64,7 +61,7 @@ class TbWhPalletDbHelper {
         orderBy: 'palletSeq ASC',
       );
       return maps.map((e) => TbWhPallet.fromJson(e)).toList();
-    }catch(e){
+    } catch (e) {
       writeLog(e.toString());
     }
   }
@@ -79,13 +76,11 @@ class TbWhPalletDbHelper {
         ' from TB_WH_PALLET '
         ' where comps = ? '
         '   and workshop = ? '
-        '   and location = ?'
-        '   and state = ?',
+        '   and location = ?',
         [
           tbWhPallet.comps!,
           tbWhPallet.workshop!,
           tbWhPallet.location!,
-          LoadState.Confirm.index,
         ]);
 
     final maps2 = await db.rawQuery(
@@ -94,13 +89,11 @@ class TbWhPalletDbHelper {
         ' where comps = ? '
         '   and workshop = ? '
         '   and location = ?'
-        '   and state = ?'
         ' group by comps, workshop, location, itemNo, itemLot ',
         [
           tbWhPallet.comps!,
           tbWhPallet.workshop!,
           tbWhPallet.location!,
-          LoadState.Confirm.index,
         ]);
     final mapRet = {...maps1, ...maps2};
     return mapRet.map((e) => TbWhPalletGroup.fromJson(e)).toList();
@@ -158,13 +151,11 @@ class TbWhPalletDbHelper {
         ' where comps = ? '
         '   and workshop = ? '
         '   and location = ?'
-        '   and state = ?'
-        ' group by comps, workshop, location, palletSeq, itemNo, itemLot  ',
+        ' group by comps, workshop, location,  itemNo  ',
         [
           tbWhPallet.comps,
           tbWhPallet.workshop,
           tbWhPallet.location,
-          LoadState.Confirm.index,
         ]);
 
     return maps.map((e) => TbWhPalletGroup.fromJson(e)).toList();
@@ -181,13 +172,11 @@ class TbWhPalletDbHelper {
         ' from TB_WH_PALLET '
         ' where comps = ? '
         '   and workshop = ? '
-        '   and location = ?'
-        '   and state >=  ? ',
+        '   and location = ?',
         [
           tbWhPallet.comps!,
           tbWhPallet.workshop!,
           tbWhPallet.location!,
-          LoadState.Confirm.index,
         ]);
     final maps2 = await db.rawQuery(
         'SELECT itemNo, itemLot, sum(quantity) as quantity, count(*) as boxCnt '
@@ -195,13 +184,11 @@ class TbWhPalletDbHelper {
         ' where comps = ? '
         '   and workshop = ? '
         '   and location = ?'
-        '   and state >=  ? '
         ' group by comps, workshop, location, itemNo, itemLot ',
         [
           tbWhPallet.comps,
           tbWhPallet.workshop,
           tbWhPallet.location,
-          LoadState.Confirm.index,
         ]);
     final mapRet = {...maps1, ...maps2};
     return mapRet.map((e) => TbWhPalletGroup.fromJson(e)).toList();
@@ -215,13 +202,11 @@ class TbWhPalletDbHelper {
       'TB_WH_PALLET',
       where: 'comps = ? '
           'and workshop = ? '
-          'and location = ?'
-          'and state >=  ? ',
+          'and location = ?',
       whereArgs: [
         tbWhPallet.comps,
         tbWhPallet.workshop,
         tbWhPallet.location,
-        LoadState.Confirm.index,
       ],
       orderBy: 'palletSeq ASC',
     );
@@ -285,14 +270,12 @@ class TbWhPalletDbHelper {
     Result result;
 
     try {
-
       int ret = await db.update(
         'TB_WH_PALLET',
         pallet.toJson(),
         where: 'comps = ? and barcode = ? ',
         whereArgs: [pallet.comps, pallet.barcode],
       );
-
     } catch (e) {
       return Result.error(e.toString());
     }
@@ -361,7 +344,8 @@ class TbWhPalletDbHelper {
 
   // 01. 기실적여부 체크
   // 02. 품번 유효성 체크
-  Future<Result<bool>> selectCheckValue(TbWhPallet pallet) async {
+  Future<Result<bool>> selectCheckValue(
+      TbWhPallet pallet, String inWarehouseCd) async {
     int? count = Sqflite.firstIntValue(await db.rawQuery(
         'SELECT COUNT(*) '
         ' FROM TB_WH_PALLET '
@@ -373,16 +357,41 @@ class TbWhPalletDbHelper {
     if (count != null && count > 0) {
       return const Result.error('이미 입력한 식별표 입니다.');
     }
-
     count = Sqflite.firstIntValue(await db.rawQuery(
         'SELECT COUNT(*) '
         'FROM TB_WH_ITEM '
         ' WHERE itemNo = ?',
         [pallet.itemNo]));
-
     if (count != null && count == 0) {
       return const Result.error('품번정보가 없습니다. 동기화 또는 식별표를 확인하세요.');
     }
+
+    //이품체크,  warehouseCd
+    //값이 없는 경우 에러
+    String itemNo = '';
+    String sWarehouseCd = '';
+    String sWarehouseNm = '';
+
+    final maps = await db.rawQuery(
+      'SELECT  itemNo, warehouseCd, warehouseNm'
+      '  FROM TB_WH_ITEM '
+      ' WHERE itemNo = ?',
+      [pallet.itemNo],
+    );
+
+    List<TbWhItem> itemList = maps.map((e) => TbWhItem.fromJson(e)).toList();
+    if (itemList.isNotEmpty) {
+      itemNo = itemList[0].itemNo!;
+      sWarehouseCd = itemList[0].warehouseCd!;
+      sWarehouseNm = itemList[0].warehouseNm!;
+
+      if (sWarehouseCd != inWarehouseCd) {
+        String sErrMsg =
+            "이품이 입력되었습니다. \r\n품번:[$itemNo] \r\n설정 된 창고: [$sWarehouseNm($sWarehouseCd)]";
+        return Result.error(sErrMsg);
+      }
+    }
+
     return const Result.success(true);
   }
 

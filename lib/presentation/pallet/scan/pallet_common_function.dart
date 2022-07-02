@@ -135,8 +135,7 @@ Future<bool> deletePackItem(
   BuildContext context,
   PlutoGridStateManager gridStateManager,
   String sWorkshop,
-  String sLocation,
-  int nState,
+  String sLocation
 ) async {
   PalletViewModel viewModel = context.read<PalletViewModel>();
 

@@ -283,7 +283,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
   void deletePackedPallet() async {
     bool bRet = await deletePackItem(context, downGridStateManager,
-        _readWorkShop, _readLocation, LoadState.Pack.index);
+        _readWorkShop, _readLocation);
 
     if (bRet) {
       viewAll(_readWorkShop, _readLocation);
@@ -314,9 +314,12 @@ class _PalletScanPageState extends State<PalletScanPage> {
         Vibration.vibrate(duration: 90);
       }
 
+      // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
+      // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
       Result resultCheck = await viewModel.useCasesWms.selectCheckValue(pallet);
       resultCheck.when(success: (value) async {
         //추가시 validation 은 repository 내부에있음
+
         Result result = await viewModel.useCasesWms.addPallet(pallet);
         result.when(success: (value) {
           viewTopList();
@@ -340,7 +343,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
       topGridStateManager,
       _readWorkShop,
       _readLocation,
-      LoadState.Confirm.index,
     );
   }
 
@@ -399,7 +401,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
         quantity: cells[4].value,
         barcode: cells[5].value,
       );
-      print(newItem);
+
       tbWhPallets.add(newItem);
     }
 
@@ -547,10 +549,12 @@ class _PalletScanPageState extends State<PalletScanPage> {
     PointmobileScanner.initScanner();
     PointmobileScanner.enableScanner();
     PointmobileScanner.enableBeep();
+
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_CODE128);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_EAN13);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_QR);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_UPCA);
+    // PointmobileScanner.triggerOn();
   }
 
   //바코드 관련 이벤트 및 함수 선언부분

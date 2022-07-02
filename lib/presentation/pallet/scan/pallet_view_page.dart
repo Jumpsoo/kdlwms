@@ -288,7 +288,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
 
   void deletePackedPallet() async {
     bool bRet = await deletePackItem(context, downGridStateManager,
-        _readWorkShop, _readLocation, LoadState.Pack.index);
+        _readWorkShop, _readLocation);
 
     if (bRet) {
       viewAll(_readWorkShop, _readLocation);

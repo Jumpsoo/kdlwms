@@ -17,8 +17,7 @@ Future<void> createPackingTopGridView(
     BuildContext context,
     PlutoGridStateManager gridStateManager,
     String sWareHouse,
-    String sLocation,
-    int nState) async {
+    String sLocation ) async {
   //초기화
   PalletViewModel viewModel = context.read<PalletViewModel>();
   gridStateManager.rows.clear();

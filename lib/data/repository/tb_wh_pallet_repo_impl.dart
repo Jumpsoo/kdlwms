@@ -1,15 +1,19 @@
 import 'dart:async';
 
 import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/data/data_source/tb_wh_cm_code_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
+import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 class TbWhPalletRepoImpl implements TbWhPalletRepo {
+  final TbWhCmCodeDbHelper dbCode;
   final TbWhPalletDbHelper db;
 
-  TbWhPalletRepoImpl(this.db);
+  TbWhPalletRepoImpl(this.db, this.dbCode);
 
   @override
   Future<List<TbWhPalletGroup>?> selectPackingSummary(
@@ -134,7 +138,21 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
 
   @override
   Future<Result<bool>> selectCheckValue(TbWhPallet pallet) async {
-    return await db.selectCheckValue(pallet);
+
+    String sWarehouseCd = '';
+
+    //공통코드 조회 후 값전달 체크되지 않으면 2품체크 패스하라고 함(미설정시)
+    TbWhCmCode tbWhCmCode =  TbWhCmCode(comps: gComps, grpCd: 'LOCATION', codeCd: pallet.location);
+    Result result = await dbCode.selectTbWhCmCodeListByCodeCd(tbWhCmCode);
+    result.when(success: (valueList) {
+      List<TbWhCmCode> codeList = valueList;
+      if(codeList.isNotEmpty){
+        sWarehouseCd = codeList[0].ref2!;
+      }
+    }, error: (message){
+      return Result.error(message);
+    });
+    return await db.selectCheckValue(pallet,sWarehouseCd);
   }
 
   @override

@@ -37,6 +37,9 @@ class UseCaseWms {
 
 
   final GetPalletCountInDevice getPalletCountInDevice;
+
+  // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
+  // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
   final SelectCheckValue selectCheckValue;
 
   final ScanQrCode scanQrCode;

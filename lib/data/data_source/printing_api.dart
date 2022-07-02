@@ -16,40 +16,38 @@ class PrintingApi {
 
   static final baseUrl = gServiceURL + '/printTag';
 
-  Future<Result<List<TbWhPalletLoad?>>> sendPrintingList(
-      List<TbWhPallet> palletList, int nState) async {
+  Future<Result<int?>> sendPrintingList(
+      List<TbWhPallet> palletList) async {
 
     if (palletList.isEmpty) {
       return const Result.error('전송 할 인쇄 데이터가 없습니다.');
     }
     
     var dataAsMap = jsonEncode(palletList.map((e) => e.toJson()).toList());
+    int nPalletSeq = 0;
 
     http.Response res = await http.post(
       Uri.parse(baseUrl),
       body: dataAsMap,
       headers: {"Content-Type": "application/json"},
     );
-    // res => List<TbWhPallet>
-    // 생성된 apllet seq 업데이트
-
     try {
       if (res.statusCode == 200) {
         Map<String, dynamic> resData = convert
             .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
         String retSeq = resData['data'].toString();
-        int nPalletSeq = int.parse(retSeq);
-
-        Map<String, dynamic> jsonResponse = jsonDecode(utf8.decode(res.bodyBytes));
-        Iterable hits = jsonResponse['data']['itemList'];
-        return Result.success(hits.map((e) => TbWhPalletLoad.fromJson(e)).toList());
+        nPalletSeq = int.parse(retSeq);
+        return Result.success(nPalletSeq);
 
       } else {
+        Map<String, dynamic> resData = convert
+            .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
         return Result.error('에러발생 : ${res.statusCode}');
       }
     } catch (e) {
+
       var sErrMsg = "처리중 에러발생 : sendPrintingList (api) ";
-      writeLog(sErrMsg);
+      writeLog(e.toString());
       return Result.error(sErrMsg);
     }
   }

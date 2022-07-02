@@ -12,14 +12,13 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 class PalletApi {
 
   final http.Client client = http.Client();
-  static final baseUrl = gServiceURL + '/insertPallet';
+  static final baseUrl = gServiceURL + '/update';
 
   PalletApi();
 
   //상차항목 전송
   Future<Result<List<TbWhPalletLoad>>> sendPalletLoadList(
-      List<TbWhPalletLoad> palletList, int nState) async {
-
+      List<TbWhPalletLoad> palletList) async {
     try {
       if (palletList.isEmpty) {
         return const Result.error('전송할 데이터가 없습니다.');
@@ -27,6 +26,7 @@ class PalletApi {
 
       List<TbWhPalletLoad> retList = [];
       var dataAsMap = jsonEncode(palletList.map((e) => e.toJson()).toList());
+
       http.Response res = await http.post(
         Uri.parse(baseUrl),
         body: dataAsMap,
@@ -36,14 +36,10 @@ class PalletApi {
       // 생성된 apllet seq 업데이트
       try {
         if (res.statusCode == 200) {
+
           Map<String, dynamic> resData = convert
               .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
           String retSeq = resData['data'].toString();
-          int nPalletSeq = int.parse(retSeq);
-
-          for (TbWhPalletLoad item in palletList) {
-            retList.add(item.copyWith(palletSeq: nPalletSeq, state: nState));
-          }
         } else {
           return Result.error('에러발생 : ${res.statusCode}');
         }

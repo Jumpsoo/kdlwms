@@ -20,8 +20,10 @@ class CmCodeRcvRepoImpl implements CmCodeRcvRepo {
   }
 
   @override
-  Future<Result<List<TbWhCmCode>>> selectCmCodeListByCodeCd(TbWhCmCode tbWhCmCode) async {
-    final Result<Iterable> result = await api.selectCmCodeListByCodeCd(tbWhCmCode);
+  Future<Result<List<TbWhCmCode>>> selectCmCodeListByCodeCd(
+      TbWhCmCode tbWhCmCode) async {
+    final Result<Iterable> result =
+        await api.selectCmCodeListByCodeCd(tbWhCmCode);
 
     return result.when(success: (iterable) {
       return Result.success(
@@ -30,9 +32,12 @@ class CmCodeRcvRepoImpl implements CmCodeRcvRepo {
       return Result.error(message);
     });
   }
+
   @override
-  Future<Result<List<TbWhCmCode>>> selectCmCodeListByGrpCd(TbWhCmCode tbWhCmCode) async {
-    final Result<Iterable> result = await api.selectCmCodeListByGrpCd(tbWhCmCode);
+  Future<Result<List<TbWhCmCode>>> selectCmCodeListByGrpCd(
+      TbWhCmCode tbWhCmCode) async {
+    final Result<Iterable> result =
+        await api.selectCmCodeListByGrpCd(tbWhCmCode);
 
     return result.when(success: (iterable) {
       return Result.success(
@@ -48,8 +53,9 @@ class CmCodeRcvRepoImpl implements CmCodeRcvRepo {
     final Result<Iterable> result = await api.getPDAVersion();
 
     result.when(success: (iterable) {
-      List<TbWhCmCode> items = iterable.map((e) => TbWhCmCode.fromJson(e)).toList();
-      if(items.isNotEmpty){
+      List<TbWhCmCode> items =
+          iterable.map((e) => TbWhCmCode.fromJson(e)).toList();
+      if (items.isNotEmpty) {
         pdaVersion = items[0].codeCd!;
       }
     }, error: (message) {

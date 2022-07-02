@@ -544,6 +544,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     PalletViewModel viewModel = context.read<PalletViewModel>();
     Result result = await viewModel.useCasesWms
         .selectPalletingListUseCase(gComps, _readWorkShop, _readLocation);
+
     // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
     // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
     result.when(success: (valueList) async {
@@ -553,7 +554,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
       }
       //전송
       Result result = await viewModel.useCasesWms
-          .printingPalletUseCase(printingList, LoadState.Confirm.index);
+          .printingPalletUseCase(printingList);
       result.when(
           success: (value) {
             showCustomSnackBarWarn(context, gSuccessMsg);

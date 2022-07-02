@@ -21,6 +21,7 @@ class MigTbWhItem {
       if (itemList.isEmpty) {
         return const Result.error('복사할 대상이 없습니다.');
       }
+
       Result resultDelete = await repository.deleteAndInsertTbWhItemBatch(itemList);
       resultDelete.when(success: (value) async {
 
