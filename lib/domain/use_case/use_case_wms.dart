@@ -9,7 +9,10 @@ import 'package:kdlwms/domain/use_case/pallet/scan_qr_code.dart';
 class UseCaseWms {
   final InsertPalletUseCase addPallet;
   final UpdatePalletUseCase updatePallet;
-  //완료처리 : 서버전송없이 로컬디비만 업데이트
+
+  // 서버로 전송 및 로컬디비 데이터 수정
+  // 2022-07-01 | 서버로 전송하지 않고, 상태만 변경한다.
+  // 2022-07-02 | 서버롤 전송하고 전송한 데이터는 삭제한다.
   final ConfirmPalletFinishUseCase confirmPalletFinishUseCase;
   //상차처리 : 서버전송 후 로컬디비 테이블 복사 후 해당 데이터 삭제
   final LoadingPalletFinishUseCase loadingPalletFinishUseCase;
@@ -32,6 +35,7 @@ class UseCaseWms {
 
   //04.상차화면 관련 조회 쿼리
   final SelectLoadingListUseCase selectLoadingListUseCase;
+  final SelectLoadingListByApiUseCase selectLoadingListByApiUseCase;
   final SelectLoadingSummaryUseCase selectLoadingSummaryUseCase;
   final GetPalletLoadCountInDevice getPalletLoadCountInDevice;
 
@@ -71,5 +75,6 @@ class UseCaseWms {
     required this.confirmPalletFinishUseCase,
     required this.getPalletLoadCountInDevice,
     required this.deletePalletLoadAllUseCase,
+    required this.selectLoadingListByApiUseCase,
   });
 }

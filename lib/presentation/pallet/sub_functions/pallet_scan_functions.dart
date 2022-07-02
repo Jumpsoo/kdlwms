@@ -46,20 +46,25 @@ Future<void> createPackingButtomGridView(
     String sWareHouse,
     String sLocation) async {
 
-  //초기화
   PalletViewModel viewModel = context.read<PalletViewModel>();
-  gridStateManager.rows.clear();
   gridStateManager.removeRows(gridStateManager.rows);
+  gridStateManager.rows.clear();
+  gridStateManager.notifyListeners();
 
   //조회
+
   List<TbWhPallet>? pallets =
   await viewModel.useCasesWms.selectPackingListUseCase(sWareHouse, sLocation);
-  if (pallets == null) {
-    showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
-  } else {
+  if (pallets != null){
+
     gridStateManager.appendRows(
       getPackButtomGridRows(pallets),
     );
+
+    if(gridStateManager.rows.length == 1){
+      //데이터가 없습니다는 한군데에서만
+      // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
+    }
     gridStateManager.notifyListeners();
   }
 }
@@ -84,7 +89,7 @@ List<PlutoColumn> getTopGridColumns() {
     PlutoColumn(
       title: '품목 코드',
       field: 'itemNo',
-      width: 120,
+      width: 140,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
       enableColumnDrag: false,
@@ -167,7 +172,7 @@ List<PlutoColumn> getPackGridColumns() {
     PlutoColumn(
       title: '품목 코드',
       field: 'itemNo',
-      width: 120,
+      width: 140,
       type: PlutoColumnType.text(),
       textAlign: PlutoColumnTextAlign.left,
       enableColumnDrag: false,

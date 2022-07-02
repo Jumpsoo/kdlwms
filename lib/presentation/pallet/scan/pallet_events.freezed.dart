@@ -23,7 +23,7 @@ mixin _$PalletEvent {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -38,7 +38,7 @@ mixin _$PalletEvent {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -53,7 +53,7 @@ mixin _$PalletEvent {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -210,7 +210,7 @@ class _$ListPallets implements ListPallets {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -228,7 +228,7 @@ class _$ListPallets implements ListPallets {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -246,7 +246,7 @@ class _$ListPallets implements ListPallets {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -408,7 +408,7 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -426,7 +426,7 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -444,7 +444,7 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -606,7 +606,7 @@ class _$AddPallet implements AddPallet {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -624,7 +624,7 @@ class _$AddPallet implements AddPallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -642,7 +642,7 @@ class _$AddPallet implements AddPallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -793,7 +793,7 @@ class _$UpdatePallet implements UpdatePallet {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -811,7 +811,7 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -829,7 +829,7 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -912,7 +912,7 @@ abstract class _$$UpdatePalletLoadStateCopyWith<$Res> {
   factory _$$UpdatePalletLoadStateCopyWith(_$UpdatePalletLoadState value,
           $Res Function(_$UpdatePalletLoadState) then) =
       __$$UpdatePalletLoadStateCopyWithImpl<$Res>;
-  $Res call({List<TbWhPalletLoad> pallets, String sState});
+  $Res call({List<TbWhPalletPrint> pallets, String sState});
 }
 
 /// @nodoc
@@ -935,7 +935,7 @@ class __$$UpdatePalletLoadStateCopyWithImpl<$Res>
       pallets == freezed
           ? _value._pallets
           : pallets // ignore: cast_nullable_to_non_nullable
-              as List<TbWhPalletLoad>,
+              as List<TbWhPalletPrint>,
       sState == freezed
           ? _value.sState
           : sState // ignore: cast_nullable_to_non_nullable
@@ -947,12 +947,13 @@ class __$$UpdatePalletLoadStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdatePalletLoadState implements UpdatePalletLoadState {
-  const _$UpdatePalletLoadState(final List<TbWhPalletLoad> pallets, this.sState)
+  const _$UpdatePalletLoadState(
+      final List<TbWhPalletPrint> pallets, this.sState)
       : _pallets = pallets;
 
-  final List<TbWhPalletLoad> _pallets;
+  final List<TbWhPalletPrint> _pallets;
   @override
-  List<TbWhPalletLoad> get pallets {
+  List<TbWhPalletPrint> get pallets {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_pallets);
   }
@@ -994,7 +995,7 @@ class _$UpdatePalletLoadState implements UpdatePalletLoadState {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -1012,7 +1013,7 @@ class _$UpdatePalletLoadState implements UpdatePalletLoadState {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1030,7 +1031,7 @@ class _$UpdatePalletLoadState implements UpdatePalletLoadState {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1101,10 +1102,10 @@ class _$UpdatePalletLoadState implements UpdatePalletLoadState {
 
 abstract class UpdatePalletLoadState implements PalletEvent {
   const factory UpdatePalletLoadState(
-          final List<TbWhPalletLoad> pallets, final String sState) =
+          final List<TbWhPalletPrint> pallets, final String sState) =
       _$UpdatePalletLoadState;
 
-  List<TbWhPalletLoad> get pallets => throw _privateConstructorUsedError;
+  List<TbWhPalletPrint> get pallets => throw _privateConstructorUsedError;
   String get sState => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$UpdatePalletLoadStateCopyWith<_$UpdatePalletLoadState> get copyWith =>
@@ -1184,7 +1185,7 @@ class _$DeletePallet implements DeletePallet {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -1202,7 +1203,7 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1220,7 +1221,7 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1344,7 +1345,7 @@ class _$DeletePalletAll implements DeletePalletAll {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -1362,7 +1363,7 @@ class _$DeletePalletAll implements DeletePalletAll {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1380,7 +1381,7 @@ class _$DeletePalletAll implements DeletePalletAll {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1500,7 +1501,7 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -1518,7 +1519,7 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1536,7 +1537,7 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1678,7 +1679,7 @@ class _$ScanQRData implements ScanQRData {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPalletLoad> pallets, String sState)
+    required TResult Function(List<TbWhPalletPrint> pallets, String sState)
         updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
@@ -1696,7 +1697,7 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
@@ -1714,7 +1715,7 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPalletLoad> pallets, String sState)?
+    TResult Function(List<TbWhPalletPrint> pallets, String sState)?
         updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,

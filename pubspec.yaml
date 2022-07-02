@@ -51,6 +51,7 @@ dependencies:
   connectivity_plus: ^2.3.5
 
   vibration: ^1.7.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

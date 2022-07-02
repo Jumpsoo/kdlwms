@@ -1,6 +1,7 @@
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 
 part 'pallet_events.freezed.dart';
 
@@ -12,7 +13,7 @@ abstract class PalletEvent with _$PalletEvent {
 
   const factory PalletEvent.addPallet(TbWhPallet? tbWhPallet) = AddPallet;
   const factory PalletEvent.updatePallet(List<TbWhPallet> pallets) = UpdatePallet;
-  const factory PalletEvent.updatePalletLoadState(List<TbWhPalletLoad> pallets, String sState) = UpdatePalletLoadState;
+  const factory PalletEvent.updatePalletLoadState(List<TbWhPalletPrint> pallets, String sState) = UpdatePalletLoadState;
 
   const factory PalletEvent.deletePallet(List<TbWhPallet> pallets) = DeletePallet;
   const factory PalletEvent.deletePalletAll() = DeletePalletAll;

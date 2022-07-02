@@ -35,7 +35,6 @@ class ScanQrCode {
 
       String sBoxNo = qrCode.substring(143,150);
 
-      print('sBoxNo : $sBoxNo');
       nBoxNo = int.parse(sBoxNo);
 
       pallet = TbWhPallet(

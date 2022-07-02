@@ -93,6 +93,10 @@ Future<bool> checkValue(BuildContext context, String confirm,
       if(await tryConnectionWithPopup(context) == false){
         return false;
       }
+      if(gridStateManager.currentRow == null){
+        showCustomSnackBarWarn(context, '선택된 항목이 없습니다.');
+        return false;
+      }
 
       if (gridStateManager.rows.isEmpty) {
         showCustomSnackBarWarn(context, '인쇄할 항목이 없습니다.');

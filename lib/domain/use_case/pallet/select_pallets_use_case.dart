@@ -1,6 +1,8 @@
+import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_load_repo.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -26,11 +28,9 @@ class SelectPackingListUseCase {
 
   SelectPackingListUseCase(this.repository);
 
-  Future<List<TbWhPallet>?> call(
-      String sWorkShop, String sLocation) async {
-
-    TbWhPallet condTbWhPallet = TbWhPallet(
-        comps: gComps, workshop: sWorkShop, location: sLocation);
+  Future<List<TbWhPallet>?> call(String sWorkShop, String sLocation) async {
+    TbWhPallet condTbWhPallet =
+        TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
     return await repository.selectPackingList(condTbWhPallet);
   }
 }
@@ -73,8 +73,8 @@ class SelectLoadingSummaryUseCase {
 
   Future<Result<List<TbWhPalletLoadGroup>?>> call(
       String sComps, String sWareHouse, String sLocation) async {
-    TbWhPalletLoad tbWhPalletLoad =
-    TbWhPalletLoad(comps: sComps, workshop: sWareHouse, location: sLocation);
+    TbWhPalletLoad tbWhPalletLoad = TbWhPalletLoad(
+        comps: sComps, workshop: sWareHouse, location: sLocation);
 
     return await repository.selectLoadingSummary(tbWhPalletLoad);
   }
@@ -88,10 +88,26 @@ class SelectLoadingListUseCase {
 
   Future<Result<List<TbWhPalletLoad>?>> call(
       String sComps, String sWorkShop, String sLocation) async {
-
     TbWhPalletLoad tbWhPalletLoad =
         TbWhPalletLoad(comps: gComps, workshop: sWorkShop, location: sLocation);
     return await repository.selectLoadingList(tbWhPalletLoad);
+  }
+}
+
+//04-02. 상차완료 하단 데이터 조회(상세)
+class SelectLoadingListByApiUseCase {
+  final PalletApi api;
+
+  SelectLoadingListByApiUseCase(this.api);
+
+  Future<Result<List<TbWhPalletPrint>?>> call(String sComps, String sWorkShop,
+      String sLocation, String sScanPalletSeq) async {
+    late Result result ;
+    TbWhPallet tbWhPallet =
+    TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
+
+    return await api.selectPalletPrintingList(tbWhPallet, sScanPalletSeq);
+
   }
 }
 
@@ -140,11 +156,12 @@ class SelectPrintingList {
   SelectPrintingList(this.repository);
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<List<TbWhPalletGroup>?> call(
-      String comps, String sWorkShop, String sLocation) async {
+  Future<Result<List<TbWhPalletPrint>?>> call(
+      String comps, String sWorkShop, String sLocation, String sPalletSeq) async {
     TbWhPallet tbWhPallet =
         TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
-    return await repository.selectPrintingList(tbWhPallet);
+
+    return await repository.selectPrintingListByApi(tbWhPallet, sPalletSeq);
   }
 
 //

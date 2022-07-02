@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/data/data_source/tb_wh_cm_code_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
 import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -12,8 +14,9 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 class TbWhPalletRepoImpl implements TbWhPalletRepo {
   final TbWhCmCodeDbHelper dbCode;
   final TbWhPalletDbHelper db;
+  final PalletApi api ;
 
-  TbWhPalletRepoImpl(this.db, this.dbCode);
+  TbWhPalletRepoImpl(this.db, this.dbCode, this.api);
 
   @override
   Future<List<TbWhPalletGroup>?> selectPackingSummary(
@@ -40,9 +43,23 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   }
 
   @override
+  Future<Result<List<TbWhPallet>?>> selectPalletingListByApi(
+      TbWhPallet tbWhPallet, String sPalletSeq) async {
+    return await api.selectPalletListByApi(tbWhPallet, sPalletSeq);
+  }
+
+  @override
   Future<List<TbWhPalletGroup>?> selectPrintingList(
       TbWhPallet tbWhPallet) async {
     return await db.selectPrintingList(tbWhPallet);
+  }
+
+
+  @override
+  Future<Result<List<TbWhPalletPrint>?>> selectPrintingListByApi(
+      TbWhPallet tbWhPallet, String sPalletSeq) async {
+
+    return await api.selectPalletPrintingList(tbWhPallet, sPalletSeq);
   }
 
   @override
@@ -110,6 +127,7 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   Future<Result<bool>> deleteTbWhPallet(List<TbWhPallet> pallets) async {
     late Result result;
     try {
+      print(pallets);
       for (TbWhPallet pallet in pallets) {
         result = await db.deleteTbWhPallet(pallet);
         result.when(

@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_common_function.dart';
@@ -219,21 +221,15 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
                 // columnGroups: columnGroups,
                 onLoaded: (PlutoGridOnLoadedEvent event) {
                   topGridStateManager = event.stateManager;
-                  viewPrintingList(
-                    context,
-                    topGridStateManager,
-                  );
+                  // viewPrintingList(
+                  //   context,
+                  //   topGridStateManager,
+                  // );
                 },
                 onChanged: (PlutoGridOnChangedEvent event) {
                   //to do
                 },
-                configuration: const PlutoGridConfiguration(
-                  enterKeyAction: PlutoGridEnterKeyAction.none,
-                  enableColumnBorder: true,
-                  rowHeight: 50,
-                  columnHeight: 50,
-                  cellTextStyle: TextStyle(fontSize: 14),
-                ),
+                configuration: getGridStyle1(),
               ),
             ),
           ],
@@ -513,10 +509,6 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
       //Location
       _readLocation = sVal;
       _changeLocation(_readLocation);
-    } else if (sVal != null && sVal.length > 100) {
-      //제품 QR
-      _readQRData = sVal;
-      _changeReadQrData(_readQRData);
     } else {
       showCustomSnackBarWarn(context, '스캔한 작업 코드가 부적절합니다.');
     }
@@ -541,39 +533,45 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     if (await checkValue(context, 'PRINT', gridStateManager, '') == false) {
       return false;
     }
-    PalletViewModel viewModel = context.read<PalletViewModel>();
-    Result result = await viewModel.useCasesWms
-        .selectPalletingListUseCase(gComps, _readWorkShop, _readLocation);
 
-    // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
-    // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
-    result.when(success: (valueList) async {
-      List<TbWhPallet> printingList = valueList;
-      if (printingList.isEmpty) {
-        showCustomSnackBarSuccess(context, '인쇄할 내용이 전송되었습니다..');
-      }
-      //전송
-      Result result = await viewModel.useCasesWms
-          .printingPalletUseCase(printingList);
-      result.when(
-          success: (value) {
-            showCustomSnackBarWarn(context, gSuccessMsg);
-            viewPrintingList(
-              context,
-              topGridStateManager,
-            );
-          },
-          error: (message) {
-            showCustomSnackBarWarn(context, message);
-          });
+    PalletViewModel viewModel = context.read<PalletViewModel>();
+    List<TbWhPalletPrint> printingList = [];
+
+    //for (PlutoRow row in gridStateManager.rows) {
+    PlutoRow row = gridStateManager.currentCell!.row;
+    List<PlutoCell> cells = row.cells.values.toList();
+    printingList.add(TbWhPalletPrint(
+      printFlag: cells[0].value,
+      palletDate: DateFormat('yyyy-MM-dd HH:mm:ss').parse(cells[1].value)  ,
+      palletSeq: cells[2].value,
+      departure: cells[3].value,
+      arrival: cells[4].value,
+      total: cells[5].value,
+    ));
+    // }
+
+    if (printingList.isEmpty) {
+      showCustomSnackBarSuccess(context, '인쇄할 내용이 전송되었습니다..');
+    }
+
+    //라벨전송
+    Result result =
+        await viewModel.useCasesWms.printingPalletUseCase(printingList);
+    result.when(success: (value) {
+      showCustomSnackBarWarn(context, gSuccessMsg);
+      viewPrintingList(
+        context,
+        topGridStateManager,
+      );
     }, error: (message) {
-      return Result.error(message);
+      showCustomSnackBarWarn(context, message);
     });
 
-    return false;
+    return true;
   }
 
   //인쇄 대상 조회
+  //서버에서 불러온다.
   Future<void> viewPrintingList(
       BuildContext context, PlutoGridStateManager gridStateManager) async {
     //초기화
@@ -581,16 +579,22 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     gridStateManager.rows.clear();
     gridStateManager.removeRows(gridStateManager.rows);
 
-    List<TbWhPalletGroup>? pallets = await viewModel.useCasesWms
-        .selectPrintingList(gComps, _readWorkShop, _readLocation);
+    Result result = await viewModel.useCasesWms
+        .selectPrintingList(gComps, _readWorkShop, _readLocation, '');
 
-    if (pallets == null) {
-      showCustomSnackBarSuccess(context, '해당 작업위치에 입력 완료한 실적이 없습니다.');
-    } else {
-      List<PlutoRow> rows = getPrintGridRowsGroup(pallets);
+    result.when(success: (valueList) {
+      List<TbWhPalletPrint> palletList = valueList;
 
-      gridStateManager.appendRows(rows);
-      gridStateManager.notifyListeners();
-    }
+      if (palletList.isEmpty) {
+        showCustomSnackBarSuccess(context, '해당 작업위치에 입력 완료한 실적이 없습니다.');
+      } else {
+        List<PlutoRow> rows = getPrintGridRowsGroup(palletList);
+
+        gridStateManager.appendRows(rows);
+        gridStateManager.notifyListeners();
+      }
+    }, error: (message) {
+      showCustomSnackBarWarn(context, message);
+    });
   }
 }

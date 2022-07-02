@@ -174,7 +174,9 @@ exitProgram(BuildContext context) async {
 
 //향후 로그저장필요시 상세 구현할것
 void writeLog(var msg) {
-  print(msg);
+  f (kDebugMode) {
+    print(msg);
+  }
 }
 
 Future<bool> checkSyncStatus(BuildContext context) async {

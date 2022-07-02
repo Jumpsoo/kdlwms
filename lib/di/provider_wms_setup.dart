@@ -1,4 +1,5 @@
 import 'package:kdlwms/data/data_source/cm_code_rcv_api.dart';
+import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/tb_cm_location_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_cm_sync_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_server_info_db_helper.dart';
@@ -193,6 +194,12 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     },
   );
 
+  //서버사이드 repository 등록
+  ItemRcvRepoImpl itemRcvRepo = ItemRcvRepoImpl();
+  CmCodeRcvRepoImpl cmCodeRcvRepo = CmCodeRcvRepoImpl();
+  CmCodeRcvApi cmCodeRcvApi = CmCodeRcvApi();
+  PalletApi palletApi = PalletApi();
+
   // 기준정보등을 내려받기 위해 사용
   //공통코드
   TbWhCmCodeDbHelper tbWhCmCodeDbHelper = TbWhCmCodeDbHelper(database);
@@ -200,7 +207,8 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
 
   // 실적 입력 & 조회관련
   TbWhPalletDbHelper palletDbHelper = TbWhPalletDbHelper(database);
-  TbWhPalletRepo palletRepository = TbWhPalletRepoImpl(palletDbHelper, tbWhCmCodeDbHelper);
+  TbWhPalletRepo palletRepository =
+      TbWhPalletRepoImpl(palletDbHelper, tbWhCmCodeDbHelper, palletApi);
   TbWhPalletLoadDbHelper palletLoadDbHelper = TbWhPalletLoadDbHelper(database);
   TbWhPalletLoadRepo palletLoadRepository =
       TbWhPalletLoadRepoImpl(palletLoadDbHelper);
@@ -240,12 +248,12 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
         GetPalletLoadCountInDevice(palletLoadRepository),
     deletePalletLoadAllUseCase:
         DeletePalletLoadAllUseCase(palletLoadRepository),
+    selectLoadingListByApiUseCase: SelectLoadingListByApiUseCase(palletApi),
 
     //
   );
 
   PalletViewModel palletViewModel = PalletViewModel(useCasesWms);
-
 
   //작업장 관리
   TbCmLocationDbHelper tbCmLocationDbHelper = TbCmLocationDbHelper(database);
@@ -260,11 +268,6 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
   TbServerInfoDbHelper tbServerInfoDbHelper = TbServerInfoDbHelper(database);
   TbServerInfoRepo tbServerInfoRepo =
       TbServerInfoRepoImpl(tbServerInfoDbHelper);
-
-  //서버사이드 repository 등록
-  ItemRcvRepoImpl itemRcvRepo = ItemRcvRepoImpl();
-  CmCodeRcvRepoImpl cmCodeRcvRepo = CmCodeRcvRepoImpl();
-  CmCodeRcvApi cmCodeRcvApi = CmCodeRcvApi();
 
   //작업장 설정 화면 관련
   UseCaseCommonInfo useCaseTbCmLocation = UseCaseCommonInfo(

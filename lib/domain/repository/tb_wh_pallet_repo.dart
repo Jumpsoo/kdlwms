@@ -1,5 +1,6 @@
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 
 abstract class TbWhPalletRepo {
   //팔렛트 시퀀스 조회
@@ -12,9 +13,12 @@ abstract class TbWhPalletRepo {
   //02.실적조회
   Future<List<TbWhPalletGroup>?>  selectPalletingSummary(TbWhPallet tbWhPallet);
   Future<Result<List<TbWhPallet>?>> selectPalletingList(TbWhPallet tbWhPallet);
+  Future<Result<List<TbWhPallet>?>> selectPalletingListByApi(TbWhPallet tbWhPallet, String sPalletSeq);
 
   //03라벨 데이터 조회
   Future<List<TbWhPalletGroup>?> selectPrintingList(TbWhPallet tbWhPallet);
+
+  Future<Result<List<TbWhPalletPrint>?>> selectPrintingListByApi(TbWhPallet tbWhPallet, String sPalletSeq);
 
   //04. 상차완료
   Future<List<TbWhPalletGroup>?> selectLoadingSummary(TbWhPallet tbWhPallet);

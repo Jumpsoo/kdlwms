@@ -282,11 +282,12 @@ class _PalletScanPageState extends State<PalletScanPage> {
   }
 
   void deletePackedPallet() async {
-    bool bRet = await deletePackItem(context, downGridStateManager,
-        _readWorkShop, _readLocation);
+    bool bRet = await deletePackItem(
+        context, downGridStateManager, _readWorkShop, _readLocation);
 
     if (bRet) {
-      viewAll(_readWorkShop, _readLocation);
+      viewTopList();
+      viewBottomList();
     }
   }
 
@@ -337,8 +338,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
   }
 
   //상단 리스트 조회
-  void viewTopList() {
-    createPackingTopGridView(
+  void viewTopList()  {
+     createPackingTopGridView(
       context,
       topGridStateManager,
       _readWorkShop,
@@ -347,8 +348,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
   }
 
   //하단 리스트 조회
-  void viewBottomList() {
-    createPackingButtomGridView(
+  void viewBottomList()  {
+     createPackingButtomGridView(
       context,
       downGridStateManager,
       _readWorkShop,
@@ -370,10 +371,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
     setState(() {
       _readLocation = sReadLocation;
     });
-    viewAll(_readWorkShop, _readLocation);
-  }
 
-  Future<void> viewAll(String? sWareHouse, String? sLocation) async {
     viewTopList();
     viewBottomList();
   }
@@ -400,18 +398,25 @@ class _PalletScanPageState extends State<PalletScanPage> {
         boxNo: cells[3].value,
         quantity: cells[4].value,
         barcode: cells[5].value,
-      );
+        state: '02',
 
+      );
       tbWhPallets.add(newItem);
     }
 
     // 서버로 전송 및 로컬디비 데이터 수정
-    // 서버로 전송하지 않고, 상태만 변경한다.
-    await viewModel.useCasesWms
-        .confirmPalletFinishUseCase(tbWhPallets, LoadState.Confirm.index);
+    // 2022-07-01 | 서버로 전송하지 않고, 상태만 변경한다.
+    // 2022-07-02 | 서버롤 전송하고 전송한 데이터는 삭제한다.
+    Result result = await viewModel.useCasesWms.confirmPalletFinishUseCase(
+        tbWhPallets);
 
-    showCustomSnackBarSuccess(ownContext, gSuccessMsg);
-    await viewAll(_readWorkShop, _readLocation);
+    result.when(success: (value) async {
+      showCustomSnackBarSuccess(ownContext, gSuccessMsg);
+    }, error: (message) {
+      showCustomSnackBarWarn(ownContext, message);
+    });
+     viewTopList();
+     viewBottomList();
   }
 
   //최초로딩시 콤보박스 세팅
@@ -465,7 +470,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
                 if (newValue != null) {
                   setState(() {
                     _readWorkShop = newValue;
-                    viewAll(_readWorkShop, _readWorkShop);
+                    viewTopList();
+                    viewBottomList();
                   });
                 }
               },
@@ -512,7 +518,9 @@ class _PalletScanPageState extends State<PalletScanPage> {
                 if (newValue != null) {
                   setState(() {
                     _readLocation = newValue;
-                    viewAll(_readWorkShop, _readLocation);
+
+                    viewTopList();
+                    viewBottomList();
                   });
                 }
               },
