@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
@@ -56,15 +57,15 @@ class _MainPageState extends State<MainPage> {
 
    @override
   void initState() {
-
     super.initState();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_)=>syncData(true));
 
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => syncData(true));
    }
 
   @override
   Widget build(BuildContext context) {
+
      return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       body: Padding(
@@ -162,7 +163,7 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
       ),
-      bottomNavigationBar: const MainFrameNavigationBarMain(),
+      bottomNavigationBar: MainFrameNavigationBarMain(),
     );
   }
 }

@@ -1,19 +1,25 @@
 import 'package:kdlwms/data/data_source/cm_code_rcv_api.dart';
 import 'package:kdlwms/data/data_source/tb_cm_location_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_cm_sync_db_helper.dart';
+import 'package:kdlwms/data/data_source/tb_server_info_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_wh_cm_code_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_wh_item_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
+import 'package:kdlwms/data/data_source/tb_wh_pallet_load_db_helper.dart';
 import 'package:kdlwms/data/repository/cm_code_rcv_repo_impl.dart';
 import 'package:kdlwms/data/repository/item_rcv_repo_impl.dart';
 import 'package:kdlwms/data/repository/tb_cm_location_repo_impl.dart';
 import 'package:kdlwms/data/repository/tb_cm_sync_repo_impl.dart';
+import 'package:kdlwms/data/repository/tb_server_info_repo_impl.dart';
 import 'package:kdlwms/data/repository/tb_wh_cm_code_repo_impl.dart';
 import 'package:kdlwms/data/repository/tb_wh_item_repo_impl.dart';
+import 'package:kdlwms/data/repository/tb_wh_pallet_load_repo_impl.dart';
 import 'package:kdlwms/data/repository/tb_wh_pallet_repo_impl.dart';
 import 'package:kdlwms/domain/repository/tb_cm_location_repo.dart';
 import 'package:kdlwms/domain/repository/tb_cm_sync_repo.dart';
+import 'package:kdlwms/domain/repository/tb_server_info_repo.dart';
 import 'package:kdlwms/domain/repository/tb_wh_cm_code_repo.dart';
+import 'package:kdlwms/domain/repository/tb_wh_pallet_load_repo.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/use_case/pallet/printing_pallet_use_case.dart';
@@ -34,7 +40,10 @@ import 'package:kdlwms/domain/use_case/tb_cm_location/select_tb_cm_location.dart
 import 'package:kdlwms/domain/use_case/tb_cm_location/update_tb_cm_location.dart';
 import 'package:kdlwms/domain/use_case/tb_cm_sync/save_tb_cm_sync_info.dart';
 import 'package:kdlwms/domain/use_case/tb_cm_sync/select_tb_cm_sync.dart';
+import 'package:kdlwms/domain/use_case/tb_server_info/select_tb_server_info.dart';
+import 'package:kdlwms/domain/use_case/tb_server_info/update_tb_server_info.dart';
 import 'package:kdlwms/domain/use_case/use_case_data_sync.dart';
+import 'package:kdlwms/domain/use_case/use_case_server_info.dart';
 import 'package:kdlwms/domain/use_case/use_case_tb_cm_location.dart';
 import 'package:kdlwms/domain/use_case/use_case_wms.dart';
 import 'package:kdlwms/domain/use_case/web_api/get_common_info.dart';
@@ -49,10 +58,10 @@ import 'package:kdlwms/domain/use_case/data_batch/mig_tb_cm_sync.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_item.dart';
 
 Future<List<SingleChildWidget>> getWmsProviders() async {
-  // deleteDatabase('wms_db_local');
+  //deleteDatabase('wms_db_local_v1');
 
   Database database = await openDatabase(
-    'wms_db_local',
+    'wms_db_local_v1',
     version: 1,
     onCreate: (database, version) async {
       //1. 공통코드
@@ -129,6 +138,31 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           ',updtrId       INT'
           ',updtDt        TIMESTAMP)');
 
+      //4. 상차대상정보
+      await database.execute('CREATE TABLE TB_WH_PALLET_LOAD ( '
+          ' comps         TEXT'
+          ',palletSeq     INT'
+          ',workshop      TEXT'
+          ',location      TEXT'
+          ',itemNo        TEXT'
+          ',itemLot       TEXT'
+          ',quantity      INT'
+          ',state         INT'
+          ',barcode       TEXT'
+          ',scanDate      TIMESTAMP'
+          ',scanUsernm    TEXT'
+          ',boxNo         INT'
+          ',printFlag     TEXT'
+          ',printDate     TIMESTAMP'
+          ',printUser     TEXT'
+          ',as400IfFlag   TEXT'
+          ',as400IfDate   TIMESTAMP'
+          ',as400IfUser   TEXT'
+          ',rgstrId       INT'
+          ',rgstDt        TIMESTAMP'
+          ',updtrId       INT'
+          ',updtDt        TIMESTAMP)');
+
       //5.동기화 정보( 서버 & 클라이언트), 버전, 데이터 동기화 일시
       await database.execute('CREATE TABLE TB_CM_SYNC ( '
           'VERSION_CODE     TEXT,'
@@ -140,20 +174,31 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           'CMF_4            TEXT,'
           'CMF_5            TEXT )');
 
-      //6. 공장정보
-      await database.execute('CREATE TABLE TB_FACTORY ( '
-          'FACTORY_CD     TEXT,'
-          'FACTORY_NM     TEXT)');
+      //6. 서버 접속 정보
+      await database.execute('CREATE TABLE TB_SERVER_INFO ( '
+          'serverUrl     TEXT,'
+          'comps         TEXT,'
+          'deviceId     TEXT,'
+          'vibrateState  INT )');
 
-      //7. 현재생성한 MAX PALLET 정보
-      await database.execute('CREATE TABLE TB_PALLET_MAX_SEQ ( '
-          'MAX_SEQ     INT )');
+      //
+      // //6. 공장정보
+      // await database.execute('CREATE TABLE TB_FACTORY ( '
+      //     'FACTORY_CD     TEXT,'
+      //     'FACTORY_NM     TEXT)');
+      //
+      // //7. 현재생성한 MAX PALLET 정보
+      // await database.execute('CREATE TABLE TB_PALLET_MAX_SEQ ( '
+      //     'MAX_SEQ     INT )');
     },
   );
 
   // 실적 입력 & 조회관련
   TbWhPalletDbHelper palletDbHelper = TbWhPalletDbHelper(database);
   TbWhPalletRepo palletRepository = TbWhPalletRepoImpl(palletDbHelper);
+  TbWhPalletLoadDbHelper palletLoadDbHelper = TbWhPalletLoadDbHelper(database);
+  TbWhPalletLoadRepo palletLoadRepository =
+      TbWhPalletLoadRepoImpl(palletLoadDbHelper);
 
   //마스터 정보관련 (품목)
   TbWhItemDbHelper tbWhItemDbHelper = TbWhItemDbHelper(database);
@@ -165,20 +210,31 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     selectCheckValue: SelectCheckValue(palletRepository),
     addPallet: InsertPalletUseCase(palletRepository),
     updatePallet: UpdatePalletUseCase(palletRepository),
-    updatePalletFinishUseCase: UpdatePalletFinishUseCase(palletRepository),
+    loadingPalletFinishUseCase:
+        LoadingPalletFinishUseCase(palletLoadRepository),
     deletePallet: DeletePalletUseCase(palletRepository),
-    deletePalletAll: DeletePalletAllUseCase(palletRepository),
+    deletePalletAllUseCase: DeletePalletAllUseCase(palletRepository),
     getPalletCountInDevice: GetPalletCountInDevice(palletRepository),
     scanQrCode: ScanQrCode(),
     selectItemList: SelectItemList(tbWhItemRepo),
     selectPrintingList: SelectPrintingList(palletRepository),
-    printingPalletUseCase: PrintingPalletUseCase(),
+    printingPalletUseCase:
+        PrintingPalletUseCase(palletLoadRepository, palletRepository),
     selectPackingSummaryUseCase: SelectPackingSummaryUseCase(palletRepository),
-    selectLoadingSummaryUseCase: SelectLoadingSummaryUseCase(palletRepository),
-    selectLoadingListUseCase: SelectLoadingListUseCase(palletRepository),
+
     selectPalletingListUseCase: SelectPalletingListUseCase(palletRepository),
     selectPalletingSummaryUseCase:
         SelectPalletingSummaryUseCase(palletRepository),
+
+    //상차관리 관련
+    selectLoadingSummaryUseCase:
+        SelectLoadingSummaryUseCase(palletLoadRepository),
+    selectLoadingListUseCase: SelectLoadingListUseCase(palletLoadRepository),
+    confirmPalletFinishUseCase: ConfirmPalletFinishUseCase(palletRepository),
+    getPalletLoadCountInDevice:
+        GetPalletLoadCountInDevice(palletLoadRepository),
+    deletePalletLoadAllUseCase:
+        DeletePalletLoadAllUseCase(palletLoadRepository),
 
     //
   );
@@ -198,6 +254,11 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
   //동기화 정보
   TbCmSyncDbHelper tbCmSyncDbHelper = TbCmSyncDbHelper(database);
   TbCmSyncRepo tbCmSyncRepo = TbCmSyncRepoImpl(tbCmSyncDbHelper);
+
+  //서버 접속정보
+  TbServerInfoDbHelper tbServerInfoDbHelper = TbServerInfoDbHelper(database);
+  TbServerInfoRepo tbServerInfoRepo =
+      TbServerInfoRepoImpl(tbServerInfoDbHelper);
 
   //서버사이드 repository 등록
   ItemRcvRepoImpl itemRcvRepo = ItemRcvRepoImpl();
@@ -228,8 +289,14 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     getCurrentLocalVersion: GetCurrentLocalVersion(tbWhCmCodeRepo),
   );
 
+  UseCaseServerInfo useCaseServerInfo = UseCaseServerInfo(
+    selectTbServerInfo: SelectTbServerInfo(tbServerInfoRepo),
+    mergeTbServerInfo: MergeTbServerInfo(tbServerInfoRepo),
+    selectPropertyInfo: SelectPropertyInfo(tbServerInfoRepo),
+  );
+
   SettingInfoViewModel settingWorkshopViewModel =
-      SettingInfoViewModel(useCaseTbCmLocation);
+      SettingInfoViewModel(useCaseTbCmLocation, useCaseServerInfo);
 
   //배치 관련
   UseCaseDataSync useCaseDataBatch = UseCaseDataSync(

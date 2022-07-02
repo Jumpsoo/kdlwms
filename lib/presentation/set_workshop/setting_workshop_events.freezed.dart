@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SettingWorkShopEvents {
+mixin _$SettingInfoEvents {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() selectTbCmLocationAll,
@@ -106,20 +106,20 @@ mixin _$SettingWorkShopEvents {
 }
 
 /// @nodoc
-abstract class $SettingWorkShopEventsCopyWith<$Res> {
-  factory $SettingWorkShopEventsCopyWith(SettingWorkShopEvents value,
-          $Res Function(SettingWorkShopEvents) then) =
-      _$SettingWorkShopEventsCopyWithImpl<$Res>;
+abstract class $SettingInfoEventsCopyWith<$Res> {
+  factory $SettingInfoEventsCopyWith(
+          SettingInfoEvents value, $Res Function(SettingInfoEvents) then) =
+      _$SettingInfoEventsCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SettingWorkShopEventsCopyWithImpl<$Res>
-    implements $SettingWorkShopEventsCopyWith<$Res> {
-  _$SettingWorkShopEventsCopyWithImpl(this._value, this._then);
+class _$SettingInfoEventsCopyWithImpl<$Res>
+    implements $SettingInfoEventsCopyWith<$Res> {
+  _$SettingInfoEventsCopyWithImpl(this._value, this._then);
 
-  final SettingWorkShopEvents _value;
+  final SettingInfoEvents _value;
   // ignore: unused_field
-  final $Res Function(SettingWorkShopEvents) _then;
+  final $Res Function(SettingInfoEvents) _then;
 }
 
 /// @nodoc
@@ -131,7 +131,7 @@ abstract class _$$SelectTbCmLocationAllCopyWith<$Res> {
 
 /// @nodoc
 class __$$SelectTbCmLocationAllCopyWithImpl<$Res>
-    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    extends _$SettingInfoEventsCopyWithImpl<$Res>
     implements _$$SelectTbCmLocationAllCopyWith<$Res> {
   __$$SelectTbCmLocationAllCopyWithImpl(_$SelectTbCmLocationAll _value,
       $Res Function(_$SelectTbCmLocationAll) _then)
@@ -148,7 +148,7 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
 
   @override
   String toString() {
-    return 'SettingWorkShopEvents.selectTbCmLocationAll()';
+    return 'SettingInfoEvents.selectTbCmLocationAll()';
   }
 
   @override
@@ -272,7 +272,7 @@ class _$SelectTbCmLocationAll implements SelectTbCmLocationAll {
   }
 }
 
-abstract class SelectTbCmLocationAll implements SettingWorkShopEvents {
+abstract class SelectTbCmLocationAll implements SettingInfoEvents {
   const factory SelectTbCmLocationAll() = _$SelectTbCmLocationAll;
 }
 
@@ -286,7 +286,7 @@ abstract class _$$SelectTbCmLocationCurrentItemCopyWith<$Res> {
 
 /// @nodoc
 class __$$SelectTbCmLocationCurrentItemCopyWithImpl<$Res>
-    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    extends _$SettingInfoEventsCopyWithImpl<$Res>
     implements _$$SelectTbCmLocationCurrentItemCopyWith<$Res> {
   __$$SelectTbCmLocationCurrentItemCopyWithImpl(
       _$SelectTbCmLocationCurrentItem _value,
@@ -305,7 +305,7 @@ class _$SelectTbCmLocationCurrentItem implements SelectTbCmLocationCurrentItem {
 
   @override
   String toString() {
-    return 'SettingWorkShopEvents.selectTbCmLocationCurrentItem()';
+    return 'SettingInfoEvents.selectTbCmLocationCurrentItem()';
   }
 
   @override
@@ -430,7 +430,7 @@ class _$SelectTbCmLocationCurrentItem implements SelectTbCmLocationCurrentItem {
   }
 }
 
-abstract class SelectTbCmLocationCurrentItem implements SettingWorkShopEvents {
+abstract class SelectTbCmLocationCurrentItem implements SettingInfoEvents {
   const factory SelectTbCmLocationCurrentItem() =
       _$SelectTbCmLocationCurrentItem;
 }
@@ -447,7 +447,7 @@ abstract class _$$SelectTbCmLocationCopyWith<$Res> {
 
 /// @nodoc
 class __$$SelectTbCmLocationCopyWithImpl<$Res>
-    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    extends _$SettingInfoEventsCopyWithImpl<$Res>
     implements _$$SelectTbCmLocationCopyWith<$Res> {
   __$$SelectTbCmLocationCopyWithImpl(
       _$SelectTbCmLocation _value, $Res Function(_$SelectTbCmLocation) _then)
@@ -486,7 +486,7 @@ class _$SelectTbCmLocation implements SelectTbCmLocation {
 
   @override
   String toString() {
-    return 'SettingWorkShopEvents.selectTbCmLocation(tbCmLocation: $tbCmLocation)';
+    return 'SettingInfoEvents.selectTbCmLocation(tbCmLocation: $tbCmLocation)';
   }
 
   @override
@@ -620,7 +620,7 @@ class _$SelectTbCmLocation implements SelectTbCmLocation {
   }
 }
 
-abstract class SelectTbCmLocation implements SettingWorkShopEvents {
+abstract class SelectTbCmLocation implements SettingInfoEvents {
   const factory SelectTbCmLocation(final TbCmLocation tbCmLocation) =
       _$SelectTbCmLocation;
 
@@ -642,7 +642,7 @@ abstract class _$$UpdateTbCmLocationCopyWith<$Res> {
 
 /// @nodoc
 class __$$UpdateTbCmLocationCopyWithImpl<$Res>
-    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    extends _$SettingInfoEventsCopyWithImpl<$Res>
     implements _$$UpdateTbCmLocationCopyWith<$Res> {
   __$$UpdateTbCmLocationCopyWithImpl(
       _$UpdateTbCmLocation _value, $Res Function(_$UpdateTbCmLocation) _then)
@@ -681,7 +681,7 @@ class _$UpdateTbCmLocation implements UpdateTbCmLocation {
 
   @override
   String toString() {
-    return 'SettingWorkShopEvents.updateTbCmLocation(tbCmLocation: $tbCmLocation)';
+    return 'SettingInfoEvents.updateTbCmLocation(tbCmLocation: $tbCmLocation)';
   }
 
   @override
@@ -815,7 +815,7 @@ class _$UpdateTbCmLocation implements UpdateTbCmLocation {
   }
 }
 
-abstract class UpdateTbCmLocation implements SettingWorkShopEvents {
+abstract class UpdateTbCmLocation implements SettingInfoEvents {
   const factory UpdateTbCmLocation(final TbCmLocation tbCmLocation) =
       _$UpdateTbCmLocation;
 
@@ -836,7 +836,7 @@ abstract class _$$UpdateFromSelectTbCmLocationToEnableCopyWith<$Res> {
 
 /// @nodoc
 class __$$UpdateFromSelectTbCmLocationToEnableCopyWithImpl<$Res>
-    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    extends _$SettingInfoEventsCopyWithImpl<$Res>
     implements _$$UpdateFromSelectTbCmLocationToEnableCopyWith<$Res> {
   __$$UpdateFromSelectTbCmLocationToEnableCopyWithImpl(
       _$UpdateFromSelectTbCmLocationToEnable _value,
@@ -872,7 +872,7 @@ class _$UpdateFromSelectTbCmLocationToEnable
 
   @override
   String toString() {
-    return 'SettingWorkShopEvents.updateFromSelectTbCmLocationToEnable(sWorkShop: $sWorkShop)';
+    return 'SettingInfoEvents.updateFromSelectTbCmLocationToEnable(sWorkShop: $sWorkShop)';
   }
 
   @override
@@ -1007,7 +1007,7 @@ class _$UpdateFromSelectTbCmLocationToEnable
 }
 
 abstract class UpdateFromSelectTbCmLocationToEnable
-    implements SettingWorkShopEvents {
+    implements SettingInfoEvents {
   const factory UpdateFromSelectTbCmLocationToEnable(final String sWorkShop) =
       _$UpdateFromSelectTbCmLocationToEnable;
 
@@ -1028,7 +1028,7 @@ abstract class _$$UpdateFromSelectTbCmLocationToDisableAllCopyWith<$Res> {
 
 /// @nodoc
 class __$$UpdateFromSelectTbCmLocationToDisableAllCopyWithImpl<$Res>
-    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    extends _$SettingInfoEventsCopyWithImpl<$Res>
     implements _$$UpdateFromSelectTbCmLocationToDisableAllCopyWith<$Res> {
   __$$UpdateFromSelectTbCmLocationToDisableAllCopyWithImpl(
       _$UpdateFromSelectTbCmLocationToDisableAll _value,
@@ -1049,7 +1049,7 @@ class _$UpdateFromSelectTbCmLocationToDisableAll
 
   @override
   String toString() {
-    return 'SettingWorkShopEvents.updateFromSelectTbCmLocationToDisableAll()';
+    return 'SettingInfoEvents.updateFromSelectTbCmLocationToDisableAll()';
   }
 
   @override
@@ -1175,7 +1175,7 @@ class _$UpdateFromSelectTbCmLocationToDisableAll
 }
 
 abstract class UpdateFromSelectTbCmLocationToDisableAll
-    implements SettingWorkShopEvents {
+    implements SettingInfoEvents {
   const factory UpdateFromSelectTbCmLocationToDisableAll() =
       _$UpdateFromSelectTbCmLocationToDisableAll;
 }
@@ -1192,7 +1192,7 @@ abstract class _$$InsertTbCmLocationCopyWith<$Res> {
 
 /// @nodoc
 class __$$InsertTbCmLocationCopyWithImpl<$Res>
-    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    extends _$SettingInfoEventsCopyWithImpl<$Res>
     implements _$$InsertTbCmLocationCopyWith<$Res> {
   __$$InsertTbCmLocationCopyWithImpl(
       _$InsertTbCmLocation _value, $Res Function(_$InsertTbCmLocation) _then)
@@ -1231,7 +1231,7 @@ class _$InsertTbCmLocation implements InsertTbCmLocation {
 
   @override
   String toString() {
-    return 'SettingWorkShopEvents.insertTbCmLocation(tbCmLocation: $tbCmLocation)';
+    return 'SettingInfoEvents.insertTbCmLocation(tbCmLocation: $tbCmLocation)';
   }
 
   @override
@@ -1365,7 +1365,7 @@ class _$InsertTbCmLocation implements InsertTbCmLocation {
   }
 }
 
-abstract class InsertTbCmLocation implements SettingWorkShopEvents {
+abstract class InsertTbCmLocation implements SettingInfoEvents {
   const factory InsertTbCmLocation(final TbCmLocation tbCmLocation) =
       _$InsertTbCmLocation;
 
@@ -1385,7 +1385,7 @@ abstract class _$$BatchInsertTbCmLocationCopyWith<$Res> {
 
 /// @nodoc
 class __$$BatchInsertTbCmLocationCopyWithImpl<$Res>
-    extends _$SettingWorkShopEventsCopyWithImpl<$Res>
+    extends _$SettingInfoEventsCopyWithImpl<$Res>
     implements _$$BatchInsertTbCmLocationCopyWith<$Res> {
   __$$BatchInsertTbCmLocationCopyWithImpl(_$BatchInsertTbCmLocation _value,
       $Res Function(_$BatchInsertTbCmLocation) _then)
@@ -1423,7 +1423,7 @@ class _$BatchInsertTbCmLocation implements BatchInsertTbCmLocation {
 
   @override
   String toString() {
-    return 'SettingWorkShopEvents.batchInsertTbCmLocation(tbCmLocations: $tbCmLocations)';
+    return 'SettingInfoEvents.batchInsertTbCmLocation(tbCmLocations: $tbCmLocations)';
   }
 
   @override
@@ -1557,7 +1557,7 @@ class _$BatchInsertTbCmLocation implements BatchInsertTbCmLocation {
   }
 }
 
-abstract class BatchInsertTbCmLocation implements SettingWorkShopEvents {
+abstract class BatchInsertTbCmLocation implements SettingInfoEvents {
   const factory BatchInsertTbCmLocation(
       final List<TbCmLocation> tbCmLocations) = _$BatchInsertTbCmLocation;
 

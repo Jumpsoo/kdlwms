@@ -48,6 +48,9 @@ dependencies:
   flutter_beep: ^1.0.0
   dio: ^4.0.6
   restart_app: ^1.1.0
+  connectivity_plus: ^2.3.5
+
+  vibration: ^1.7.3
 
 dev_dependencies:
   flutter_test:

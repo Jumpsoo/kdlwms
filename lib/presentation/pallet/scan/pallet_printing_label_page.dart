@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -87,7 +88,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     hideCircularProgressIndicator();
 
     WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showCustomSnackBarWarn(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
+        showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
   }
 
   @override
@@ -266,6 +267,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
                   }
                 else if (index == 1)
                   {
+                    //인쇄요청 ( 벡엔드 : 팔레트 생성,인쇄처리)
                     pringtingPalletList(
                       context,
                       topGridStateManager,
@@ -281,52 +283,6 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
                   }
               }),
     );
-  }
-
-  // 작업중인 내용 확정 처리
-  // 확정 후 확정 리스트 서버로 송신
-  void loadPacking() async {
-    if (await checkValue(context, 'LOAD', downGridStateManager, '') == false) {
-      return;
-    }
-    //상태를 3 로변경한다.
-    //화면에서가 아닌 데이터 조회 후 전송한다.
-    List<TbWhPallet> tbWhPallets = [];
-    for (PlutoRow row in downGridStateManager.rows) {
-      List<PlutoCell> cells = row.cells.values.toList();
-      tbWhPallets.add(TbWhPallet(
-        comps: gComps,
-        palletSeq: cells[0].value,
-        itemNo: cells[1].value,
-        itemLot: cells[2].value,
-        boxNo: cells[3].value,
-        quantity: cells[4].value,
-        barcode: cells[5].value,
-      ));
-    }
-    // 서버로 전송 및 로컬디비 데이터 수정
-    // 상태 변경
-
-    await viewModel.useCasesWms
-        .updatePalletFinishUseCase(tbWhPallets, LoadState.Load.index);
-
-    showCustomSnackBarSuccess(ownContext, '정상처리 되었습니다.');
-    viewPrintingList(
-      context,
-      topGridStateManager,
-    );
-  }
-
-  void deletePackedPallet() async {
-    bool bRet = await deletePackItem(context, downGridStateManager,
-        _readWorkShop, _readLocation, LoadState.Pack.index);
-
-    if (bRet) {
-      viewPrintingList(
-        context,
-        topGridStateManager,
-      );
-    }
   }
 
   // 리딩한 작업내용을 아래 그리드에 추가함
@@ -586,33 +542,34 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
       return false;
     }
     PalletViewModel viewModel = context.read<PalletViewModel>();
-
-    List<TbWhPallet> tbWhPallets = [];
-    for (PlutoRow row in gridStateManager.rows) {
-      if (row.checked == true) {
-        List<PlutoCell> cells = row.cells.values.toList();
-        tbWhPallets.add(TbWhPallet(
-          comps: gComps,
-          workshop: _readWorkShop,
-          location: _readLocation,
-          palletSeq: cells[5].value,
-          itemNo: cells[1].value,
-          quantity: cells[3].value,
-        ));
+    Result result = await viewModel.useCasesWms
+        .selectPalletingListUseCase(gComps, _readWorkShop, _readLocation);
+    // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
+    // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
+    result.when(success: (valueList) async {
+      List<TbWhPallet> printingList = valueList;
+      if (printingList.isEmpty) {
+        showCustomSnackBarSuccess(context, '인쇄할 내용이 전송되었습니다..');
       }
-    }
+      //전송
+      Result result = await viewModel.useCasesWms
+          .printingPalletUseCase(printingList, LoadState.Confirm.index);
+      result.when(
+          success: (value) {
+            showCustomSnackBarWarn(context, gSuccessMsg);
+            viewPrintingList(
+              context,
+              topGridStateManager,
+            );
+          },
+          error: (message) {
+            showCustomSnackBarWarn(context, message);
+          });
+    }, error: (message) {
+      return Result.error(message);
+    });
 
-    if (tbWhPallets.isEmpty) {
-      hideCircularProgressIndicator();
-      showCustomSnackBarWarn(context, '인쇄 할 내용이 없습니다.');
-      return false;
-    }
-
-    viewModel.useCasesWms
-        .printingPalletUseCase(tbWhPallets, LoadState.Confirm.index);
-    showCustomSnackBarSuccess(context, '인쇄할 내용이 전송되었습니다..');
-
-    return true;
+    return false;
   }
 
   //인쇄 대상 조회
@@ -622,10 +579,6 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     PalletViewModel viewModel = context.read<PalletViewModel>();
     gridStateManager.rows.clear();
     gridStateManager.removeRows(gridStateManager.rows);
-
-    //조회
-    // List<TbWhPallet>? pallets =
-    //     await viewModel.useCasesWms.selectPrintingList(gComps, _readWorkShop, _readLocation);
 
     List<TbWhPalletGroup>? pallets = await viewModel.useCasesWms
         .selectPrintingList(gComps, _readWorkShop, _readLocation);

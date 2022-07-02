@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
@@ -31,16 +32,29 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
             //서버 동기화 체크
             await checkSyncStatus(context);
 
-            if(await checkValue('DELETE', context)){
-
+            if (await checkValue('DELETE', context)) {
               showCircularProgressIndicator(context);
               await Future.delayed(const Duration(milliseconds: 500));
 
-              if(await viewModel.useCasesWms.deletePalletAll() == false){
-                await showErrorMsg(context, '적재이력 삭제');
-              }else{
-                await showSuccessMsg(context);
-              }
+              Result result =
+                  await viewModel.useCasesWms.deletePalletAllUseCase();
+              result.when(
+                  success: (value) {},
+                  error: (message) {
+                    showCustomSnackBarWarn(context, message);
+                    return;
+                  });
+              //상차이력 삭제
+
+              Result resultLoad =
+                  await viewModel.useCasesWms.deletePalletLoadAllUseCase();
+              resultLoad.when(
+                  success: (value) {},
+                  error: (message) {
+                    showCustomSnackBarWarn(context, message);
+                    return;
+                  });
+              showCustomSnackBarWarn(context, gSuccessMsg);
               hideCircularProgressIndicator();
             }
           },
@@ -93,10 +107,18 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
 
   //체크로직, 완료, 삭제 시
   Future<bool> checkValue(String confirm, BuildContext ownContext) async {
-
     switch (confirm) {
       case 'DELETE':
         int nCount = await viewModel.useCasesWms.getPalletCountInDevice();
+        Result result =
+            await viewModel.useCasesWms.getPalletLoadCountInDevice();
+
+        result.when(
+            success: (itemCount) async {
+              int loadCount = itemCount;
+              nCount = nCount + loadCount;
+            },
+            error: (message) {});
 
         if (nCount == 0) {
           await showAlertDialog(ownContext, '삭제 할 데이터가 없습니다.');
@@ -115,7 +137,4 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
     }
     return true;
   }
-
-
-
 }

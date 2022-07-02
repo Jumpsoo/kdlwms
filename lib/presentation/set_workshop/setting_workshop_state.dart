@@ -6,11 +6,11 @@ part 'setting_workshop_state.freezed.dart';
 part 'setting_workshop_state.g.dart';
 
 @freezed
-class SettingWorkshopState with _$SettingWorkshopState {
-  factory SettingWorkshopState({
+class SettingInfoState with _$SettingInfoState {
+  factory SettingInfoState({
     required List<TbCmLocation>? tbCmLocations,
     required bool isLoading,
   }) = _SettingWorkshopState;
 
-  factory SettingWorkshopState.fromJson(Map<String, dynamic> json) => _$SettingWorkshopStateFromJson(json);
+  factory SettingInfoState.fromJson(Map<String, dynamic> json) => _$SettingInfoStateFromJson(json);
 }

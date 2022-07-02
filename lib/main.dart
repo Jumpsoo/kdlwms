@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/di/provider_wms_setup.dart';
+import 'package:kdlwms/domain/model/tb_server_info.dart';
+import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
-import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/presentation/main_frame.dart';
+import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:kdlwms/ui/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -29,6 +32,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    Future<String> varUrl = _getUrl(context) ;
+    varUrl.then((val) {
+      if(val.isNotEmpty){
+        gServiceURL = val;
+      }else{
+
+      }
+    }).catchError((error) {
+      //
+    });
+
+    Future<String> varDeviceId = _getPropertyInfo(context) ;
+    varDeviceId.then((val) {
+      if(val.isNotEmpty){
+        gDeviceId = val;
+      }else{
+        gDeviceId = 'No_DEVICE';
+      }
+    }).catchError((error) {
+      //
+    });
+
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -51,4 +78,38 @@ class MyApp extends StatelessWidget {
       home: const MainFrame(),
     );
   }
+
+  //최초 url을 조회해온다.
+  Future<String> _getUrl(BuildContext context) async {
+
+    String sUrl = '';
+    SettingInfoViewModel viewModelSetting;
+    viewModelSetting = context.read<SettingInfoViewModel>();
+    sUrl = await viewModelSetting.useCaseServerInfo.selectTbServerInfo();
+
+    return sUrl;
+  }
+
+  //최초 장치명 및 기타정보를 조회한다.
+  Future<String> _getPropertyInfo(BuildContext context) async {
+
+    String sDeviceId = '';
+    SettingInfoViewModel viewModelSetting;
+    viewModelSetting = context.read<SettingInfoViewModel>();
+    Result result  = await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+    result.when(success: (value){
+
+      TbServerInfo info = value;
+      gDeviceId = info.deviceId!;
+      gVibrateEnable = info.vibrateState!;
+
+    }, error: (message){
+      //showCustomSnackBarWarn(context, message);
+    });
+
+    return sDeviceId;
+  }
+
 }
+
+

@@ -47,6 +47,12 @@ Future<bool> checkValue(BuildContext context, String confirm,
       break;
 
     case 'LOAD':
+
+      //인터넷 접속 확인
+      if(await tryConnectionWithPopup(context) == false){
+        return false;
+      }
+
       if (gridStateManager.rows.isEmpty) {
         showCustomSnackBarWarn(context, '상차 처리 할 항목이 없습니다.');
         return false;
@@ -68,7 +74,7 @@ Future<bool> checkValue(BuildContext context, String confirm,
         return false;
       }
       if (gridStateManager.currentCell == null) {
-        await showAlertDialog(context, '선택된 항목이 없습니다. \r\n 먼저 항목을 체크하세요.');
+        showCustomSnackBarWarn(context, '선택된 항목이 없습니다. \r\n 먼저 항목을 체크하세요.');
         return false;
       }
 
@@ -82,20 +88,26 @@ Future<bool> checkValue(BuildContext context, String confirm,
       }
       break;
     case 'PRINT':
+
+      //인터넷 접속 확인
+      if(await tryConnectionWithPopup(context) == false){
+        return false;
+      }
+
       if (gridStateManager.rows.isEmpty) {
         showCustomSnackBarWarn(context, '인쇄할 항목이 없습니다.');
         return false;
       }
-      for (PlutoRow row in gridStateManager.rows) {
-        if (row.checked == true) {
-          nCheckedItemCnt = nCheckedItemCnt + 1;
-        }
-      }
-
-      if (nCheckedItemCnt == 0) {
-        await showAlertDialog(context, '선택된 항목이 없습니다. \r\n 먼저 항목을 체크하세요.');
-        return false;
-      }
+      // for (PlutoRow row in gridStateManager.rows) {
+      //   if (row.checked == true) {
+      //     nCheckedItemCnt = nCheckedItemCnt + 1;
+      //   }
+      // }
+      //
+      // if (nCheckedItemCnt == 0) {
+      //   await showAlertDialog(context, '선택된 항목이 없습니다. \r\n 먼저 항목을 체크하세요.');
+      //   return false;
+      // }
 
       if (await showAlertDialogQ(
             context,
@@ -153,7 +165,7 @@ Future<bool> deletePackItem(
   }
 
   viewModel.useCasesWms.deletePallet(tbWhPallets);
-  showCustomSnackBarSuccess(context, '정상처리 되었습니다.');
+  showCustomSnackBarSuccess(context, gSuccessMsg);
 
   return true;
 }
@@ -195,10 +207,9 @@ Future<List<ComboValueType>> getLocationComboValueList(
 
   result.when(
       success: (c) {
-        print(TbWhCmCode);
         for (TbWhCmCode tb in c) {
           ComboValueType item = ComboValueType(
-              key: tb.codeCd!, value: tb.codeCd! + ':' + tb.codeKoNm!);
+              key: tb.codeCd!, value: tb.codeCd! + ':' + (tb.ref1 == null ? '' : tb.ref1)!);
           comboItemList.add(item);
         }
       },

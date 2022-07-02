@@ -1,20 +1,111 @@
-import 'package:kdlwms/data/data_source/pallet_api.dart';
+import 'dart:convert';
+
 import 'package:kdlwms/data/data_source/printing_api.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
+import 'package:kdlwms/domain/repository/tb_wh_pallet_load_repo.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
-import 'package:kdlwms/kdl_common/common_functions.dart';
 
+// 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
+// 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
 class PrintingPalletUseCase {
   PrintingApi api = PrintingApi();
+  final TbWhPalletLoadRepo repository;
+  final TbWhPalletRepo repositoryPallet;
 
-  PrintingPalletUseCase();
+  PrintingPalletUseCase(this.repository, this.repositoryPallet);
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<Result<bool>> call(List<TbWhPallet> palletList, int nState) async {
+  Future<Result<bool>> call(List<TbWhPallet> palletLists, int nState) async {
+    Result result = await api.sendPrintingList(palletLists, nState);
+    result.when(success: (value) async {
+      //처리 완료되면 : 상차테이블로 복사
+      //대상 삭제
+      // List<TbWhPalletLoad> migList = value;
 
-    Result result = await api.sendPrintingList(palletList, nState);
-    result.when(success: (value) {}, error: (message) {
+      //테스트용 삭제할것
+      List<TbWhPalletLoad> migList = [];
+      for (TbWhPallet item in palletLists) {
+        TbWhPalletLoad newItem = TbWhPalletLoad(
+          comps: item.comps,
+          palletSeq: item.palletSeq,
+          workshop: item.workshop,
+          location: item.location,
+          itemNo: item.itemNo,
+          itemLot: item.itemLot,
+          quantity: item.quantity,
+          state: item.state,
+          barcode: item.barcode,
+          scanDate: item.scanDate,
+          scanUsernm: item.scanUsernm,
+          boxNo: item.boxNo,
+          printFlag: item.printFlag,
+          printDate: item.printDate,
+          printUser: item.printUser,
+          as400IfFlag: item.as400IfFlag,
+          as400IfDate: item.as400IfDate,
+          as400IfUser: item.as400IfUser,
+          rgstrId: item.rgstrId,
+          rgstDt: item.rgstDt,
+          updtrId: item.updtrId,
+          updtDt: item.updtDt,
+        );
+        migList.add(newItem);
+      }
+
+      Result resultMig = await repository.upsertTbWhPalletLoad(migList);
+      resultMig.when(success: (value) {
+        return Result.success(true);
+      }, error: (message) {
+        return Result.error(message);
+      });
+    }, error: (message) async {
+      //테스트용 삭제할것
+
+      List<TbWhPalletLoad> migList = [];
+      for (TbWhPallet item in palletLists) {
+        TbWhPalletLoad newItem = TbWhPalletLoad(
+          comps: item.comps,
+          palletSeq: item.palletSeq,
+          workshop: item.workshop,
+          location: item.location,
+          itemNo: item.itemNo,
+          itemLot: item.itemLot,
+          quantity: item.quantity,
+          state: item.state,
+          barcode: item.barcode,
+          scanDate: item.scanDate,
+          scanUsernm: item.scanUsernm,
+          boxNo: item.boxNo,
+          printFlag: item.printFlag,
+          printDate: item.printDate,
+          printUser: item.printUser,
+          as400IfFlag: item.as400IfFlag,
+          as400IfDate: item.as400IfDate,
+          as400IfUser: item.as400IfUser,
+          rgstrId: item.rgstrId,
+          rgstDt: item.rgstDt,
+          updtrId: item.updtrId,
+          updtDt: item.updtDt,
+        );
+        migList.add(newItem);
+      }
+      //상차리스트로 이동
+      Result resultMig = await repository.upsertTbWhPalletLoad(migList);
+      resultMig.when(success: (value) async {
+        //인쇄 완료한 항목은 삭제
+        Result resultDel = await repositoryPallet.deleteTbWhPallet(palletLists);
+        resultDel.when(
+            success: (value) {
+              return const Result.success(true);
+            },
+            error: (message) {
+              return Result.error(message);
+            });
+      }, error: (message) {
+        return Result.error(message);
+      });
       return Result.error(message);
     });
     return const Result.success(true);

@@ -18,7 +18,7 @@ class TbWhItem with _$TbWhItem {
     String? warehouseCd,
     int? width,
     String? useYn,
-    int? boxKg,
+    double? boxKg,
     int? height,
     int? rgstrId,
     int? updtrId,

@@ -3,16 +3,25 @@ library my_prj.globals;
 import 'package:flutter/material.dart';
 
 int gSystemUserId = 11111;
-String gDeviceName = "TEST001";
+String gDeviceId = "TEST001";
 String gComps = 'C1';
 
-String gCurrentVersion = '동기화전 입니다.';
+String gSuccessMsg = '처리완료(OK!)';
+String gErrorMsg = '에러 발생(NG!!)';
 
+String gCurrentVersion = '동기화전 입니다.';
+String gCheckInternet = '';
 bool gSync = false;
 
-const String gServiceURL = 'http://54.180.96.240:8080/api/';
+int gVibrateEnable = 0;
+
+// 사외
+String gServiceURL = 'http://54.180.96.240:8080/api/';
+// 사내(덴소)
+//String gServiceURL = 'http://10.73.254.208/api/';
 
 late BuildContext gTransitContext;
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 String gSplitCharacter = '\r\n';
 

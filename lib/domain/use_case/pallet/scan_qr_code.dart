@@ -49,7 +49,7 @@ class ScanQrCode {
         quantity: nQty,
         barcode: sQrCode,
         scanDate: DateTime.now(),
-        scanUsernm: gDeviceName,
+        scanUsernm: gDeviceId,
         boxNo: nBoxNo,
       );
     } catch (e) {

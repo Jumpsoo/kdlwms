@@ -9,7 +9,7 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 class CmCodeRcvApi {
   final http.Client client = http.Client();
 
-  static const baseUrl = gServiceURL + 'code';
+  static final baseUrl = gServiceURL + '/code';
 
   Future<Result<Iterable>> selectCmCodeListAll() async {
     try {

@@ -31,7 +31,7 @@ mixin _$TbWhItem {
   String? get warehouseCd => throw _privateConstructorUsedError;
   int? get width => throw _privateConstructorUsedError;
   String? get useYn => throw _privateConstructorUsedError;
-  int? get boxKg => throw _privateConstructorUsedError;
+  double? get boxKg => throw _privateConstructorUsedError;
   int? get height => throw _privateConstructorUsedError;
   int? get rgstrId => throw _privateConstructorUsedError;
   int? get updtrId => throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ abstract class $TbWhItemCopyWith<$Res> {
       String? warehouseCd,
       int? width,
       String? useYn,
-      int? boxKg,
+      double? boxKg,
       int? height,
       int? rgstrId,
       int? updtrId});
@@ -138,7 +138,7 @@ class _$TbWhItemCopyWithImpl<$Res> implements $TbWhItemCopyWith<$Res> {
       boxKg: boxKg == freezed
           ? _value.boxKg
           : boxKg // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       height: height == freezed
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -173,7 +173,7 @@ abstract class _$$_TbWhItemCopyWith<$Res> implements $TbWhItemCopyWith<$Res> {
       String? warehouseCd,
       int? width,
       String? useYn,
-      int? boxKg,
+      double? boxKg,
       int? height,
       int? rgstrId,
       int? updtrId});
@@ -255,7 +255,7 @@ class __$$_TbWhItemCopyWithImpl<$Res> extends _$TbWhItemCopyWithImpl<$Res>
       boxKg: boxKg == freezed
           ? _value.boxKg
           : boxKg // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       height: height == freezed
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -318,7 +318,7 @@ class _$_TbWhItem implements _TbWhItem {
   @override
   final String? useYn;
   @override
-  final int? boxKg;
+  final double? boxKg;
   @override
   final int? height;
   @override
@@ -400,7 +400,7 @@ abstract class _TbWhItem implements TbWhItem {
       final String? warehouseCd,
       final int? width,
       final String? useYn,
-      final int? boxKg,
+      final double? boxKg,
       final int? height,
       final int? rgstrId,
       final int? updtrId}) = _$_TbWhItem;
@@ -430,7 +430,7 @@ abstract class _TbWhItem implements TbWhItem {
   @override
   String? get useYn => throw _privateConstructorUsedError;
   @override
-  int? get boxKg => throw _privateConstructorUsedError;
+  double? get boxKg => throw _privateConstructorUsedError;
   @override
   int? get height => throw _privateConstructorUsedError;
   @override

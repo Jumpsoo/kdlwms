@@ -18,7 +18,7 @@ _$_TbWhItem _$$_TbWhItemFromJson(Map<String, dynamic> json) => _$_TbWhItem(
       warehouseCd: json['warehouseCd'] as String?,
       width: json['width'] as int?,
       useYn: json['useYn'] as String?,
-      boxKg: json['boxKg'] as int?,
+      boxKg: (json['boxKg'] as num?)?.toDouble(),
       height: json['height'] as int?,
       rgstrId: json['rgstrId'] as int?,
       updtrId: json['updtrId'] as int?,

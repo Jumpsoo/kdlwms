@@ -88,7 +88,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
     hideCircularProgressIndicator();
 
     WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showCustomSnackBarWarn(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
+        showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
   }
 
   @override

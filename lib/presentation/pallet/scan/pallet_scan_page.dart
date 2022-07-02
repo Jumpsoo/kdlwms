@@ -16,6 +16,7 @@ import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:pointmobile_scanner/pointmobile_scanner.dart';
 import 'package:provider/provider.dart';
+import 'package:vibration/vibration.dart';
 
 class PalletScanPage extends StatefulWidget {
   final String title;
@@ -34,6 +35,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   int sortType = sortName;
 
   String _decodeResult = '';
+
   //창고는 콤보박스
 
   //창고위치 및 작업위치
@@ -43,7 +45,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
   //콤보박스용 변수
   List<ComboValueType> _dataWorkshop = [];
   List<ComboValueType> _dataLocation = [];
-
 
   // QR 리딩값 분기용 변수 2개
 
@@ -91,9 +92,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
     //프로그래스바
     hideCircularProgressIndicator();
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) =>
-        showCustomSnackBarWarn(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
   }
 
   @override
@@ -108,8 +108,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
           backgroundColor: Colors.blueGrey[900],
         ),
         body: Padding(
-          padding: const EdgeInsets.only(
-              left: 0, right: 0, top: 10, bottom: 10),
+          padding:
+              const EdgeInsets.only(left: 0, right: 0, top: 10, bottom: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
@@ -130,8 +130,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
                               await checkSyncStatus(context);
 
                               showCustomSnackBarSuccess(
-                              context, '로케이션 번호를 읽히세요.');
-                              },
+                                  context, '로케이션 번호를 읽히세요.');
+                            },
                             style: ElevatedButton.styleFrom(
                               fixedSize: const Size(100, 40),
                               primary: Colors.teal[300],
@@ -154,8 +154,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                     Column(
                       children: [
                         Container(
-                          padding:
-                          const EdgeInsets.only(left: 5, right: 5),
+                          padding: const EdgeInsets.only(left: 5, right: 5),
                           width: 250,
                           height: 40,
                           alignment: Alignment.center,
@@ -202,8 +201,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                     Column(
                       children: [
                         Container(
-                          padding:
-                          const EdgeInsets.only(left: 5, right: 5),
+                          padding: const EdgeInsets.only(left: 5, right: 5),
                           width: 0,
                           height: 30,
                           alignment: Alignment.centerLeft,
@@ -242,6 +240,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                 child: PlutoGrid(
                   columns: getPackGridColumns(),
                   rows: [],
+                  mode: PlutoGridMode.select,
                   // columnGroups: columnGroups,
                   onLoaded: (PlutoGridOnLoadedEvent event) {
                     downGridStateManager = event.stateManager;
@@ -265,24 +264,21 @@ class _PalletScanPageState extends State<PalletScanPage> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.arrow_back), label: '전화면')
             ],
-            onTap: (index) =>
-            {
-              if (index == 0)
-                {confirmPacking()} //완료, 완료처리및 서벚전송
-              else
-                if (index == 1)
-                  {
-                    deletePackedPallet(),
-                  }
-                else
-                  if (index == 2)
+            onTap: (index) => {
+                  if (index == 0)
+                    {confirmPacking()} //완료, 완료처리및 서벚전송
+                  else if (index == 1)
+                    {
+                      deletePackedPallet(),
+                    }
+                  else if (index == 2)
                     {
                       Future.delayed(const Duration(seconds: 1), () async {
                         ScaffoldMessenger.of(context).clearSnackBars();
                         Navigator.pop(context);
                       })
                     }
-            }));
+                }));
   }
 
   void deletePackedPallet() async {
@@ -314,9 +310,11 @@ class _PalletScanPageState extends State<PalletScanPage> {
         showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
         return;
       }
+      if (gVibrateEnable == 0) {
+        Vibration.vibrate(duration: 90);
+      }
 
-      Result resultCheck =
-      await viewModel.useCasesWms.selectCheckValue(pallet);
+      Result resultCheck = await viewModel.useCasesWms.selectCheckValue(pallet);
       resultCheck.when(success: (value) async {
         //추가시 validation 은 repository 내부에있음
         Result result = await viewModel.useCasesWms.addPallet(pallet);
@@ -353,7 +351,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
       downGridStateManager,
       _readWorkShop,
       _readLocation,
-      LoadState.Confirm.index,
     );
   }
 
@@ -372,9 +369,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _readLocation = sReadLocation;
     });
     viewAll(_readWorkShop, _readLocation);
-
   }
-
 
   Future<void> viewAll(String? sWareHouse, String? sLocation) async {
     viewTopList();
@@ -392,26 +387,28 @@ class _PalletScanPageState extends State<PalletScanPage> {
     //화면에서가 아닌 데이터 조회 후 전송한다.
     List<TbWhPallet> tbWhPallets = [];
     for (PlutoRow row in downGridStateManager.rows) {
-
-        List<PlutoCell> cells = row.cells.values.toList();
-
-
-        tbWhPallets.add(TbWhPallet(
-            comps: gComps,
-            palletSeq: cells[0].value,
-            itemNo: cells[1].value,
-            itemLot: cells[2].value,
-            boxNo: cells[3].value,
-            quantity: cells[4].value,
-            barcode: cells[5].value,
-            ));
-
+      List<PlutoCell> cells = row.cells.values.toList();
+      TbWhPallet newItem = TbWhPallet(
+        comps: gComps,
+        workshop: _readWorkShop,
+        location: _readLocation,
+        palletSeq: cells[0].value,
+        itemNo: cells[1].value,
+        itemLot: cells[2].value,
+        boxNo: cells[3].value,
+        quantity: cells[4].value,
+        barcode: cells[5].value,
+      );
+      print(newItem);
+      tbWhPallets.add(newItem);
     }
-    // 서버로 전송 및 로컬디비 데이터 수정
-    await viewModel.useCasesWms
-        .updatePalletFinishUseCase(tbWhPallets, LoadState.Confirm.index);
 
-    showCustomSnackBarSuccess(ownContext, '정상처리 되었습니다.');
+    // 서버로 전송 및 로컬디비 데이터 수정
+    // 서버로 전송하지 않고, 상태만 변경한다.
+    await viewModel.useCasesWms
+        .confirmPalletFinishUseCase(tbWhPallets, LoadState.Confirm.index);
+
+    showCustomSnackBarSuccess(ownContext, gSuccessMsg);
     await viewAll(_readWorkShop, _readLocation);
   }
 
@@ -423,14 +420,13 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
     setState(() {
       _dataWorkshop = comboList;
-
       _readWorkShop = sDefaultLocation!;
       if (sDefaultLocation != null) {
         _readWorkShop = sDefaultLocation;
       }
 
       if (sDefaultLocation == '') {
-        showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
+        showCustomSnackBarWarn(context, '작업위치가 설정되지 않았습니다.');
       }
     });
   }
@@ -465,11 +461,9 @@ class _PalletScanPageState extends State<PalletScanPage> {
               style: const TextStyle(color: Colors.black, fontSize: 16.0),
               onChanged: (String? newValue) {
                 if (newValue != null) {
-
                   setState(() {
                     _readWorkShop = newValue;
                     viewAll(_readWorkShop, _readWorkShop);
-
                   });
                 }
               },
@@ -567,10 +561,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
       return;
     }
 
-
     try {
       if (call.method == PointmobileScanner.ON_DECODE) {
-
         // showCircularProgressIndicator(context);
         _onDecode(call);
         // await hideCircularProgressIndicator();
@@ -598,13 +590,13 @@ class _PalletScanPageState extends State<PalletScanPage> {
     //TAG 리스트 스캔시 해당분기로 빠지는걸 방지
     if (sVal != null && sVal.length < 4 && sVal.substring(0, 1) == 'L') {
       //Location
-      _readLocation = sVal ;
+      _readLocation = sVal;
       _changeLocation(_readLocation);
-    } else if (sVal != null && sVal.length > 100 ) {
+    } else if (sVal != null && sVal.length > 100) {
       //제품 QR
       _readQRData = sVal;
       _changeReadQrData(_readQRData);
-    }else{
+    } else {
       showCustomSnackBarWarn(context, '스캔한 작업 코드가 부적절합니다.');
     }
   }

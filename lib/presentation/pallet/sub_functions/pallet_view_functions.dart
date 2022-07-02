@@ -1,6 +1,6 @@
-
 // 01. 실적입력화면 세부 함수
 import 'package:flutter/material.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 
 import 'package:kdlwms/kdl_common/common_functions.dart';
@@ -8,7 +8,6 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:provider/provider.dart';
-
 
 // 02.  실적 조회 화면
 // 작업위치, 창고별 조회, 그루핑
@@ -24,16 +23,16 @@ Future<void> createPalletingTopGridView(
   gridStateManager.removeRows(gridStateManager.rows);
   //조회
 
-  List<TbWhPalletGroup>? pallets =
-  await viewModel.useCasesWms.selectPalletingSummaryUseCase(gComps, sWareHouse, sLocation);
-  if (pallets != null){
+  List<TbWhPalletGroup>? pallets = await viewModel.useCasesWms
+      .selectPalletingSummaryUseCase(gComps, sWareHouse, sLocation);
+  if (pallets != null) {
     gridStateManager.appendRows(
       getViewTopGridRowsGrouping(pallets),
     );
 
-    if(gridStateManager.rows.length == 1){
+    if (gridStateManager.rows.length == 1) {
       //데이터가 없습니다는 한군데에서만
-      showCustomSnackBarWarn(context, '입력 중인 데이터가 없습니다.');
+      // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
     }
     gridStateManager.notifyListeners();
   }
@@ -50,17 +49,22 @@ Future<void> createPalletingButtomGridView(
   gridStateManager.removeRows(gridStateManager.rows);
   //조회
 
-  List<TbWhPallet>? pallets =
-  await viewModel.useCasesWms.selectPalletingListUseCase(gComps, sWareHouse, sLocation);
+  Result result = await viewModel.useCasesWms
+      .selectPalletingListUseCase(gComps, sWareHouse, sLocation);
+  result.when(success: (valueList) {
 
-  if (pallets == null) {
-    showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
-  } else {
-    gridStateManager.appendRows(
-      getViewButtomGridRows(pallets),
-    );
-    gridStateManager.notifyListeners();
-  }
+    List<TbWhPallet>? pallets = valueList;
+    if (pallets == null) {
+      showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
+    } else {
+      gridStateManager.appendRows(
+        getViewButtomGridRows(pallets),
+      );
+      gridStateManager.notifyListeners();
+    }
+  }, error: (message) {
+    showCustomSnackBarWarn(context, message);
+  });
 }
 
 // 상단 그리드 입력창용
@@ -68,7 +72,6 @@ Future<void> createPalletingButtomGridView(
 // max => 180
 List<PlutoColumn> getViewTopGridColumns() {
   List<PlutoColumn> cols = <PlutoColumn>[
-
     PlutoColumn(
       title: 'SEQ',
       field: 'SEQ',
@@ -125,14 +128,13 @@ List<PlutoColumn> getViewTopGridColumns() {
 // 상단 그리드
 // 데이터 로우
 List<PlutoRow> getViewTopGridRows(List<TbWhPallet> pallets) {
-
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   for (var e in pallets) {
     nRowNum = nRowNum + 1;
     PlutoRow row = PlutoRow(
       cells: {
-        'SEQ' : PlutoCell(value: nRowNum),
+        'SEQ': PlutoCell(value: nRowNum),
         'itemNo': PlutoCell(value: e.itemNo),
         'itemLot': PlutoCell(value: e.itemLot),
         'palletSeq': PlutoCell(value: e.palletSeq),
@@ -148,13 +150,12 @@ List<PlutoRow> getViewTopGridRows(List<TbWhPallet> pallets) {
 // 상단 그리드
 // 데이터 로우
 List<PlutoRow> getViewTopGridRowsGrouping(List<TbWhPalletGroup> pallets) {
-
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   for (var e in pallets) {
     PlutoRow row = PlutoRow(
       cells: {
-        'SEQ' : PlutoCell(value: nRowNum),
+        'SEQ': PlutoCell(value: nRowNum),
         'itemNo': PlutoCell(value: e.itemNo),
         'itemLot': PlutoCell(value: e.itemLot),
         'quantity': PlutoCell(value: e.quantity),
@@ -235,19 +236,19 @@ List<PlutoColumn> getPackGridColumns() {
     ),
   ];
 }
+
 // 하단 그리드
 // 데이터 로우
 List<PlutoRow> getViewButtomGridRows(List<TbWhPallet> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
-  try{
-
+  try {
     int nRowNum = 0;
     for (var e in pallets) {
       nRowNum = nRowNum + 1;
       PlutoRow row = PlutoRow(
         cells: {
-          'palletSeq' : PlutoCell(value: nRowNum),
+          'palletSeq': PlutoCell(value: nRowNum),
           'itemNo': PlutoCell(value: e.itemNo),
           'itemLot': PlutoCell(value: e.itemLot),
           'quantity': PlutoCell(value: e.quantity),
@@ -257,9 +258,8 @@ List<PlutoRow> getViewButtomGridRows(List<TbWhPallet> pallets) {
       );
       rows.add(row);
     }
-  }catch(e){
+  } catch (e) {
     writeLog(e.toString());
   }
   return rows;
 }
-

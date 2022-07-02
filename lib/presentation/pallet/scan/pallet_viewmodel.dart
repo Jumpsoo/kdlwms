@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/domain/use_case/use_case_wms.dart';
 import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
@@ -32,7 +33,7 @@ class PalletViewModel with ChangeNotifier {
       selectCheckValue: _selectCheckValue,
       addPallet: _addPallet,
       updatePallet: _updatePallet,
-      updatePalletState: _updatePalletState,
+      updatePalletLoadState: _updatePalletLoadState,
       deletePallet: _deletePallet,
       deletePalletAll: _deletePalletAll,
       scanQRData: _scanQRData,
@@ -45,7 +46,7 @@ class PalletViewModel with ChangeNotifier {
       String sWorkShop, String sLocation, int nState) async {
 
     List<TbWhPallet>? palletlist =
-        await useCasesWms.selectPackingListUseCase(sWorkShop, sLocation, nState);
+        await useCasesWms.selectPackingListUseCase(sWorkShop, sLocation);
 
     _state = state.copyWith(
       pallets: palletlist,
@@ -69,16 +70,17 @@ class PalletViewModel with ChangeNotifier {
     return await useCasesWms.updatePallet(pallets);
   }
 
-  Future<Result<bool>> _updatePalletState(List<TbWhPallet> pallets, int nState) async {
-    return await useCasesWms.updatePalletFinishUseCase(pallets, nState);
+  //상차완료시 상태변경
+  Future<Result<bool>> _updatePalletLoadState(List<TbWhPalletLoad> pallets, int nState) async {
+    return await useCasesWms.loadingPalletFinishUseCase(pallets, nState);
   }
 
-  Future<bool> _deletePallet(List<TbWhPallet> pallets) async {
+  Future<Result<bool>> _deletePallet(List<TbWhPallet> pallets) async {
     return await useCasesWms.deletePallet(pallets);
   }
 
-  Future<bool> _deletePalletAll() async {
-    return await useCasesWms.deletePalletAll();
+  Future<Result<bool>> _deletePalletAll() async {
+    return await useCasesWms.deletePalletAllUseCase();
   }
 
   Future<int> _getPalletCountInDevice() async {
@@ -102,7 +104,7 @@ class PalletViewModel with ChangeNotifier {
         quantity: int.parse(convertedData[6]),
         barcode: sQRData,
         scanDate: DateTime.now(),
-        scanUsernm: gDeviceName,
+        scanUsernm: gDeviceId,
         boxNo: int.parse(convertedData[7]),
       );
     } catch (e) {

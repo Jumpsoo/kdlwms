@@ -11,7 +11,7 @@ abstract class TbWhPalletRepo {
 
   //02.실적조회
   Future<List<TbWhPalletGroup>?>  selectPalletingSummary(TbWhPallet tbWhPallet);
-  Future<List<TbWhPallet>?> selectPalletingList(TbWhPallet tbWhPallet);
+  Future<Result<List<TbWhPallet>?>> selectPalletingList(TbWhPallet tbWhPallet);
 
   //03라벨 데이터 조회
   Future<List<TbWhPalletGroup>?> selectPrintingList(TbWhPallet tbWhPallet);
@@ -23,6 +23,7 @@ abstract class TbWhPalletRepo {
   //단일행조회
   Future<Result<TbWhPallet?>> selectTbWhPalletInto(TbWhPallet tbWhPallet);
 
+  //적재중(입력, 완료) 대상 전체 조회
   Future<int> getTbWhPalletCountInDevice();
 
   Future<bool> insertTbWhPallet(TbWhPallet pallet);
@@ -33,9 +34,9 @@ abstract class TbWhPalletRepo {
 
   Future<Result<bool>> updateTbWhPalletState(List<TbWhPallet> pallets);
 
-  Future<bool> deleteTbWhPallet(List<TbWhPallet> pallet);
+  Future<Result<bool>> deleteTbWhPallet(List<TbWhPallet> pallet);
 
-  Future<bool> deleteTbWhPalletAll();
+  Future<Result<bool>> deleteTbWhPalletAll();
 
   // 01. 기실적여부 체크
   // 02. 품번 유효성 체크

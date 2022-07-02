@@ -13,6 +13,7 @@ class ItemRcvRepoImpl implements ItemRcvRepo {
 
     return result.when(
         success: (iterable) {
+
       return Result.success(iterable.map((e) => TbWhItem.fromJson(e)).toList());
     }, error: (message) {
           return Result.error(message);

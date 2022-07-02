@@ -9,17 +9,26 @@ import 'package:pluto_grid/pluto_grid.dart';
 // 상태무관하게 조회됨
 List<PlutoColumn> getPrintItemColumns() {
   List<PlutoColumn> cols = <PlutoColumn>[
-    PlutoColumn(
-      title: 'chk',
-      field: 'check',
-      width: 70,
-      textAlign: PlutoColumnTextAlign.right,
-      type: PlutoColumnType.text(),
-      enableColumnDrag: false,
-      enableContextMenu: false,
-      enableEditingMode: false,
-      enableRowChecked: true,
-    ),
+    // PlutoColumn(
+    //   title: 'chk',
+    //   field: 'check',
+    //   width: 70,
+    //   textAlign: PlutoColumnTextAlign.right,
+    //   type: PlutoColumnType.text(),
+    //   enableColumnDrag: false,
+    //   enableContextMenu: false,
+    //   enableEditingMode: false,
+    //   enableRowChecked: true,
+    // ),
+    // PlutoColumn(
+    //   title: '위치',
+    //   field: 'location',
+    //   width: 120,
+    //   type: PlutoColumnType.text(),
+    //   textAlign: PlutoColumnTextAlign.left,
+    //   enableColumnDrag: false,
+    //   enableContextMenu: false,
+    // ),
     PlutoColumn(
       title: '품목 코드',
       field: 'itemNo',
@@ -60,16 +69,6 @@ List<PlutoColumn> getPrintItemColumns() {
       enableContextMenu: false,
       enableEditingMode: false,
     ),
-    PlutoColumn(
-      title: 'palletSeq',
-      field: 'palletSeq',
-      width: 0,
-      type: PlutoColumnType.number(),
-      textAlign: PlutoColumnTextAlign.right,
-      enableColumnDrag: false,
-      enableContextMenu: false,
-      enableEditingMode: false,
-    ),
   ];
   return cols;
 }
@@ -81,17 +80,18 @@ List<PlutoRow> getPrintGridRowsGroup(List<TbWhPalletGroup> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   for (var e in pallets) {
+
+    nRowNum = nRowNum + 1;
     PlutoRow row = PlutoRow(
       cells: {
-        'check': PlutoCell(value: false),
+        // 'check': PlutoCell(value: false),
+        // 'SEQ': PlutoCell(value: nRowNum),
         'itemNo': PlutoCell(value: e.itemNo),
         'itemLot': PlutoCell(value: e.itemLot),
         'quantity': PlutoCell(value: e.quantity),
         'boxCnt': PlutoCell(value: e.boxCnt),
-        'palletSeq': PlutoCell(value: e.palletSeq),
       },
     );
-    nRowNum = nRowNum + 1;
     rows.add(row);
   }
   return rows;

@@ -23,8 +23,8 @@ mixin _$PalletEvent {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -38,7 +38,8 @@ mixin _$PalletEvent {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -52,7 +53,8 @@ mixin _$PalletEvent {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -66,7 +68,8 @@ mixin _$PalletEvent {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -80,7 +83,7 @@ mixin _$PalletEvent {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -93,7 +96,7 @@ mixin _$PalletEvent {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -207,8 +210,8 @@ class _$ListPallets implements ListPallets {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -225,7 +228,8 @@ class _$ListPallets implements ListPallets {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -242,7 +246,8 @@ class _$ListPallets implements ListPallets {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -262,7 +267,8 @@ class _$ListPallets implements ListPallets {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -279,7 +285,7 @@ class _$ListPallets implements ListPallets {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -295,7 +301,7 @@ class _$ListPallets implements ListPallets {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -402,8 +408,8 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -420,7 +426,8 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -437,7 +444,8 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -457,7 +465,8 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -474,7 +483,7 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -490,7 +499,7 @@ class _$SelectDupleCheck implements SelectDupleCheck {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -597,8 +606,8 @@ class _$AddPallet implements AddPallet {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -615,7 +624,8 @@ class _$AddPallet implements AddPallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -632,7 +642,8 @@ class _$AddPallet implements AddPallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -652,7 +663,8 @@ class _$AddPallet implements AddPallet {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -669,7 +681,7 @@ class _$AddPallet implements AddPallet {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -685,7 +697,7 @@ class _$AddPallet implements AddPallet {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -781,8 +793,8 @@ class _$UpdatePallet implements UpdatePallet {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -799,7 +811,8 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -816,7 +829,8 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -836,7 +850,8 @@ class _$UpdatePallet implements UpdatePallet {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -853,7 +868,7 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -869,7 +884,7 @@ class _$UpdatePallet implements UpdatePallet {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -893,34 +908,34 @@ abstract class UpdatePallet implements PalletEvent {
 }
 
 /// @nodoc
-abstract class _$$UpdatePalletStateCopyWith<$Res> {
-  factory _$$UpdatePalletStateCopyWith(
-          _$UpdatePalletState value, $Res Function(_$UpdatePalletState) then) =
-      __$$UpdatePalletStateCopyWithImpl<$Res>;
-  $Res call({List<TbWhPallet> pallets, int nState});
+abstract class _$$UpdatePalletLoadStateCopyWith<$Res> {
+  factory _$$UpdatePalletLoadStateCopyWith(_$UpdatePalletLoadState value,
+          $Res Function(_$UpdatePalletLoadState) then) =
+      __$$UpdatePalletLoadStateCopyWithImpl<$Res>;
+  $Res call({List<TbWhPalletLoad> pallets, int nState});
 }
 
 /// @nodoc
-class __$$UpdatePalletStateCopyWithImpl<$Res>
+class __$$UpdatePalletLoadStateCopyWithImpl<$Res>
     extends _$PalletEventCopyWithImpl<$Res>
-    implements _$$UpdatePalletStateCopyWith<$Res> {
-  __$$UpdatePalletStateCopyWithImpl(
-      _$UpdatePalletState _value, $Res Function(_$UpdatePalletState) _then)
-      : super(_value, (v) => _then(v as _$UpdatePalletState));
+    implements _$$UpdatePalletLoadStateCopyWith<$Res> {
+  __$$UpdatePalletLoadStateCopyWithImpl(_$UpdatePalletLoadState _value,
+      $Res Function(_$UpdatePalletLoadState) _then)
+      : super(_value, (v) => _then(v as _$UpdatePalletLoadState));
 
   @override
-  _$UpdatePalletState get _value => super._value as _$UpdatePalletState;
+  _$UpdatePalletLoadState get _value => super._value as _$UpdatePalletLoadState;
 
   @override
   $Res call({
     Object? pallets = freezed,
     Object? nState = freezed,
   }) {
-    return _then(_$UpdatePalletState(
+    return _then(_$UpdatePalletLoadState(
       pallets == freezed
           ? _value._pallets
           : pallets // ignore: cast_nullable_to_non_nullable
-              as List<TbWhPallet>,
+              as List<TbWhPalletLoad>,
       nState == freezed
           ? _value.nState
           : nState // ignore: cast_nullable_to_non_nullable
@@ -931,13 +946,13 @@ class __$$UpdatePalletStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UpdatePalletState implements UpdatePalletState {
-  const _$UpdatePalletState(final List<TbWhPallet> pallets, this.nState)
+class _$UpdatePalletLoadState implements UpdatePalletLoadState {
+  const _$UpdatePalletLoadState(final List<TbWhPalletLoad> pallets, this.nState)
       : _pallets = pallets;
 
-  final List<TbWhPallet> _pallets;
+  final List<TbWhPalletLoad> _pallets;
   @override
-  List<TbWhPallet> get pallets {
+  List<TbWhPalletLoad> get pallets {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_pallets);
   }
@@ -947,14 +962,14 @@ class _$UpdatePalletState implements UpdatePalletState {
 
   @override
   String toString() {
-    return 'PalletEvent.updatePalletState(pallets: $pallets, nState: $nState)';
+    return 'PalletEvent.updatePalletLoadState(pallets: $pallets, nState: $nState)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdatePalletState &&
+            other is _$UpdatePalletLoadState &&
             const DeepCollectionEquality().equals(other._pallets, _pallets) &&
             const DeepCollectionEquality().equals(other.nState, nState));
   }
@@ -967,8 +982,9 @@ class _$UpdatePalletState implements UpdatePalletState {
 
   @JsonKey(ignore: true)
   @override
-  _$$UpdatePalletStateCopyWith<_$UpdatePalletState> get copyWith =>
-      __$$UpdatePalletStateCopyWithImpl<_$UpdatePalletState>(this, _$identity);
+  _$$UpdatePalletLoadStateCopyWith<_$UpdatePalletLoadState> get copyWith =>
+      __$$UpdatePalletLoadStateCopyWithImpl<_$UpdatePalletLoadState>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -978,14 +994,14 @@ class _$UpdatePalletState implements UpdatePalletState {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
     required TResult Function(String sQRData) scanQRData,
   }) {
-    return updatePalletState(pallets, nState);
+    return updatePalletLoadState(pallets, nState);
   }
 
   @override
@@ -996,13 +1012,14 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
   }) {
-    return updatePalletState?.call(pallets, nState);
+    return updatePalletLoadState?.call(pallets, nState);
   }
 
   @override
@@ -1013,15 +1030,16 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
     TResult Function(String sQRData)? scanQRData,
     required TResult orElse(),
   }) {
-    if (updatePalletState != null) {
-      return updatePalletState(pallets, nState);
+    if (updatePalletLoadState != null) {
+      return updatePalletLoadState(pallets, nState);
     }
     return orElse();
   }
@@ -1033,14 +1051,15 @@ class _$UpdatePalletState implements UpdatePalletState {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
         getPalletCountInDevice,
     required TResult Function(ScanQRData value) scanQRData,
   }) {
-    return updatePalletState(this);
+    return updatePalletLoadState(this);
   }
 
   @override
@@ -1050,13 +1069,13 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
   }) {
-    return updatePalletState?.call(this);
+    return updatePalletLoadState?.call(this);
   }
 
   @override
@@ -1066,28 +1085,29 @@ class _$UpdatePalletState implements UpdatePalletState {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
     TResult Function(ScanQRData value)? scanQRData,
     required TResult orElse(),
   }) {
-    if (updatePalletState != null) {
-      return updatePalletState(this);
+    if (updatePalletLoadState != null) {
+      return updatePalletLoadState(this);
     }
     return orElse();
   }
 }
 
-abstract class UpdatePalletState implements PalletEvent {
-  const factory UpdatePalletState(
-      final List<TbWhPallet> pallets, final int nState) = _$UpdatePalletState;
+abstract class UpdatePalletLoadState implements PalletEvent {
+  const factory UpdatePalletLoadState(
+          final List<TbWhPalletLoad> pallets, final int nState) =
+      _$UpdatePalletLoadState;
 
-  List<TbWhPallet> get pallets => throw _privateConstructorUsedError;
+  List<TbWhPalletLoad> get pallets => throw _privateConstructorUsedError;
   int get nState => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$UpdatePalletStateCopyWith<_$UpdatePalletState> get copyWith =>
+  _$$UpdatePalletLoadStateCopyWith<_$UpdatePalletLoadState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1164,8 +1184,8 @@ class _$DeletePallet implements DeletePallet {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -1182,7 +1202,8 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -1199,7 +1220,8 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -1219,7 +1241,8 @@ class _$DeletePallet implements DeletePallet {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -1236,7 +1259,7 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -1252,7 +1275,7 @@ class _$DeletePallet implements DeletePallet {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -1321,8 +1344,8 @@ class _$DeletePalletAll implements DeletePalletAll {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -1339,7 +1362,8 @@ class _$DeletePalletAll implements DeletePalletAll {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -1356,7 +1380,8 @@ class _$DeletePalletAll implements DeletePalletAll {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -1376,7 +1401,8 @@ class _$DeletePalletAll implements DeletePalletAll {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -1393,7 +1419,7 @@ class _$DeletePalletAll implements DeletePalletAll {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -1409,7 +1435,7 @@ class _$DeletePalletAll implements DeletePalletAll {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -1474,8 +1500,8 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -1492,7 +1518,8 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -1509,7 +1536,8 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -1529,7 +1557,8 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -1546,7 +1575,7 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -1562,7 +1591,7 @@ class _$GetPalletCountInDevice implements GetPalletCountInDevice {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -1649,8 +1678,8 @@ class _$ScanQRData implements ScanQRData {
     required TResult Function(TbWhPallet tbWhPallet) selectCheckValue,
     required TResult Function(TbWhPallet? tbWhPallet) addPallet,
     required TResult Function(List<TbWhPallet> pallets) updatePallet,
-    required TResult Function(List<TbWhPallet> pallets, int nState)
-        updatePalletState,
+    required TResult Function(List<TbWhPalletLoad> pallets, int nState)
+        updatePalletLoadState,
     required TResult Function(List<TbWhPallet> pallets) deletePallet,
     required TResult Function() deletePalletAll,
     required TResult Function() getPalletCountInDevice,
@@ -1667,7 +1696,8 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -1684,7 +1714,8 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(TbWhPallet tbWhPallet)? selectCheckValue,
     TResult Function(TbWhPallet? tbWhPallet)? addPallet,
     TResult Function(List<TbWhPallet> pallets)? updatePallet,
-    TResult Function(List<TbWhPallet> pallets, int nState)? updatePalletState,
+    TResult Function(List<TbWhPalletLoad> pallets, int nState)?
+        updatePalletLoadState,
     TResult Function(List<TbWhPallet> pallets)? deletePallet,
     TResult Function()? deletePalletAll,
     TResult Function()? getPalletCountInDevice,
@@ -1704,7 +1735,8 @@ class _$ScanQRData implements ScanQRData {
     required TResult Function(SelectDupleCheck value) selectCheckValue,
     required TResult Function(AddPallet value) addPallet,
     required TResult Function(UpdatePallet value) updatePallet,
-    required TResult Function(UpdatePalletState value) updatePalletState,
+    required TResult Function(UpdatePalletLoadState value)
+        updatePalletLoadState,
     required TResult Function(DeletePallet value) deletePallet,
     required TResult Function(DeletePalletAll value) deletePalletAll,
     required TResult Function(GetPalletCountInDevice value)
@@ -1721,7 +1753,7 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,
@@ -1737,7 +1769,7 @@ class _$ScanQRData implements ScanQRData {
     TResult Function(SelectDupleCheck value)? selectCheckValue,
     TResult Function(AddPallet value)? addPallet,
     TResult Function(UpdatePallet value)? updatePallet,
-    TResult Function(UpdatePalletState value)? updatePalletState,
+    TResult Function(UpdatePalletLoadState value)? updatePalletLoadState,
     TResult Function(DeletePallet value)? deletePallet,
     TResult Function(DeletePalletAll value)? deletePalletAll,
     TResult Function(GetPalletCountInDevice value)? getPalletCountInDevice,

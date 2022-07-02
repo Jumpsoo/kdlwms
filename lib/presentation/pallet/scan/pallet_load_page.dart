@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_common_function.dart';
@@ -91,7 +92,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
 
     WidgetsBinding.instance
         .addPostFrameCallback((_) =>
-        showCustomSnackBarWarn(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
+        showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
   }
 
   @override
@@ -263,7 +264,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
               label: '조회',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.local_airport),
+              icon: Icon(Icons.car_repair),
               label: '상차 완료',
             ),
             BottomNavigationBarItem(
@@ -279,6 +280,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
               }
             else if (index == 1)
               {
+                //처리후 삭제
                 loadPacking(),
               }
             else if (index == 2)
@@ -301,11 +303,13 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     }
     //상태를 3 로변경한다.
     //화면에서가 아닌 데이터 조회 후 전송한다.
-    List<TbWhPallet> tbWhPallets = [];
+    List<TbWhPalletLoad> tbWhPallets = [];
     for (PlutoRow row in downGridStateManager.rows) {
         List<PlutoCell> cells = row.cells.values.toList();
-        tbWhPallets.add(TbWhPallet(
+        tbWhPallets.add(TbWhPalletLoad(
           comps: gComps,
+          workshop: _readWorkShop,
+          location: _readLocation,
           palletSeq: cells[0].value,
           itemNo: cells[1].value,
           itemLot: cells[2].value,
@@ -315,11 +319,10 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
         ));
     }
     // 서버로 전송 및 로컬디비 데이터 수정
-    // 상태 변경
+    // 데이터 삭제
+    await viewModel.useCasesWms.loadingPalletFinishUseCase(tbWhPallets, LoadState.Load.index);
 
-    await viewModel.useCasesWms.updatePalletFinishUseCase(tbWhPallets, LoadState.Load.index);
-
-    showCustomSnackBarSuccess(ownContext, '정상처리 되었습니다.');
+    showCustomSnackBarSuccess(ownContext, gSuccessMsg);
     await viewAll(_readWorkShop, _readLocation);
   }
 

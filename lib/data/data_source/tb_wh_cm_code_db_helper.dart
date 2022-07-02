@@ -24,9 +24,7 @@ class TbWhCmCodeDbHelper {
         'TB_WH_CM_CODE',
         where: ' grpCd = ?',
          whereArgs: [tbWhCmCode.grpCd], //버전은 통합관리하도록 공장코드를 조건에섲 제외함
-        
-        // where: 'comps=? and grpCd = ?',        
-        // whereArgs: [tbWhCmCode.comps, tbWhCmCode.grpCd],
+
       );
 
       return Result.success(maps.map((e) => TbWhCmCode.fromJson(e)).toList());

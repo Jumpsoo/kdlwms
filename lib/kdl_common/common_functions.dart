@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_beep/flutter_beep.dart';
@@ -9,6 +10,8 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:http/http.dart' as http;
+import 'package:vibration/vibration.dart';
 
 late BuildContext dialogContext;
 
@@ -95,14 +98,13 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
 }
 
 //경고일 경우 팝업도 보여주고 하단 스낵바도 보여준다.
-void showCustomSnackBarWarn(
-    BuildContext context, String message)  async {
-
+void showCustomSnackBarWarn(BuildContext context, String message) async {
   ScaffoldMessenger.of(context).clearSnackBars();
 
-  FlutterBeep.beep(false);
-
-  // await showAlertDialog(context, message);
+  //진동
+  if (gVibrateEnable == 0) {
+    Vibration.vibrate(duration: 400);
+  }
 
   final snackBar1 = SnackBar(
     content: Text(message),
@@ -114,15 +116,17 @@ void showCustomSnackBarWarn(
       },
     ),
   );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar1);
+  ScaffoldMessenger.of(context).showSnackBar(snackBar1);
 }
 
-void showCustomSnackBarSuccess(
-    BuildContext context, String message)  {
-
+void showCustomSnackBarSuccess(BuildContext context, String message) {
   ScaffoldMessenger.of(context).clearSnackBars();
 
   FlutterBeep.beep();
+
+  if (gVibrateEnable == 0) {
+    Vibration.vibrate(duration: 100);
+  }
 
   final snackBar1 = SnackBar(
     content: Text(message),
@@ -138,9 +142,8 @@ void showCustomSnackBarSuccess(
 }
 
 showCircularProgressIndicator(BuildContext context) {
-
   String sMessage = '처리중';
-  return  showDialog(
+  return showDialog(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
@@ -150,7 +153,7 @@ showCircularProgressIndicator(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             const CircularProgressIndicator(),
-             Text(sMessage),
+            Text(sMessage),
           ],
         ),
       );
@@ -159,69 +162,67 @@ showCircularProgressIndicator(BuildContext context) {
 }
 
 hideCircularProgressIndicator() {
-
   Navigator.pop(dialogContext);
-
 }
+
 //종료
-exitProgram(BuildContext context) async{
-  if(await showAlertDialogQ(context, '', '종료하시겠습니까?') == true){
+exitProgram(BuildContext context) async {
+  if (await showAlertDialogQ(context, '', '종료하시겠습니까?') == true) {
     exit(0);
   }
 }
 
 //향후 로그저장필요시 상세 구현할것
-void writeLog(var msg){
+void writeLog(var msg) {
   print(msg);
 }
 
-
-Future<bool> checkSyncStatus(BuildContext context) async{
-
-  DataSyncViewModel dataSyncViewModel = gTransitContext.read<DataSyncViewModel>();
-  Result resultSyncStatus = await dataSyncViewModel.useCaseDataBatch.getLastSyncInfo();
-  resultSyncStatus.when(success: (value){
-
+Future<bool> checkSyncStatus(BuildContext context) async {
+  DataSyncViewModel dataSyncViewModel =
+      gTransitContext.read<DataSyncViewModel>();
+  Result resultSyncStatus =
+      await dataSyncViewModel.useCaseDataBatch.getLastSyncInfo();
+  resultSyncStatus.when(success: (value) {
     TbCmSync tbCmSync = value;
-    String localSyncDate = tbCmSync.SYNC_DATETIME!.month.toString() + tbCmSync.SYNC_DATETIME!.day.toString();
+    String localSyncDate = tbCmSync.SYNC_DATETIME!.month.toString() +
+        tbCmSync.SYNC_DATETIME!.day.toString();
     DateTime currDate = DateTime.now();
     String currentDate = currDate.month.toString() + currDate.day.toString();
 
-    if(localSyncDate == currentDate){
+    if (localSyncDate == currentDate) {
       gSync = true;
-    }else{
+    } else {
       gSync = false;
     }
-
-  }, error: (message){
+  }, error: (message) {
     gSync = false;
   });
-  if(!gSync){
+  if (!gSync) {
     await showAlertDialog(context, "서버와 동기와 필요. \r\n 프로그램을 다시 실행하세요.");
-    Restart.restartApp();
+    await Future.delayed(const Duration(milliseconds: 2000));
+    // Restart.restartApp();
   }
   return gSync;
 }
 
-
-Future<bool> checkSyncStatusNoAlert() async{
-
-  DataSyncViewModel dataSyncViewModel = gTransitContext.read<DataSyncViewModel>();
-  Result resultSyncStatus = await dataSyncViewModel.useCaseDataBatch.getLastSyncInfo();
-  resultSyncStatus.when(success: (value){
-
+Future<bool> checkSyncStatusNoAlert() async {
+  DataSyncViewModel dataSyncViewModel =
+      gTransitContext.read<DataSyncViewModel>();
+  Result resultSyncStatus =
+      await dataSyncViewModel.useCaseDataBatch.getLastSyncInfo();
+  resultSyncStatus.when(success: (value) {
     TbCmSync tbCmSync = value;
-    String localSyncDate = tbCmSync.SYNC_DATETIME!.month.toString() + tbCmSync.SYNC_DATETIME!.day.toString();
+    String localSyncDate = tbCmSync.SYNC_DATETIME!.month.toString() +
+        tbCmSync.SYNC_DATETIME!.day.toString();
     DateTime currDate = DateTime.now();
     String currentDate = currDate.month.toString() + currDate.day.toString();
 
-    if(localSyncDate == currentDate){
+    if (localSyncDate == currentDate) {
       gSync = true;
-    }else{
+    } else {
       gSync = false;
     }
-
-  }, error: (message){
+  }, error: (message) {
     gSync = false;
   });
   return gSync;
@@ -242,10 +243,74 @@ Map<K, V> mergeMaps<K, V>(Map<K, V> map1, Map<K, V> map2,
 
   map2.forEach((key, mapValue) {
     result[key] =
-    result.containsKey(key) ? value(result[key] as V, mapValue) : mapValue;
+        result.containsKey(key) ? value(result[key] as V, mapValue) : mapValue;
   });
   return result;
 }
 
+//인터넷 접속 어뎁터 확인
+Future<bool> tryConnectionWithPopup(BuildContext context) async {
+  String errMsg = '인터넷 연결을 찾을 수 없습니다. \r\n';
 
+  if (await tryConnection() == false) {
+    await showAlertDialog(context, errMsg);
+    return false;
+  } else {
+    return true;
+  }
+}
 
+//인터넷 접속 어뎁터 확인
+Future<bool> tryConnection() async {
+
+  final ConnectivityResult result = await Connectivity().checkConnectivity();
+
+  try {
+
+    if (result == ConnectivityResult.wifi) {
+      final response =
+          await http.head(Uri.parse(gServiceURL + '/item?itemNo=x'));
+      if (response.statusCode != 200) {
+        return false;
+      }
+      return true;
+
+    } else if (result == ConnectivityResult.mobile) {
+      final response =
+          await http.head(Uri.parse(gServiceURL + '/item?itemNo=x'));
+      if (response.statusCode != 200) {
+        return false;
+      }
+      return true;
+    } else {
+      print('other type network');
+      return false;
+    }
+  } catch (_) {
+    print('에러');
+    return false;
+  }
+
+}
+
+class GlobalNavigator {
+  static showAlertDialog(String text) {
+    showDialog(
+      barrierDismissible: false,
+      context: navigatorKey.currentContext!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text('AAAAA'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

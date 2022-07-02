@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
+import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
+import 'package:kdlwms/presentation/settings/setting_property.dart';
+import 'package:provider/provider.dart';
 
 class MainFrameNavigationBarMain extends StatelessWidget {
-  const MainFrameNavigationBarMain({Key? key}) : super(key: key);
+  MainFrameNavigationBarMain({Key? key}) : super(key: key);
+
+  final TextEditingController _textFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +32,10 @@ class MainFrameNavigationBarMain extends StatelessWidget {
                   }
                 else if (index == 1)
                   {
+                    _moveToSetting(context),
+                  }
+                else if (index == 2)
+                  {
                     exitProgram(context),
                   }
               },
@@ -38,6 +49,14 @@ class MainFrameNavigationBarMain extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(
+                Icons.settings,
+                color: Colors.white,
+                size: 25,
+              ),
+              label: '환경 설정',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
                 Icons.highlight_off,
                 color: Colors.white,
                 size: 25,
@@ -47,8 +66,24 @@ class MainFrameNavigationBarMain extends StatelessWidget {
           ]),
     );
   }
+ void _moveToSetting(BuildContext context) async{
+   showCircularProgressIndicator(context);
+   await Future.delayed(const Duration(milliseconds: 500));
+
+   await Navigator.push(
+     context,
+     MaterialPageRoute(
+         builder: (context) =>
+         const SettingProperty(title: '환경 설정')),
+   );
+ }
 
   void _syncData(BuildContext context) async {
+    //인터넷 접속 확인
+    if (await tryConnectionWithPopup(context) == false) {
+      return;
+    }
+
     if (await showAlertDialogQ(
           context,
           '확인',
@@ -58,4 +93,5 @@ class MainFrameNavigationBarMain extends StatelessWidget {
       syncData(false);
     }
   }
+
 }

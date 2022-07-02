@@ -14,37 +14,37 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SettingWorkshopState _$SettingWorkshopStateFromJson(Map<String, dynamic> json) {
+SettingInfoState _$SettingInfoStateFromJson(Map<String, dynamic> json) {
   return _SettingWorkshopState.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SettingWorkshopState {
+mixin _$SettingInfoState {
   List<TbCmLocation>? get tbCmLocations => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SettingWorkshopStateCopyWith<SettingWorkshopState> get copyWith =>
+  $SettingInfoStateCopyWith<SettingInfoState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SettingWorkshopStateCopyWith<$Res> {
-  factory $SettingWorkshopStateCopyWith(SettingWorkshopState value,
-          $Res Function(SettingWorkshopState) then) =
-      _$SettingWorkshopStateCopyWithImpl<$Res>;
+abstract class $SettingInfoStateCopyWith<$Res> {
+  factory $SettingInfoStateCopyWith(
+          SettingInfoState value, $Res Function(SettingInfoState) then) =
+      _$SettingInfoStateCopyWithImpl<$Res>;
   $Res call({List<TbCmLocation>? tbCmLocations, bool isLoading});
 }
 
 /// @nodoc
-class _$SettingWorkshopStateCopyWithImpl<$Res>
-    implements $SettingWorkshopStateCopyWith<$Res> {
-  _$SettingWorkshopStateCopyWithImpl(this._value, this._then);
+class _$SettingInfoStateCopyWithImpl<$Res>
+    implements $SettingInfoStateCopyWith<$Res> {
+  _$SettingInfoStateCopyWithImpl(this._value, this._then);
 
-  final SettingWorkshopState _value;
+  final SettingInfoState _value;
   // ignore: unused_field
-  final $Res Function(SettingWorkshopState) _then;
+  final $Res Function(SettingInfoState) _then;
 
   @override
   $Res call({
@@ -66,7 +66,7 @@ class _$SettingWorkshopStateCopyWithImpl<$Res>
 
 /// @nodoc
 abstract class _$$_SettingWorkshopStateCopyWith<$Res>
-    implements $SettingWorkshopStateCopyWith<$Res> {
+    implements $SettingInfoStateCopyWith<$Res> {
   factory _$$_SettingWorkshopStateCopyWith(_$_SettingWorkshopState value,
           $Res Function(_$_SettingWorkshopState) then) =
       __$$_SettingWorkshopStateCopyWithImpl<$Res>;
@@ -76,7 +76,7 @@ abstract class _$$_SettingWorkshopStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_SettingWorkshopStateCopyWithImpl<$Res>
-    extends _$SettingWorkshopStateCopyWithImpl<$Res>
+    extends _$SettingInfoStateCopyWithImpl<$Res>
     implements _$$_SettingWorkshopStateCopyWith<$Res> {
   __$$_SettingWorkshopStateCopyWithImpl(_$_SettingWorkshopState _value,
       $Res Function(_$_SettingWorkshopState) _then)
@@ -128,7 +128,7 @@ class _$_SettingWorkshopState implements _SettingWorkshopState {
 
   @override
   String toString() {
-    return 'SettingWorkshopState(tbCmLocations: $tbCmLocations, isLoading: $isLoading)';
+    return 'SettingInfoState(tbCmLocations: $tbCmLocations, isLoading: $isLoading)';
   }
 
   @override
@@ -160,7 +160,7 @@ class _$_SettingWorkshopState implements _SettingWorkshopState {
   }
 }
 
-abstract class _SettingWorkshopState implements SettingWorkshopState {
+abstract class _SettingWorkshopState implements SettingInfoState {
   factory _SettingWorkshopState(
       {required final List<TbCmLocation>? tbCmLocations,
       required final bool isLoading}) = _$_SettingWorkshopState;

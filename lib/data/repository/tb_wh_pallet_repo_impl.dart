@@ -30,12 +30,14 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   }
 
   @override
-  Future<List<TbWhPallet>?> selectPalletingList(TbWhPallet tbWhPallet) async {
+  Future<Result<List<TbWhPallet>?>> selectPalletingList(
+      TbWhPallet tbWhPallet) async {
     return await db.selectPalletingList(tbWhPallet);
   }
 
   @override
-  Future<List<TbWhPalletGroup>?> selectPrintingList(TbWhPallet tbWhPallet) async {
+  Future<List<TbWhPalletGroup>?> selectPrintingList(
+      TbWhPallet tbWhPallet) async {
     return await db.selectPrintingList(tbWhPallet);
   }
 
@@ -101,16 +103,23 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   }
 
   @override
-  Future<bool> deleteTbWhPallet(List<TbWhPallet> pallets) async {
+  Future<Result<bool>> deleteTbWhPallet(List<TbWhPallet> pallets) async {
+    late Result result;
     try {
       for (TbWhPallet pallet in pallets) {
-        db.deleteTbWhPallet(pallet);
+        result = await db.deleteTbWhPallet(pallet);
+        result.when(
+            success: (value) {},
+            error: (message) {
+              return Result.error(message);
+            });
       }
     } catch (e) {
-      writeLog(e.toString());
-      return false;
+      var  sErrMsg = '에러 발생 : deleteTbWhPallet (repo)';
+      writeLog(sErrMsg);
+      return Result.error(sErrMsg);
     }
-    return true;
+    return const Result.success(true);
   }
 
   @override
@@ -119,7 +128,7 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   }
 
   @override
-  Future<bool> deleteTbWhPalletAll() async {
+  Future<Result<bool>> deleteTbWhPalletAll() async {
     return await db.deleteTbWhPalletAll();
   }
 

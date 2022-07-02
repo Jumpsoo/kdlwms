@@ -35,7 +35,7 @@ Future<void> createPackingTopGridView(
 
     if(gridStateManager.rows.length == 1){
       //데이터가 없습니다는 한군데에서만
-      showCustomSnackBarWarn(context, '입력 중인 데이터가 없습니다. ');
+      // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
     }
     gridStateManager.notifyListeners();
   }
@@ -45,17 +45,16 @@ Future<void> createPackingButtomGridView(
     BuildContext context,
     PlutoGridStateManager gridStateManager,
     String sWareHouse,
-    String sLocation,
-    int nState) async {
+    String sLocation) async {
+
   //초기화
   PalletViewModel viewModel = context.read<PalletViewModel>();
   gridStateManager.rows.clear();
   gridStateManager.removeRows(gridStateManager.rows);
+
   //조회
-
   List<TbWhPallet>? pallets =
-  await viewModel.useCasesWms.selectPackingListUseCase(sWareHouse, sLocation, nState);
-
+  await viewModel.useCasesWms.selectPackingListUseCase(sWareHouse, sLocation);
   if (pallets == null) {
     showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
   } else {
@@ -232,8 +231,8 @@ List<PlutoRow> getPackButtomGridRows(List<TbWhPallet> pallets) {
           'palletSeq' : PlutoCell(value: nRowNum),
           'itemNo': PlutoCell(value: e.itemNo),
           'itemLot': PlutoCell(value: e.itemLot),
-          'quantity': PlutoCell(value: e.quantity),
           'boxNo': PlutoCell(value: e.boxNo),
+          'quantity': PlutoCell(value: e.quantity),
           'barcode': PlutoCell(value: e.barcode),
         },
       );

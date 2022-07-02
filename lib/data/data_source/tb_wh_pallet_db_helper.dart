@@ -50,21 +50,23 @@ class TbWhPalletDbHelper {
   //상차전인 항목 표시
   //상태값이 0, 1인 항목만 보 여줄것
   Future<List<TbWhPallet>?> selectPackingList(TbWhPallet tbWhPallet) async {
-    final maps = await db.query(
-      'TB_WH_PALLET',
-      where: 'comps = ? '
-          'and workshop = ? '
-          'and location = ?'
-          'and state <=  ? ',
-      whereArgs: [
-        tbWhPallet.comps,
-        tbWhPallet.workshop,
-        tbWhPallet.location,
-        LoadState.Confirm.index,
-      ],
-      orderBy: 'palletSeq ASC',
-    );
-    return maps.map((e) => TbWhPallet.fromJson(e)).toList();
+    try{
+      final maps = await db.query(
+        'TB_WH_PALLET',
+        where: 'comps = ? '
+            'and workshop = ? '
+            'and location = ?',
+        whereArgs: [
+          tbWhPallet.comps,
+          tbWhPallet.workshop,
+          tbWhPallet.location,
+        ],
+        orderBy: 'palletSeq ASC',
+      );
+      return maps.map((e) => TbWhPallet.fromJson(e)).toList();
+    }catch(e){
+      writeLog(e.toString());
+    }
   }
 
   //02. 실적조회 상단집계
@@ -77,11 +79,13 @@ class TbWhPalletDbHelper {
         ' from TB_WH_PALLET '
         ' where comps = ? '
         '   and workshop = ? '
-        '   and location = ?',
+        '   and location = ?'
+        '   and state = ?',
         [
           tbWhPallet.comps!,
           tbWhPallet.workshop!,
           tbWhPallet.location!,
+          LoadState.Confirm.index,
         ]);
 
     final maps2 = await db.rawQuery(
@@ -90,11 +94,13 @@ class TbWhPalletDbHelper {
         ' where comps = ? '
         '   and workshop = ? '
         '   and location = ?'
+        '   and state = ?'
         ' group by comps, workshop, location, itemNo, itemLot ',
         [
           tbWhPallet.comps!,
           tbWhPallet.workshop!,
           tbWhPallet.location!,
+          LoadState.Confirm.index,
         ]);
     final mapRet = {...maps1, ...maps2};
     return mapRet.map((e) => TbWhPalletGroup.fromJson(e)).toList();
@@ -103,27 +109,35 @@ class TbWhPalletDbHelper {
   //02. 실적조회 하단 조회
   //상차전인 항목 표시
   //상태값 전체다 보여줄것
-  Future<List<TbWhPallet>?> selectPalletingList(TbWhPallet tbWhPallet) async {
-    final maps = await db.query(
-      'TB_WH_PALLET',
-      where: 'comps = ? '
-          'and workshop = ? '
-          'and location = ?' ,
-      whereArgs: [
-        tbWhPallet.comps,
-        tbWhPallet.workshop,
-        tbWhPallet.location,
-      ],
-      orderBy: 'itemLot, itemNo, state ',
-    );
-    return maps.map((e) => TbWhPallet.fromJson(e)).toList();
+  Future<Result<List<TbWhPallet>?>> selectPalletingList(
+      TbWhPallet tbWhPallet) async {
+    try {
+      final maps = await db.query(
+        'TB_WH_PALLET',
+        where: 'comps = ? '
+            'and workshop = ? '
+            'and location = ?',
+        // 'and state = ?',
+        whereArgs: [
+          tbWhPallet.comps,
+          tbWhPallet.workshop,
+          tbWhPallet.location,
+          // LoadState.Confirm.index,
+        ],
+        orderBy: 'itemLot, itemNo, state ',
+      );
+      return Result.success(maps.map((e) => TbWhPallet.fromJson(e)).toList());
+    } catch (_) {
+      var sErrMsg = '데이터베이스 에러 : selectPalletingList(qry) ';
+      writeLog(sErrMsg);
+      return Result.error(sErrMsg);
+    }
   }
 
   //02. 실적조회 화면 쿼리
   // 작업위치별 실적 리스트 조회
   Future<List<TbWhPallet>?> selectTbWhPalletListByLocation(
       TbWhPallet tbWhPallet) async {
-
     final maps = await db.query(
       'TB_WH_PALLET',
       where: 'comps = ? and workshop = ? and location = ?',
@@ -138,22 +152,22 @@ class TbWhPalletDbHelper {
   // 어디에 입력되었는지도 알려주면 좋을거같다.
   Future<List<TbWhPalletGroup>?> selectPrintingList(
       TbWhPallet tbWhPallet) async {
-
     final maps = await db.rawQuery(
         'SELECT palletSeq, itemNo, itemLot, sum(quantity) as quantity, count(*) as boxCnt '
-            ' from TB_WH_PALLET '
-            ' where comps = ? '
-            '   and workshop = ? '
-            '   and location = ?'
-            ' group by comps, workshop, location, palletSeq, itemNo, itemLot ',
+        ' from TB_WH_PALLET '
+        ' where comps = ? '
+        '   and workshop = ? '
+        '   and location = ?'
+        '   and state = ?'
+        ' group by comps, workshop, location, palletSeq, itemNo, itemLot  ',
         [
           tbWhPallet.comps,
           tbWhPallet.workshop,
           tbWhPallet.location,
+          LoadState.Confirm.index,
         ]);
-    print(maps);
-    return maps.map((e) => TbWhPalletGroup.fromJson(e)).toList();
 
+    return maps.map((e) => TbWhPalletGroup.fromJson(e)).toList();
   }
 
   //04. 상차완료 상단 조회
@@ -271,40 +285,46 @@ class TbWhPalletDbHelper {
     Result result;
 
     try {
-      await db.update(
+
+      int ret = await db.update(
         'TB_WH_PALLET',
         pallet.toJson(),
         where: 'comps = ? and barcode = ? ',
         whereArgs: [pallet.comps, pallet.barcode],
       );
+
     } catch (e) {
       return Result.error(e.toString());
     }
     return const Result.success(true);
   }
 
-  Future<bool> deleteTbWhPallet(TbWhPallet pallet) async {
+  Future<Result<bool>> deleteTbWhPallet(TbWhPallet pallet) async {
     try {
       int nRet = await db.delete(
         'TB_WH_PALLET',
         where: 'barcode = ?',
         whereArgs: [pallet.barcode],
       );
-    } catch (e) {
-      return false;
+      return Result.success(true);
+    } catch (_) {
+      var sErrMsg = '데이터베이스 에러발생 : deleteTbWhPallet(qry)';
+      writeLog(sErrMsg);
+      return Result.error(sErrMsg);
     }
-    return true;
   }
 
-  Future<bool> deleteTbWhPalletAll() async {
+  Future<Result<bool>> deleteTbWhPalletAll() async {
     try {
       await db.delete(
         'TB_WH_PALLET',
       );
-    } catch (e) {
-      return false;
+      return Result.success(true);
+    } catch (e_) {
+      var sErrMsg = '데이터베이스 에러발생 : deleteTbWhPallet(qry)';
+      writeLog(sErrMsg);
+      return Result.error(sErrMsg);
     }
-    return true;
   }
 
   Future<Result<bool>> upsertPallet(TbWhPallet pallet) async {

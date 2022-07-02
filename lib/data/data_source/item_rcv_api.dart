@@ -9,7 +9,7 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 class ItemRcvApi {
   final http.Client client = http.Client();
 
-  static const baseUrl = gServiceURL + '/item';
+  static final baseUrl = gServiceURL + '/item';
 
   Future<Result<Iterable>> selectItemList(String query) async {
     try {

@@ -26,17 +26,19 @@ class _DataSyncState extends State<DataSync> {
   }
 }
 
-Future<bool> syncData( bool ignoreMsg) async {
+Future<bool> syncData(bool ignoreMsg) async {
   const double nTotalPercent = 100;
   const double nIncreaseUnit = 100 / 4;
   double percentage = 0.0;
   String sBatchName = '공통코드';
   String sServerVersion = '';
 
-  DataSyncViewModel dataSyncViewModel = gTransitContext.read<DataSyncViewModel>();
+  DataSyncViewModel dataSyncViewModel =
+      gTransitContext.read<DataSyncViewModel>();
   //실적조회용 : 차후 삭제할것
   PalletViewModel palletViewModel = gTransitContext.read<PalletViewModel>();
-  SettingInfoViewModel viewModelSettings = gTransitContext.read<SettingInfoViewModel>();
+  SettingInfoViewModel viewModelSettings =
+      gTransitContext.read<SettingInfoViewModel>();
 
   //00. 프로그램 버전 체크
   //로컬버전
@@ -46,11 +48,16 @@ Future<bool> syncData( bool ignoreMsg) async {
   sServerVersion = await dataSyncViewModel.useCaseDataBatch.getServerVersion();
   writeLog('로컬버전 / 서버버전 : $gCurrentVersion / $sServerVersion');
 
+  //연결체크
+  bool bRet = await tryConnection();
+  if(bRet == false){
+    return false;
+  }
+
   gCurrentVersion = sServerVersion;
-  
-  if(ignoreMsg == true && gCurrentVersion == sServerVersion){
+  if (ignoreMsg == true && gCurrentVersion == sServerVersion) {
     //동기화 하지 않음
-    if(await checkSyncStatusNoAlert() == true) {
+    if (await checkSyncStatusNoAlert() == true) {
       return false;
     }
   }
@@ -61,7 +68,6 @@ Future<bool> syncData( bool ignoreMsg) async {
     textDirection: TextDirection.ltr,
     isDismissible: true,
   );
-
   progressDialog.style(
 //      message: 'Downloading file...',
     message: '초기화 중 ..',
@@ -79,12 +85,12 @@ Future<bool> syncData( bool ignoreMsg) async {
   );
   await progressDialog.show();
 
-
   sBatchName = '01.공통 코드';
   writeLog('$sBatchName');
+
   TbWhCmCode condTbWhCmCode = TbWhCmCode();
   if (await _getBatchItem(
-    gTransitContext,
+        gTransitContext,
         sBatchName,
         await dataSyncViewModel.useCaseDataBatch
             .migTbWhCmCode(condTbWhCmCode, sBatchName),
@@ -99,11 +105,12 @@ Future<bool> syncData( bool ignoreMsg) async {
 
   sBatchName = '02.품목정보';
   writeLog('$sBatchName');
+
   //조건이있을 경우 추가 할 것
   TbWhItem condTbWhItem = TbWhItem();
   percentage = percentage + nIncreaseUnit;
   if (await _getBatchItem(
-    gTransitContext,
+        gTransitContext,
         sBatchName,
         await dataSyncViewModel.useCaseDataBatch.migTbWhItem(condTbWhItem),
         progressDialog,
@@ -121,9 +128,11 @@ Future<bool> syncData( bool ignoreMsg) async {
 
   sBatchName = '03.작업장정보&팔레트정보';
   writeLog('$sBatchName');
+  //인터넷 연결 체크
+
   percentage = percentage + nIncreaseUnit;
   if (await _getBatchItem(
-    gTransitContext,
+        gTransitContext,
         sBatchName,
         await dataSyncViewModel.useCaseDataBatch.migTbCmLocation(),
         progressDialog,
@@ -137,30 +146,17 @@ Future<bool> syncData( bool ignoreMsg) async {
 
   sBatchName = '04.버전정보 동기화중..';
   //로컬버전정보 -> 서버로 변경
-  Result resultVersion = await dataSyncViewModel.useCaseDataBatch.updateLocalVersion(sServerVersion) ;
-  resultVersion.when(success: (value) async {
-    await dataSyncViewModel.useCaseDataBatch.saveLastSyncInfo(sServerVersion);
-    gSync = await checkSyncStatus(gTransitContext);
-  }, error: (message){});
-
-  //로컬 데이터 갱신일자 저장
-  // writeLog('$sBatchName');
-  // percentage = percentage + nIncreaseUnit;
-  // if (await _getBatchItem(
-  //   context,
-  //   sBatchName,
-  //   await viewModel.useCaseDataBatch.getCurrentVersionRow(),
-  //   progressDialog,
-  //   percentage,
-  // ) ==
-  //     false) {
-  //   _exitInitialProgram();
-  //
-  // }
-
+  Result resultVersion = await dataSyncViewModel.useCaseDataBatch
+      .updateLocalVersion(sServerVersion);
+  resultVersion.when(
+      success: (value) async {
+        await dataSyncViewModel.useCaseDataBatch
+            .saveLastSyncInfo(sServerVersion);
+        gSync = await checkSyncStatus(gTransitContext);
+      },
+      error: (message) {});
 
   progressDialog.hide();
-
 
   return true;
 }
@@ -200,8 +196,9 @@ Future<bool> _getBatchItem(BuildContext context, String sBatchName,
   DataSyncViewModel viewModel = context.read<DataSyncViewModel>();
 
   try {
-    result.when(success: (value) async {
+    result.when(success: (value) {
       updateProgressBar(progressDialog, percentage, '[$sBatchName].. 내려받는 중');
+
       writeLog('$sBatchName : 성공');
       retVal = true;
     }, error: (message) async {

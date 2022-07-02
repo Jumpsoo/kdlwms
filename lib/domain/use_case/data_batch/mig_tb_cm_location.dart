@@ -29,7 +29,6 @@ class MigTbCmLocation {
 
     Result resultTmp = await repository.selectTbCmLocationListAll();
     resultTmp.when(success: (list){
-      print(list);
     }, error: (message){});
 
 

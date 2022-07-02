@@ -29,6 +29,11 @@ class BtnMovePacking extends StatelessWidget  {
               //서버 동기화 체크
               await checkSyncStatus(context);
 
+              //인터넷 접속 확인
+              // if(await tryConnectionWithPopup(context) == false){
+              //   return;
+              // }
+
               showCircularProgressIndicator(context);
               await Future.delayed(const Duration(milliseconds: 500));
 
