@@ -320,7 +320,12 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
         loadingList);
 
     showCustomSnackBarSuccess(ownContext, gSuccessMsg);
-    await viewAll(_readWorkShop, _readLocation);
+
+    // 처리후 비동기 호출 추가
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => viewAll(_readWorkShop, _readLocation));
+
+    // await viewAll(_readWorkShop, _readLocation);
   }
 
   void deletePackedPallet() async {
@@ -488,8 +493,10 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
               value: _readLocation,
               style: const TextStyle(color: Colors.black, fontSize: 16.0),
               onChanged: (String? newValue) {
+                writeLog('AAAAAAAAAAAAAAAAAA');
                 if (newValue != null) {
                   setState(() {
+                    writeLog('AAAAAAAAAAAAAAAAAA');
                     _readLocation = newValue;
                     viewAll(_readWorkShop, _readLocation);
                   });
@@ -562,18 +569,26 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
   void _onDecode(MethodCall call) {
     final List lDecodeResult = call.arguments;
     String? sVal = lDecodeResult[1];
+    String sPivot = 'C100000001';
 
     if (sVal == 'READ_FAIL') {
       showCustomSnackBarWarn(context, '(바코드 읽기 실패)');
       return;
     }
 
+    if (sVal != null && sVal.length < sPivot.length ) {
+      showCustomSnackBarWarn(context, '(이동태그가 잘못되었습니다.)');
+      return;
+    }
     _readPalletSeq = sVal!;
+
     if (_readPalletSeq.isNotEmpty) {
       _readPalletSeq = _readPalletSeq.substring(2, 10);
     }
+
+
     // viewTopList();
-    viewBottomList();
+
     // //로케이션번호일경우
     // //TAG 리스트 스캔시 해당분기로 빠지는걸 방지
     // if (sVal != null && sVal.length < 4 && sVal.substring(0, 1) == 'L') {

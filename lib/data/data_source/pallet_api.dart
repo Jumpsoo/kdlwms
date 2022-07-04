@@ -164,7 +164,6 @@ class PalletApi {
 
       }
       final res = await client.get(Uri.parse(sParameters));
-
       if (res.statusCode == 200) {
         Map<String, dynamic> jsonResponse =
             jsonDecode(utf8.decode(res.bodyBytes));
@@ -172,6 +171,40 @@ class PalletApi {
 
         List<TbWhPalletPrint> retList =
             hits.map((e) => TbWhPalletPrint.fromJson(e)).toList();
+
+        return Result.success(retList);
+      } else {
+        return Result.error('서비스에러' + res.statusCode.toString());
+      }
+    } catch (e) {
+      return const Result.error('네트워크 연결 에러');
+    }
+  }
+
+  //상차대상 리스트 조회
+  Future<Result<List<TbWhPalletPrint>>> selectPalletLoadingList(
+      TbWhPallet tbWhPallet, String sPalletSeq) async {
+    try {
+      final callUrl = gServiceURL + '/selectLoad';
+      //필수값
+      String scanDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+      String sComps = tbWhPallet.comps!;
+      String sLocation = tbWhPallet.location!;
+      String sWorkShop = tbWhPallet.workshop!;
+      String sParameters = '';
+      int nPalletSeq = 0;
+
+      sParameters =
+      '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop&state=03&printFlag=Y';
+      
+      final res = await client.get(Uri.parse(sParameters));
+      if (res.statusCode == 200) {
+        Map<String, dynamic> jsonResponse =
+        jsonDecode(utf8.decode(res.bodyBytes));
+        Iterable hits = jsonResponse['data']['tagList'];
+
+        List<TbWhPalletPrint> retList =
+        hits.map((e) => TbWhPalletPrint.fromJson(e)).toList();
 
         return Result.success(retList);
       } else {

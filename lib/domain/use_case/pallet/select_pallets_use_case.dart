@@ -108,7 +108,7 @@ class SelectLoadingListByApiUseCase {
     TbWhPallet tbWhPallet =
     TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
 
-    return await api.selectPalletPrintingList(tbWhPallet, sScanPalletSeq);
+    return await api.selectPalletLoadingList(tbWhPallet, sScanPalletSeq);
 
   }
 }

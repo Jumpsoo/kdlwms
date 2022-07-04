@@ -400,9 +400,10 @@ class _PalletScanPageState extends State<PalletScanPage> {
     result.when(success: (value) async {
       showCustomSnackBarSuccess(ownContext, gSuccessMsg);
 
+      // 처리후 비동기 호출 추가
       WidgetsBinding.instance
           .addPostFrameCallback((_) => _viewAll());
-      
+
     }, error: (message) {
       showCustomSnackBarWarn(ownContext, message);
       return false;
