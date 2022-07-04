@@ -13,13 +13,12 @@ import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 // http 통신을 위해 사용
 class PalletApi {
-
   final http.Client client = http.Client();
+
   PalletApi();
 
   // 적재항목 완료 시 전송
-  Future<Result<bool>> sendPalletList(
-      List<TbWhPallet> palletList) async {
+  Future<Result<bool>> sendPalletList(List<TbWhPallet> palletList) async {
     try {
       final callUrl = gServiceURL + '/insertPallet';
       if (palletList.isEmpty) {
@@ -37,11 +36,9 @@ class PalletApi {
 
       try {
         if (res.statusCode == 200) {
-
           Map<String, dynamic> resData = convert
               .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
           String retSeq = resData['data'].toString();
-
         } else {
           return Result.error('에러발생 : ${res.statusCode}');
         }
@@ -109,12 +106,14 @@ class PalletApi {
 
       if (sPalletSeq.isNotEmpty) {
         //서버반여여후 아래 주석부분으로 교체할것
-        sParameters = '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
+        sParameters =
+            '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
         // sParameters = '$callUrl?pallet_seq=$nPalletSeq&location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
       } else {
         //서버반여여후 아래 주석부분으로 교체할것
-        sParameters = '$callUrl?comps=$gComps&location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
-         //sParameters ='$callUrl?location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
+        sParameters =
+            '$callUrl?comps=$gComps&location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
+        //sParameters ='$callUrl?location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
       }
       writeLog(sParameters);
 
@@ -133,7 +132,6 @@ class PalletApi {
 
         return Result.success(retList);
       }
-
     } catch (e) {
       writeLog(e.toString());
       return const Result.error('네트워크 연결 에러');
@@ -157,11 +155,10 @@ class PalletApi {
       if (sPalletSeq.isNotEmpty) {
         nPalletSeq = int.parse(sPalletSeq);
         sParameters =
-        '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
-      }else{
+            '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
+      } else {
         sParameters =
-        '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
-
+            '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
       }
       final res = await client.get(Uri.parse(sParameters));
       if (res.statusCode == 200) {
@@ -193,19 +190,23 @@ class PalletApi {
       String sWorkShop = tbWhPallet.workshop!;
       String sParameters = '';
 
-
-
-      sParameters =
-      '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
+      if (nPalletSeq == 0) {
+        sParameters =
+        '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
+      } else {
+        sParameters =
+        '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
+      }
+print(sParameters);
 
       final res = await client.get(Uri.parse(sParameters));
       if (res.statusCode == 200) {
         Map<String, dynamic> jsonResponse =
-        jsonDecode(utf8.decode(res.bodyBytes));
+            jsonDecode(utf8.decode(res.bodyBytes));
         Iterable hits = jsonResponse['data']['loadList'];
 
         List<TbWhPalletPrint> retList =
-        hits.map((e) => TbWhPalletPrint.fromJson(e)).toList();
+            hits.map((e) => TbWhPalletPrint.fromJson(e)).toList();
 
         return Result.success(retList);
       } else {

@@ -61,10 +61,10 @@ Future<void> createLoadingButtomGridView(BuildContext context,
   result.when(success: (valueList) {
     List<TbWhPalletPrint>? pallets = valueList;
     if (pallets == null) {
-      showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
+      showCustomSnackBarSuccess(context, '해당 태그로 상차가능한 항목이 없습니다.');
     }
     else if (pallets != null && pallets.length == 0) {
-      showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
+      showCustomSnackBarSuccess(context, '해당 태그로 상차가능한 항목이 없습니다.');
     } else {
       gridStateManager.appendRows(
         getLoadButtomGridRows(pallets),

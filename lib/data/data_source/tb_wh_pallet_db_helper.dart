@@ -61,12 +61,6 @@ class TbWhPalletDbHelper {
         orderBy: 'palletSeq ASC',
       );
 
-      List<TbWhPallet> lst = maps.map((e) => TbWhPallet.fromJson(e)).toList();
-      for(TbWhPallet item in lst){
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        print(item);
-      }
-      print(maps.map((e) => TbWhPallet.fromJson(e)).toList());
       return maps.map((e) => TbWhPallet.fromJson(e)).toList();
     } catch (e) {
       writeLog(e.toString());
@@ -289,12 +283,15 @@ class TbWhPalletDbHelper {
     return const Result.success(true);
   }
 
+  //해당 로케에 입력되어있는 항목 모두삭제
   Future<Result<bool>> deleteTbWhPallet(TbWhPallet pallet) async {
     try {
       int nRet = await db.delete(
         'TB_WH_PALLET',
-        where: 'barcode = ?',
-        whereArgs: [pallet.barcode],
+        // where: 'barcode = ?',
+        // whereArgs: [pallet.barcode],
+        where: 'comps = ? and workshop = ? and location = ? ',
+        whereArgs: [pallet.comps, pallet.workshop, pallet.location],
       );
       return Result.success(true);
     } catch (_) {
@@ -364,6 +361,7 @@ class TbWhPalletDbHelper {
     if (count != null && count > 0) {
       return const Result.error('이미 입력한 식별표 입니다.');
     }
+
     count = Sqflite.firstIntValue(await db.rawQuery(
         'SELECT COUNT(*) '
         'FROM TB_WH_ITEM '

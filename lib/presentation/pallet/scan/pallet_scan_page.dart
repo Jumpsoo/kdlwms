@@ -244,6 +244,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                   // columnGroups: columnGroups,
                   onLoaded: (PlutoGridOnLoadedEvent event) {
                     downGridStateManager = event.stateManager;
+
                     viewBottomList();
                   },
                   onChanged: (PlutoGridOnChangedEvent event) {
@@ -294,47 +295,75 @@ class _PalletScanPageState extends State<PalletScanPage> {
   // 리딩한 작업내용을 아래 그리드에 추가함
   // 값 파싱->임시저장 -> 재조회
   void _changeReadQrData(String sQrData) async {
-    try {
-      TbWhPallet? pallet = await viewModel.useCasesWms
-          .scanQrCode(sQrData, _readWorkShop, _readLocation);
+    TbWhPallet? pallet = await viewModel.useCasesWms
+        .scanQrCode(sQrData, _readWorkShop, _readLocation);
 
-      if (pallet == null) {
-        showCustomSnackBarWarn(context, '잘못된 식별표입니다. 식별표를 다시 확인하세요.');
-        return;
-      }
-      //공백일 경우에러 발생
-      if (_readWorkShop == null || _readWorkShop.isEmpty) {
-        showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
-        return;
-      }
-      if (_readLocation == null || _readLocation.isEmpty) {
-        showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
-        return;
-      }
-      if (gVibrateEnable == 0) {
-        Vibration.vibrate(duration: 90);
-      }
-
-      // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
-      // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
-      Result resultCheck = await viewModel.useCasesWms.selectCheckValue(pallet);
-      resultCheck.when(success: (value) async {
-        //추가시 validation 은 repository 내부에있음
-
-        Result result = await viewModel.useCasesWms.addPallet(pallet);
-        result.when(success: (value) {
-          viewTopList();
-          viewBottomList();
-        }, error: (message) {
-          showCustomSnackBarWarn(context, message);
-        });
-      }, error: (message) async {
-        showCustomSnackBarWarn(context, message);
-        return;
-      });
-    } catch (e) {
-      writeLog(e.toString());
+    if (pallet == null) {
+      showCustomSnackBarWarn(context, gErrorMsg);
+      return;
     }
+    //공백일 경우에러 발생
+    if (_readWorkShop == null || _readWorkShop.isEmpty) {
+      showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
+      return;
+    }
+    if (_readLocation == null || _readLocation.isEmpty) {
+      showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
+      return;
+    }
+
+    //입력값 체킄
+    if (await checkValueAdd(context, pallet) == false) {
+      print('aaa');
+      for(TbWhPallet item in await getSendRow()){
+        print("11");
+        print(item);
+      }
+      return;
+    }
+
+    //추가시 validation 은 repository 내부에있음
+    Result result = await viewModel.useCasesWms.addPallet(pallet);
+
+    result.when(
+        success: (value)  {
+          _viewAll();
+        },
+        error: (message) {});
+
+  }
+
+  //체크로직, 완료, 삭제 시
+  Future<bool> checkValueAdd(BuildContext context, TbWhPallet? pallet) async {
+    bool bRet = false;
+
+    if (pallet == null) {
+      return false;
+    }
+    // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
+    // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
+    // 실패인데 성공으로 빠짐
+    Result result = await viewModel.useCasesWms.selectCheckValue(pallet);
+    result.when(success: (value) {
+      bRet = true;
+      return true;
+    }, error: (message) {
+      showCustomSnackBarWarn(context, message);
+      bRet = false;
+      return false;
+    });
+
+    return bRet;
+    //
+    // resultCheck.when(success: (value) async {
+    //   return true;
+    // }, error: (message) async {
+    //   showCustomSnackBarWarn(context, message);
+    //
+    //   return Result.error(message);
+    // });
+
+    return true;
   }
 
   //상단 리스트 조회
@@ -376,11 +405,11 @@ class _PalletScanPageState extends State<PalletScanPage> {
     viewBottomList();
   }
 
-
-  void _viewAll(){
+  void _viewAll() {
     viewTopList();
     viewBottomList();
   }
+
   // 작업중인 내용 확정 처리
   // 확정 후 확정 리스트 서버로 송신
   Future<bool> confirmPacking() async {
@@ -397,12 +426,11 @@ class _PalletScanPageState extends State<PalletScanPage> {
     Result result =
         await viewModel.useCasesWms.confirmPalletFinishUseCase(sendList);
 
-    result.when(success: (value) async {
+    result.when(success: (value) async{
       showCustomSnackBarSuccess(ownContext, gSuccessMsg);
 
       // 처리후 비동기 호출 추가
-      WidgetsBinding.instance
-          .addPostFrameCallback((_) => _viewAll());
+      WidgetsBinding.instance.addPostFrameCallback((_) => _viewAll());
 
     }, error: (message) {
       showCustomSnackBarWarn(ownContext, message);

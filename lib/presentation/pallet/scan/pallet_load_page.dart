@@ -39,7 +39,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
   String _readWorkShop = '';
   String _readLocation = '';
   String _decodeResult = '';
-  String _readPalletSeq = '';
+  String _readPalletSeq = '0';
 
   //콤보박스용 변수
   List<ComboValueType> _dataWorkshop = [];

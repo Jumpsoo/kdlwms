@@ -47,9 +47,9 @@ Future<void> createPackingButtomGridView(
     String sLocation) async {
 
   PalletViewModel viewModel = context.read<PalletViewModel>();
-  gridStateManager.removeRows(gridStateManager.rows);
   gridStateManager.rows.clear();
-  gridStateManager.notifyListeners();
+  gridStateManager.removeRows(gridStateManager.rows);
+
 
   //조회
   List<TbWhPallet>? pallets =
@@ -59,12 +59,12 @@ Future<void> createPackingButtomGridView(
     gridStateManager.appendRows(
       getPackButtomGridRows(pallets),
     );
+    gridStateManager.notifyListeners();
 
     if(gridStateManager.rows.length == 1){
       //데이터가 없습니다는 한군데에서만
       // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
     }
-    gridStateManager.notifyListeners();
   }
 }
 
