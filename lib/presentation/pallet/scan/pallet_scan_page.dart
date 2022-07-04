@@ -379,10 +379,31 @@ class _PalletScanPageState extends State<PalletScanPage> {
   // 작업중인 내용 확정 처리
   // 확정 후 확정 리스트 서버로 송신
   void confirmPacking() async {
+
     if (await checkValue(context, 'CONFIRM', downGridStateManager, '') ==
         false) {
       return;
     }
+
+    // 서버로 전송 및 로컬디비 데이터 수정
+    // 2022-07-01 | 서버로 전송하지 않고, 상태만 변경한다.
+    // 2022-07-02 | 서버롤 전송하고 전송한 데이터는 삭제한다.
+    List<TbWhPallet> sendList = await getSendRow();
+
+    Result result = await viewModel.useCasesWms.confirmPalletFinishUseCase(
+        sendList);
+
+    result.when(success: (value) async {
+      showCustomSnackBarSuccess(ownContext, gSuccessMsg);
+    }, error: (message) {
+      showCustomSnackBarWarn(ownContext, message);
+    });
+     viewTopList();
+     viewBottomList();
+  }
+
+  Future<List<TbWhPallet>> getSendRow() async{
+
     //상태를 2 로변경한다.
     //화면에서가 아닌 데이터 조회 후 전송한다.
     List<TbWhPallet> tbWhPallets = [];
@@ -404,19 +425,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
       tbWhPallets.add(newItem);
     }
 
-    // 서버로 전송 및 로컬디비 데이터 수정
-    // 2022-07-01 | 서버로 전송하지 않고, 상태만 변경한다.
-    // 2022-07-02 | 서버롤 전송하고 전송한 데이터는 삭제한다.
-    Result result = await viewModel.useCasesWms.confirmPalletFinishUseCase(
-        tbWhPallets);
-
-    result.when(success: (value) async {
-      showCustomSnackBarSuccess(ownContext, gSuccessMsg);
-    }, error: (message) {
-      showCustomSnackBarWarn(ownContext, message);
-    });
-     viewTopList();
-     viewBottomList();
+    return tbWhPallets;
   }
 
   //최초로딩시 콤보박스 세팅

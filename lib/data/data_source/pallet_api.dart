@@ -17,7 +17,7 @@ class PalletApi {
   PalletApi();
 
   // 적재항목 완료 시 전송
-  Future<Result<List<TbWhPallet>>> sendPalletList(
+  Future<Result<bool>> sendPalletList(
       List<TbWhPallet> palletList) async {
     try {
       final callUrl = gServiceURL + '/insertPallet';
@@ -26,7 +26,6 @@ class PalletApi {
       }
 
       //json 데이터 전송
-      List<TbWhPallet> retList = [];
       var dataAsMap = jsonEncode(palletList.map((e) => e.toJson()).toList());
 
       http.Response res = await http.post(
@@ -34,11 +33,14 @@ class PalletApi {
         body: dataAsMap,
         headers: {"Content-Type": "application/json"},
       );
+
       try {
         if (res.statusCode == 200) {
+
           Map<String, dynamic> resData = convert
               .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
           String retSeq = resData['data'].toString();
+
         } else {
           return Result.error('에러발생 : ${res.statusCode}');
         }
@@ -46,7 +48,7 @@ class PalletApi {
         writeLog("sendPalletList 예외: ");
         writeLog(e);
       }
-      return Result.success(retList);
+      return Result.success(true);
     } catch (e) {
       return const Result.error('네트워크 연결 에러');
     }

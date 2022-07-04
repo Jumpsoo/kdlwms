@@ -52,7 +52,6 @@ Future<void> createPackingButtomGridView(
   gridStateManager.notifyListeners();
 
   //조회
-
   List<TbWhPallet>? pallets =
   await viewModel.useCasesWms.selectPackingListUseCase(sWareHouse, sLocation);
   if (pallets != null){

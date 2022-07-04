@@ -488,10 +488,8 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
               value: _readLocation,
               style: const TextStyle(color: Colors.black, fontSize: 16.0),
               onChanged: (String? newValue) {
-                writeLog('AAAAAAAAAAAAAAAAAA');
                 if (newValue != null) {
                   setState(() {
-                    writeLog('AAAAAAAAAAAAAAAAAA');
                     _readLocation = newValue;
                     viewAll(_readWorkShop, _readLocation);
                   });
