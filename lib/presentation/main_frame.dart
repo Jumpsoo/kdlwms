@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/btn_move_exit.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/navigation_bar_main.dart';
+import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
+import 'package:provider/provider.dart';
 import 'main_frame_widgets/btn_move_packing.dart';
 import 'main_frame_widgets/btn_set_location.dart';
 
@@ -57,6 +62,7 @@ class _MainPageState extends State<MainPage> {
 
    @override
   void initState() {
+
     super.initState();
 
     WidgetsBinding.instance
@@ -65,6 +71,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    getVersion();
 
      return Scaffold(
       backgroundColor: Colors.blueGrey[900],
@@ -165,5 +173,20 @@ class _MainPageState extends State<MainPage> {
       ),
       bottomNavigationBar: MainFrameNavigationBarMain(),
     );
+  }
+
+  void getVersion() async {
+
+    SettingInfoViewModel viewModelSetting;
+    viewModelSetting = context.read<SettingInfoViewModel>();
+    Result result  = await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+    String version = await viewModelSetting.useCaseCommonInfo
+        .getCurrentLocalVersion('PDA_VERSION');
+
+    setState((){
+      //00. 프로그램 버전 체크
+      //로컬버전
+      gCurrentVersion = version;
+    });
   }
 }

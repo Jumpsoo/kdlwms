@@ -35,15 +35,18 @@ Future<bool> syncData(bool ignoreMsg) async {
 
   DataSyncViewModel dataSyncViewModel =
       gTransitContext.read<DataSyncViewModel>();
+
   //실적조회용 : 차후 삭제할것
   PalletViewModel palletViewModel = gTransitContext.read<PalletViewModel>();
   SettingInfoViewModel viewModelSettings =
       gTransitContext.read<SettingInfoViewModel>();
 
+
   //00. 프로그램 버전 체크
   //로컬버전
   gCurrentVersion = await viewModelSettings.useCaseCommonInfo
       .getCurrentLocalVersion('PDA_VERSION');
+
   //서버버전
   sServerVersion = await dataSyncViewModel.useCaseDataBatch.getServerVersion();
   writeLog('로컬버전 / 서버버전 : $gCurrentVersion / $sServerVersion');
