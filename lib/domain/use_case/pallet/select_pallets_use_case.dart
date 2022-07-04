@@ -29,8 +29,10 @@ class SelectPackingListUseCase {
   SelectPackingListUseCase(this.repository);
 
   Future<List<TbWhPallet>?> call(String sWorkShop, String sLocation) async {
+
     TbWhPallet condTbWhPallet =
         TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
+
     return await repository.selectPackingList(condTbWhPallet);
   }
 }

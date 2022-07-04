@@ -60,6 +60,13 @@ class TbWhPalletDbHelper {
         ],
         orderBy: 'palletSeq ASC',
       );
+
+      List<TbWhPallet> lst = maps.map((e) => TbWhPallet.fromJson(e)).toList();
+      for(TbWhPallet item in lst){
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        print(item);
+      }
+      print(maps.map((e) => TbWhPallet.fromJson(e)).toList());
       return maps.map((e) => TbWhPallet.fromJson(e)).toList();
     } catch (e) {
       writeLog(e.toString());

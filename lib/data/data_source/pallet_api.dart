@@ -7,13 +7,14 @@ import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
+import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 // http 통신을 위해 사용
 class PalletApi {
-  final http.Client client = http.Client();
 
+  final http.Client client = http.Client();
   PalletApi();
 
   // 적재항목 완료 시 전송

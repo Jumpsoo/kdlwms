@@ -29,14 +29,11 @@ class ConfirmPalletFinishUseCase {
 
     //팔레트 전송
     Result result = await api.sendPalletList(palletList);
-
     result.when(success: (value) async {      //전송이 성공했을때 데이터 클리어
       Result resultUpd = await repository.deleteTbWhPallet(palletList);
-      resultUpd.when(
-          success: (value) {},
-          error: (message) {
-            return Result.error(message);
-          });
+      resultUpd.when(success: (value){}, error: (message){
+        return Result.error(message);
+      });
     }, error: (message) {
       return Result.error(message);
     });

@@ -338,8 +338,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
   }
 
   //상단 리스트 조회
-  void viewTopList()  {
-     createPackingTopGridView(
+  void viewTopList() {
+    createPackingTopGridView(
       context,
       topGridStateManager,
       _readWorkShop,
@@ -348,8 +348,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
   }
 
   //하단 리스트 조회
-  void viewBottomList()  {
-     createPackingButtomGridView(
+  void viewBottomList() {
+    createPackingButtomGridView(
       context,
       downGridStateManager,
       _readWorkShop,
@@ -376,13 +376,17 @@ class _PalletScanPageState extends State<PalletScanPage> {
     viewBottomList();
   }
 
+
+  void _viewAll(){
+    viewTopList();
+    viewBottomList();
+  }
   // 작업중인 내용 확정 처리
   // 확정 후 확정 리스트 서버로 송신
-  void confirmPacking() async {
-
+  Future<bool> confirmPacking() async {
     if (await checkValue(context, 'CONFIRM', downGridStateManager, '') ==
         false) {
-      return;
+      return false;
     }
 
     // 서버로 전송 및 로컬디비 데이터 수정
@@ -390,20 +394,24 @@ class _PalletScanPageState extends State<PalletScanPage> {
     // 2022-07-02 | 서버롤 전송하고 전송한 데이터는 삭제한다.
     List<TbWhPallet> sendList = await getSendRow();
 
-    Result result = await viewModel.useCasesWms.confirmPalletFinishUseCase(
-        sendList);
+    Result result =
+        await viewModel.useCasesWms.confirmPalletFinishUseCase(sendList);
 
     result.when(success: (value) async {
       showCustomSnackBarSuccess(ownContext, gSuccessMsg);
+
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => _viewAll());
+      
     }, error: (message) {
       showCustomSnackBarWarn(ownContext, message);
+      return false;
     });
-     viewTopList();
-     viewBottomList();
+
+    return true;
   }
 
-  Future<List<TbWhPallet>> getSendRow() async{
-
+  Future<List<TbWhPallet>> getSendRow() async {
     //상태를 2 로변경한다.
     //화면에서가 아닌 데이터 조회 후 전송한다.
     List<TbWhPallet> tbWhPallets = [];
@@ -420,8 +428,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
         quantity: cells[4].value,
         barcode: cells[5].value,
         state: '02',
-
       );
+
       tbWhPallets.add(newItem);
     }
 
