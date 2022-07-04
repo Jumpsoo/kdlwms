@@ -103,12 +103,12 @@ class SelectLoadingListByApiUseCase {
   SelectLoadingListByApiUseCase(this.api);
 
   Future<Result<List<TbWhPalletPrint>?>> call(String sComps, String sWorkShop,
-      String sLocation, String sScanPalletSeq) async {
+      String sLocation, int nScanPalletSeq) async {
     late Result result ;
     TbWhPallet tbWhPallet =
     TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
 
-    return await api.selectPalletLoadingList(tbWhPallet, sScanPalletSeq);
+    return await api.selectPalletLoadingList(tbWhPallet, nScanPalletSeq);
 
   }
 }

@@ -44,25 +44,26 @@ import 'package:provider/provider.dart';
 //   });
 // }
 
-Future<void> createLoadingButtomGridView(
-    BuildContext context,
+Future<void> createLoadingButtomGridView(BuildContext context,
     PlutoGridStateManager gridStateManager,
     String sWareHouse,
     String sLocation,
-    String sScanPalletSeq) async {
-
+    int nScanPalletSeq) async {
   //초기화
   PalletViewModel viewModel = context.read<PalletViewModel>();
   gridStateManager.rows.clear();
   gridStateManager.removeRows(gridStateManager.rows);
   //조회
   Result result = await viewModel.useCasesWms
-      .selectLoadingListByApiUseCase(gComps, sWareHouse, sLocation, sScanPalletSeq);
+      .selectLoadingListByApiUseCase(
+      gComps, sWareHouse, sLocation, nScanPalletSeq);
 
   result.when(success: (valueList) {
-
     List<TbWhPalletPrint>? pallets = valueList;
     if (pallets == null) {
+      showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
+    }
+    else if (pallets != null && pallets.length == 0) {
       showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
     } else {
       gridStateManager.appendRows(
@@ -73,8 +74,8 @@ Future<void> createLoadingButtomGridView(
     }
   }, error: (message) {
     showCustomSnackBarWarn(context, message);
-  });
-}
+    });
+  }
 
 // 상단 그리드 입력창용
 // 컬럼 리스트 지정
@@ -180,94 +181,94 @@ Future<void> createLoadingButtomGridView(
 // 하단그리드 입력창용
 // 컬럼 리스트 지정
 // max => 180
-List<PlutoColumn> getPackGridColumns() {
-  return <PlutoColumn>[
-    // PlutoColumn(title: 'Id',field: 'id',type: PlutoColumnType.text(),),
+      List<PlutoColumn> getPackGridColumns()
+  {
+    return <PlutoColumn>[
+      // PlutoColumn(title: 'Id',field: 'id',type: PlutoColumnType.text(),),
 
-    PlutoColumn(
-      title: '발행',
-      field: 'printFlag',
-      width: 60,
-      type: PlutoColumnType.text(),
-      textAlign: PlutoColumnTextAlign.center,
-      enableColumnDrag: false,
-      enableContextMenu: false,
-    ),
-    PlutoColumn(
-      title: '적재시간',
-      field: 'palletDate',
-      width: 150,
-      textAlign: PlutoColumnTextAlign.center,
-      type: PlutoColumnType.text(),
-      enableColumnDrag: false,
-      enableContextMenu: false,
-      enableEditingMode: false,
-      // enableRowChecked: true,
-    ),
-    PlutoColumn(
-      title: 'SEQ',
-      field: 'palletSeq',
-      width: 50,
-      textAlign: PlutoColumnTextAlign.right,
-      type: PlutoColumnType.number(),
-      enableColumnDrag: false,
-      enableContextMenu: false,
-      enableEditingMode: false,
-      // enableRowChecked: true,
-    ),
-    PlutoColumn(
-      title: '출발지',
-      field: 'departure',
-      width: 70,
-      type: PlutoColumnType.text(),
-      textAlign: PlutoColumnTextAlign.right,
-      enableColumnDrag: false,
-      enableContextMenu: false,
-      enableEditingMode: false,
-    ),
-    PlutoColumn(
-      title: '도착지',
-      field: 'arrival',
-      width: 70,
-      type: PlutoColumnType.text(),
-      textAlign: PlutoColumnTextAlign.right,
-      enableColumnDrag: false,
-      enableContextMenu: false,
-      enableEditingMode: false,
-    ),
-    PlutoColumn(
-      title: 'TOTAL',
-      field: 'total',
-      width: 70,
-      type: PlutoColumnType.number(),
-      textAlign: PlutoColumnTextAlign.right,
-      enableColumnDrag: false,
-      enableContextMenu: false,
-      enableEditingMode: false,
-    ),
-  ];
-}
+      PlutoColumn(
+        title: '발행',
+        field: 'printFlag',
+        width: 60,
+        type: PlutoColumnType.text(),
+        textAlign: PlutoColumnTextAlign.center,
+        enableColumnDrag: false,
+        enableContextMenu: false,
+      ),
+      PlutoColumn(
+        title: '적재시간',
+        field: 'palletDate',
+        width: 150,
+        textAlign: PlutoColumnTextAlign.center,
+        type: PlutoColumnType.text(),
+        enableColumnDrag: false,
+        enableContextMenu: false,
+        enableEditingMode: false,
+        // enableRowChecked: true,
+      ),
+      PlutoColumn(
+        title: 'SEQ',
+        field: 'palletSeq',
+        width: 50,
+        textAlign: PlutoColumnTextAlign.right,
+        type: PlutoColumnType.number(),
+        enableColumnDrag: false,
+        enableContextMenu: false,
+        enableEditingMode: false,
+        // enableRowChecked: true,
+      ),
+      PlutoColumn(
+        title: '출발지',
+        field: 'departure',
+        width: 70,
+        type: PlutoColumnType.text(),
+        textAlign: PlutoColumnTextAlign.right,
+        enableColumnDrag: false,
+        enableContextMenu: false,
+        enableEditingMode: false,
+      ),
+      PlutoColumn(
+        title: '도착지',
+        field: 'arrival',
+        width: 70,
+        type: PlutoColumnType.text(),
+        textAlign: PlutoColumnTextAlign.right,
+        enableColumnDrag: false,
+        enableContextMenu: false,
+        enableEditingMode: false,
+      ),
+      PlutoColumn(
+        title: 'TOTAL',
+        field: 'total',
+        width: 70,
+        type: PlutoColumnType.number(),
+        textAlign: PlutoColumnTextAlign.right,
+        enableColumnDrag: false,
+        enableContextMenu: false,
+        enableEditingMode: false,
+      ),
+    ];
+  }
 
 // 하단 그리드
 // 데이터 로우
-List<PlutoRow> getLoadButtomGridRows(List<TbWhPalletPrint> pallets) {
-
-  List<PlutoRow> rows = List.empty(growable: true);
-  int nRowNum = 0;
-  for (var e in pallets) {
-
-    nRowNum = nRowNum + 1;
-    PlutoRow row = PlutoRow(
-      cells: {
-        'printFlag' :PlutoCell(value: e.printFlag),
-        'palletDate' :PlutoCell(value: DateFormat('yyyy-MM-dd HH:mm:ss').format(e.palletDate!)),
-        'palletSeq': PlutoCell(value: e.palletSeq),
-        'departure': PlutoCell(value: e.departure),
-        'arrival': PlutoCell(value: e.arrival),
-        'total': PlutoCell(value: e.total),
-      },
-    );
-    rows.add(row);
+  List<PlutoRow> getLoadButtomGridRows(List<TbWhPalletPrint> pallets) {
+    List<PlutoRow> rows = List.empty(growable: true);
+    int nRowNum = 0;
+    for (var e in pallets) {
+      nRowNum = nRowNum + 1;
+      PlutoRow row = PlutoRow(
+        cells: {
+          'printFlag': PlutoCell(value: e.printFlag),
+          'palletDate': PlutoCell(
+              value: DateFormat('yyyy-MM-dd HH:mm:ss').format(e.palletDate!)),
+          'palletSeq': PlutoCell(value: e.palletSeq),
+          'departure': PlutoCell(value: e.departure),
+          'arrival': PlutoCell(value: e.arrival),
+          'total': PlutoCell(value: e.total),
+        },
+      );
+      rows.add(row);
+    }
+    return rows;
   }
-  return rows;
-}

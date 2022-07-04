@@ -541,6 +541,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     PlutoRow row = gridStateManager.currentCell!.row;
     List<PlutoCell> cells = row.cells.values.toList();
     printingList.add(TbWhPalletPrint(
+      comps: gComps,
       printFlag: cells[0].value,
       palletDate: DateFormat('yyyy-MM-dd HH:mm:ss').parse(cells[1].value)  ,
       palletSeq: cells[2].value,

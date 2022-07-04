@@ -368,12 +368,19 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
 
   //하단 리스트 조회
   void viewBottomList() {
+    int nPalletSeq = 0;
+    try {
+      nPalletSeq = int.parse(_readPalletSeq);
+    }catch(e){
+      showCustomSnackBarWarn(context, '팔레트번호가 잘못되었습니다.');
+      return;
+    }
     createLoadingButtomGridView(
       context,
       downGridStateManager,
       _readWorkShop,
       _readLocation,
-      _readPalletSeq,
+      nPalletSeq,
     );
   }
 
@@ -584,6 +591,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
 
     if (_readPalletSeq.isNotEmpty) {
       _readPalletSeq = _readPalletSeq.substring(2, 10);
+
       viewBottomList();
     }
 

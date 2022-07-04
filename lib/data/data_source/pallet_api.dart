@@ -183,7 +183,7 @@ class PalletApi {
 
   //상차대상 리스트 조회
   Future<Result<List<TbWhPalletPrint>>> selectPalletLoadingList(
-      TbWhPallet tbWhPallet, String sPalletSeq) async {
+      TbWhPallet tbWhPallet, int nPalletSeq) async {
     try {
       final callUrl = gServiceURL + '/selectLoad';
       //필수값
@@ -192,12 +192,12 @@ class PalletApi {
       String sLocation = tbWhPallet.location!;
       String sWorkShop = tbWhPallet.workshop!;
       String sParameters = '';
-      int nPalletSeq = 0;
+
 
 
       sParameters =
       '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
-print(sParameters);
+
       final res = await client.get(Uri.parse(sParameters));
       if (res.statusCode == 200) {
         Map<String, dynamic> jsonResponse =
