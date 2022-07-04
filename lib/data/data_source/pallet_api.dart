@@ -195,7 +195,7 @@ class PalletApi {
       int nPalletSeq = 0;
 
       sParameters =
-      '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop&state=03&printFlag=Y';
+      '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
       
       final res = await client.get(Uri.parse(sParameters));
       if (res.statusCode == 200) {
