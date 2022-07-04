@@ -584,6 +584,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
 
     if (_readPalletSeq.isNotEmpty) {
       _readPalletSeq = _readPalletSeq.substring(2, 10);
+      viewBottomList();
     }
 
 

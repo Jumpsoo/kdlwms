@@ -194,14 +194,15 @@ class PalletApi {
       String sParameters = '';
       int nPalletSeq = 0;
 
+
       sParameters =
       '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
-      
+print(sParameters);
       final res = await client.get(Uri.parse(sParameters));
       if (res.statusCode == 200) {
         Map<String, dynamic> jsonResponse =
         jsonDecode(utf8.decode(res.bodyBytes));
-        Iterable hits = jsonResponse['data']['tagList'];
+        Iterable hits = jsonResponse['data']['loadList'];
 
         List<TbWhPalletPrint> retList =
         hits.map((e) => TbWhPalletPrint.fromJson(e)).toList();
