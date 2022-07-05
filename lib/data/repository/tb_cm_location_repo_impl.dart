@@ -63,8 +63,22 @@ class TbCmLocationRepoImpl implements TbCmLocationRepo {
   }
 
   @override
-  Future<Result<bool>> upsertTbCmLocation(List<TbCmLocation> tbCmLocations) async {
-    return await db.upsertTbCmLocation(tbCmLocations);
+  Future<Result<bool>> upsertTbCmLocation(List<TbCmLocation> tbCmLocationList) async {
+    bool bRet = false;
+    for(TbCmLocation item in tbCmLocationList){
+
+      //있으면 수정 없으면 등록
+      Result result = await db.upsertTbCmLocation(item);
+
+      result.when(success: (value){
+        bRet = true;
+        return Result.success(bRet);
+      }, error: (message){
+        bRet = false;
+        return Result.error(message);
+      });
+    }
+    return Result.success(bRet);
   }
 
   @override

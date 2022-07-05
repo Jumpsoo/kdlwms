@@ -31,13 +31,14 @@ class CmCodeRcvApi {
     try {
       String sGrpCd = tbWhCmCode.grpCd!;
       String sCodeCd = tbWhCmCode.codeCd!;
-
+      String sParameter = '$baseUrl?comps=$gComps&grpCd=$sGrpCd&codeCd=$sCodeCd';
+      print(sParameter);
       final response = await client.get(
-          Uri.parse('$baseUrl?comps=$gComps&grpCd=$sGrpCd&codeCd=$sCodeCd'));
+          Uri.parse(sParameter));
 
       Map<String, dynamic> jsonResponse =
           jsonDecode(utf8.decode(response.bodyBytes));
-      Iterable hits = jsonResponse['data']['itemList'];
+      Iterable hits = jsonResponse['data']['codeList'];
 
       return Result.success(hits);
     } catch (e) {
@@ -49,12 +50,14 @@ class CmCodeRcvApi {
       TbWhCmCode tbWhCmCode) async {
     try {
       String sGrpCd = tbWhCmCode.grpCd!;
+      String sParameter = '$baseUrl?comps=$gComps&grpCd=$sGrpCd';
+      print(sParameter);
       final response =
-          await client.get(Uri.parse('$baseUrl?comps=$gComps&grpCd=$sGrpCd'));
+          await client.get(Uri.parse(sParameter));
 
       Map<String, dynamic> jsonResponse =
           jsonDecode(utf8.decode(response.bodyBytes));
-      Iterable hits = jsonResponse['data']['itemList'];
+      Iterable hits = jsonResponse['data']['codeList'];
 
       return Result.success(hits);
     } catch (e) {

@@ -16,113 +16,58 @@ class MigTbCmLocation {
   Future<Result<bool>> call() async {
     Result result;
     //설정된 공정을 제외하고 모두 삭제 후 저장
+    // SET_FLAG = 'Y' 은 그대로 둘 것
     result = await repository.deleteTbCmLocationAllBySetFlag('N');
-    result.when(success: (value) async{
+    result.when(success: (value) async {
+      TbWhCmCode tbWhCmCode = TbWhCmCode(grpCd: 'WAREHOUSE');
 
-      Result resultIns = await repository.upsertTbCmLocation(getTbCmLocationSampleList());
-      // 공통코드 서비스 개발되면 아래코드로 바꿀것
-      // Result resultList = await cmCodeRepository.selectCmCodeList('WAREHOUSE');
-      // resultList.when(success: (insertList) async{
-      //   Result resultIns = await repository.upsertTbCmLocation(insertList);
-      // }, error: (message){});
-    }, error: (message){});
+      Result codeList =
+          await cmCodeRepository.selectCmCodeListByGrpCd(tbWhCmCode);
 
-    Result resultTmp = await repository.selectTbCmLocationListAll();
-    resultTmp.when(success: (list){
-    }, error: (message){});
+      codeList.when(success: (codeRetList) async {
+        // 서버에서 조회 -> 저장한다 (있으면 업데이트하고 없으면 등록)
+        Result resultIns = await repository.upsertTbCmLocation(
+            getConvertTbWhCmCodeToTbCmLocationList(codeRetList));
 
+        resultIns.when(success: (valueList) {
+          return Result.success(valueList);
+        }, error: (message) {
+          return Result.error(message);
+        });
+      }, error: (message) {
+        return Result.error(message);
+      });
+
+      // // 공통코드 서비스 개발되면 아래코드로 바꿀것
+      //  Result resultList = await cmCodeRepository.selectCmCodeList('WAREHOUSE');
+      //  resultList.when(success: (insertList) async{
+      //    Result resultIns = await repository.upsertTbCmLocation(insertList);
+      //  }, error: (message){});
+    }, error: (message) {
+      return Result.error(message);
+    });
 
     return const Result.success(true);
   }
 
-
 // 03. 작업장 정보 리스트
-  List<TbCmLocation> getTbCmLocationSampleList() {
+  List<TbCmLocation> getConvertTbWhCmCodeToTbCmLocationList(
+      List<TbWhCmCode> inList) {
     List<TbCmLocation> retList = [];
-    retList.add(TbCmLocation(WORKSHOP: 'WH001',
-      WORKSHOP_NM: '울산창고',
-      LOCATION: '1',
-      SYNC_DATETIME: DateTime.now(),
-      SET_FLAG: 'N',
-      CMF_1: ' ',
-      CMF_2: ' ',
-      CMF_3: ' ',
-      CMF_4: ' ',
-      CMF_5: ' ',));
-    retList.add(TbCmLocation(WORKSHOP: 'WH002',
-      WORKSHOP_NM: '창원창고',
-      LOCATION: '1',
-      SYNC_DATETIME: DateTime.now(),
-      SET_FLAG: 'N',
-      CMF_1: ' ',
-      CMF_2: ' ',
-      CMF_3: ' ',
-      CMF_4: ' ',
-      CMF_5: ' ',));
-    retList.add(TbCmLocation(WORKSHOP: 'WH003',
-      WORKSHOP_NM: '마산창고',
-      LOCATION: '1',
-      SYNC_DATETIME: DateTime.now(),
-      SET_FLAG: 'N',
-      CMF_1: ' ',
-      CMF_2: ' ',
-      CMF_3: ' ',
-      CMF_4: ' ',
-      CMF_5: ' ',));
-    retList.add(TbCmLocation(WORKSHOP: 'WH004',
-      WORKSHOP_NM: '화성창고',
-      LOCATION: '1',
-      SYNC_DATETIME: DateTime.now(),
-      SET_FLAG: 'N',
-      CMF_1: ' ',
-      CMF_2: ' ',
-      CMF_3: ' ',
-      CMF_4: ' ',
-      CMF_5: ' ',));
-    retList.add(TbCmLocation(WORKSHOP: 'WH005',
-      WORKSHOP_NM: '울산창고2',
-      LOCATION: '1',
-      SYNC_DATETIME: DateTime.now(),
-      SET_FLAG: 'N',
-      CMF_1: ' ',
-      CMF_2: ' ',
-      CMF_3: ' ',
-      CMF_4: ' ',
-      CMF_5: ' ',));
-    retList.add(TbCmLocation(WORKSHOP: 'WH006',
-      WORKSHOP_NM: '마산창고2',
-      LOCATION: '1',
-      SYNC_DATETIME: DateTime.now(),
-      SET_FLAG: 'N',
-      CMF_1: ' ',
-      CMF_2: ' ',
-      CMF_3: ' ',
-      CMF_4: ' ',
-      CMF_5: ' ',));
-    retList.add(TbCmLocation(WORKSHOP: 'WH007',
-      WORKSHOP_NM: '마산창고3',
-      LOCATION: '1',
-      SYNC_DATETIME: DateTime.now(),
-      SET_FLAG: 'N',
-      CMF_1: ' ',
-      CMF_2: ' ',
-      CMF_3: ' ',
-      CMF_4: ' ',
-      CMF_5: ' ',));
-    retList.add(TbCmLocation(WORKSHOP: 'WH008',
-      WORKSHOP_NM: '마산창고4',
-      LOCATION: '1',
-      SYNC_DATETIME: DateTime.now(),
-      SET_FLAG: 'N',
-      CMF_1: ' ',
-      CMF_2: ' ',
-      CMF_3: ' ',
-      CMF_4: ' ',
-      CMF_5: ' ',));
-
+    for (TbWhCmCode item in inList) {
+      retList.add(TbCmLocation(
+        WORKSHOP: item.codeCd!,
+        WORKSHOP_NM: item.codeKoNm,
+        LOCATION: '1',
+        SYNC_DATETIME: DateTime.now(),
+        SET_FLAG: 'N',
+        CMF_1: ' ',
+        CMF_2: ' ',
+        CMF_3: ' ',
+        CMF_4: ' ',
+        CMF_5: ' ',
+      ));
+    }
     return retList;
   }
 }
-
-
-

@@ -155,18 +155,31 @@ class TbCmLocationDbHelper {
     }
   }
 
-  Future<Result<bool>> upsertTbCmLocation(List<TbCmLocation> insertList) async {
+  Future<Result<bool>> upsertTbCmLocation(TbCmLocation tbCmLocation) async {
     try {
+      final maps = await db.query('TB_CM_LOCATION',
+          where: 'WORKSHOP = ? ', whereArgs: [tbCmLocation.WORKSHOP]);
 
-      for (TbCmLocation insertItem in insertList) {
-        final maps = await db.query(
+      if (maps.map((e) => TbCmLocation.fromJson(e)).toList().isNotEmpty) {
+        //상태값은 그대로 둬야한다.
+        await db.rawQuery(
+            'UPDATE TB_CM_LOCATION  '
+            'SET  WORKSHOP_NM = ?, SYNC_DATETIME = ?'
+            ' WHERE WORKSHOP = ?',
+            [
+              tbCmLocation.WORKSHOP_NM,
+              tbCmLocation.SYNC_DATETIME,
+              tbCmLocation.WORKSHOP,
+            ]);
+
+        await db.update(
           'TB_CM_LOCATION',
-          where: 'WORKSHOP = ? AND LOCATION = ? ',
-          whereArgs: [insertItem.WORKSHOP, insertItem.LOCATION],
+          tbCmLocation.toJson(),
+          where: 'WORKSHOP = ?',
+          whereArgs: [tbCmLocation.WORKSHOP],
         );
-        if (maps.map((e) => TbCmLocation.fromJson(e)).toList().isEmpty) {
-          await db.insert('TB_CM_LOCATION', insertItem.toJson());
-        }
+      } else {
+        await db.insert('TB_CM_LOCATION', tbCmLocation.toJson());
       }
       return const Result.success(true);
     } catch (e) {
