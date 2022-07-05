@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
-import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_common_function.dart';
@@ -258,8 +257,9 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
           onTap: (index) => {
                 if (index == 0)
                   {
-                    //setLocationList(),
-                    showCircularProgressIndicator(context),
+                    // 2022-07-05 | 소스코드 정리
+                    setLocationList(),
+                    //showCircularProgressIndicator(context),
                   }
                 else if (index == 1)
                   {
