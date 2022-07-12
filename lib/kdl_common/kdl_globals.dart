@@ -16,9 +16,9 @@ bool gSync = false;
 int gVibrateEnable = 0;
 
 // 사외
-//String gServiceURL = 'http://54.180.96.240:8080/api';
+String gServiceURL = 'http://54.180.96.240:8080/api';
 // 사내(덴소)
-String gServiceURL = 'http://10.73.254.208/api';
+//String gServiceURL = 'http://10.73.254.208/api';
 
 late BuildContext gTransitContext;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

@@ -30,10 +30,6 @@ class ConfirmPalletFinishUseCase {
     //팔레트 전송
     Result result = await api.sendPalletList(palletList);
 
-    for(TbWhPallet item in palletList){
-      print("#################");
-      print(item);
-    }
     result.when(success: (value) async {      //전송이 성공했을때 데이터 클리어
       Result resultUpd = await repository.deleteTbWhPallet(palletList);
       resultUpd.when(success: (value){}, error: (message){

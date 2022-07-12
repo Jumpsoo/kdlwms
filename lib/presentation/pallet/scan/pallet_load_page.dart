@@ -340,21 +340,21 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
   // 리딩한 작업내용을 아래 그리드에 추가함
   // 값 파싱->임시저장 -> 재조회
   // 상차화면에서는 실적입력안함
-  void _changeReadQrData(String sQrData) async {
-    try {
-      //공백일 경우에러 발생
-      if (_readWorkShop == null || _readWorkShop.isEmpty) {
-        showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
-        return;
-      }
-      if (_readLocation == null || _readLocation.isEmpty) {
-        showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
-        return;
-      }
-    } catch (e) {
-      writeLog(e.toString());
-    }
-  }
+  // void _changeReadQrData(String sQrData) async {
+  //   try {
+  //     //공백일 경우에러 발생
+  //     if (_readWorkShop == null || _readWorkShop.isEmpty) {
+  //       showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
+  //       return;
+  //     }
+  //     if (_readLocation == null || _readLocation.isEmpty) {
+  //       showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
+  //       return;
+  //     }
+  //   } catch (e) {
+  //     writeLog(e.toString());
+  //   }
+  // }
 
   // //상단 리스트 조회
   // void viewTopList() {
@@ -419,7 +419,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
         _readWorkShop = sDefaultLocation;
       }
       if (sDefaultLocation == '') {
-        showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
+        showCustomSnackBarWarn(context, '이동태그를 먼저 스캔하세요.');
       }
     });
   }
@@ -579,7 +579,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     String sPivot = 'C100000001';
 
     if (sVal == 'READ_FAIL') {
-      showCustomSnackBarWarn(context, '(바코드 읽기 실패)');
+      // showCustomSnackBarWarn(context, '(바코드 읽기 실패)');
       return;
     }
 

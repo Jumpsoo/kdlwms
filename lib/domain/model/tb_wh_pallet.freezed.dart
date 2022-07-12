@@ -32,6 +32,7 @@ mixin _$TbWhPallet {
   DateTime? get scanDate => throw _privateConstructorUsedError;
   String? get scanUsernm => throw _privateConstructorUsedError;
   int? get boxNo => throw _privateConstructorUsedError;
+  String? get arrival => throw _privateConstructorUsedError;
   String? get printFlag => throw _privateConstructorUsedError;
   DateTime? get printDate => throw _privateConstructorUsedError;
   String? get printUser => throw _privateConstructorUsedError;
@@ -67,6 +68,7 @@ abstract class $TbWhPalletCopyWith<$Res> {
       DateTime? scanDate,
       String? scanUsernm,
       int? boxNo,
+      String? arrival,
       String? printFlag,
       DateTime? printDate,
       String? printUser,
@@ -101,6 +103,7 @@ class _$TbWhPalletCopyWithImpl<$Res> implements $TbWhPalletCopyWith<$Res> {
     Object? scanDate = freezed,
     Object? scanUsernm = freezed,
     Object? boxNo = freezed,
+    Object? arrival = freezed,
     Object? printFlag = freezed,
     Object? printDate = freezed,
     Object? printUser = freezed,
@@ -161,6 +164,10 @@ class _$TbWhPalletCopyWithImpl<$Res> implements $TbWhPalletCopyWith<$Res> {
           ? _value.boxNo
           : boxNo // ignore: cast_nullable_to_non_nullable
               as int?,
+      arrival: arrival == freezed
+          ? _value.arrival
+          : arrival // ignore: cast_nullable_to_non_nullable
+              as String?,
       printFlag: printFlag == freezed
           ? _value.printFlag
           : printFlag // ignore: cast_nullable_to_non_nullable
@@ -225,6 +232,7 @@ abstract class _$$_TbWhPalletCopyWith<$Res>
       DateTime? scanDate,
       String? scanUsernm,
       int? boxNo,
+      String? arrival,
       String? printFlag,
       DateTime? printDate,
       String? printUser,
@@ -261,6 +269,7 @@ class __$$_TbWhPalletCopyWithImpl<$Res> extends _$TbWhPalletCopyWithImpl<$Res>
     Object? scanDate = freezed,
     Object? scanUsernm = freezed,
     Object? boxNo = freezed,
+    Object? arrival = freezed,
     Object? printFlag = freezed,
     Object? printDate = freezed,
     Object? printUser = freezed,
@@ -321,6 +330,10 @@ class __$$_TbWhPalletCopyWithImpl<$Res> extends _$TbWhPalletCopyWithImpl<$Res>
           ? _value.boxNo
           : boxNo // ignore: cast_nullable_to_non_nullable
               as int?,
+      arrival: arrival == freezed
+          ? _value.arrival
+          : arrival // ignore: cast_nullable_to_non_nullable
+              as String?,
       printFlag: printFlag == freezed
           ? _value.printFlag
           : printFlag // ignore: cast_nullable_to_non_nullable
@@ -381,6 +394,7 @@ class _$_TbWhPallet implements _TbWhPallet {
       this.scanDate,
       this.scanUsernm,
       this.boxNo,
+      this.arrival,
       this.printFlag,
       this.printDate,
       this.printUser,
@@ -420,6 +434,8 @@ class _$_TbWhPallet implements _TbWhPallet {
   @override
   final int? boxNo;
   @override
+  final String? arrival;
+  @override
   final String? printFlag;
   @override
   final DateTime? printDate;
@@ -442,7 +458,7 @@ class _$_TbWhPallet implements _TbWhPallet {
 
   @override
   String toString() {
-    return 'TbWhPallet(comps: $comps, palletSeq: $palletSeq, workshop: $workshop, location: $location, itemNo: $itemNo, itemLot: $itemLot, quantity: $quantity, state: $state, barcode: $barcode, scanDate: $scanDate, scanUsernm: $scanUsernm, boxNo: $boxNo, printFlag: $printFlag, printDate: $printDate, printUser: $printUser, as400IfFlag: $as400IfFlag, as400IfDate: $as400IfDate, as400IfUser: $as400IfUser, rgstrId: $rgstrId, rgstDt: $rgstDt, updtrId: $updtrId, updtDt: $updtDt)';
+    return 'TbWhPallet(comps: $comps, palletSeq: $palletSeq, workshop: $workshop, location: $location, itemNo: $itemNo, itemLot: $itemLot, quantity: $quantity, state: $state, barcode: $barcode, scanDate: $scanDate, scanUsernm: $scanUsernm, boxNo: $boxNo, arrival: $arrival, printFlag: $printFlag, printDate: $printDate, printUser: $printUser, as400IfFlag: $as400IfFlag, as400IfDate: $as400IfDate, as400IfUser: $as400IfUser, rgstrId: $rgstrId, rgstDt: $rgstDt, updtrId: $updtrId, updtDt: $updtDt)';
   }
 
   @override
@@ -463,6 +479,7 @@ class _$_TbWhPallet implements _TbWhPallet {
             const DeepCollectionEquality()
                 .equals(other.scanUsernm, scanUsernm) &&
             const DeepCollectionEquality().equals(other.boxNo, boxNo) &&
+            const DeepCollectionEquality().equals(other.arrival, arrival) &&
             const DeepCollectionEquality().equals(other.printFlag, printFlag) &&
             const DeepCollectionEquality().equals(other.printDate, printDate) &&
             const DeepCollectionEquality().equals(other.printUser, printUser) &&
@@ -494,6 +511,7 @@ class _$_TbWhPallet implements _TbWhPallet {
         const DeepCollectionEquality().hash(scanDate),
         const DeepCollectionEquality().hash(scanUsernm),
         const DeepCollectionEquality().hash(boxNo),
+        const DeepCollectionEquality().hash(arrival),
         const DeepCollectionEquality().hash(printFlag),
         const DeepCollectionEquality().hash(printDate),
         const DeepCollectionEquality().hash(printUser),
@@ -531,6 +549,7 @@ abstract class _TbWhPallet implements TbWhPallet {
       final DateTime? scanDate,
       final String? scanUsernm,
       final int? boxNo,
+      final String? arrival,
       final String? printFlag,
       final DateTime? printDate,
       final String? printUser,
@@ -569,6 +588,8 @@ abstract class _TbWhPallet implements TbWhPallet {
   String? get scanUsernm => throw _privateConstructorUsedError;
   @override
   int? get boxNo => throw _privateConstructorUsedError;
+  @override
+  String? get arrival => throw _privateConstructorUsedError;
   @override
   String? get printFlag => throw _privateConstructorUsedError;
   @override

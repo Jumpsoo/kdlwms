@@ -43,9 +43,11 @@ import 'package:kdlwms/domain/use_case/tb_cm_sync/save_tb_cm_sync_info.dart';
 import 'package:kdlwms/domain/use_case/tb_cm_sync/select_tb_cm_sync.dart';
 import 'package:kdlwms/domain/use_case/tb_server_info/select_tb_server_info.dart';
 import 'package:kdlwms/domain/use_case/tb_server_info/update_tb_server_info.dart';
+import 'package:kdlwms/domain/use_case/tb_wh_item/select_tb_wh_item.dart';
 import 'package:kdlwms/domain/use_case/use_case_data_sync.dart';
 import 'package:kdlwms/domain/use_case/use_case_server_info.dart';
 import 'package:kdlwms/domain/use_case/use_case_tb_cm_location.dart';
+import 'package:kdlwms/domain/use_case/use_case_tb_wh_item.dart';
 import 'package:kdlwms/domain/use_case/use_case_wms.dart';
 import 'package:kdlwms/domain/use_case/web_api/get_common_info.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync_viewmodel.dart';
@@ -59,7 +61,7 @@ import 'package:kdlwms/domain/use_case/data_batch/mig_tb_cm_sync.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_item.dart';
 
 Future<List<SingleChildWidget>> getWmsProviders() async {
-  //deleteDatabase('wms_db_local_v1');
+  deleteDatabase('wms_db_local_v1');
 
   Database database = await openDatabase(
     'wms_db_local_v1',
@@ -128,6 +130,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           ',scanDate      TIMESTAMP'
           ',scanUsernm    TEXT'
           ',boxNo         INT'
+          ',arrival       TEXT'
           ',printFlag     TEXT'
           ',printDate     TIMESTAMP'
           ',printUser     TEXT'
@@ -253,6 +256,11 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     //
   );
 
+  UseCaseTbWhItem useCaseTbWhItem = UseCaseTbWhItem(
+    selectTbWhItem: SelectTbWhItem(tbWhItemRepo),
+  );
+
+
   PalletViewModel palletViewModel = PalletViewModel(useCasesWms);
 
   //작업장 관리
@@ -300,7 +308,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
   );
 
   SettingInfoViewModel settingWorkshopViewModel =
-      SettingInfoViewModel(useCaseTbCmLocation, useCaseServerInfo);
+      SettingInfoViewModel(useCaseTbCmLocation, useCaseServerInfo, useCaseTbWhItem);
 
   //배치 관련
   UseCaseDataSync useCaseDataBatch = UseCaseDataSync(

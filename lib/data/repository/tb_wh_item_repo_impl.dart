@@ -58,4 +58,9 @@ class TbWhItemRepoImpl implements TbWhItemRepo {
   Future<Result<bool>> deleteTbWhItemAll() async {
     return await db.deleteTbWhItemAll();
   }
+
+  @override
+  Future<Result<TbWhItem?>> selectTbWhItem(TbWhItem tbWhItem) async {
+    return await db.selectTbWhItem(tbWhItem);
+  }
 }

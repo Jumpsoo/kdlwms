@@ -22,6 +22,7 @@ _$_TbWhPallet _$$_TbWhPalletFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['scanDate'] as String),
       scanUsernm: json['scanUsernm'] as String?,
       boxNo: json['boxNo'] as int?,
+      arrival: json['arrival'] as String?,
       printFlag: json['printFlag'] as String?,
       printDate: json['printDate'] == null
           ? null
@@ -56,6 +57,7 @@ Map<String, dynamic> _$$_TbWhPalletToJson(_$_TbWhPallet instance) =>
       'scanDate': instance.scanDate?.toIso8601String(),
       'scanUsernm': instance.scanUsernm,
       'boxNo': instance.boxNo,
+      'arrival': instance.arrival,
       'printFlag': instance.printFlag,
       'printDate': instance.printDate?.toIso8601String(),
       'printUser': instance.printUser,

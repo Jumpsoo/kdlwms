@@ -10,64 +10,6 @@ import 'package:pluto_grid/pluto_grid.dart';
 import 'package:provider/provider.dart';
 
 
-// 01. 실적 입력화면
-// 작업위치, 창고별 조회, 그루핑
-// 조회되는 상태 :  packing, 완료항목
-Future<void> createPackingTopGridView(
-    BuildContext context,
-    PlutoGridStateManager gridStateManager,
-    String sWareHouse,
-    String sLocation ) async {
-  //초기화
-  PalletViewModel viewModel = context.read<PalletViewModel>();
-  gridStateManager.rows.clear();
-  gridStateManager.removeRows(gridStateManager.rows);
-  //조회
-
-  List<TbWhPalletGroup>? pallets =
-  await viewModel.useCasesWms.selectPackingSummaryUseCase(gComps, sWareHouse, sLocation);
-  if (pallets != null){
-
-    gridStateManager.appendRows(
-      getPackTopGridRowsGrouping(pallets),
-    );
-
-    if(gridStateManager.rows.length == 1){
-      //데이터가 없습니다는 한군데에서만
-      // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
-    }
-    gridStateManager.notifyListeners();
-  }
-}
-
-Future<void> createPackingButtomGridView(
-    BuildContext context,
-    PlutoGridStateManager gridStateManager,
-    String sWareHouse,
-    String sLocation) async {
-
-  PalletViewModel viewModel = context.read<PalletViewModel>();
-  gridStateManager.rows.clear();
-  gridStateManager.removeRows(gridStateManager.rows);
-
-
-  //조회
-  List<TbWhPallet>? pallets =
-  await viewModel.useCasesWms.selectPackingListUseCase(sWareHouse, sLocation);
-
-  if (pallets != null){
-    gridStateManager.appendRows(
-      getPackButtomGridRows(pallets),
-    );
-    gridStateManager.notifyListeners();
-
-    if(gridStateManager.rows.length == 1){
-      //데이터가 없습니다는 한군데에서만
-      // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
-    }
-  }
-}
-
 
 // 상단 그리드 입력창용
 // 컬럼 리스트 지정

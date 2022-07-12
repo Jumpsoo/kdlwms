@@ -64,4 +64,22 @@ class TbWhItemDbHelper {
       return Result.error(e.toString());
     }
   }
+
+ //단일 항목 조회
+  Future<Result<TbWhItem?>> selectTbWhItem(TbWhItem tbWhItem) async {
+    try {
+      final maps = await db.query(
+        'TB_WH_ITEM',
+        where: 'itemNo = ? ',
+        whereArgs: [tbWhItem.itemNo],
+      );
+      List<TbWhItem> retList = maps.map((e) => TbWhItem.fromJson(e)).toList();
+      if(retList.isNotEmpty) {
+        return Result.success(retList[0]);
+      }
+      return const Result.error('품목정보 없음');
+    } catch (e) {
+      return Result.error(e.toString());
+    }
+  }
 }

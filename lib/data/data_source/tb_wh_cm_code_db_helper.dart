@@ -39,6 +39,7 @@ class TbWhCmCodeDbHelper {
           where: 'comps=? and grpCd = ? and codeCd = ?',
         whereArgs: [tbWhCmCode.comps, tbWhCmCode.grpCd, tbWhCmCode.codeCd],
       );
+
       return Result.success(maps.map((e) => TbWhCmCode.fromJson(e)).toList());
     } catch (e) {
       return const Result.error('데이터베이스 에러');

@@ -5,6 +5,7 @@ import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:kdlwms/domain/use_case/use_case_server_info.dart';
 import 'package:kdlwms/domain/use_case/use_case_tb_cm_location.dart';
+import 'package:kdlwms/domain/use_case/use_case_tb_wh_item.dart';
 import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_events.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_state.dart';
@@ -13,8 +14,9 @@ import 'package:kdlwms/presentation/set_workshop/setting_workshop_state.dart';
 class SettingInfoViewModel with ChangeNotifier {
   final UseCaseCommonInfo useCaseCommonInfo;
   final UseCaseServerInfo useCaseServerInfo;
+  final UseCaseTbWhItem useCaseTbWhItem;
 
-  SettingInfoViewModel(this.useCaseCommonInfo, this.useCaseServerInfo);
+  SettingInfoViewModel(this.useCaseCommonInfo, this.useCaseServerInfo, this.useCaseTbWhItem);
 
   final StreamController<CommUiEvents> _eventController =
       StreamController<CommUiEvents>();

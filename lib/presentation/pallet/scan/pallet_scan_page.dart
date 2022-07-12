@@ -5,6 +5,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
+import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -42,6 +44,9 @@ class _PalletScanPageState extends State<PalletScanPage> {
   String _readWorkShop = '';
   String _readLocation = '';
 
+  String _readWareHouse = '';
+  String _readWareHouseNm = '';
+
   //콤보박스용 변수
   List<ComboValueType> _dataWorkshop = [];
   List<ComboValueType> _dataLocation = [];
@@ -57,7 +62,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   List<PlutoRow> topGridRows = [];
 
   late PalletViewModel viewModel;
-  late SettingInfoViewModel viewModelShop;
+  late SettingInfoViewModel viewCommon;
 
   // 그리드메니저
   late final PlutoGridStateManager topGridStateManager;
@@ -72,6 +77,10 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _decodeResult = "준비";
       _readWorkShop = '';
       _readLocation = '';
+
+      _readWareHouse = '';
+      _readWareHouseNm = '실적없음';
+
       //for test, 지울것
       gComps = 'C1';
     });
@@ -91,14 +100,16 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
     //프로그래스바
     hideCircularProgressIndicator();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
+    //
+    // WidgetsBinding.instance.addPostFrameCallback((_) =>
+    //     showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
   }
 
   @override
   Widget build(BuildContext context) {
     viewModel = context.watch<PalletViewModel>();
+    viewCommon = context.watch<SettingInfoViewModel>();
+
     ownContext = context;
 
     return Scaffold(
@@ -127,10 +138,10 @@ class _PalletScanPageState extends State<PalletScanPage> {
                           child: ElevatedButton(
                             onPressed: () async {
                               //서버 동기화 체크
-                              await checkSyncStatus(context);
+                              //await checkSyncStatus(context);
 
-                              showCustomSnackBarSuccess(
-                                  context, '로케이션 번호를 읽히세요.');
+                              //showCustomSnackBarSuccess(
+                              // context, '로케이션 번호를 읽히세요.');
                             },
                             style: ElevatedButton.styleFrom(
                               fixedSize: const Size(100, 40),
@@ -139,8 +150,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                             ),
-                            child: const AutoSizeText(
-                              '작업위치',
+                            child: AutoSizeText(
+                              _readWareHouseNm,
                               style: TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.white,
@@ -164,7 +175,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                         ),
                       ],
                     ),
-                    Padding(padding: EdgeInsets.only(left: 5)),
+                    Padding(padding: const EdgeInsets.only(left: 5)),
                     Column(
                       children: [
                         Container(
@@ -173,12 +184,12 @@ class _PalletScanPageState extends State<PalletScanPage> {
                           width: 0.0,
                           child: ElevatedButton(
                             onPressed: () async {
-                              //서버 동기화 체크
-                              await checkSyncStatus(context);
-
-                              //해당버튼을 누르면 창고위치로 값을 넘겨준다
-                              showCustomSnackBarSuccess(
-                                  context, '창고 QR을 입력하세요.');
+                              // //서버 동기화 체크
+                              // await checkSyncStatus(context);
+                              //
+                              // //해당버튼을 누르면 창고위치로 값을 넘겨준다
+                              // showCustomSnackBarSuccess(
+                              //     context, '창고 QR을 입력하세요.');
                             },
                             style: ElevatedButton.styleFrom(
                               fixedSize: const Size(70, 40),
@@ -188,7 +199,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                               ),
                             ),
                             child: const AutoSizeText(
-                              '',
+                              '1',
                               style: TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.white,
@@ -244,7 +255,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
                   // columnGroups: columnGroups,
                   onLoaded: (PlutoGridOnLoadedEvent event) {
                     downGridStateManager = event.stateManager;
-
                     viewBottomList();
                   },
                   onChanged: (PlutoGridOnChangedEvent event) {
@@ -285,7 +295,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
   void deletePackedPallet() async {
     bool bRet = await deletePackItem(
         context, downGridStateManager, _readWorkShop, _readLocation);
-
     if (bRet) {
       viewTopList();
       viewBottomList();
@@ -302,35 +311,47 @@ class _PalletScanPageState extends State<PalletScanPage> {
       showCustomSnackBarWarn(context, gErrorMsg);
       return;
     }
-    //공백일 경우에러 발생
-    if (_readWorkShop == null || _readWorkShop.isEmpty) {
-      showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
-      return;
-    }
-    if (_readLocation == null || _readLocation.isEmpty) {
-      showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
+    if (_readLocation.isEmpty) {
+      showCustomSnackBarWarn(context, '로케이션을 먼저 스캔하세요.');
       return;
     }
 
+    //qr 실적에서 창고코드 조회 후 체크
+    TbWhItem tbWhItem = TbWhItem(comps: gComps, itemNo: pallet.itemNo);
+    Result resultItem = await viewCommon.useCaseTbWhItem.selectTbWhItem(tbWhItem);
+    resultItem.when(success: (value) async {
+
+      TbWhItem retWhItem = value;
+      pallet = pallet!.copyWith(arrival: retWhItem.warehouseCd);
+
+    }, error: (message) {
+      showCustomSnackBarWarn(context, message);
+      return message;
+    });
+
+
     //입력값 체킄
     if (await checkValueAdd(context, pallet) == false) {
-      print('aaa');
-      for(TbWhPallet item in await getSendRow()){
-        print("11");
-        print(item);
-      }
+      // for(TbWhPallet item in await getSendRow()){
+      //   print(item);
+      // }
       return;
     }
 
     //추가시 validation 은 repository 내부에있음
-    Result result = await viewModel.useCasesWms.addPallet(pallet);
-
+    Result result = await viewModel.useCasesWms.addPallet(pallet!);
     result.when(
-        success: (value)  {
+        success: (value) {
           _viewAll();
         },
         error: (message) {});
+  }
 
+  void _clearData() {
+    setState((){
+      _readWareHouse = '';
+      _readWareHouseNm='실적없음';
+    });
   }
 
   //체크로직, 완료, 삭제 시
@@ -340,9 +361,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
     if (pallet == null) {
       return false;
     }
-    // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
-    // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
-    // 실패인데 성공으로 빠짐
+
     Result result = await viewModel.useCasesWms.selectCheckValue(pallet);
     result.when(success: (value) {
       bRet = true;
@@ -354,22 +373,11 @@ class _PalletScanPageState extends State<PalletScanPage> {
     });
 
     return bRet;
-    //
-    // resultCheck.when(success: (value) async {
-    //   return true;
-    // }, error: (message) async {
-    //   showCustomSnackBarWarn(context, message);
-    //
-    //   return Result.error(message);
-    // });
-
-    return true;
   }
 
   //상단 리스트 조회
   void viewTopList() {
     createPackingTopGridView(
-      context,
       topGridStateManager,
       _readWorkShop,
       _readLocation,
@@ -379,7 +387,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
   //하단 리스트 조회
   void viewBottomList() {
     createPackingButtomGridView(
-      context,
       downGridStateManager,
       _readWorkShop,
       _readLocation,
@@ -388,12 +395,14 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
   //
   // 저장
-  void _changeWorkshop(String sLocation) {
-    setState(() {
-      _readWorkShop = sLocation;
-      viewBottomList();
-    });
-  }
+  // void _changeWorkshop(String sWorkShop) {
+  //   setState(() {
+  //
+  //     _readWorkShop = sWorkShop;
+  //
+  //     viewBottomList();
+  //   });
+  // }
 
   //창고QR 리딩
   void _changeLocation(String sReadLocation) {
@@ -426,12 +435,11 @@ class _PalletScanPageState extends State<PalletScanPage> {
     Result result =
         await viewModel.useCasesWms.confirmPalletFinishUseCase(sendList);
 
-    result.when(success: (value) async{
+    result.when(success: (value) async {
       showCustomSnackBarSuccess(ownContext, gSuccessMsg);
 
       // 처리후 비동기 호출 추가
       WidgetsBinding.instance.addPostFrameCallback((_) => _viewAll());
-
     }, error: (message) {
       showCustomSnackBarWarn(ownContext, message);
       return false;
@@ -440,9 +448,9 @@ class _PalletScanPageState extends State<PalletScanPage> {
     return true;
   }
 
+  //상태를 2 로변경한다.
+  //화면에서가 아닌 데이터 조회 후 전송한다.
   Future<List<TbWhPallet>> getSendRow() async {
-    //상태를 2 로변경한다.
-    //화면에서가 아닌 데이터 조회 후 전송한다.
     List<TbWhPallet> tbWhPallets = [];
     for (PlutoRow row in downGridStateManager.rows) {
       List<PlutoCell> cells = row.cells.values.toList();
@@ -479,14 +487,14 @@ class _PalletScanPageState extends State<PalletScanPage> {
       }
 
       if (sDefaultLocation == '') {
-        showCustomSnackBarWarn(context, '작업위치가 설정되지 않았습니다.');
+        showCustomSnackBarSuccess(context, '로케이션을 스캔하세요.');
       }
     });
   }
 
+  //로케이션 리스트를 불러온다.
   Future<void> setLocationList() async {
     List<ComboValueType> comboList = await getLocationComboValueList(context);
-
     setState(() {
       _dataLocation = comboList;
     });
@@ -602,7 +610,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
     PointmobileScanner.channel.setMethodCallHandler(_onBarcodeScannerHandler);
     PointmobileScanner.initScanner();
     PointmobileScanner.enableScanner();
-    PointmobileScanner.enableBeep();
+    // PointmobileScanner.enableBeep();
 
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_CODE128);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_EAN13);
@@ -614,10 +622,10 @@ class _PalletScanPageState extends State<PalletScanPage> {
   //바코드 관련 이벤트 및 함수 선언부분
   Future<void> _onBarcodeScannerHandler(MethodCall call) async {
     //공장코드 미설정 시 작업장 화면에서 설정하도록 할것
-    if (gComps.isEmpty) {
-      showAlertDialog(context, '(진행불가) 공장 정보 미설정. \r\n 작업장 설정 화면에서 설정필요 ');
-      return;
-    }
+    // if (gComps.isEmpty) {
+    //   showAlertDialog(context, '(진행불가) 공장 정보 미설정. \r\n 작업장 설정 화면에서 설정필요 ');
+    //   return;
+    // }
 
     try {
       if (call.method == PointmobileScanner.ON_DECODE) {
@@ -640,20 +648,26 @@ class _PalletScanPageState extends State<PalletScanPage> {
     String? sVal = lDecodeResult[1];
 
     if (sVal == 'READ_FAIL') {
-      showCustomSnackBarWarn(context, '(바코드 읽기 실패)');
+      // 2022-07-12 | 요청사항 바코드 읽기 실패해도 무시하도록 수정
+      //showCustomSnackBarWarn(context, '(바코드 읽기 실패)');
       return;
     }
-
     //로케이션번호일경우
     //TAG 리스트 스캔시 해당분기로 빠지는걸 방지
     if (sVal != null && sVal.length < 4 && sVal.substring(0, 1) == 'L') {
+
       //Location
       _readLocation = sVal;
+      _clearData();
       _changeLocation(_readLocation);
+
     } else if (sVal != null && sVal.length > 100) {
+
       //제품 QR
       _readQRData = sVal;
+      // 실적 추가 후 품번에 대한 로케이션 정보를 불러온다.
       _changeReadQrData(_readQRData);
+
     } else {
       showCustomSnackBarWarn(context, '스캔한 작업 코드가 부적절합니다.');
     }
@@ -668,5 +682,127 @@ class _PalletScanPageState extends State<PalletScanPage> {
   void _onExit() {
     PointmobileScanner.disableScanner();
     Navigator.pop(context);
+  }
+
+  // 파싱된 품번을 이용해서 창고정보를 설정한다.
+  // 1. 품번으로  창코위치와 location 정보를 가져와야함
+  // 2. 창고 코드로 공통정보 조회 후 설정한다
+  Future<bool> _changeWareHouse(
+      BuildContext context, TbWhPallet? pallet) async {
+
+    bool bRet = false;
+    String sMsg = '';
+
+    TbWhItem tbWhItem = TbWhItem(comps: gComps, itemNo: pallet!.itemNo);
+    Result resultItem =
+        await viewCommon.useCaseTbWhItem.selectTbWhItem(tbWhItem);
+
+    resultItem.when(success: (value) async {
+
+      TbWhItem item = value;
+      Result result = await _getWarehouseInfo(item.warehouseCd!);
+
+      result.when(success: (wareHouseInfo) async {
+        TbWhCmCode retInfo = wareHouseInfo;
+        setState(() {
+          if (retInfo != null) {
+            _readWareHouse = retInfo.codeCd!;
+            _readWareHouseNm = retInfo.codeKoNm!;
+          }
+        });
+      }, error: (message) {
+        showCustomSnackBarWarn(context, sMsg);
+      });
+    }, error: (message) async {
+      showCustomSnackBarWarn(context, sMsg);
+      bRet = false;
+    });
+
+    return bRet;
+  }
+
+  Future<Result<TbWhCmCode>> _getWarehouseInfo(String sWarehouseCd) async {
+
+    bool bRet  = false;
+    // 창고명 조회
+    String sMsg = '';
+    late TbWhCmCode  ret;
+    TbWhCmCode tbWhCmCode =
+    TbWhCmCode(comps: gComps, grpCd: 'ARRIVAL', codeCd: sWarehouseCd);
+    Result result = await viewCommon.useCaseCommonInfo.selectTbWhCmCodeListByCodeCd(tbWhCmCode);
+
+    result.when(success: (value) async{
+
+      List<TbWhCmCode> retList = value;
+      if(retList.isNotEmpty){
+        bRet = true;
+        ret = retList[0];
+      }
+
+    }, error: (message) async{
+      bRet= false;
+      sMsg = message;
+    });
+
+    if(bRet){
+      return Result.success(ret);
+    }else{
+      return Result.error(sMsg);
+    }
+  }
+
+// 01. 실적 입력화면
+// 작업위치, 창고별 조회, 그루핑
+// 조회되는 상태 :  packing, 완료항목
+  Future<void> createPackingTopGridView(PlutoGridStateManager gridStateManager,
+      String sWareHouse, String sLocation) async {
+    //초기화
+    PalletViewModel viewModel = context.read<PalletViewModel>();
+    gridStateManager.rows.clear();
+    gridStateManager.removeRows(gridStateManager.rows);
+    //조회
+
+    List<TbWhPalletGroup>? pallets = await viewModel.useCasesWms
+        .selectPackingSummaryUseCase(gComps, sWareHouse, sLocation);
+    if (pallets != null) {
+      gridStateManager.appendRows(
+        getPackTopGridRowsGrouping(pallets),
+      );
+
+      if (gridStateManager.rows.length == 1) {
+        //데이터가 없습니다는 한군데에서만
+        // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
+      }
+
+      gridStateManager.notifyListeners();
+    }
+  }
+
+  Future<void> createPackingButtomGridView(
+      PlutoGridStateManager gridStateManager,
+      String sWareHouse,
+      String sLocation) async {
+    PalletViewModel viewModel = context.read<PalletViewModel>();
+    gridStateManager.rows.clear();
+    gridStateManager.removeRows(gridStateManager.rows);
+
+    //조회
+    List<TbWhPallet>? pallets = await viewModel.useCasesWms
+        .selectPackingListUseCase(sWareHouse, sLocation);
+
+    if (pallets != null && pallets.isNotEmpty) {
+      gridStateManager.appendRows(
+        getPackButtomGridRows(pallets),
+      );
+      gridStateManager.notifyListeners();
+
+      //창고 코드 설정
+      _changeWareHouse(context, pallets[0]);
+
+      if (gridStateManager.rows.length == 1) {
+        //데이터가 없습니다는 한군데에서만
+        // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
+      }
+    }
   }
 }

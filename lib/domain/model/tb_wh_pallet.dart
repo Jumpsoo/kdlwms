@@ -19,6 +19,7 @@ class TbWhPallet with _$TbWhPallet {
     DateTime? scanDate,
     String? scanUsernm,
     int? boxNo ,
+    String? arrival,
     String? printFlag ,
     DateTime? printDate ,
     String? printUser ,

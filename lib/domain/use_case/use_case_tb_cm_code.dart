@@ -24,5 +24,4 @@ class UseCaseTbCmCode {
     required this.deleteTbWhCmCode,
     required this.deleteTbWhCmCodeAll,
   });
-
 }

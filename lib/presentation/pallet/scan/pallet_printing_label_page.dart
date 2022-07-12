@@ -44,6 +44,8 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
   List<ComboValueType> _dataWorkshop = [];
   List<ComboValueType> _dataLocation = [];
 
+  String _readWareHouseNm = '';
+
   // QR 리딩값 분기용 변수 2개
 
   String _readQRData = "";
@@ -69,6 +71,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
       _decodeResult = "준비";
       _readWorkShop = '';
       _readLocation = '';
+      _readWareHouseNm = '실적없음';
       //for test, 지울것
       gComps = 'C1';
     });
@@ -135,8 +138,8 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
-                          child: const AutoSizeText(
-                            '작업위치',
+                          child: AutoSizeText(
+                            _readWareHouseNm,
                             style: TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.white,
@@ -284,34 +287,34 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
   // 리딩한 작업내용을 아래 그리드에 추가함
   // 값 파싱->임시저장 -> 재조회
   // 상차화면에서는 실적입력안함
-  void _changeReadQrData(String sQrData) async {
-    try {
-      //공백일 경우에러 발생
-      if (_readWorkShop == null || _readWorkShop.isEmpty) {
-        showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
-        return;
-      }
-      if (_readLocation == null || _readLocation.isEmpty) {
-        showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
-        return;
-      }
-    } catch (e) {
-      writeLog(e.toString());
-    }
-  }
+  // void _changeReadQrData(String sQrData) async {
+  //   try {
+  //     //공백일 경우에러 발생
+  //     if (_readWorkShop == null || _readWorkShop.isEmpty) {
+  //       showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
+  //       return;
+  //     }
+  //     if (_readLocation == null || _readLocation.isEmpty) {
+  //       showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
+  //       return;
+  //     }
+  //   } catch (e) {
+  //     writeLog(e.toString());
+  //   }
+  // }
 
   //
   // 저장
-  void _changeWorkshop(String sLocation) {
-    setState(() {
-      _readWorkShop = sLocation;
-
-      pringtingPalletList(
-        context,
-        topGridStateManager,
-      );
-    });
-  }
+  // void _changeWorkshop(String sLocation) {
+  //   setState(() {
+  //     _readWorkShop = sLocation;
+  //
+  //     pringtingPalletList(
+  //       context,
+  //       topGridStateManager,
+  //     );
+  //   });
+  // }
 
   //창고QR 리딩
   void _changeLocation(String sReadLocation) {
@@ -339,7 +342,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
       }
 
       if (sDefaultLocation == '') {
-        showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
+        showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.');
       }
     });
   }
@@ -499,7 +502,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     String? sVal = lDecodeResult[1];
 
     if (sVal == 'READ_FAIL') {
-      showCustomSnackBarWarn(context, '(바코드 읽기 실패)');
+      // showCustomSnackBarWarn(context, '(바코드 읽기 실패)');
       return;
     }
 
@@ -593,6 +596,10 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
 
         gridStateManager.appendRows(rows);
         gridStateManager.notifyListeners();
+
+        setState((){
+          _readWareHouseNm = palletList[0].arrival!;
+        });
       }
     }, error: (message) {
       showCustomSnackBarWarn(context, message);

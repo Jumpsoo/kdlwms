@@ -150,11 +150,12 @@ Future<bool> deletePackItem(
 
   // for (PlutoRow row in gridStateManager.currentSelectingRows) {
   PlutoRow row = gridStateManager.currentCell!.row;
-
   List<PlutoCell> cells = row.cells.values.toList();
 
   tbWhPallets.add(TbWhPallet(
       comps: gComps,
+      workshop: sWorkshop,
+      location: sLocation,
       itemNo: cells[1].value,
       itemLot: cells[2].value,
       quantity: cells[4].value,

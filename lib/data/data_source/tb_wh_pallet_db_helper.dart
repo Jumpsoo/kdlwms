@@ -1,4 +1,5 @@
 import 'package:kdlwms/data/data_source/result.dart';
+import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
@@ -288,10 +289,10 @@ class TbWhPalletDbHelper {
     try {
       int nRet = await db.delete(
         'TB_WH_PALLET',
-        // where: 'barcode = ?',
-        // whereArgs: [pallet.barcode],
-        where: 'comps = ? and workshop = ? and location = ? ',
-        whereArgs: [pallet.comps, pallet.workshop, pallet.location],
+        where: 'barcode = ?',
+        whereArgs: [pallet.barcode],
+        // where: 'comps = ? and workshop = ? and location = ? ',
+        // whereArgs: [pallet.comps, pallet.workshop, pallet.location],
       );
       return Result.success(true);
     } catch (_) {
@@ -373,30 +374,58 @@ class TbWhPalletDbHelper {
 
     //이품체크,  warehouseCd
     //값이 없는 경우 에러
-    String itemNo = '';
-    String sWarehouseCd = '';
+    // String itemNo = pallet.itemNo!;
+    // String sWarehouseCd = pallet.arrival!;
+
+    // final maps = await db.rawQuery(
+    //   'SELECT  itemNo, warehouseCd, warehouseNm'
+    //   '  FROM TB_WH_ITEM '
+    //   ' WHERE itemNo = ?',
+    //   [pallet.itemNo],
+    // );
+    //
+    // List<TbWhItem> itemList = maps.map((e) => TbWhItem.fromJson(e)).toList();
+    // if (itemList.isNotEmpty) {
+    //   itemNo = itemList[0].itemNo!;
+    //   sWarehouseCd = itemList[0].warehouseCd!;
+    //   sWarehouseNm = itemList[0].warehouseNm!;
+    //   print('sWarehouseCd : $sWarehouseCd');
+    //   print('inWarehouseCd : $inWarehouseCd');
+    //   if (sWarehouseCd != inWarehouseCd) {
+    //     String sErrMsg =
+    //         "이품이 입력되었습니다. \r\n품번:[$itemNo] \r\n설정 된 창고: [$sWarehouseNm($sWarehouseCd)]";
+    //     return Result.error(sErrMsg);
+    //   }
+    // }
+
+    String itemNo = pallet.itemNo!;
+    String sWarehouseCd = pallet.arrival!;
     String sWarehouseNm = '';
-
-    final maps = await db.rawQuery(
-      'SELECT  itemNo, warehouseCd, warehouseNm'
-      '  FROM TB_WH_ITEM '
-      ' WHERE itemNo = ?',
-      [pallet.itemNo],
+    final maps2 = await db.query(
+      'TB_WH_CM_CODE',
+      where: 'comps=? and grpCd = ? and codeCd = ?',
+      whereArgs: [pallet.comps, 'ARRIVAL', pallet.arrival],
     );
-
-    List<TbWhItem> itemList = maps.map((e) => TbWhItem.fromJson(e)).toList();
-    if (itemList.isNotEmpty) {
-      itemNo = itemList[0].itemNo!;
-      sWarehouseCd = itemList[0].warehouseCd!;
-      sWarehouseNm = itemList[0].warehouseNm!;
-
-      if (sWarehouseCd != inWarehouseCd) {
-        String sErrMsg =
-            "이품이 입력되었습니다. \r\n품번:[$itemNo] \r\n설정 된 창고: [$sWarehouseNm($sWarehouseCd)]";
-        return Result.error(sErrMsg);
-      }
+    List<TbWhCmCode> codeList = maps2.map((e) => TbWhCmCode.fromJson(e)).toList();
+    if(codeList.isNotEmpty){
+      sWarehouseNm = codeList[0].codeKoNm!;
     }
 
+    //
+    final maps = await db.query(
+      'TB_WH_PALLET',
+      where: 'comps = ? and workshop = ?  and location = ?',
+      whereArgs:  [pallet.comps, pallet.workshop, pallet.location],
+    );
+
+    List<TbWhPallet> lastList = maps.map((e) => TbWhPallet.fromJson(e)).toList();
+    if(lastList.isNotEmpty){
+      if(lastList[0].arrival != pallet.arrival!){
+            String sErrMsg =
+                "이품이 입력되었습니다. \r\n품번:[$itemNo] \r\n설정 된 창고: [$sWarehouseNm($sWarehouseCd)]";
+            return Result.error(sErrMsg);
+      }
+    }
     return const Result.success(true);
   }
 

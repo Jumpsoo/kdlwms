@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-// import 'package:flutter_beep/flutter_beep.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -11,7 +10,7 @@ import 'package:kdlwms/kdl_common/web_sync/data_sync_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:http/http.dart' as http;
-// import 'package:vibration/vibration.dart';
+import 'package:vibration/vibration.dart';
 
 late BuildContext dialogContext;
 
@@ -101,9 +100,13 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
 void showCustomSnackBarWarn(BuildContext context, String message) async {
   ScaffoldMessenger.of(context).clearSnackBars();
 
+
   //진동
   if (gVibrateEnable == 0) {
-    // Vibration.vibrate(duration: 400);
+
+    // AssetsAudioPlayer.playAndForget(
+    //     Audio('assets/siren_ton.wav'));
+    Vibration.vibrate(duration: 400);
   }
 
   final snackBar1 = SnackBar(

@@ -159,18 +159,19 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
     String sWarehouseCd = '';
 
     //공통코드 조회 후 값전달 체크되지 않으면 2품체크 패스하라고 함(미설정시)
-    TbWhCmCode tbWhCmCode =  TbWhCmCode(comps: gComps, grpCd: 'LOCATION', codeCd: pallet.location);
-    Result result = await dbCode.selectTbWhCmCodeListByCodeCd(tbWhCmCode);
+    // TbWhCmCode tbWhCmCode =  TbWhCmCode(comps: gComps, grpCd: 'LOCATION', codeCd: pallet.location);
+    // Result result = await dbCode.selectTbWhCmCodeListByCodeCd(tbWhCmCode);
 
-    result.when(success: (valueList) async {
-      List<TbWhCmCode> codeList = valueList;
-      if(codeList.isNotEmpty){
-        sWarehouseCd = codeList[0].ref2!;
-      }
-    }, error: (message){
-      return Result.error(message);
-    });
+    // result.when(success: (valueList) async {
+    //   List<TbWhCmCode> codeList = valueList;
+    //   if(codeList.isNotEmpty){
+    //     sWarehouseCd = codeList[0].ref2!;
+    //   }
+    // }, error: (message){
+    //   return Result.error(message);
+    // });
 
+    sWarehouseCd = pallet.arrival!;
     return await db.selectCheckValue(pallet,sWarehouseCd);
 
   }
