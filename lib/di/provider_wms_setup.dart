@@ -61,10 +61,10 @@ import 'package:kdlwms/domain/use_case/data_batch/mig_tb_cm_sync.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_item.dart';
 
 Future<List<SingleChildWidget>> getWmsProviders() async {
-  deleteDatabase('wms_db_local_v1');
+  //deleteDatabase('wms_db_local_v1');
 
   Database database = await openDatabase(
-    'wms_db_local_v1',
+    'wms_db_local_v3',
     version: 1,
     onCreate: (database, version) async {
       //1. 공통코드
