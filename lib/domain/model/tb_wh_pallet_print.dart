@@ -7,6 +7,7 @@ part 'tb_wh_pallet_print.g.dart';
 class TbWhPalletPrint with _$TbWhPalletPrint {
   factory TbWhPalletPrint({
     String? comps,
+    String? workshop,
     int? total ,
     DateTime? palletDate,
     String? arrival,

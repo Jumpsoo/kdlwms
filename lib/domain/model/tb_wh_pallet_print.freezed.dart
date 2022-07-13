@@ -21,6 +21,7 @@ TbWhPalletPrint _$TbWhPalletPrintFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TbWhPalletPrint {
   String? get comps => throw _privateConstructorUsedError;
+  String? get workshop => throw _privateConstructorUsedError;
   int? get total => throw _privateConstructorUsedError;
   DateTime? get palletDate => throw _privateConstructorUsedError;
   String? get arrival => throw _privateConstructorUsedError;
@@ -42,7 +43,8 @@ abstract class $TbWhPalletPrintCopyWith<$Res> {
       _$TbWhPalletPrintCopyWithImpl<$Res>;
   $Res call(
       {String? comps,
-      int? total,
+        String? workshop,
+        int? total,
       DateTime? palletDate,
       String? arrival,
       String? printFlag,
@@ -63,6 +65,7 @@ class _$TbWhPalletPrintCopyWithImpl<$Res>
   @override
   $Res call({
     Object? comps = freezed,
+    Object? workshop = freezed,
     Object? total = freezed,
     Object? palletDate = freezed,
     Object? arrival = freezed,
@@ -76,6 +79,10 @@ class _$TbWhPalletPrintCopyWithImpl<$Res>
           ? _value.comps
           : comps // ignore: cast_nullable_to_non_nullable
               as String?,
+      workshop: workshop == freezed
+          ? _value.workshop
+          : workshop // ignore: cast_nullable_to_non_nullable
+      as String?,
       total: total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -117,6 +124,7 @@ abstract class _$$_TbWhPalletPrintCopyWith<$Res>
   @override
   $Res call(
       {String? comps,
+        String? workshop,
       int? total,
       DateTime? palletDate,
       String? arrival,
@@ -140,6 +148,7 @@ class __$$_TbWhPalletPrintCopyWithImpl<$Res>
   @override
   $Res call({
     Object? comps = freezed,
+    Object? workshop = freezed,
     Object? total = freezed,
     Object? palletDate = freezed,
     Object? arrival = freezed,
@@ -153,6 +162,10 @@ class __$$_TbWhPalletPrintCopyWithImpl<$Res>
           ? _value.comps
           : comps // ignore: cast_nullable_to_non_nullable
               as String?,
+      workshop: workshop == freezed
+          ? _value.workshop
+          : workshop // ignore: cast_nullable_to_non_nullable
+      as String?,
       total: total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -190,6 +203,7 @@ class __$$_TbWhPalletPrintCopyWithImpl<$Res>
 class _$_TbWhPalletPrint implements _TbWhPalletPrint {
   _$_TbWhPalletPrint(
       {this.comps,
+      this.workshop,
       this.total,
       this.palletDate,
       this.arrival,
@@ -203,6 +217,8 @@ class _$_TbWhPalletPrint implements _TbWhPalletPrint {
 
   @override
   final String? comps;
+  @override
+  final String? workshop;
   @override
   final int? total;
   @override
@@ -220,7 +236,7 @@ class _$_TbWhPalletPrint implements _TbWhPalletPrint {
 
   @override
   String toString() {
-    return 'TbWhPalletPrint(comps: $comps, total: $total, palletDate: $palletDate, arrival: $arrival, printFlag: $printFlag, palletSeq: $palletSeq, departure: $departure, state: $state)';
+    return 'TbWhPalletPrint(comps: $comps, workshop: $workshop, total: $total, palletDate: $palletDate, arrival: $arrival, printFlag: $printFlag, palletSeq: $palletSeq, departure: $departure, state: $state)';
   }
 
   @override
@@ -229,6 +245,7 @@ class _$_TbWhPalletPrint implements _TbWhPalletPrint {
         (other.runtimeType == runtimeType &&
             other is _$_TbWhPalletPrint &&
             const DeepCollectionEquality().equals(other.comps, comps) &&
+            const DeepCollectionEquality().equals(other.workshop, workshop) &&
             const DeepCollectionEquality().equals(other.total, total) &&
             const DeepCollectionEquality()
                 .equals(other.palletDate, palletDate) &&
@@ -244,6 +261,7 @@ class _$_TbWhPalletPrint implements _TbWhPalletPrint {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(comps),
+      const DeepCollectionEquality().hash(workshop),
       const DeepCollectionEquality().hash(total),
       const DeepCollectionEquality().hash(palletDate),
       const DeepCollectionEquality().hash(arrival),
@@ -266,6 +284,7 @@ class _$_TbWhPalletPrint implements _TbWhPalletPrint {
 abstract class _TbWhPalletPrint implements TbWhPalletPrint {
   factory _TbWhPalletPrint(
       {final String? comps,
+      final String? workshop,
       final int? total,
       final DateTime? palletDate,
       final String? arrival,
@@ -279,6 +298,8 @@ abstract class _TbWhPalletPrint implements TbWhPalletPrint {
 
   @override
   String? get comps => throw _privateConstructorUsedError;
+  @override
+  String? get workshop => throw _privateConstructorUsedError;
   @override
   int? get total => throw _privateConstructorUsedError;
   @override
