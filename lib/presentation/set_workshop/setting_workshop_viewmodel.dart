@@ -23,7 +23,7 @@ class SettingInfoViewModel with ChangeNotifier {
 
   Stream<CommUiEvents> get eventStream => _eventController.stream;
 
-  SettingInfoState _state = SettingInfoState(
+  final SettingInfoState _state = SettingInfoState(
     tbCmLocations: [],
     isLoading: true,
   );

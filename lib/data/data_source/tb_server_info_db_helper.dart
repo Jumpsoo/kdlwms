@@ -13,6 +13,7 @@ class TbServerInfoDbHelper {
       final maps = await db.query(
         'TB_SERVER_INFO',
       );
+      print(maps.map((e) => TbServerInfo.fromJson(e)).toList());
       return Result.success(maps.map((e) => TbServerInfo.fromJson(e)).toList()[0]);
     } catch (e) {
       return Result.error(e.toString());

@@ -461,7 +461,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
         _readWorkShop = sDefaultLocation;
       }
       if (sDefaultLocation == '') {
-        showCustomSnackBarWarn(context, '이동태그를 먼저 스캔하세요.');
+        showCustomSnackBarSuccess(context, '이동태그를 먼저 읽혀주세요.');
       }
     });
   }
@@ -626,7 +626,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     }
 
     if (sVal != null && sVal.length < sPivot.length) {
-      showCustomSnackBarWarn(context, '(이동태그가 잘못되었습니다.)');
+      showCustomSnackBarSuccess(context, '(이동태그가 읽혀주세요.)');
       return;
     }
     _readPalletSeq = sVal!;

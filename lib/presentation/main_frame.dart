@@ -1,11 +1,7 @@
-import 'dart:async';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/result.dart';
-import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/btn_move_exit.dart';
@@ -66,6 +62,8 @@ class _MainPageState extends State<MainPage> {
     audioPlayerOk = AssetsAudioPlayer();
     audioPlayerNG = AssetsAudioPlayer();
 
+    getVersion();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => syncData(true));
   }
 
@@ -78,7 +76,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    getVersion();
+
 
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],

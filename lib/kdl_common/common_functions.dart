@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:kdlwms/data/data_source/result.dart';
@@ -71,15 +72,15 @@ Future<void> _asyncConfirmDialog(BuildContext context) async {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: Text('Confirm Title'),
-        content: Text('bora hihi'),
+        title: const Text('Confirm Title'),
+        content: const Text('bora hihi'),
         actions: <Widget>[
           ElevatedButton(
-            child: Text('CANCEL'),
+            child: const Text('CANCEL'),
             onPressed: () {},
           ),
           ElevatedButton(
-            child: Text('ACCEPT'),
+            child: const Text('ACCEPT'),
             onPressed: () {},
           )
         ],
@@ -103,14 +104,16 @@ void showCustomSnackBarWarn(BuildContext context, String message) async {
 
   //진동
   if (gVibrateEnable == 0) {
-    Vibration.vibrate(duration: 400);
+    Vibration.vibrate(duration: 1000);
   }
   //오류소리
   playNgSound();
+
   PointmobileScanner.triggerOff();
   gbTriggerOn = false;
 
   final snackBar1 = SnackBar(
+    backgroundColor: Colors.red,
     content: Text(message),
     action: SnackBarAction(
       textColor: Colors.yellow,
@@ -125,12 +128,6 @@ void showCustomSnackBarWarn(BuildContext context, String message) async {
 
 void showCustomSnackBarSuccess(BuildContext context, String message) {
   ScaffoldMessenger.of(context).clearSnackBars();
-
-  // FlutterBeep.beep();
-
-  if (gVibrateEnable == 0) {
-    // Vibration.vibrate(duration: 100);
-  }
 
   playOkSound();
 
@@ -180,7 +177,7 @@ exitProgram(BuildContext context) async {
 
 //향후 로그저장필요시 상세 구현할것
 void writeLog(var msg) {
-  f(kDebugMode) {
+  if(kDebugMode) {
     print(msg);
   }
 }
@@ -296,12 +293,13 @@ Future<bool> tryConnection() async {
 }
 
 void playScanOkSound() async {
-  audioPlayerOk.open(Audio('assets/ok.wav'));
+  await audioPlayerOk.open(Audio('assets/ok.wav'));
   audioPlayerOk.play();
 }
 
 void playOkSound() async {
-  audioPlayerOk.open(Audio('assets/ok.wav'));
+  await audioPlayerOk.open(Audio('assets/ok.wav'));
+  // audioPlayerOk.open(Audio('assets/ok2.mp3'));
   audioPlayerOk.play();
 }
 

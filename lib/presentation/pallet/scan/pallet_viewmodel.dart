@@ -3,11 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 import 'package:kdlwms/domain/use_case/use_case_wms.dart';
-import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
-import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_events.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_state.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -45,7 +42,6 @@ class PalletViewModel with ChangeNotifier {
   //현재 location 값은 불명확함
   Future<void> _listPallets(
       String sWorkShop, String sLocation, int nState) async {
-
     List<TbWhPallet>? palletlist =
         await useCasesWms.selectPackingListUseCase(sWorkShop, sLocation);
 
@@ -72,7 +68,8 @@ class PalletViewModel with ChangeNotifier {
   }
 
   //상차완료시 상태변경
-  Future<Result<bool>> _updatePalletLoadState(List<TbWhPalletPrint> pallets, String sState) async {
+  Future<Result<bool>> _updatePalletLoadState(
+      List<TbWhPalletPrint> pallets, String sState) async {
     return await useCasesWms.loadingPalletFinishUseCase(pallets);
   }
 

@@ -1,7 +1,4 @@
-
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
@@ -11,8 +8,6 @@ import 'package:pluto_grid/pluto_grid.dart';
 // 상태무관하게 조회됨
 List<PlutoColumn> getPrintItemColumns() {
   List<PlutoColumn> cols = <PlutoColumn>[
-
-
     PlutoColumn(
       title: '발행',
       field: 'printFlag',
@@ -44,7 +39,7 @@ List<PlutoColumn> getPrintItemColumns() {
       enableEditingMode: false,
       // enableRowChecked: true,
     ),
-     PlutoColumn(
+    PlutoColumn(
       title: '출발지',
       field: 'departure',
       width: 70,
@@ -81,16 +76,15 @@ List<PlutoColumn> getPrintItemColumns() {
 // 상단 그리드
 // 데이터 로우
 List<PlutoRow> getPrintGridRowsGroup(List<TbWhPalletPrint> pallets) {
-
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
   for (var e in pallets) {
-
     nRowNum = nRowNum + 1;
     PlutoRow row = PlutoRow(
       cells: {
-        'printFlag' :PlutoCell(value: e.printFlag),
-        'palletDate' :PlutoCell(value: DateFormat('yyyy-MM-dd HH:mm:ss').format(e.palletDate!)),
+        'printFlag': PlutoCell(value: e.printFlag),
+        'palletDate': PlutoCell(
+            value: DateFormat('yyyy-MM-dd HH:mm:ss').format(e.palletDate!)),
         'palletSeq': PlutoCell(value: e.palletSeq),
         'departure': PlutoCell(value: e.departure),
         'arrival': PlutoCell(value: e.arrival),

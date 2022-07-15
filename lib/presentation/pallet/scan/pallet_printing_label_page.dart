@@ -93,7 +93,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     hideCircularProgressIndicator();
 
     WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
+        showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.'));
   }
 
   @override
@@ -342,10 +342,10 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
         _readWorkShop = sDefaultLocation;
       }
 
-      if (sDefaultLocation == '') {
-        // showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.');
-        showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
-      }
+      // if (sDefaultLocation == '') {
+      //
+      //   showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
+      // }
     });
   }
 

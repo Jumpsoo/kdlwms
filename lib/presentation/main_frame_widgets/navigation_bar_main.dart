@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kdlwms/data/data_source/result.dart';
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
-import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
 import 'package:kdlwms/presentation/settings/setting_property.dart';
-import 'package:provider/provider.dart';
 
 class MainFrameNavigationBarMain extends StatelessWidget {
   MainFrameNavigationBarMain({Key? key}) : super(key: key);
@@ -66,17 +62,17 @@ class MainFrameNavigationBarMain extends StatelessWidget {
           ]),
     );
   }
- void _moveToSetting(BuildContext context) async{
-   showCircularProgressIndicator(context);
-   await Future.delayed(const Duration(milliseconds: 500));
 
-   await Navigator.push(
-     context,
-     MaterialPageRoute(
-         builder: (context) =>
-         const SettingProperty(title: '환경 설정')),
-   );
- }
+  void _moveToSetting(BuildContext context) async {
+    showCircularProgressIndicator(context);
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const SettingProperty(title: '환경 설정')),
+    );
+  }
 
   void _syncData(BuildContext context) async {
     //인터넷 접속 확인
@@ -93,5 +89,4 @@ class MainFrameNavigationBarMain extends StatelessWidget {
       syncData(false);
     }
   }
-
 }

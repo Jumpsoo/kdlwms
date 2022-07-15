@@ -88,7 +88,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
     hideCircularProgressIndicator();
 
     WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
+        showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.'));
   }
 
   @override
@@ -158,7 +158,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
                       ),
                     ],
                   ),
-                  Padding(padding: EdgeInsets.only(left: 5)),
+                  const Padding(padding: EdgeInsets.only(left: 5)),
                   Column(
                     children: [
                       Container(
@@ -210,7 +210,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
             const Padding(padding: EdgeInsets.only(top: 5)),
             //하단그리드
 
-            Container(
+            SizedBox(
               height: 180,
               child: PlutoGrid(
                 columns: getViewTopGridColumns(),
@@ -228,7 +228,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
               ),
             ),
             const Padding(padding: EdgeInsets.only(top: 5)),
-            Container(
+            SizedBox(
               height: 230,
               child: PlutoGrid(
                 columns: getPackGridColumns(),
@@ -336,12 +336,12 @@ class _PalletViewPageState extends State<PalletViewPage> {
 
   //
   // 저장
-  void _changeWorkshop(String sLocation) {
-    setState(() {
-      _readWorkShop = sLocation;
-      viewBottomList();
-    });
-  }
+  // void _changeWorkshop(String sLocation) {
+  //   setState(() {
+  //     _readWorkShop = sLocation;
+  //     viewBottomList();
+  //   });
+  // }
 
   //창고QR 리딩
   void _changeLocation(String sReadLocation) {
@@ -370,9 +370,9 @@ class _PalletViewPageState extends State<PalletViewPage> {
         _readWorkShop = sDefaultLocation;
       }
 
-      if (sDefaultLocation == '') {
-        showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
-      }
+      // if (sDefaultLocation == '') {
+      //   showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.');
+      // }
     });
   }
 
@@ -621,8 +621,8 @@ class _PalletViewPageState extends State<PalletViewPage> {
     });
   }
 
-  void _onExit() {
-    PointmobileScanner.disableScanner();
-    Navigator.pop(context);
-  }
+  // void _onExit() {
+  //   PointmobileScanner.disableScanner();
+  //   Navigator.pop(context);
+  // }
 }

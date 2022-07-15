@@ -20,16 +20,14 @@ class SettingWorkShopPage extends StatefulWidget {
 }
 
 class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
-  String _msgData = '';
-  List<ComboValueType> _datas = [];
+  // String _msgData = '';
+  List<ComboValueType> dataList = [];
   late BuildContext ownContext;
   late SettingInfoViewModel viewModel;
   List<TbCmLocation>? locationList = [];
   String sCurrentWorkShop = '';
   StreamSubscription? _subscription;
-
   String? _selectedValue;
-
 
   @override
   // init에는 watch 사용 금지
@@ -56,7 +54,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
         await getWorkshopComboValueList(context);
     String? sDefaultLocation = await palletCommonGetDefaultWorkShop(context);
     setState(() {
-      _datas = comboList;
+      dataList = comboList;
       _selectedValue = sDefaultLocation;
     });
   }
@@ -148,14 +146,14 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
       body: Padding(
         padding:
             const EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
-        child: Container(
+        child: SizedBox(
           height: 500,
           child: Column(
             children: [
               Container(
                 height: 150,
               ),
-              Container(
+              SizedBox(
                 height: 300,
                 child: Column(
                   children: [
@@ -199,7 +197,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
                                     width: 150,
                                     alignment: Alignment.centerRight,
                                     child: createWorkshopDropDownButton(
-                                      _datas,
+                                      dataList,
                                     ),
                                   ),
                                 ],

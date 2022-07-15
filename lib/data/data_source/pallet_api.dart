@@ -1,13 +1,9 @@
 import 'dart:convert';
-import 'dart:convert' as convert;
-
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
-import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
@@ -35,18 +31,14 @@ class PalletApi {
       );
 
       try {
-        if (res.statusCode == 200) {
-          Map<String, dynamic> resData = convert
-              .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
-          String retSeq = resData['data'].toString();
-        } else {
+        if (res.statusCode != 200) {
           return Result.error('에러발생 : ${res.statusCode}');
         }
       } catch (e) {
         writeLog("sendPalletList 예외: ");
         writeLog(e);
       }
-      return Result.success(true);
+      return const Result.success(true);
     } catch (e) {
       return const Result.error('네트워크 연결 에러');
     }
@@ -74,18 +66,14 @@ class PalletApi {
       );
       try {
         //성공인 경우
-        writeLog(dataAsMap);
-        if (res.statusCode == 200) {
-          Map<String, dynamic> resData = convert
-              .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
-        } else {
+        if (res.statusCode != 200) {
           return Result.error('에러발생 : ${res.statusCode}');
         }
       } catch (e) {
         writeLog("sendPalletList 예외: ");
         writeLog(e);
       }
-      return Result.success(true);
+      return const Result.success(true);
     } catch (e) {
       return const Result.error('네트워크 연결 에러');
     }
@@ -98,7 +86,7 @@ class PalletApi {
 
       //필수값
       String scanDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-      String sComps = tbWhPallet.comps!;
+      // String sComps = tbWhPallet.comps!;
       String sLocation = tbWhPallet.location!;
       String sWorkShop = tbWhPallet.workshop!;
       String sParameters = '';
@@ -119,8 +107,9 @@ class PalletApi {
 
       final res = await client.get(Uri.parse(sParameters));
       if (res.statusCode == 200) {
-        Map<String, dynamic> resData = convert
-            .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
+
+        // Map<String, dynamic> resData = convert
+        //     .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
 
         Map<String, dynamic> jsonResponse =
             jsonDecode(utf8.decode(res.bodyBytes));
@@ -146,7 +135,7 @@ class PalletApi {
       final callUrl = gServiceURL + '/selectTag';
       //필수값
       String scanDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-      String sComps = tbWhPallet.comps!;
+      // String sComps = tbWhPallet.comps!;
       String sLocation = tbWhPallet.location!;
       String sWorkShop = tbWhPallet.workshop!;
       String sParameters = '';
@@ -185,19 +174,18 @@ class PalletApi {
       final callUrl = gServiceURL + '/selectLoad';
       //필수값
       String scanDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-      String sComps = tbWhPallet.comps!;
+      // String sComps = tbWhPallet.comps!;
       String sLocation = tbWhPallet.location!;
       String sWorkShop = tbWhPallet.workshop!;
       String sParameters = '';
 
       if (nPalletSeq == 0) {
         sParameters =
-        '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
+            '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
       } else {
         sParameters =
-        '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
+            '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
       }
-print(sParameters);
 
       final res = await client.get(Uri.parse(sParameters));
       if (res.statusCode == 200) {

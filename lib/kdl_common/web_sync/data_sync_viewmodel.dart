@@ -14,10 +14,6 @@ import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
 class DataSyncViewModel with ChangeNotifier {
   final UseCaseDataSync useCaseDataBatch;
 
-  final DataSyncState _state = DataSyncState(
-    isLoading: true,
-  );
-
   DataSyncViewModel(
     this.useCaseDataBatch,
   ) {
@@ -27,8 +23,6 @@ class DataSyncViewModel with ChangeNotifier {
   final _eventController = StreamController<CommUiEvents>();
 
   Stream<CommUiEvents> get eventStreams => _eventController.stream;
-
-  // Stream<CommUiEvents> get eventStream => _eventController.stream;
 
   void onEvent(DataSyncEvent event) {
     event.when(

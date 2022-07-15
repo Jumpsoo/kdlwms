@@ -22,8 +22,6 @@ class _SettingPropertyState extends State<SettingProperty> {
   final TextEditingController _textFieldControllerDeviceId =
       TextEditingController();
 
-  int _nVibrateState = 0;
-
   @override
   // init에는 watch 사용 금지
   void initState() {
@@ -33,8 +31,6 @@ class _SettingPropertyState extends State<SettingProperty> {
 
     _textFieldControllerServerUrl.text = gServiceURL;
     _textFieldControllerDeviceId.text = gDeviceId;
-
-    _nVibrateState = gVibrateEnable;
   }
 
   @override
@@ -183,11 +179,11 @@ class _SettingPropertyState extends State<SettingProperty> {
                       child: Row(
                         children: [
                           Radio(
-                              value: 0,
-                              groupValue: _nVibrateState,
+                              value: gVibrateEnable == 0 ? 1 : 0,
+                              groupValue: gVibrateEnable,
                               onChanged: (int? index) {
                                 setState(() {
-                                  _nVibrateState = index!;
+                                  gVibrateEnable = index!;
                                 });
                                 Vibration.vibrate(duration: 200);
                               }),
@@ -202,11 +198,11 @@ class _SettingPropertyState extends State<SettingProperty> {
                       child: Row(
                         children: [
                           Radio(
-                              value: 1,
-                              groupValue: _nVibrateState,
+                              value: gVibrateEnable == 1 ? 1 : 0,
+                              groupValue: gVibrateEnable,
                               onChanged: (int? index) {
                                 setState(() {
-                                  _nVibrateState = index!;
+                                  gVibrateEnable = index!;
                                 });
                                 Vibration.vibrate(duration: 50);
                               }),
@@ -267,7 +263,6 @@ class _SettingPropertyState extends State<SettingProperty> {
     }
     gServiceURL = _textFieldControllerServerUrl.text;
     gDeviceId = _textFieldControllerDeviceId.text;
-    gVibrateEnable = _nVibrateState;
 
     _saveServerProperty(context, gServiceURL, gDeviceId, gVibrateEnable);
   }
@@ -280,7 +275,6 @@ class _SettingPropertyState extends State<SettingProperty> {
 
     Result result = await viewModelSetting.useCaseServerInfo
         .mergeTbServerInfo(sUrl, sDeviceId, nVibrateEnable);
-
     result.when(
         success: (value) {
           showCustomSnackBarSuccess(context, '저장 완료(OK)');

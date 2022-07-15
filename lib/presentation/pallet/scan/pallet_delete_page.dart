@@ -1,9 +1,5 @@
 import 'dart:async';
-import 'dart:io';
-
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -228,7 +224,7 @@ class _PalletDeletePageState extends State<PalletDeletePage> {
     PlutoGridStateManager gridStateManager,
     String sQrCode,
   ) async {
-    int nCheckedItemCnt = 0;
+    // int nCheckedItemCnt = 0;
 
     switch (sGbn) {
       case 'DELETE':

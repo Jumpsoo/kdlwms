@@ -15,11 +15,12 @@ class MigTbWhCmCode {
 
     String errorMsg =  ' ';
 
-    if(cmCodeRcvRepoImpl == null) cmCodeRcvRepoImpl=CmCodeRcvRepoImpl();
-    //서버에서 데이터를 조회한다.
-    Result resultRecv = await cmCodeRcvRepoImpl.selectCmCodeListAll();
+    cmCodeRcvRepoImpl=CmCodeRcvRepoImpl();
 
-    resultRecv.when(success: (itemList) async {
+    //서버에서 데이터를 조회한다.
+    Result resultRcv = await cmCodeRcvRepoImpl.selectCmCodeListAll();
+
+    resultRcv.when(success: (itemList) async {
       if (itemList.isEmpty) {
         return const Result.error('복사할 대상이 없습니다.');
       }

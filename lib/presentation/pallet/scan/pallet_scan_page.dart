@@ -18,7 +18,6 @@ import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:pointmobile_scanner/pointmobile_scanner.dart';
 import 'package:provider/provider.dart';
-import 'package:vibration/vibration.dart';
 
 class PalletScanPage extends StatefulWidget {
   final String title;
@@ -156,7 +155,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                             ),
                             child: AutoSizeText(
                               _readWareHouseNm,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18.0,
                                   color: Colors.white,
                                   fontFamily: "Roboto"),
@@ -179,7 +178,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                         ),
                       ],
                     ),
-                    Padding(padding: const EdgeInsets.only(left: 5)),
+                    const Padding(padding: EdgeInsets.only(left: 5)),
                     Column(
                       children: [
                         Container(
@@ -232,7 +231,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
               const Padding(padding: EdgeInsets.only(top: 5)),
               //하단그리드
 
-              Container(
+              SizedBox(
                 height: 180,
                 child: PlutoGrid(
                   columns: getTopGridColumns(),
@@ -250,7 +249,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                 ),
               ),
               const Padding(padding: EdgeInsets.only(top: 5)),
-              Container(
+              SizedBox(
                 height: 230,
                 child: PlutoGrid(
                   columns: getPackGridColumns(),
@@ -674,7 +673,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _changeLocation(_readLocation);
 
       playScanOkSound();
-
     } else if (sVal != null && sVal.length > 100) {
       //제품 QR
       _readQRData = sVal;
@@ -682,7 +680,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _changeReadQrData(_readQRData);
 
       playScanOkSound();
-
     } else {
       showCustomSnackBarWarn(context, '스캔한 작업 코드가 부적절합니다.');
     }
@@ -693,11 +690,11 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _decodeResult = error.toString();
     });
   }
-
-  void _onExit() {
-    PointmobileScanner.disableScanner();
-    Navigator.pop(context);
-  }
+  //
+  // void _onExit() {
+  //   PointmobileScanner.disableScanner();
+  //   Navigator.pop(context);
+  // }
 
   // 파싱된 품번을 이용해서 창고정보를 설정한다.
   // 1. 품번으로  창코위치와 location 정보를 가져와야함
@@ -808,7 +805,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
       PlutoGridStateManager gridStateManager,
       String sQrCode,
       ) async {
-    int nCheckedItemCnt = 0;
+    // int nCheckedItemCnt = 0;
 
     switch (sConfirm) {
       case 'READ_QR':

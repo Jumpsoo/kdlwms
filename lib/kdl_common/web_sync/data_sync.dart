@@ -41,7 +41,6 @@ Future<bool> syncData(bool ignoreMsg) async {
   SettingInfoViewModel viewModelSettings =
       gTransitContext.read<SettingInfoViewModel>();
 
-
   //00. 프로그램 버전 체크
   //로컬버전
   gCurrentVersion = await viewModelSettings.useCaseCommonInfo
@@ -53,7 +52,7 @@ Future<bool> syncData(bool ignoreMsg) async {
 
   //연결체크
   bool bRet = await tryConnection();
-  if(bRet == false){
+  if (bRet == false) {
     return false;
   }
 
@@ -193,7 +192,6 @@ void updateProgressBar(
 //### 02. 품목정보 리스트
 Future<bool> _getBatchItem(BuildContext context, String sBatchName,
     Result result, ProgressDialog progressDialog, double percentage) async {
-  int delayTime = 1000;
   bool retVal = false;
   writeLog('$sBatchName : 시작');
   DataSyncViewModel viewModel = context.read<DataSyncViewModel>();
