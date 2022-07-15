@@ -857,3 +857,247 @@ abstract class _TbWhPalletGroup implements TbWhPalletGroup {
   _$$_TbWhPalletGroupCopyWith<_$_TbWhPalletGroup> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+TbWhPalletForDelete _$TbWhPalletForDeleteFromJson(Map<String, dynamic> json) {
+  return _TbWhPalletForDelete.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TbWhPalletForDelete {
+  String? get comps => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
+  String? get locationNm => throw _privateConstructorUsedError;
+  String? get arrival => throw _privateConstructorUsedError;
+  String? get arrivalNm => throw _privateConstructorUsedError;
+  int? get boxCnt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TbWhPalletForDeleteCopyWith<TbWhPalletForDelete> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TbWhPalletForDeleteCopyWith<$Res> {
+  factory $TbWhPalletForDeleteCopyWith(
+          TbWhPalletForDelete value, $Res Function(TbWhPalletForDelete) then) =
+      _$TbWhPalletForDeleteCopyWithImpl<$Res>;
+  $Res call(
+      {String? comps,
+      String? location,
+      String? locationNm,
+      String? arrival,
+      String? arrivalNm,
+      int? boxCnt});
+}
+
+/// @nodoc
+class _$TbWhPalletForDeleteCopyWithImpl<$Res>
+    implements $TbWhPalletForDeleteCopyWith<$Res> {
+  _$TbWhPalletForDeleteCopyWithImpl(this._value, this._then);
+
+  final TbWhPalletForDelete _value;
+  // ignore: unused_field
+  final $Res Function(TbWhPalletForDelete) _then;
+
+  @override
+  $Res call({
+    Object? comps = freezed,
+    Object? location = freezed,
+    Object? locationNm = freezed,
+    Object? arrival = freezed,
+    Object? arrivalNm = freezed,
+    Object? boxCnt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      comps: comps == freezed
+          ? _value.comps
+          : comps // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      locationNm: locationNm == freezed
+          ? _value.locationNm
+          : locationNm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      arrival: arrival == freezed
+          ? _value.arrival
+          : arrival // ignore: cast_nullable_to_non_nullable
+              as String?,
+      arrivalNm: arrivalNm == freezed
+          ? _value.arrivalNm
+          : arrivalNm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      boxCnt: boxCnt == freezed
+          ? _value.boxCnt
+          : boxCnt // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_TbWhPalletForDeleteCopyWith<$Res>
+    implements $TbWhPalletForDeleteCopyWith<$Res> {
+  factory _$$_TbWhPalletForDeleteCopyWith(_$_TbWhPalletForDelete value,
+          $Res Function(_$_TbWhPalletForDelete) then) =
+      __$$_TbWhPalletForDeleteCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String? comps,
+      String? location,
+      String? locationNm,
+      String? arrival,
+      String? arrivalNm,
+      int? boxCnt});
+}
+
+/// @nodoc
+class __$$_TbWhPalletForDeleteCopyWithImpl<$Res>
+    extends _$TbWhPalletForDeleteCopyWithImpl<$Res>
+    implements _$$_TbWhPalletForDeleteCopyWith<$Res> {
+  __$$_TbWhPalletForDeleteCopyWithImpl(_$_TbWhPalletForDelete _value,
+      $Res Function(_$_TbWhPalletForDelete) _then)
+      : super(_value, (v) => _then(v as _$_TbWhPalletForDelete));
+
+  @override
+  _$_TbWhPalletForDelete get _value => super._value as _$_TbWhPalletForDelete;
+
+  @override
+  $Res call({
+    Object? comps = freezed,
+    Object? location = freezed,
+    Object? locationNm = freezed,
+    Object? arrival = freezed,
+    Object? arrivalNm = freezed,
+    Object? boxCnt = freezed,
+  }) {
+    return _then(_$_TbWhPalletForDelete(
+      comps: comps == freezed
+          ? _value.comps
+          : comps // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      locationNm: locationNm == freezed
+          ? _value.locationNm
+          : locationNm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      arrival: arrival == freezed
+          ? _value.arrival
+          : arrival // ignore: cast_nullable_to_non_nullable
+              as String?,
+      arrivalNm: arrivalNm == freezed
+          ? _value.arrivalNm
+          : arrivalNm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      boxCnt: boxCnt == freezed
+          ? _value.boxCnt
+          : boxCnt // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_TbWhPalletForDelete implements _TbWhPalletForDelete {
+  _$_TbWhPalletForDelete(
+      {this.comps,
+      this.location,
+      this.locationNm,
+      this.arrival,
+      this.arrivalNm,
+      this.boxCnt});
+
+  factory _$_TbWhPalletForDelete.fromJson(Map<String, dynamic> json) =>
+      _$$_TbWhPalletForDeleteFromJson(json);
+
+  @override
+  final String? comps;
+  @override
+  final String? location;
+  @override
+  final String? locationNm;
+  @override
+  final String? arrival;
+  @override
+  final String? arrivalNm;
+  @override
+  final int? boxCnt;
+
+  @override
+  String toString() {
+    return 'TbWhPalletForDelete(comps: $comps, location: $location, locationNm: $locationNm, arrival: $arrival, arrivalNm: $arrivalNm, boxCnt: $boxCnt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TbWhPalletForDelete &&
+            const DeepCollectionEquality().equals(other.comps, comps) &&
+            const DeepCollectionEquality().equals(other.location, location) &&
+            const DeepCollectionEquality()
+                .equals(other.locationNm, locationNm) &&
+            const DeepCollectionEquality().equals(other.arrival, arrival) &&
+            const DeepCollectionEquality().equals(other.arrivalNm, arrivalNm) &&
+            const DeepCollectionEquality().equals(other.boxCnt, boxCnt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(comps),
+      const DeepCollectionEquality().hash(location),
+      const DeepCollectionEquality().hash(locationNm),
+      const DeepCollectionEquality().hash(arrival),
+      const DeepCollectionEquality().hash(arrivalNm),
+      const DeepCollectionEquality().hash(boxCnt));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_TbWhPalletForDeleteCopyWith<_$_TbWhPalletForDelete> get copyWith =>
+      __$$_TbWhPalletForDeleteCopyWithImpl<_$_TbWhPalletForDelete>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TbWhPalletForDeleteToJson(this);
+  }
+}
+
+abstract class _TbWhPalletForDelete implements TbWhPalletForDelete {
+  factory _TbWhPalletForDelete(
+      {final String? comps,
+      final String? location,
+      final String? locationNm,
+      final String? arrival,
+      final String? arrivalNm,
+      final int? boxCnt}) = _$_TbWhPalletForDelete;
+
+  factory _TbWhPalletForDelete.fromJson(Map<String, dynamic> json) =
+      _$_TbWhPalletForDelete.fromJson;
+
+  @override
+  String? get comps => throw _privateConstructorUsedError;
+  @override
+  String? get location => throw _privateConstructorUsedError;
+  @override
+  String? get locationNm => throw _privateConstructorUsedError;
+  @override
+  String? get arrival => throw _privateConstructorUsedError;
+  @override
+  String? get arrivalNm => throw _privateConstructorUsedError;
+  @override
+  int? get boxCnt => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TbWhPalletForDeleteCopyWith<_$_TbWhPalletForDelete> get copyWith =>
+      throw _privateConstructorUsedError;
+}

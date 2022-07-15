@@ -40,6 +40,10 @@ class UseCaseWms {
   final GetPalletLoadCountInDevice getPalletLoadCountInDevice;
 
 
+  //05.이력삭제
+  final SelectPalletForDeleteUseCase selectPalletForDeleteUseCase;
+  final DeleteTbWhPalletByLocationUseCase deleteTbWhPalletByLocationUseCase;
+
   final GetPalletCountInDevice getPalletCountInDevice;
 
   // 인쇄요청(-> 벡엔드에서 실제 팔레트를 생성해서 인쇄 모둘까지 전송한다.
@@ -54,7 +58,7 @@ class UseCaseWms {
   // 전송 완료 후 ok 응답받으면 상차테이블로 전송하고 삭제
   final PrintingPalletUseCase printingPalletUseCase;
 
-  UseCaseWms({
+  UseCaseWms(  {
     required this.addPallet,
     required this.updatePallet,
     required this.loadingPalletFinishUseCase,
@@ -76,5 +80,7 @@ class UseCaseWms {
     required this.getPalletLoadCountInDevice,
     required this.deletePalletLoadAllUseCase,
     required this.selectLoadingListByApiUseCase,
+    required this.selectPalletForDeleteUseCase,
+    required this.deleteTbWhPalletByLocationUseCase,
   });
 }

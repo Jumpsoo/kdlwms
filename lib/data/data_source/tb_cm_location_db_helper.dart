@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:sqflite/sqflite.dart';

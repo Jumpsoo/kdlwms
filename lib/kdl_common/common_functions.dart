@@ -1,11 +1,13 @@
 import 'dart:io';
-
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync_viewmodel.dart';
+import 'package:pointmobile_scanner/pointmobile_scanner.dart';
 import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:http/http.dart' as http;
@@ -99,14 +101,14 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
 void showCustomSnackBarWarn(BuildContext context, String message) async {
   ScaffoldMessenger.of(context).clearSnackBars();
 
-
   //진동
   if (gVibrateEnable == 0) {
-
-    // AssetsAudioPlayer.playAndForget(
-    //     Audio('assets/siren_ton.wav'));
     Vibration.vibrate(duration: 400);
   }
+  //오류소리
+  playNgSound();
+  PointmobileScanner.triggerOff();
+  gbTriggerOn = false;
 
   final snackBar1 = SnackBar(
     content: Text(message),
@@ -129,6 +131,8 @@ void showCustomSnackBarSuccess(BuildContext context, String message) {
   if (gVibrateEnable == 0) {
     // Vibration.vibrate(duration: 100);
   }
+
+  playOkSound();
 
   final snackBar1 = SnackBar(
     content: Text(message),
@@ -176,7 +180,7 @@ exitProgram(BuildContext context) async {
 
 //향후 로그저장필요시 상세 구현할것
 void writeLog(var msg) {
-  f (kDebugMode) {
+  f(kDebugMode) {
     print(msg);
   }
 }
@@ -204,7 +208,7 @@ Future<bool> checkSyncStatus(BuildContext context) async {
   if (!gSync) {
     await showAlertDialog(context, "서버와 동기와 필요. \r\n 프로그램을 다시 실행하세요.");
     await Future.delayed(const Duration(milliseconds: 2000));
-    // Restart.restartApp();
+    Restart.restartApp();
   }
   return gSync;
 }
@@ -266,11 +270,9 @@ Future<bool> tryConnectionWithPopup(BuildContext context) async {
 
 //인터넷 접속 어뎁터 확인
 Future<bool> tryConnection() async {
-
   final ConnectivityResult result = await Connectivity().checkConnectivity();
 
   try {
-
     if (result == ConnectivityResult.wifi) {
       final response =
           await http.head(Uri.parse(gServiceURL + '/item?itemNo=x'));
@@ -278,7 +280,6 @@ Future<bool> tryConnection() async {
         return false;
       }
       return true;
-
     } else if (result == ConnectivityResult.mobile) {
       final response =
           await http.head(Uri.parse(gServiceURL + '/item?itemNo=x'));
@@ -287,34 +288,24 @@ Future<bool> tryConnection() async {
       }
       return true;
     } else {
-      print('other type network');
       return false;
     }
   } catch (_) {
-    print('에러');
     return false;
   }
-
 }
 
-class GlobalNavigator {
-  static showAlertDialog(String text) {
-    showDialog(
-      barrierDismissible: false,
-      context: navigatorKey.currentContext!,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Text('AAAAA'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+void playScanOkSound() async {
+  audioPlayerOk.open(Audio('assets/ok.wav'));
+  audioPlayerOk.play();
+}
+
+void playOkSound() async {
+  audioPlayerOk.open(Audio('assets/ok.wav'));
+  audioPlayerOk.play();
+}
+
+void playNgSound() async {
+  audioPlayerNG.open(Audio('assets/siren.mp3'));
+  audioPlayerNG.play();
 }

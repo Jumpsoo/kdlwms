@@ -1,6 +1,6 @@
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kdlwms/domain/model/tb_server_info.dart';
+
 
 part 'setting_workshop_events.freezed.dart';
 

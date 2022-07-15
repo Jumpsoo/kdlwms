@@ -1,12 +1,11 @@
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
-import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 class ScanQrCode {
   // 값조회 -> 있으면 삭제 -> 등록
   //분할한 값 0번은 팔레트번호로 사용하지 않음
-  Future<TbWhPallet?> call(String sQrCode, String sWorkShop,
-      String sLocation) async {
+  Future<TbWhPallet?> call(
+      String sQrCode, String sWorkShop, String sLocation) async {
     TbWhPallet pallet;
     String qrCode = sQrCode;
 
@@ -17,23 +16,22 @@ class ScanQrCode {
     int nQty = 0;
 
     int nBoxNo = 0;
-    int nPalletSeq = 0;
 
     // 공백이 여러건일 경우가 있기 때문에 치환한다.
-    
+
     try {
       //품번은 두번째값부터
       //91
-      sItemNo = qrCode.substring(91,106).trim();
-      String sQty = qrCode.substring(107,113).trim();
+      sItemNo = qrCode.substring(91, 106).trim();
+      String sQty = qrCode.substring(107, 113).trim();
       //수량은 분할된 세번째 값에서 0~7 값만 취함
       nQty = int.parse(sQty);
       //박스 순번은 세번째값에서 뒤에서 세번째
       sResultDate = qrCode.substring(118, 126).trim();
       //lot no는 네번째(작업지시번호) 에서 뒤에서 세번째값만 취함
-      sLotNo = convertLotToNumber(sResultDate.substring(4,8));
+      sLotNo = convertLotToNumber(sResultDate.substring(4, 8));
       //Box Seq
-      sBoxNo = qrCode.substring(143,150).trim();
+      sBoxNo = qrCode.substring(143, 150).trim();
       nBoxNo = int.parse(sBoxNo);
 
       pallet = TbWhPallet(
@@ -55,7 +53,6 @@ class ScanQrCode {
     return pallet;
   }
 
-
   //생산일자를 알파벳순서로변환한다.
   //1,2,3,4,~12
   //1,2,3,4,~31
@@ -73,7 +70,6 @@ class ScanQrCode {
     } catch (e) {
       return 'error';
     }
-    return '';
   }
 
   String convertNumberToLotChar(String charVal) {

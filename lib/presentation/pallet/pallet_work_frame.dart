@@ -82,18 +82,18 @@ class _SubMainPagState extends State<PltWorkPage> {
               const EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
           child: Column(
             children:  [
-              BtnPacking(),//1.적재작업
-              Padding(padding: EdgeInsets.only(bottom: 10)),
-              BtnPrintLabel(),//2.라벨발행
-              Padding(padding: EdgeInsets.only(bottom: 10)),
-              BtnPackingView(),//3.실적조회
-              Padding(padding: EdgeInsets.only(bottom: 10)),
-              BtnPackingLoad(),//4.상차화면
-              Padding(padding: EdgeInsets.only(bottom: 10)),
-              BtnPackingDelete(),//5.적재이력삭제
-              Padding(padding: EdgeInsets.only(bottom: 10)),
-              BtnMovePrevious(), //6.이전화면
-              Padding(padding: EdgeInsets.only(bottom: 5)),
+              const BtnPacking(),//1.적재작업
+              const Padding(padding: const EdgeInsets.only(bottom: 10)),
+              const BtnPrintLabel(),//2.라벨발행
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
+              const BtnPackingView(),//3.실적조회
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
+              const BtnPackingLoad(),//4.상차화면
+              const Padding(padding: const EdgeInsets.only(bottom: 10)),
+              const BtnPackingDelete(),//5.적재이력삭제
+              const Padding(padding: const EdgeInsets.only(bottom: 10)),
+              const BtnMovePrevious(), //6.이전화면
+              const Padding(padding: EdgeInsets.only(bottom: 5)),
               Container(
                 color: Colors.black,
                 padding: const EdgeInsets.only(left: 0),

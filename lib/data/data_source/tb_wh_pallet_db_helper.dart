@@ -1,9 +1,7 @@
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
-import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TbWhPalletDbHelper {
@@ -61,10 +59,11 @@ class TbWhPalletDbHelper {
         ],
         orderBy: 'palletSeq ASC',
       );
-
       return maps.map((e) => TbWhPallet.fromJson(e)).toList();
+
     } catch (e) {
       writeLog(e.toString());
+      return null;
     }
   }
 
@@ -129,7 +128,7 @@ class TbWhPalletDbHelper {
     }
   }
 
-  //02. 실적조회 화면 쿼리
+  //0. 실적조회 화면 쿼리
   // 작업위치별 실적 리스트 조회
   Future<List<TbWhPallet>?> selectTbWhPalletListByLocation(
       TbWhPallet tbWhPallet) async {
@@ -141,6 +140,7 @@ class TbWhPalletDbHelper {
     );
     return maps.map((e) => TbWhPallet.fromJson(e)).toList();
   }
+
 
   //03. 인쇄 대상 조회
   // 입력된 실적 확인
@@ -215,6 +215,50 @@ class TbWhPalletDbHelper {
     return maps.map((e) => TbWhPallet.fromJson(e)).toList();
   }
 
+  //05. 이력 삭제용
+  // 전체 그루핑 후 조회
+  Future<Result<List<TbWhPalletForDelete>?>> selectPalletForDelete() async {
+    try {
+      final maps = await db.rawQuery(
+        'SELECT a.comps, a.location, b.codeKoNm as locationNm, a.arrival, c.codeKoNm as arrivalNm, count(*) as boxCnt '
+        ' from TB_WH_PALLET a inner join TB_WH_CM_CODE b on a.location = b.codeCd '
+        '                     inner join TB_WH_CM_CODE c on a.arrival = c.codeCd'
+        ' where b.grpCd = ? '
+        '  and c.grpCd =  ? '
+        ' group by a.comps, a.location, b.codeKoNm, a.arrival, c.codeKoNm ',
+          [
+          'LOCATION',
+          'ARRIVAL',
+          ]
+      );
+      return Result.success(maps.map((e) => TbWhPalletForDelete.fromJson(e)).toList());
+    } catch (e) {
+      return Result.error(e.toString());
+    }
+  }
+
+  //로케이션 기준으로 삭제
+  Future<Result<bool>> deleteTbWhPalletByLocation(
+      TbWhPalletForDelete tbWhPalletForDelete) async {
+    try {
+      int nRet = await db.delete(
+        'TB_WH_PALLET',
+        where: 'comps = ? and location = ? ',
+        whereArgs: [tbWhPalletForDelete.comps, tbWhPalletForDelete.location],
+      );
+      if(nRet == 0){
+        return const Result.error('삭제된 항목이 없습니다.');
+      }else {
+        return const Result.success(true);
+      }
+    } catch (_) {
+      var sErrMsg = '데이터베이스 에러발생 : deleteTbWhPallet(qry)';
+      writeLog(sErrMsg);
+      return Result.error(sErrMsg);
+    }
+
+  }
+
   // 단일행 조회 (서버전송용 정보 재조회)
   Future<Result<TbWhPallet?>> selectTbWhPalletInto(
       TbWhPallet tbWhPallet) async {
@@ -227,7 +271,7 @@ class TbWhPalletDbHelper {
       return Result.success(
           maps.map((e) => TbWhPallet.fromJson(e)).toList()[0]);
     } else {
-      return Result.error('No Data found');
+      return const Result.error('No Data found');
     }
   }
 
@@ -269,19 +313,22 @@ class TbWhPalletDbHelper {
   }
 
   Future<Result<bool>> updateTbWhPalletState(TbWhPallet pallet) async {
-    Result result;
-
     try {
-      int ret = await db.update(
+      int nRet = await db.update(
         'TB_WH_PALLET',
         pallet.toJson(),
         where: 'comps = ? and barcode = ? ',
         whereArgs: [pallet.comps, pallet.barcode],
       );
+
+      if(nRet == 0){
+        return const Result.error('수정된 항목이 없습니다.');
+      }else{
+        return const Result.success(true);
+      }
     } catch (e) {
       return Result.error(e.toString());
     }
-    return const Result.success(true);
   }
 
   //해당 로케에 입력되어있는 항목 모두삭제
@@ -294,7 +341,11 @@ class TbWhPalletDbHelper {
         // where: 'comps = ? and workshop = ? and location = ? ',
         // whereArgs: [pallet.comps, pallet.workshop, pallet.location],
       );
-      return Result.success(true);
+      if(nRet == 0){
+        return const Result.error('삭제된 항목이 없습니다.');
+      }else{
+        return const Result.success(true);
+      }
     } catch (_) {
       var sErrMsg = '데이터베이스 에러발생 : deleteTbWhPallet(qry)';
       writeLog(sErrMsg);
@@ -307,7 +358,7 @@ class TbWhPalletDbHelper {
       await db.delete(
         'TB_WH_PALLET',
       );
-      return Result.success(true);
+      return const Result.success(true);
     } catch (e_) {
       var sErrMsg = '데이터베이스 에러발생 : deleteTbWhPallet(qry)';
       writeLog(sErrMsg);
@@ -406,8 +457,9 @@ class TbWhPalletDbHelper {
       where: 'comps=? and grpCd = ? and codeCd = ?',
       whereArgs: [pallet.comps, 'ARRIVAL', pallet.arrival],
     );
-    List<TbWhCmCode> codeList = maps2.map((e) => TbWhCmCode.fromJson(e)).toList();
-    if(codeList.isNotEmpty){
+    List<TbWhCmCode> codeList =
+        maps2.map((e) => TbWhCmCode.fromJson(e)).toList();
+    if (codeList.isNotEmpty) {
       sWarehouseNm = codeList[0].codeKoNm!;
     }
 
@@ -415,15 +467,16 @@ class TbWhPalletDbHelper {
     final maps = await db.query(
       'TB_WH_PALLET',
       where: 'comps = ? and workshop = ?  and location = ?',
-      whereArgs:  [pallet.comps, pallet.workshop, pallet.location],
+      whereArgs: [pallet.comps, pallet.workshop, pallet.location],
     );
 
-    List<TbWhPallet> lastList = maps.map((e) => TbWhPallet.fromJson(e)).toList();
-    if(lastList.isNotEmpty){
-      if(lastList[0].arrival != pallet.arrival!){
-            String sErrMsg =
-                "이품이 입력되었습니다. \r\n품번:[$itemNo] \r\n설정 된 창고: [$sWarehouseNm($sWarehouseCd)]";
-            return Result.error(sErrMsg);
+    List<TbWhPallet> lastList =
+        maps.map((e) => TbWhPallet.fromJson(e)).toList();
+    if (lastList.isNotEmpty) {
+      if (lastList[0].arrival != pallet.arrival!) {
+        String sErrMsg =
+            "이품이 입력되었습니다. \r\n품번:[$itemNo] \r\n설정 된 창고: [$sWarehouseNm($sWarehouseCd)]";
+        return Result.error(sErrMsg);
       }
     }
     return const Result.success(true);

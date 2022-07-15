@@ -15,7 +15,7 @@ class ItemRcvApi {
     try {
       final response = await client
           // .get(Uri.parse('$baseUrl?key=$key&q=$query&image_type=photo'));
-          .get(Uri.parse('$baseUrl'));
+          .get(Uri.parse(baseUrl));
 
       Map<String, dynamic> jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
       Iterable hits = jsonResponse['data']['itemList'];

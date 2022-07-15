@@ -4,12 +4,10 @@ import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/data/data_source/tb_wh_cm_code_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
-import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 class TbWhPalletRepoImpl implements TbWhPalletRepo {
   final TbWhCmCodeDbHelper dbCode;
@@ -31,19 +29,19 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   }
 
   @override
-  Future<List<TbWhPalletGroup>?> selectPalletingSummary(
+  Future<List<TbWhPalletGroup>?> selectPalletSummary(
       TbWhPallet tbWhPallet) async {
     return await db.selectPalletingSummary(tbWhPallet);
   }
 
   @override
-  Future<Result<List<TbWhPallet>?>> selectPalletingList(
+  Future<Result<List<TbWhPallet>?>> selectPalletList(
       TbWhPallet tbWhPallet) async {
     return await db.selectPalletingList(tbWhPallet);
   }
 
   @override
-  Future<Result<List<TbWhPallet>?>> selectPalletingListByApi(
+  Future<Result<List<TbWhPallet>?>> selectPalletListByApi(
       TbWhPallet tbWhPallet, String sPalletSeq) async {
     return await api.selectPalletListByApi(tbWhPallet, sPalletSeq);
   }
@@ -74,10 +72,38 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
     return await db.selectLoadingSummary(tbWhPallet);
   }
 
+
+  //05. 이력 삭제
+  // 삭제용 데이터 쿼리
+  @override
+  Future<Result<List<TbWhPalletForDelete>?>> selectPalletForDelete() async{
+    return await db.selectPalletForDelete();
+
+  }
+
+  @override
+  Future<Result<bool>> deleteTbWhPalletByLocation(List<TbWhPalletForDelete> tbWhPalletForDeleteList) async{
+        late Result result;
+    try {
+      for (TbWhPalletForDelete tbWhPalletForDelete in tbWhPalletForDeleteList) {
+        result = await db.deleteTbWhPalletByLocation(tbWhPalletForDelete);
+        result.when(
+            success: (value) {},
+            error: (message) {
+              return Result.error(message);
+            });
+      }
+    } catch (e) {
+      var  sErrMsg = '에러 발생 : deleteTbWhPallet (repo)';
+      writeLog(sErrMsg);
+      return Result.error(sErrMsg);
+    }
+    return const Result.success(true);
+  }
+
   @override
   Future<Result<TbWhPallet?>> selectTbWhPalletInto(
       TbWhPallet tbWhPallet) async {
-    // TODO: implement getPallet
     return await db.selectTbWhPalletInto(tbWhPallet);
   }
 
@@ -86,9 +112,9 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
     List<TbWhPallet>? retList = await db.selectDupleCheck(sBarCode);
 
     if (retList != null && retList.isNotEmpty) {
-      return Result.error('이미 입력 한 식별표입니다.');
+      return const Result.error('이미 입력 한 식별표입니다.');
     } else {
-      return Result.success(true);
+      return const Result.success(true);
     }
   }
 

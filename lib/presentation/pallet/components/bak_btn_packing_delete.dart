@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
-import 'package:kdlwms/presentation/pallet/scan/pallet_delete_page.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-class BtnPackingDelete extends StatefulWidget {
-  const BtnPackingDelete({Key? key}) : super(key: key);
+// 기존소스벡업
+class BakBtnPackingDelete extends StatefulWidget {
+  const BakBtnPackingDelete({Key? key}) : super(key: key);
 
   @override
-  State<BtnPackingDelete> createState() => _BtnPackingDeleteState();
+  State<BakBtnPackingDelete> createState() => _BakBtnPackingDelete();
 }
 
-class _BtnPackingDeleteState extends State<BtnPackingDelete> {
+class _BakBtnPackingDelete extends State<BakBtnPackingDelete> {
   late PalletViewModel viewModel;
 
   @override
@@ -23,8 +23,6 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
     const String sNo = '5';
     const String sTitle = '적재이력 삭제';
     const String sSubTitle = '미완료 상차 실적을 삭제합니다.';
-    const String sChildTitle = '적재이력 삭제';
-
     viewModel = context.watch<PalletViewModel>();
 
     return Column(
@@ -33,16 +31,34 @@ class _BtnPackingDeleteState extends State<BtnPackingDelete> {
           // 값 유무 체크 후 삭제
           // 값이 없을 경우 에러 메시지 출력
           onPressed: () async {
+            //서버 동기화 체크
+            await checkSyncStatus(context);
 
-            showCircularProgressIndicator(context);
-            await Future.delayed(const Duration(milliseconds: 500));
-            await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const PalletDeletePage(title: sChildTitle)
-              ),
-            );
+            if (await checkValue('DELETE', context)) {
+              showCircularProgressIndicator(context);
+              await Future.delayed(const Duration(milliseconds: 500));
 
+              Result result =
+                  await viewModel.useCasesWms.deletePalletAllUseCase();
+              result.when(
+                  success: (value) {},
+                  error: (message) {
+                    showCustomSnackBarWarn(context, message);
+                    return;
+                  });
+              //상차이력 삭제
+
+              Result resultLoad =
+                  await viewModel.useCasesWms.deletePalletLoadAllUseCase();
+              resultLoad.when(
+                  success: (value) {},
+                  error: (message) {
+                    showCustomSnackBarWarn(context, message);
+                    return;
+                  });
+              showCustomSnackBarWarn(context, gSuccessMsg);
+              hideCircularProgressIndicator();
+            }
           },
           style: gElevatedButtonStyleMidSize,
           child: Row(

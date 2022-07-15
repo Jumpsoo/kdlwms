@@ -50,3 +50,18 @@ class TbWhPalletGroup with _$TbWhPalletGroup {
   factory TbWhPalletGroup.fromJson(Map<String, dynamic> json) => _$TbWhPalletGroupFromJson(json);
 }
 
+
+@freezed
+class TbWhPalletForDelete with _$TbWhPalletForDelete {
+  factory TbWhPalletForDelete({
+    String? comps ,
+    String? location,
+    String? locationNm,
+    String? arrival ,
+    String? arrivalNm ,
+    int? boxCnt ,
+  }) = _TbWhPalletForDelete;
+
+  factory TbWhPalletForDelete.fromJson(Map<String, dynamic> json) => _$TbWhPalletForDeleteFromJson(json);
+}
+

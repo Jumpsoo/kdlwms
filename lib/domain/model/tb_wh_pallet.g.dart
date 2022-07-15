@@ -89,3 +89,25 @@ Map<String, dynamic> _$$_TbWhPalletGroupToJson(_$_TbWhPalletGroup instance) =>
       'quantity': instance.quantity,
       'boxCnt': instance.boxCnt,
     };
+
+_$_TbWhPalletForDelete _$$_TbWhPalletForDeleteFromJson(
+        Map<String, dynamic> json) =>
+    _$_TbWhPalletForDelete(
+      comps: json['comps'] as String?,
+      location: json['location'] as String?,
+      locationNm: json['locationNm'] as String?,
+      arrival: json['arrival'] as String?,
+      arrivalNm: json['arrivalNm'] as String?,
+      boxCnt: json['boxCnt'] as int?,
+    );
+
+Map<String, dynamic> _$$_TbWhPalletForDeleteToJson(
+        _$_TbWhPalletForDelete instance) =>
+    <String, dynamic>{
+      'comps': instance.comps,
+      'location': instance.location,
+      'locationNm': instance.locationNm,
+      'arrival': instance.arrival,
+      'arrivalNm': instance.arrivalNm,
+      'boxCnt': instance.boxCnt,
+    };

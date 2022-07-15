@@ -1,11 +1,9 @@
 import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_load_repo.dart';
 import 'package:kdlwms/domain/repository/tb_wh_pallet_repo.dart';
-import 'package:kdlwms/kdl_common/common_functions.dart';
 
 class UpdatePalletUseCase {
   final TbWhPalletRepo repository;
@@ -24,22 +22,31 @@ class ConfirmPalletFinishUseCase {
 
   ConfirmPalletFinishUseCase(this.repository);
 
-  // 변경 후 서버전송
+  // 변경 후 서버전송 - 완료처리
   Future<Result<bool>> call(List<TbWhPallet> palletList) async {
+    String sMsg = '';
+    bool bRet = false;
 
-    //팔레트 전송
     Result result = await api.sendPalletList(palletList);
-
-    result.when(success: (value) async {      //전송이 성공했을때 데이터 클리어
+    //전송이 성공했을때 데이터 클리어
+    result.when(success: (value) async {
+      bRet = true;
       Result resultUpd = await repository.deleteTbWhPallet(palletList);
-      resultUpd.when(success: (value){}, error: (message){
-        return Result.error(message);
+      resultUpd.when(success: (value) {
+        bRet = true;
+      }, error: (message) {
+        bRet = false;
+        sMsg = message;
       });
     }, error: (message) {
-      return Result.error(message);
+      bRet = false;
+      sMsg = message;
     });
-
-    return const Result.success(true);
+    if (bRet) {
+      return const Result.success(true);
+    } else {
+      return Result.error(sMsg);
+    }
   }
 }
 
@@ -51,24 +58,22 @@ class LoadingPalletFinishUseCase {
   LoadingPalletFinishUseCase(this.repository);
 
   // 변경 후 서버전송
-  Future<Result<bool>> call(
-      List<TbWhPalletPrint> palletList) async {
+  Future<Result<bool>> call(List<TbWhPalletPrint> palletList) async {
+    String sMsg = '';
+    bool bRet = false;
 
     Result result = await api.sendPalletLoadList(palletList);
-    result.when(
-        success: (savedList) {},
-        error: (message) {
-          return Result.error(message);
-        });
+    result.when(success: (savedList) {
+      bRet = true;
+    }, error: (message) {
+      bRet = false;
+      sMsg = message;
+    });
 
-    //전송이 성공한 경우 업데이트
-    // Result resultUpd = await repository.deleteTbWhPalletLoad(palletList);
-    // resultUpd.when(
-    //     success: (value) {},
-    //     error: (message) {
-    //       return Result.error(message);
-    //     });
-
-    return const Result.success(true);
+    if (bRet) {
+      return const Result.success(true);
+    } else {
+      return Result.error(sMsg);
+    }
   }
 }

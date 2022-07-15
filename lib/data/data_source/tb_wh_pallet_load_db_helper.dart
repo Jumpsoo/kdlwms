@@ -1,8 +1,6 @@
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
-
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TbWhPalletLoadDbHelper {
@@ -90,15 +88,14 @@ class TbWhPalletLoadDbHelper {
         ],
       );
       if(nRet == 0){
-        writeLog('삭제실패 : 조건 불일치');
-        return Result.error('삭제실패 : 조건 불일치');
+        return const Result.error('삭제된 항목이 없습니다.');
+      }else{
+        return const Result.success(true);
       }
     } catch (_) {
       var sErrMsg = "데이터베이스 에러발생 : deleteTbWhPalletLoad(Qry)";
-      writeLog(sErrMsg);
       return Result.error(sErrMsg);
     }
-    return const Result.success(true);
   }
 
   ///라벨 발행화면에서 데이터 이관시 사용
@@ -147,7 +144,7 @@ class TbWhPalletLoadDbHelper {
       await db.delete(
         'TB_WH_PALLET_LOAD',
       );
-      return Result.success(true);
+      return const Result.success(true);
     } catch (e) {
       var sErrMsg = '데이터베이스 에러 : deleteTbWhPalletLoadAll(qry)';
       writeLog(sErrMsg);

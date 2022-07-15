@@ -534,7 +534,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     BuildContext context,
     PlutoGridStateManager gridStateManager,
   ) async {
-    if (await checkValue(context, 'PRINT', gridStateManager, '') == false) {
+    if (await _checkValue(context, 'PRINT', gridStateManager, '') == false) {
       return false;
     }
 
@@ -606,5 +606,44 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     }, error: (message) {
       showCustomSnackBarWarn(context, message);
     });
+  }
+
+//체크로직, 완료, 삭제 시
+  Future<bool> _checkValue(BuildContext context, String confirm,
+      PlutoGridStateManager gridStateManager, String sQrCode) async {
+
+    int nCheckedItemCnt = 0;
+
+    switch (confirm) {
+      case 'PRINT':
+
+      //인터넷 접속 확인
+        if(await tryConnectionWithPopup(context) == false){
+          return false;
+        }
+        if(gridStateManager.currentRow == null){
+          showCustomSnackBarWarn(context, '선택된 항목이 없습니다.');
+          return false;
+        }
+
+        if (gridStateManager.rows.isEmpty) {
+          showCustomSnackBarWarn(context, '인쇄할 항목이 없습니다.');
+          return false;
+        }
+
+
+        if (await showAlertDialogQ(
+          context,
+          '확인',
+          '선택 한 내용을 인쇄 하시겠습니까?',
+        ) ==
+            false) {
+          return false;
+        }
+
+        break;
+
+    }
+    return true;
   }
 }

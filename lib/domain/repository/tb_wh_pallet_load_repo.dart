@@ -1,5 +1,4 @@
 import 'package:kdlwms/data/data_source/result.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 
 abstract class TbWhPalletLoadRepo { 

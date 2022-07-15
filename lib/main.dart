@@ -1,8 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/di/provider_wms_setup.dart';
 import 'package:kdlwms/domain/model/tb_server_info.dart';
-import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/main_frame.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
@@ -32,25 +32,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-    Future<String> varUrl = _getUrl(context) ;
-print(varUrl);
+    Future<String> varUrl = _getUrl(context);
+    print(varUrl);
     varUrl.then((val) {
-print(val);
-      if(val.isNotEmpty){
+      print(val);
+      if (val.isNotEmpty) {
         gServiceURL = val;
-      }else{
-
-      }
+      } else {}
     }).catchError((error) {
       //
     });
 
-    Future<String> varDeviceId = _getPropertyInfo(context) ;
+    Future<String> varDeviceId = _getPropertyInfo(context);
     varDeviceId.then((val) {
-      if(val.isNotEmpty){
+      if (val.isNotEmpty) {
         gDeviceId = val;
-      }else{
+      } else {
         gDeviceId = 'No_DEVICE';
       }
     }).catchError((error) {
@@ -75,8 +72,8 @@ print(val);
               backgroundColor: darkGray,
             ),
         textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: Colors.white,
-        ),
+              bodyColor: Colors.white,
+            ),
       ),
       home: const MainFrame(),
     );
@@ -84,7 +81,6 @@ print(val);
 
   //최초 url을 조회해온다.
   Future<String> _getUrl(BuildContext context) async {
-
     String sUrl = '';
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
@@ -95,25 +91,20 @@ print(val);
 
   //최초 장치명 및 기타정보를 조회한다.
   Future<String> _getPropertyInfo(BuildContext context) async {
-
     String sDeviceId = '';
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
-    Result result  = await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+    Result result =
+        await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
 
-    result.when(success: (value){
-
+    result.when(success: (value) {
       TbServerInfo info = value;
       gDeviceId = info.deviceId!;
       gVibrateEnable = info.vibrateState!;
-
-    }, error: (message){
+    }, error: (message) {
       //showCustomSnackBarWarn(context, message);
     });
 
     return sDeviceId;
   }
-
 }
-
-

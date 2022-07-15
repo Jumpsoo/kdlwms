@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,6 @@ class MainFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     //글로벌 context 지정
     gTransitContext = context;
 
@@ -59,22 +59,28 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
-   @override
+  @override
   void initState() {
-
     super.initState();
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => syncData(true));
-   }
+    audioPlayerOk = AssetsAudioPlayer();
+    audioPlayerNG = AssetsAudioPlayer();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => syncData(true));
+  }
+
+  @override
+  void dispose() {
+    audioPlayerOk.dispose();
+    audioPlayerNG.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-
     getVersion();
 
-     return Scaffold(
+    return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       body: Padding(
         padding:
@@ -137,7 +143,7 @@ class _MainPageState extends State<MainPage> {
                   width: 250.0,
                   height: 50.0,
                   child: Row(
-                    children:  [
+                    children: [
                       const Text(
                         '현재버전: ',
                         style: TextStyle(
@@ -176,14 +182,14 @@ class _MainPageState extends State<MainPage> {
   }
 
   void getVersion() async {
-
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
-    Result result  = await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+    Result result =
+        await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
     String version = await viewModelSetting.useCaseCommonInfo
         .getCurrentLocalVersion('PDA_VERSION');
 
-    setState((){
+    setState(() {
       //00. 프로그램 버전 체크
       //로컬버전
       gCurrentVersion = version;

@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kdlwms/data/data_source/result.dart';
-import 'package:kdlwms/domain/model/tb_server_info.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
@@ -82,7 +81,7 @@ class _SettingPropertyState extends State<SettingProperty> {
                 child: TextField(
                   autofocus: false,
                   controller: _textFieldControllerServerUrl,
-                  style: TextStyle(fontSize: 14.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 14.0, color: Colors.black),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -90,11 +89,11 @@ class _SettingPropertyState extends State<SettingProperty> {
                     contentPadding: const EdgeInsets.only(
                         left: 14.0, bottom: 8.0, top: 8.0),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(5),
                     ),
                   ),
@@ -131,7 +130,7 @@ class _SettingPropertyState extends State<SettingProperty> {
                 child: TextField(
                   autofocus: false,
                   controller: _textFieldControllerDeviceId,
-                  style: TextStyle(fontSize: 14.0, color: Colors.black),
+                  style: const TextStyle(fontSize: 14.0, color: Colors.black),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -139,11 +138,11 @@ class _SettingPropertyState extends State<SettingProperty> {
                     contentPadding: const EdgeInsets.only(
                         left: 14.0, bottom: 8.0, top: 8.0),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(5),
                     ),
                   ),
@@ -187,12 +186,12 @@ class _SettingPropertyState extends State<SettingProperty> {
                               value: 0,
                               groupValue: _nVibrateState,
                               onChanged: (int? index) {
-                                setState((){
+                                setState(() {
                                   _nVibrateState = index!;
                                 });
                                 Vibration.vibrate(duration: 200);
                               }),
-                          Expanded(
+                          const Expanded(
                             child: Text('진동'),
                           )
                         ],
@@ -206,18 +205,17 @@ class _SettingPropertyState extends State<SettingProperty> {
                               value: 1,
                               groupValue: _nVibrateState,
                               onChanged: (int? index) {
-                                setState((){
+                                setState(() {
                                   _nVibrateState = index!;
                                 });
                                 Vibration.vibrate(duration: 50);
-
                               }),
-                          Expanded(
+                          const Expanded(
                             child: Text('무진동'),
                           )
                         ],
                       ),
-                    //  flex: 1,
+                      //  flex: 1,
                     ),
                   ],
                 ),
@@ -260,10 +258,10 @@ class _SettingPropertyState extends State<SettingProperty> {
     }
     //데이터 건수 확인
     if (await showAlertDialogQ(
-      context,
-      '확인',
-      '변경한 설정을 저장하시겠습니까?',
-    ) ==
+          context,
+          '확인',
+          '변경한 설정을 저장하시겠습니까?',
+        ) ==
         false) {
       return;
     }
@@ -275,8 +273,8 @@ class _SettingPropertyState extends State<SettingProperty> {
   }
 
   //
-  void _saveServerProperty(
-      BuildContext context, String sUrl, String sDeviceId, int nVibrateEnable) async {
+  void _saveServerProperty(BuildContext context, String sUrl, String sDeviceId,
+      int nVibrateEnable) async {
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
 
@@ -289,6 +287,4 @@ class _SettingPropertyState extends State<SettingProperty> {
         },
         error: (message) {});
   }
-
-
 }

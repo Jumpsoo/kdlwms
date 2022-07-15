@@ -1,6 +1,5 @@
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 
 part 'pallet_events.freezed.dart';

@@ -4,7 +4,6 @@ import 'package:kdlwms/domain/repository/tb_server_info_repo.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 class SelectTbServerInfo {
-
   final TbServerInfoRepo repository;
 
   SelectTbServerInfo(this.repository);
@@ -29,7 +28,6 @@ class SelectPropertyInfo {
   SelectPropertyInfo(this.repository);
 
   Future<Result<TbServerInfo>> call() async {
-    String sDeviceWCId = '';
     Result result = await repository.selectTbServerInfo();
     result.when(success: (value) {
       return Result.success(value);
@@ -37,6 +35,5 @@ class SelectPropertyInfo {
       return Result.error(message);
     });
     return Result.error(gErrorMsg);
-
   }
 }

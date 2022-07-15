@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kdlwms/data/data_source/tb_wh_pallet_db_helper.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -31,7 +30,7 @@ void main() {
         ' UPDTR_ID      INTEGER,   '
         ' UPDT_DT       TIMESTAMP )');
 
-    final palletDbHelper = TbWhPalletDbHelper(db);
+    // final palletDbHelper = TbWhPalletDbHelper(db);
     //
     // await palletDbHelper.insertTbWhPallet(TbWhPallet(
     //   palletSeq: 1,
@@ -74,6 +73,5 @@ void main() {
     // expect((await palletDbHelper.selectTbWhPalletList('A001', 'aa', 1))!.length, 0);
 
     await db.close();
-
   });
 }

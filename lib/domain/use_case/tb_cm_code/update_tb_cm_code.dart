@@ -38,6 +38,6 @@ class UpdateLocalVersion{
       return Result.error(message);
     });
 
-    return Result.success(true);
+    return const Result.success(true);
   }
 }

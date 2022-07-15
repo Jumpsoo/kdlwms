@@ -1,4 +1,3 @@
-import 'package:kdlwms/data/data_source/cm_code_rcv_api.dart';
 import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/tb_cm_location_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_cm_sync_db_helper.dart';
@@ -200,7 +199,7 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
   //서버사이드 repository 등록
   ItemRcvRepoImpl itemRcvRepo = ItemRcvRepoImpl();
   CmCodeRcvRepoImpl cmCodeRcvRepo = CmCodeRcvRepoImpl();
-  CmCodeRcvApi cmCodeRcvApi = CmCodeRcvApi();
+  // CmCodeRcvApi cmCodeRcvApi = CmCodeRcvApi();
   PalletApi palletApi = PalletApi();
 
   // 기준정보등을 내려받기 위해 사용
@@ -252,6 +251,10 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     deletePalletLoadAllUseCase:
         DeletePalletLoadAllUseCase(palletLoadRepository),
     selectLoadingListByApiUseCase: SelectLoadingListByApiUseCase(palletApi),
+    deleteTbWhPalletByLocationUseCase:
+        DeleteTbWhPalletByLocationUseCase(palletRepository),
+    selectPalletForDeleteUseCase:
+        SelectPalletForDeleteUseCase(palletRepository),
 
     //
   );
@@ -259,7 +262,6 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
   UseCaseTbWhItem useCaseTbWhItem = UseCaseTbWhItem(
     selectTbWhItem: SelectTbWhItem(tbWhItemRepo),
   );
-
 
   PalletViewModel palletViewModel = PalletViewModel(useCasesWms);
 
@@ -307,8 +309,8 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
     selectPropertyInfo: SelectPropertyInfo(tbServerInfoRepo),
   );
 
-  SettingInfoViewModel settingWorkshopViewModel =
-      SettingInfoViewModel(useCaseTbCmLocation, useCaseServerInfo, useCaseTbWhItem);
+  SettingInfoViewModel settingWorkshopViewModel = SettingInfoViewModel(
+      useCaseTbCmLocation, useCaseServerInfo, useCaseTbWhItem);
 
   //배치 관련
   UseCaseDataSync useCaseDataBatch = UseCaseDataSync(

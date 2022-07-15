@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 import 'package:kdlwms/data/data_source/result.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
-import 'package:kdlwms/domain/model/tb_wh_pallet_load.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet_print.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
@@ -36,15 +33,9 @@ writeLog(dataAsMap);
 
     try {
       if (res.statusCode == 200) {
-        Map<String, dynamic> resData = convert
-            .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
-        String retSeq = resData['data'].toString();
-
         return Result.success(nPalletSeq);
 
       } else {
-        Map<String, dynamic> resData = convert
-            .jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
         return Result.error('에러발생 : ${res.statusCode}');
       }
     } catch (e) {

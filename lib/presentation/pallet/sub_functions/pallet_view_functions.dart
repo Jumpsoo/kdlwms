@@ -241,7 +241,6 @@ List<PlutoColumn> getPackGridColumns() {
 // 데이터 로우
 List<PlutoRow> getViewButtomGridRows(List<TbWhPallet> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
-  int nRowNum = 0;
   try {
     int nRowNum = 0;
     for (var e in pallets) {

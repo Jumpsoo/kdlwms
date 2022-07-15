@@ -1,5 +1,6 @@
 library my_prj.globals;
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 
 int gSystemUserId = 11111;
@@ -19,6 +20,10 @@ int gVibrateEnable = 0;
 String gServiceURL = 'http://54.180.96.240:8080/api';
 // 사내(덴소)
 //String gServiceURL = 'http://10.73.254.208/api';
+
+late AssetsAudioPlayer audioPlayerOk;
+late AssetsAudioPlayer audioPlayerNG;
+bool gbTriggerOn = false;
 
 late BuildContext gTransitContext;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

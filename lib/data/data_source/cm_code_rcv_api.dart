@@ -29,10 +29,10 @@ class CmCodeRcvApi {
   Future<Result<Iterable>> selectCmCodeListByCodeCd(
       TbWhCmCode tbWhCmCode) async {
     try {
+
       String sGrpCd = tbWhCmCode.grpCd!;
       String sCodeCd = tbWhCmCode.codeCd!;
       String sParameter = '$baseUrl?comps=$gComps&grpCd=$sGrpCd&codeCd=$sCodeCd';
-      print(sParameter);
       final response = await client.get(
           Uri.parse(sParameter));
 
@@ -51,7 +51,6 @@ class CmCodeRcvApi {
     try {
       String sGrpCd = tbWhCmCode.grpCd!;
       String sParameter = '$baseUrl?comps=$gComps&grpCd=$sGrpCd';
-      print(sParameter);
       final response =
           await client.get(Uri.parse(sParameter));
 

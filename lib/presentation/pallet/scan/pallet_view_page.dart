@@ -287,8 +287,8 @@ class _PalletViewPageState extends State<PalletViewPage> {
   }
 
   void deletePackedPallet() async {
-    bool bRet = await deletePackItem(context, downGridStateManager,
-        _readWorkShop, _readLocation);
+    bool bRet = await _deletePackItem(
+        context, downGridStateManager, _readWorkShop, _readLocation);
 
     if (bRet) {
       viewAll(_readWorkShop, _readLocation);
@@ -384,6 +384,45 @@ class _PalletViewPageState extends State<PalletViewPage> {
     });
   }
 
+//선택된 항목 삭제
+  Future<bool> _deletePackItem(
+      BuildContext context,
+      PlutoGridStateManager gridStateManager,
+      String sWorkshop,
+      String sLocation) async {
+    PalletViewModel viewModel = context.read<PalletViewModel>();
+
+    if (await _checkValue(context, 'DELETE', gridStateManager, '') == false) {
+      return false;
+    }
+    List<TbWhPallet> tbWhPallets = [];
+
+    // for (PlutoRow row in gridStateManager.currentSelectingRows) {
+    PlutoRow row = gridStateManager.currentCell!.row;
+    List<PlutoCell> cells = row.cells.values.toList();
+
+    tbWhPallets.add(TbWhPallet(
+        comps: gComps,
+        workshop: sWorkshop,
+        location: sLocation,
+        itemNo: cells[1].value,
+        itemLot: cells[2].value,
+        quantity: cells[4].value,
+        palletSeq: cells[3].value,
+        barcode: cells[5].value));
+
+    if (tbWhPallets.isEmpty) {
+      hideCircularProgressIndicator();
+      showCustomSnackBarWarn(context, '완료처리 할 내용이 없습니다.');
+      return false;
+    }
+
+    viewModel.useCasesWms.deletePallet(tbWhPallets);
+    showCustomSnackBarSuccess(context, gSuccessMsg);
+
+    return true;
+  }
+
   //작업위치 콤보박스
   Widget createWorkshopDropDownButton(List<ComboValueType> workshopList) {
     return Container(
@@ -429,6 +468,37 @@ class _PalletViewPageState extends State<PalletViewPage> {
         ],
       ),
     );
+  }
+
+//체크로직, 완료, 삭제 시
+  Future<bool> _checkValue(
+    BuildContext context,
+    String sGbn,
+    PlutoGridStateManager gridStateManager,
+    String sQrCode,
+  ) async {
+
+    switch (sGbn) {
+      case 'DELETE':
+        if (gridStateManager.currentCell == null) {
+          showCustomSnackBarWarn(context, '삭제할 항목이 선택하세요.');
+          return false;
+        }
+        if (gridStateManager.rows.isEmpty) {
+          showCustomSnackBarWarn(context, '삭제할 항목이 없습니다.');
+          return false;
+        }
+        if (await showAlertDialogQ(
+              context,
+              '확인',
+              '작업 중인 내용을 삭제 하시겠습니까?',
+            ) ==
+            false) {
+          return false;
+        }
+        break;
+    }
+    return true;
   }
 
   //창고 콤보박스

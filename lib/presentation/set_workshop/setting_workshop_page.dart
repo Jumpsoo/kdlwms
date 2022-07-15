@@ -30,12 +30,6 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
 
   String? _selectedValue;
 
-  // 상태 메세지 변경
-  void _setMsg(String sMsg) {
-    setState(() {
-      _msgData = sMsg;
-    });
-  }
 
   @override
   // init에는 watch 사용 금지

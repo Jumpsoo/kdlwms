@@ -2,7 +2,6 @@ import 'package:kdlwms/data/data_source/cm_code_rcv_api.dart';
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/repository/cm_code_rcv_repo.dart';
-import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
 class CmCodeRcvRepoImpl implements CmCodeRcvRepo {
   CmCodeRcvApi api = CmCodeRcvApi();

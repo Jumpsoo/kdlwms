@@ -4,7 +4,6 @@ import 'package:kdlwms/data/repository/cm_code_rcv_repo_impl.dart';
 import 'package:kdlwms/domain/model/tb_cm_location.dart';
 import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/repository/tb_cm_location_repo.dart';
-import 'package:kdlwms/kdl_common/common_functions.dart';
 
 class MigTbCmLocation {
   final TbCmLocationRepo repository;

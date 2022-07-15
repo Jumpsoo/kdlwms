@@ -29,7 +29,6 @@ class SelectPackingListUseCase {
   SelectPackingListUseCase(this.repository);
 
   Future<List<TbWhPallet>?> call(String sWorkShop, String sLocation) async {
-
     TbWhPallet condTbWhPallet =
         TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
 
@@ -48,7 +47,7 @@ class SelectPalletingSummaryUseCase {
       String sComps, String sWareHouse, String sLocation) async {
     TbWhPallet tbWhPallet =
         TbWhPallet(comps: sComps, workshop: sWareHouse, location: sLocation);
-    return await repository.selectPalletingSummary(tbWhPallet);
+    return await repository.selectPalletSummary(tbWhPallet);
   }
 }
 
@@ -63,7 +62,7 @@ class SelectPalletingListUseCase {
     TbWhPallet tbWhPallet =
         TbWhPallet(comps: sComps, workshop: sWareHouse, location: sLocation);
 
-    return await repository.selectPalletingList(tbWhPallet);
+    return await repository.selectPalletList(tbWhPallet);
   }
 }
 
@@ -104,12 +103,10 @@ class SelectLoadingListByApiUseCase {
 
   Future<Result<List<TbWhPalletPrint>?>> call(String sComps, String sWorkShop,
       String sLocation, int nScanPalletSeq) async {
-    late Result result ;
     TbWhPallet tbWhPallet =
-    TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
+        TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
 
     return await api.selectPalletLoadingList(tbWhPallet, nScanPalletSeq);
-
   }
 }
 
@@ -158,36 +155,22 @@ class SelectPrintingList {
   SelectPrintingList(this.repository);
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<Result<List<TbWhPalletPrint>?>> call(
-      String comps, String sWorkShop, String sLocation, String sPalletSeq) async {
+  Future<Result<List<TbWhPalletPrint>?>> call(String comps, String sWorkShop,
+      String sLocation, String sPalletSeq) async {
     TbWhPallet tbWhPallet =
         TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
 
     return await repository.selectPrintingListByApi(tbWhPallet, sPalletSeq);
   }
+}
 
-//
-// class SelectConfirmListUseCase {
-//   final TbWhPalletRepo repository;
-//
-//   SelectConfirmListUseCase(this.repository);
-//
-//   Future<List<TbWhPallet>?> call(String sWorkShop, String sLocation,
-//       int nState) async {
-//     TbWhPallet condTbWhPallet = TbWhPallet(
-//         comps: gComps, workshop: sWorkShop, location: sLocation, state: nState);
-//     return await repository.selectLoadingList(condTbWhPallet);
-//   }
-// }
+//05. 이력삭제용 조회
+class SelectPalletForDeleteUseCase {
+  final TbWhPalletRepo repository;
 
-// class GetPalletBySeq {
-//   final TbWhPalletRepo repository;
-//
-//   GetPalletBySeq(this.repository);
-//
-//   Future<TbWhPallet?> call(int palletSeq) async {
-//     return await repository.getTbWhPalletBySeq(palletSeq);
-//   }
-// }
+  SelectPalletForDeleteUseCase(this.repository);
 
+  Future<Result<List<TbWhPalletForDelete>?>> call() async {
+    return await repository.selectPalletForDelete();
+  }
 }

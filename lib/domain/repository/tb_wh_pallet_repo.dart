@@ -11,9 +11,9 @@ abstract class TbWhPalletRepo {
   Future<List<TbWhPallet>?> selectPackingList(TbWhPallet tbWhPallet);
 
   //02.실적조회
-  Future<List<TbWhPalletGroup>?>  selectPalletingSummary(TbWhPallet tbWhPallet);
-  Future<Result<List<TbWhPallet>?>> selectPalletingList(TbWhPallet tbWhPallet);
-  Future<Result<List<TbWhPallet>?>> selectPalletingListByApi(TbWhPallet tbWhPallet, String sPalletSeq);
+  Future<List<TbWhPalletGroup>?>  selectPalletSummary(TbWhPallet tbWhPallet);
+  Future<Result<List<TbWhPallet>?>> selectPalletList(TbWhPallet tbWhPallet);
+  Future<Result<List<TbWhPallet>?>> selectPalletListByApi(TbWhPallet tbWhPallet, String sPalletSeq);
 
   //03라벨 데이터 조회
   Future<List<TbWhPalletGroup>?> selectPrintingList(TbWhPallet tbWhPallet);
@@ -24,8 +24,14 @@ abstract class TbWhPalletRepo {
   Future<List<TbWhPalletGroup>?> selectLoadingSummary(TbWhPallet tbWhPallet);
   Future<List<TbWhPallet>?> selectLoadingList(TbWhPallet tbWhPallet);
 
+  //05. 이력 삭제
+  // 삭제용 데이터 쿼리
+  Future<Result<List<TbWhPalletForDelete>?>>  selectPalletForDelete();
+  Future<Result<bool>> deleteTbWhPalletByLocation(List<TbWhPalletForDelete> pallet);
+
   //단일행조회
   Future<Result<TbWhPallet?>> selectTbWhPalletInto(TbWhPallet tbWhPallet);
+  Future<Result<bool>> selectDupleCheck(String sBarCode);
 
   //적재중(입력, 완료) 대상 전체 조회
   Future<int> getTbWhPalletCountInDevice();
