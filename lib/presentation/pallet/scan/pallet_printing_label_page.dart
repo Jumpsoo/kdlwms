@@ -138,8 +138,10 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
-                          child: AutoSizeText(
-                            _readWareHouseNm,
+                          // child: AutoSizeText(
+                          //   _readWareHouseNm,
+                          child: const AutoSizeText(
+                            '작업위치',
                             style: TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.white,
@@ -335,21 +337,20 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
 
     setState(() {
       _dataWorkshop = comboList;
-
       _readWorkShop = sDefaultLocation!;
       if (sDefaultLocation != null) {
         _readWorkShop = sDefaultLocation;
       }
 
       if (sDefaultLocation == '') {
-        showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.');
+        // showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.');
+        showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
       }
     });
   }
 
   Future<void> setLocationList() async {
     List<ComboValueType> comboList = await getLocationComboValueList(context);
-
     setState(() {
       _dataLocation = comboList;
     });

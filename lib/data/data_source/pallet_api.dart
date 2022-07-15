@@ -107,13 +107,13 @@ class PalletApi {
       if (sPalletSeq.isNotEmpty) {
         //서버반여여후 아래 주석부분으로 교체할것
         sParameters =
-            '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
-        // sParameters = '$callUrl?pallet_seq=$nPalletSeq&location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
+            '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&location=$sLocation&workshop=$sWorkShop&palletDate=$scanDate';
+        // sParameters = '$callUrl?pallet_seq=$nPalletSeq&location=$sLocation&workshop=$sWorkShop&palletDate=$scanDate';
       } else {
         //서버반여여후 아래 주석부분으로 교체할것
         sParameters =
-            '$callUrl?comps=$gComps&location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
-        //sParameters ='$callUrl?location=$sLocation&workShop=$sWorkShop&palletDate=$scanDate';
+            '$callUrl?comps=$gComps&location=$sLocation&workshop=$sWorkShop&palletDate=$scanDate';
+        //sParameters ='$callUrl?location=$sLocation&workshop=$sWorkShop&palletDate=$scanDate';
       }
       writeLog(sParameters);
 
@@ -155,10 +155,10 @@ class PalletApi {
       if (sPalletSeq.isNotEmpty) {
         nPalletSeq = int.parse(sPalletSeq);
         sParameters =
-            '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
+            '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
       } else {
         sParameters =
-            '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
+            '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
       }
       final res = await client.get(Uri.parse(sParameters));
       if (res.statusCode == 200) {
@@ -192,10 +192,10 @@ class PalletApi {
 
       if (nPalletSeq == 0) {
         sParameters =
-        '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
+        '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
       } else {
         sParameters =
-        '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workShop=$sWorkShop';
+        '$callUrl?comps=$gComps&palletSeq=$nPalletSeq&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
       }
 print(sParameters);
 

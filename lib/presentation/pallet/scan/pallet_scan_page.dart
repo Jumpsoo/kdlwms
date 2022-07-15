@@ -458,6 +458,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
         comps: gComps,
         workshop: _readWorkShop,
         location: _readLocation,
+        arrival: _readWareHouse,
         palletSeq: cells[0].value,
         itemNo: cells[1].value,
         itemLot: cells[2].value,
@@ -572,7 +573,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
                 if (newValue != null) {
                   setState(() {
                     _readLocation = newValue;
-
                     viewTopList();
                     viewBottomList();
                   });
