@@ -42,6 +42,7 @@ class DeleteTbWhPalletByLocationUseCase {
 
   Future<Result<bool>> call(
       List<TbWhPalletForDelete> tbWhPalletForDeleteList) async {
+
     return await repository.deleteTbWhPalletByLocation(tbWhPalletForDeleteList);
   }
 }

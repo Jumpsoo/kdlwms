@@ -27,7 +27,7 @@ class _DataSyncState extends State<DataSync> {
 }
 
 Future<bool> syncData(bool ignoreMsg) async {
-  const double nTotalPercent = 100;
+  // const double nTotalPercent = 100;
   const double nIncreaseUnit = 100 / 4;
   double percentage = 0.0;
   String sBatchName = '공통코드';
@@ -48,6 +48,7 @@ Future<bool> syncData(bool ignoreMsg) async {
 
   //서버버전
   sServerVersion = await dataSyncViewModel.useCaseDataBatch.getServerVersion();
+  print('sServerVersion : $sServerVersion');
   writeLog('로컬버전 / 서버버전 : $gCurrentVersion / $sServerVersion');
 
   //연결체크
@@ -55,8 +56,9 @@ Future<bool> syncData(bool ignoreMsg) async {
   if (bRet == false) {
     return false;
   }
-
-  gCurrentVersion = sServerVersion;
+  if(sServerVersion.isNotEmpty) {
+    gCurrentVersion = sServerVersion;
+  }
   if (ignoreMsg == true && gCurrentVersion == sServerVersion) {
     //동기화 하지 않음
     if (await checkSyncStatusNoAlert() == true) {
@@ -88,7 +90,7 @@ Future<bool> syncData(bool ignoreMsg) async {
   await progressDialog.show();
 
   sBatchName = '01.공통 코드';
-  writeLog('$sBatchName');
+  writeLog(sBatchName);
 
   TbWhCmCode condTbWhCmCode = TbWhCmCode();
   if (await _getBatchItem(
@@ -103,10 +105,10 @@ Future<bool> syncData(bool ignoreMsg) async {
     return false;
   } // 01.공통코드 완료
 
-  await Future.delayed(Duration(milliseconds: 500), () {});
+  await Future.delayed(const Duration(milliseconds:  500), () {});
 
   sBatchName = '02.품목정보';
-  writeLog('$sBatchName');
+  writeLog(sBatchName);
 
   //조건이있을 경우 추가 할 것
   TbWhItem condTbWhItem = TbWhItem();
@@ -126,10 +128,10 @@ Future<bool> syncData(bool ignoreMsg) async {
   writeLog(resultItem);
   resultItem.when(success: (itemList) {}, error: (messge) {});
 
-  await Future.delayed(Duration(milliseconds: 500), () {});
+  await Future.delayed(const Duration(milliseconds: 500), () {});
 
   sBatchName = '03.작업장정보&팔레트정보';
-  writeLog('$sBatchName');
+  writeLog(sBatchName);
   //인터넷 연결 체크
 
   percentage = percentage + nIncreaseUnit;
@@ -144,7 +146,7 @@ Future<bool> syncData(bool ignoreMsg) async {
     return false;
   }
   //
-  await Future.delayed(Duration(milliseconds: 500), () {});
+  await Future.delayed(const Duration(milliseconds: 500), () {});
 
   sBatchName = '04.버전정보 동기화중..';
   //로컬버전정보 -> 서버로 변경
@@ -177,7 +179,7 @@ void updateProgressBar(
     ProgressDialog progressDialog, double dCurrentPercent, String sMsg) {
   progressDialog.update(
     progress: dCurrentPercent,
-    message: '$sMsg',
+    message: sMsg,
     progressWidget: Container(
         padding: const EdgeInsets.all(8.0),
         child: const CircularProgressIndicator()),
@@ -194,7 +196,7 @@ Future<bool> _getBatchItem(BuildContext context, String sBatchName,
     Result result, ProgressDialog progressDialog, double percentage) async {
   bool retVal = false;
   writeLog('$sBatchName : 시작');
-  DataSyncViewModel viewModel = context.read<DataSyncViewModel>();
+  // DataSyncViewModel viewModel = context.read<DataSyncViewModel>();
 
   try {
     result.when(success: (value) {

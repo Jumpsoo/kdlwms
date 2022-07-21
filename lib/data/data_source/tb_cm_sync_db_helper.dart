@@ -40,8 +40,8 @@ class TbCmSyncDbHelper {
       await db.update(
         'TB_CM_SYNC',
         tbCmSync.toJson(),
-        where: 'VERSION_CODE = ? ',
-        whereArgs: [tbCmSync.VERSION_CODE],
+        where: 'versionCode = ? ',
+        whereArgs: [tbCmSync.versionCode],
       );
       return const Result.success(true);
     } catch (e) {
@@ -72,8 +72,8 @@ class TbCmSyncDbHelper {
     try {
       await db.delete(
         'TB_CM_SYNC',
-        where: 'VERSION_CODE = ? ',
-        whereArgs: [tbCmSync.VERSION_CODE],
+        where: 'versionCode = ? ',
+        whereArgs: [tbCmSync.versionCode],
       );
       return const Result.success(true);
     } catch (e) {

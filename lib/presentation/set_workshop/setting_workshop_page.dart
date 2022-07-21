@@ -50,8 +50,7 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
   //최초로딩시 콤보박스 세팅
   //데이터가 없는 경우 하단 알람 창에 메세지 전시
   Future<void> setLocationList() async {
-    List<ComboValueType> comboList =
-        await getWorkshopComboValueList(context);
+    List<ComboValueType> comboList = await getWorkshopComboValueList(context);
     String? sDefaultLocation = await palletCommonGetDefaultWorkShop(context);
     setState(() {
       dataList = comboList;
@@ -82,7 +81,11 @@ class _SettingWorkShopPageState extends State<SettingWorkShopPage> {
         .updateFromSelectTbCmLocationToEnable(sSelectedWorkSHop);
 
     result.when(success: (value) {
-      showCustomSnackBarSuccess(context, '성공');
+      showCustomSnackBarSuccess(
+        context,
+        '성공',
+        true,
+      );
       setLocationList();
     }, error: (message) {
       showCustomSnackBarWarn(context, message);

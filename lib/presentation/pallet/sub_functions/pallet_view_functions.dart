@@ -26,15 +26,11 @@ Future<void> createPalletingTopGridView(
   List<TbWhPalletGroup>? pallets = await viewModel.useCasesWms
       .selectPalletingSummaryUseCase(gComps, sWareHouse, sLocation);
   if (pallets != null) {
-    gridStateManager.appendRows(
-      getViewTopGridRowsGrouping(pallets),
-    );
-
-    if (gridStateManager.rows.length == 1) {
-      //데이터가 없습니다는 한군데에서만
-      // showCustomSnackBarSuccess(context, '입력 중인 데이터가 없습니다.');
+    List<PlutoRow> plutoRows = getViewTopGridRowsGrouping(pallets);
+    if (plutoRows.isNotEmpty && plutoRows.length > 1) {
+      gridStateManager.appendRows(plutoRows);
+      gridStateManager.notifyListeners();
     }
-    gridStateManager.notifyListeners();
   }
 }
 
@@ -52,15 +48,15 @@ Future<void> createPalletingButtomGridView(
   Result result = await viewModel.useCasesWms
       .selectPalletingListUseCase(gComps, sWareHouse, sLocation);
   result.when(success: (valueList) {
-
     List<TbWhPallet>? pallets = valueList;
     if (pallets == null) {
-      showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.');
+      showCustomSnackBarSuccess(context, '해당 작업위치에 입력완료한 실적이 없습니다.', false);
     } else {
-      gridStateManager.appendRows(
-        getViewButtomGridRows(pallets),
-      );
-      gridStateManager.notifyListeners();
+      List<PlutoRow> plutoRows = getViewButtomGridRows(pallets);
+      if (plutoRows.isNotEmpty && plutoRows.length > 1) {
+        gridStateManager.appendRows(plutoRows);
+        gridStateManager.notifyListeners();
+      }
     }
   }, error: (message) {
     showCustomSnackBarWarn(context, message);

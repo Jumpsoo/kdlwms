@@ -241,11 +241,13 @@ class TbWhPalletDbHelper {
   Future<Result<bool>> deleteTbWhPalletByLocation(
       TbWhPalletForDelete tbWhPalletForDelete) async {
     try {
+
       int nRet = await db.delete(
         'TB_WH_PALLET',
         where: 'comps = ? and location = ? ',
         whereArgs: [tbWhPalletForDelete.comps, tbWhPalletForDelete.location],
       );
+
       if(nRet == 0){
         return const Result.error('삭제된 항목이 없습니다.');
       }else {
@@ -368,6 +370,7 @@ class TbWhPalletDbHelper {
 
   Future<Result<bool>> upsertPallet(TbWhPallet pallet) async {
     try {
+      print(pallet);
       final maps = await db.query(
         'TB_WH_PALLET',
         where: 'barcode = ?',

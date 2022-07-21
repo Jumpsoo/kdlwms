@@ -10,6 +10,7 @@ class TbServerInfo with _$TbServerInfo {
     String? comps,
     String? deviceId,
     int? vibrateState,
+    int? scanAlwaysState,
   }) = _TbServerInfo;
 
   factory TbServerInfo.fromJson(Map<String, dynamic> json) => _$TbServerInfoFromJson(json);

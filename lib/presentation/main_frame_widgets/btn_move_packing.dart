@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/pallet_work_frame.dart';
-import 'package:restart_app/restart_app.dart';
 
 class BtnMovePacking extends StatelessWidget  {
   const BtnMovePacking({Key? key}) : super(key: key);

@@ -23,15 +23,13 @@ Future<void> createDeleteButtomGridView(
 
   result.when(success: (valueList) {
     List<TbWhPalletForDelete>? pallets = valueList;
+
     if (pallets == null) {
       if (isMsg == true) {
-        showCustomSnackBarSuccess(context, '해당 태그로 상차가능한 항목이 없습니다.');
+        showCustomSnackBarSuccess(context, '해당 태그로 상차가능한 항목이 없습니다.', false);
       }
     } else {
-      gridStateManager.appendRows(
-        getLoadDeleteGridRows(pallets),
-      );
-
+      gridStateManager.appendRows(getLoadDeleteGridRows(pallets));
       gridStateManager.notifyListeners();
     }
   }, error: (message) {

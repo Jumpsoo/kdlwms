@@ -85,7 +85,9 @@ class TbWhPalletRepoImpl implements TbWhPalletRepo {
   Future<Result<bool>> deleteTbWhPalletByLocation(List<TbWhPalletForDelete> tbWhPalletForDeleteList) async{
         late Result result;
     try {
+      print(tbWhPalletForDeleteList);
       for (TbWhPalletForDelete tbWhPalletForDelete in tbWhPalletForDeleteList) {
+        //로케이션별 삭제
         result = await db.deleteTbWhPalletByLocation(tbWhPalletForDelete);
         result.when(
             success: (value) {},

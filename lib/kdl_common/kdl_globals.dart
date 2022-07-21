@@ -15,6 +15,8 @@ String gCheckInternet = '';
 bool gSync = false;
 
 int gVibrateEnable = 0;
+int gScanAlwaysOn = 0;
+bool gTriggered = false;
 
 // 사외
 String gServiceURL = 'http://54.180.96.240:8080/api';
@@ -81,7 +83,7 @@ dynamic gElevatedButtonStyleSmallSize = ElevatedButton.styleFrom(
 );
 
 //상태, 1:적재, 2:적재확인, 3:상차, 4:도착완료
-enum LoadState { None, Pack, Confirm, Load, Arrive }
+enum LoadState { none, pack, confirm, load, arrive }
 
 class ComboValueType {
   final String key;

@@ -55,16 +55,16 @@ class MigTbCmLocation {
     List<TbCmLocation> retList = [];
     for (TbWhCmCode item in inList) {
       retList.add(TbCmLocation(
-        WORKSHOP: item.codeCd!,
-        WORKSHOP_NM: item.codeKoNm,
-        LOCATION: '1',
-        SYNC_DATETIME: DateTime.now(),
-        SET_FLAG: 'N',
-        CMF_1: ' ',
-        CMF_2: ' ',
-        CMF_3: ' ',
-        CMF_4: ' ',
-        CMF_5: ' ',
+        workshop: item.codeCd!,
+        workshopNm: item.codeKoNm,
+        location: '1',
+        syncDateTime: DateTime.now(),
+        setFlag: 'N',
+        cmf1: ' ',
+        cmf2: ' ',
+        cmf3: ' ',
+        cmf4: ' ',
+        cmf5: ' ',
       ));
     }
     return retList;

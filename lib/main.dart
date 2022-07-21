@@ -33,16 +33,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<String> varUrl = _getUrl(context);
-    print(varUrl);
+
     varUrl.then((val) {
-      print(val);
+
       if (val.isNotEmpty) {
         gServiceURL = val;
       } else {}
     }).catchError((error) {
       //
     });
-
     Future<String> varDeviceId = _getPropertyInfo(context);
     varDeviceId.then((val) {
       if (val.isNotEmpty) {
@@ -94,13 +93,16 @@ class MyApp extends StatelessWidget {
     String sDeviceId = '';
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
+
     Result result =
         await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
-
     result.when(success: (value) {
       TbServerInfo info = value;
       gDeviceId = info.deviceId!;
       gVibrateEnable = info.vibrateState!;
+      gScanAlwaysOn = info.scanAlwaysState!;
+
+
     }, error: (message) {
       //showCustomSnackBarWarn(context, message);
     });

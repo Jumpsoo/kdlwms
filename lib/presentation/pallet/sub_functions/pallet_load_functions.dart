@@ -48,6 +48,7 @@ Future<void> createLoadingButtomGridView(
     String sLocation,
     int nScanPalletSeq) async {
   //초기화
+
   PalletViewModel viewModel = context.read<PalletViewModel>();
   gridStateManager.rows.clear();
   gridStateManager.removeRows(gridStateManager.rows);
@@ -58,14 +59,11 @@ Future<void> createLoadingButtomGridView(
   result.when(success: (valueList) {
     List<TbWhPalletPrint>? pallets = valueList;
     if (pallets == null) {
-      showCustomSnackBarSuccess(context, '해당 태그로 상차가능한 항목이 없습니다.');
-    } else if (pallets != null && pallets.isEmpty == 0) {
-      showCustomSnackBarSuccess(context, '해당 태그로 상차가능한 항목이 없습니다.');
+      showCustomSnackBarSuccess(context, '해당 태그로 상차가능한 항목이 없습니다.', false);
+    } else if (pallets.isEmpty) {
+      showCustomSnackBarSuccess(context, '해당 태그로 상차가능한 항목이 없습니다.', false);
     } else {
-      gridStateManager.appendRows(
-        getLoadButtomGridRows(pallets),
-      );
-
+      gridStateManager.appendRows(getLoadButtomGridRows(pallets));
       gridStateManager.notifyListeners();
     }
   }, error: (message) {

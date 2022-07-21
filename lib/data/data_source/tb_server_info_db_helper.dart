@@ -10,12 +10,14 @@ class TbServerInfoDbHelper {
 
   Future<Result<TbServerInfo?>> selectTbServerInfo() async {
     try {
+
       final maps = await db.query(
         'TB_SERVER_INFO',
       );
-      print(maps.map((e) => TbServerInfo.fromJson(e)).toList());
+
       return Result.success(maps.map((e) => TbServerInfo.fromJson(e)).toList()[0]);
     } catch (e) {
+      print(e.toString());
       return Result.error(e.toString());
     }
   }

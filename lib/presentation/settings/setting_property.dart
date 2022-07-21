@@ -22,6 +22,9 @@ class _SettingPropertyState extends State<SettingProperty> {
   final TextEditingController _textFieldControllerDeviceId =
       TextEditingController();
 
+  int _nVibrateState = 0;
+  int _nScanAlwaysOn = 0;
+
   @override
   // init에는 watch 사용 금지
   void initState() {
@@ -31,6 +34,9 @@ class _SettingPropertyState extends State<SettingProperty> {
 
     _textFieldControllerServerUrl.text = gServiceURL;
     _textFieldControllerDeviceId.text = gDeviceId;
+
+    _nVibrateState = gVibrateEnable;
+    _nScanAlwaysOn = gScanAlwaysOn;
   }
 
   @override
@@ -43,7 +49,7 @@ class _SettingPropertyState extends State<SettingProperty> {
         ),
         body: Padding(
           padding:
-              const EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
+              const EdgeInsets.only(left: 20, right: 10, top: 5, bottom: 5),
           child: Column(
             children: [
               Container(
@@ -83,7 +89,7 @@ class _SettingPropertyState extends State<SettingProperty> {
                     fillColor: Colors.white,
                     hintText: 'http://',
                     contentPadding: const EdgeInsets.only(
-                        left: 14.0, bottom: 8.0, top: 8.0),
+                        left: 14.0, bottom: 4.0, top: 4.0),
                     focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(5),
@@ -164,10 +170,11 @@ class _SettingPropertyState extends State<SettingProperty> {
                   ),
                 ),
               ),
+              Padding(padding: EdgeInsets.only(top: 10)),
               Container(
                 alignment: Alignment.centerLeft,
                 width: 400,
-                height: 70,
+                height: 50,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.rectangle,
@@ -179,11 +186,11 @@ class _SettingPropertyState extends State<SettingProperty> {
                       child: Row(
                         children: [
                           Radio(
-                              value: gVibrateEnable == 0 ? 1 : 0,
-                              groupValue: gVibrateEnable,
+                              value: 0,
+                              groupValue: _nVibrateState,
                               onChanged: (int? index) {
                                 setState(() {
-                                  gVibrateEnable = index!;
+                                  _nVibrateState = index!;
                                 });
                                 Vibration.vibrate(duration: 200);
                               }),
@@ -198,16 +205,88 @@ class _SettingPropertyState extends State<SettingProperty> {
                       child: Row(
                         children: [
                           Radio(
-                              value: gVibrateEnable == 1 ? 1 : 0,
-                              groupValue: gVibrateEnable,
+                              value: 1,
+                              groupValue: _nVibrateState,
                               onChanged: (int? index) {
                                 setState(() {
-                                  gVibrateEnable = index!;
+                                  _nVibrateState = index!;
                                 });
                                 Vibration.vibrate(duration: 50);
                               }),
                           const Expanded(
                             child: Text('무진동'),
+                          )
+                        ],
+                      ),
+                      //  flex: 1,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: ElevatedButton(
+                  onPressed: () async {},
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(150, 40),
+                    primary: Colors.teal[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  child: const AutoSizeText(
+                    '스캔모드',
+                    style: TextStyle(
+                        fontSize: 24.0,
+                        color: Colors.white,
+                        fontFamily: "Roboto"),
+                  ),
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              Container(
+                alignment: Alignment.centerLeft,
+                width: 400,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Radio(
+                              value: 0,
+                              groupValue: _nScanAlwaysOn,
+                              onChanged: (int? index) {
+                                setState(() {
+                                  _nScanAlwaysOn = index!;
+                                });
+                              }),
+                          const Expanded(
+                            child: Text('수동'),
+                          )
+                        ],
+                      ),
+                      //flex: _nVibrateState,
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Radio(
+                              value: 1,
+                              groupValue: _nScanAlwaysOn,
+                              onChanged: (int? index) {
+                                setState(() {
+                                  _nScanAlwaysOn = index!;
+                                });
+                              }),
+                          const Expanded(
+                            child: Text('자동'),
                           )
                         ],
                       ),
@@ -261,23 +340,32 @@ class _SettingPropertyState extends State<SettingProperty> {
         false) {
       return;
     }
+
     gServiceURL = _textFieldControllerServerUrl.text;
     gDeviceId = _textFieldControllerDeviceId.text;
+    gVibrateEnable = _nVibrateState;
+    gScanAlwaysOn = _nScanAlwaysOn;
 
-    _saveServerProperty(context, gServiceURL, gDeviceId, gVibrateEnable);
+    print('gVibrateEnable : $gVibrateEnable');
+    _saveServerProperty(
+        context, gServiceURL, gDeviceId, gVibrateEnable, gScanAlwaysOn);
   }
 
   //
   void _saveServerProperty(BuildContext context, String sUrl, String sDeviceId,
-      int nVibrateEnable) async {
+      int nVibrateEnable, int nScanAlwaysOn) async {
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
 
     Result result = await viewModelSetting.useCaseServerInfo
-        .mergeTbServerInfo(sUrl, sDeviceId, nVibrateEnable);
+        .mergeTbServerInfo(sUrl, sDeviceId, nVibrateEnable, nScanAlwaysOn);
     result.when(
         success: (value) {
-          showCustomSnackBarSuccess(context, '저장 완료(OK)');
+          showCustomSnackBarSuccess(
+            context,
+            '저장 완료(OK)',
+            true,
+          );
         },
         error: (message) {});
   }

@@ -92,8 +92,12 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     //프로그래스바
     hideCircularProgressIndicator();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.'));
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => showCustomSnackBarSuccess(
+              context,
+              '로케이션을 먼저 스캔하세요.',
+              false,
+            ));
   }
 
   @override
@@ -129,7 +133,10 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
                             await checkSyncStatus(context);
 
                             showCustomSnackBarSuccess(
-                                context, '로케이션 번호를 읽히세요.');
+                              context,
+                              '로케이션 번호를 읽히세요.',
+                              false,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(100, 40),
@@ -165,7 +172,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
                       ),
                     ],
                   ),
-                  Padding(padding: EdgeInsets.only(left: 5)),
+                  const Padding(padding: EdgeInsets.only(left: 5)),
                   Column(
                     children: [
                       Container(
@@ -178,7 +185,11 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
                             await checkSyncStatus(context);
 
                             //해당버튼을 누르면 창고위치로 값을 넘겨준다
-                            showCustomSnackBarSuccess(context, '창고 QR을 입력하세요.');
+                            showCustomSnackBarSuccess(
+                              context,
+                              '창고 QR을 입력하세요.',
+                              false,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(70, 40),
@@ -217,7 +228,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
             const Padding(padding: EdgeInsets.only(top: 5)),
             //하단그리드
 
-            Container(
+            SizedBox(
               height: 400,
               child: PlutoGrid(
                 columns: getPrintItemColumns(),
@@ -286,38 +297,6 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     );
   }
 
-  // 리딩한 작업내용을 아래 그리드에 추가함
-  // 값 파싱->임시저장 -> 재조회
-  // 상차화면에서는 실적입력안함
-  // void _changeReadQrData(String sQrData) async {
-  //   try {
-  //     //공백일 경우에러 발생
-  //     if (_readWorkShop == null || _readWorkShop.isEmpty) {
-  //       showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
-  //       return;
-  //     }
-  //     if (_readLocation == null || _readLocation.isEmpty) {
-  //       showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
-  //       return;
-  //     }
-  //   } catch (e) {
-  //     writeLog(e.toString());
-  //   }
-  // }
-
-  //
-  // 저장
-  // void _changeWorkshop(String sLocation) {
-  //   setState(() {
-  //     _readWorkShop = sLocation;
-  //
-  //     pringtingPalletList(
-  //       context,
-  //       topGridStateManager,
-  //     );
-  //   });
-  // }
-
   //창고QR 리딩
   void _changeLocation(String sReadLocation) {
     setState(() {
@@ -338,14 +317,10 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     setState(() {
       _dataWorkshop = comboList;
       _readWorkShop = sDefaultLocation!;
-      if (sDefaultLocation != null) {
+      if (sDefaultLocation.isNotEmpty) {
         _readWorkShop = sDefaultLocation;
       }
 
-      // if (sDefaultLocation == '') {
-      //
-      //   showCustomSnackBarWarn(context, '작업위치 설정되지 않았습니다.');
-      // }
     });
   }
 
@@ -524,11 +499,6 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     });
   }
 
-  void _onExit() {
-    PointmobileScanner.disableScanner();
-    Navigator.pop(context);
-  }
-
 //선택된 항목 인쇄
   Future<bool> pringtingPalletList(
     BuildContext context,
@@ -537,6 +507,9 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     if (await _checkValue(context, 'PRINT', gridStateManager, '') == false) {
       return false;
     }
+
+    bool bRet = false;
+    String sMsg= '';
 
     PalletViewModel viewModel = context.read<PalletViewModel>();
     List<TbWhPalletPrint> printingList = [];
@@ -548,7 +521,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
       comps: gComps,
       workshop: _readWorkShop,
       printFlag: cells[0].value,
-      palletDate: DateFormat('yyyy-MM-dd HH:mm:ss').parse(cells[1].value)  ,
+      palletDate: DateFormat('yyyy-MM-dd HH:mm:ss').parse(cells[1].value),
       palletSeq: cells[2].value,
       departure: cells[3].value,
       arrival: cells[4].value,
@@ -557,14 +530,16 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     // }
 
     if (printingList.isEmpty) {
-      showCustomSnackBarSuccess(context, '인쇄할 내용이 전송되었습니다..');
+      showCustomSnackBarWarn(context, '인쇄할 내용이 없습니다');
+      return false;
     }
 
     //라벨전송
     Result result =
         await viewModel.useCasesWms.printingPalletUseCase(printingList);
     result.when(success: (value) {
-      showCustomSnackBarWarn(context, gSuccessMsg);
+      showCustomSnackBarSuccess(context, gSuccessMsg, true);
+
       viewPrintingList(
         context,
         topGridStateManager,
@@ -589,18 +564,17 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
         .selectPrintingList(gComps, _readWorkShop, _readLocation, '');
 
     result.when(success: (valueList) {
-      List<TbWhPalletPrint> palletList = valueList;
+      print(valueList);
+      List<TbWhPalletPrint> pallets = valueList;
 
-      if (palletList.isEmpty) {
-        showCustomSnackBarSuccess(context, '해당 작업위치에 입력 완료한 실적이 없습니다.');
+      if (pallets.isEmpty) {
+        showCustomSnackBarSuccess(context, '해당 작업위치에 입력 완료한 실적이 없습니다.', false);
       } else {
-        List<PlutoRow> rows = getPrintGridRowsGroup(palletList);
-
-        gridStateManager.appendRows(rows);
+        gridStateManager.appendRows(getPrintGridRowsGroup(pallets));
         gridStateManager.notifyListeners();
 
-        setState((){
-          _readWareHouseNm = palletList[0].arrival!;
+        setState(() {
+          _readWareHouseNm = pallets[0].arrival!;
         });
       }
     }, error: (message) {
@@ -611,17 +585,13 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
 //체크로직, 완료, 삭제 시
   Future<bool> _checkValue(BuildContext context, String confirm,
       PlutoGridStateManager gridStateManager, String sQrCode) async {
-
-    int nCheckedItemCnt = 0;
-
     switch (confirm) {
       case 'PRINT':
-
-      //인터넷 접속 확인
-        if(await tryConnectionWithPopup(context) == false){
+        //인터넷 접속 확인
+        if (await tryConnectionWithPopup(context) == false) {
           return false;
         }
-        if(gridStateManager.currentRow == null){
+        if (gridStateManager.currentRow == null) {
           showCustomSnackBarWarn(context, '선택된 항목이 없습니다.');
           return false;
         }
@@ -631,18 +601,16 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
           return false;
         }
 
-
         if (await showAlertDialogQ(
-          context,
-          '확인',
-          '선택 한 내용을 인쇄 하시겠습니까?',
-        ) ==
+              context,
+              '확인',
+              '선택 한 내용을 인쇄 하시겠습니까?',
+            ) ==
             false) {
           return false;
         }
 
         break;
-
     }
     return true;
   }

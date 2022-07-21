@@ -24,6 +24,7 @@ mixin _$TbServerInfo {
   String? get comps => throw _privateConstructorUsedError;
   String? get deviceId => throw _privateConstructorUsedError;
   int? get vibrateState => throw _privateConstructorUsedError;
+  int? get scanAlwaysState => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,11 @@ abstract class $TbServerInfoCopyWith<$Res> {
           TbServerInfo value, $Res Function(TbServerInfo) then) =
       _$TbServerInfoCopyWithImpl<$Res>;
   $Res call(
-      {String serverUrl, String? comps, String? deviceId, int? vibrateState});
+      {String serverUrl,
+      String? comps,
+      String? deviceId,
+      int? vibrateState,
+      int? scanAlwaysState});
 }
 
 /// @nodoc
@@ -54,6 +59,7 @@ class _$TbServerInfoCopyWithImpl<$Res> implements $TbServerInfoCopyWith<$Res> {
     Object? comps = freezed,
     Object? deviceId = freezed,
     Object? vibrateState = freezed,
+    Object? scanAlwaysState = freezed,
   }) {
     return _then(_value.copyWith(
       serverUrl: serverUrl == freezed
@@ -72,6 +78,10 @@ class _$TbServerInfoCopyWithImpl<$Res> implements $TbServerInfoCopyWith<$Res> {
           ? _value.vibrateState
           : vibrateState // ignore: cast_nullable_to_non_nullable
               as int?,
+      scanAlwaysState: scanAlwaysState == freezed
+          ? _value.scanAlwaysState
+          : scanAlwaysState // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -84,7 +94,11 @@ abstract class _$$_TbServerInfoCopyWith<$Res>
       __$$_TbServerInfoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String serverUrl, String? comps, String? deviceId, int? vibrateState});
+      {String serverUrl,
+      String? comps,
+      String? deviceId,
+      int? vibrateState,
+      int? scanAlwaysState});
 }
 
 /// @nodoc
@@ -104,6 +118,7 @@ class __$$_TbServerInfoCopyWithImpl<$Res>
     Object? comps = freezed,
     Object? deviceId = freezed,
     Object? vibrateState = freezed,
+    Object? scanAlwaysState = freezed,
   }) {
     return _then(_$_TbServerInfo(
       serverUrl: serverUrl == freezed
@@ -122,6 +137,10 @@ class __$$_TbServerInfoCopyWithImpl<$Res>
           ? _value.vibrateState
           : vibrateState // ignore: cast_nullable_to_non_nullable
               as int?,
+      scanAlwaysState: scanAlwaysState == freezed
+          ? _value.scanAlwaysState
+          : scanAlwaysState // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -130,7 +149,11 @@ class __$$_TbServerInfoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TbServerInfo implements _TbServerInfo {
   _$_TbServerInfo(
-      {required this.serverUrl, this.comps, this.deviceId, this.vibrateState});
+      {required this.serverUrl,
+      this.comps,
+      this.deviceId,
+      this.vibrateState,
+      this.scanAlwaysState});
 
   factory _$_TbServerInfo.fromJson(Map<String, dynamic> json) =>
       _$$_TbServerInfoFromJson(json);
@@ -143,10 +166,12 @@ class _$_TbServerInfo implements _TbServerInfo {
   final String? deviceId;
   @override
   final int? vibrateState;
+  @override
+  final int? scanAlwaysState;
 
   @override
   String toString() {
-    return 'TbServerInfo(serverUrl: $serverUrl, comps: $comps, deviceId: $deviceId, vibrateState: $vibrateState)';
+    return 'TbServerInfo(serverUrl: $serverUrl, comps: $comps, deviceId: $deviceId, vibrateState: $vibrateState, scanAlwaysState: $scanAlwaysState)';
   }
 
   @override
@@ -158,7 +183,9 @@ class _$_TbServerInfo implements _TbServerInfo {
             const DeepCollectionEquality().equals(other.comps, comps) &&
             const DeepCollectionEquality().equals(other.deviceId, deviceId) &&
             const DeepCollectionEquality()
-                .equals(other.vibrateState, vibrateState));
+                .equals(other.vibrateState, vibrateState) &&
+            const DeepCollectionEquality()
+                .equals(other.scanAlwaysState, scanAlwaysState));
   }
 
   @JsonKey(ignore: true)
@@ -168,7 +195,8 @@ class _$_TbServerInfo implements _TbServerInfo {
       const DeepCollectionEquality().hash(serverUrl),
       const DeepCollectionEquality().hash(comps),
       const DeepCollectionEquality().hash(deviceId),
-      const DeepCollectionEquality().hash(vibrateState));
+      const DeepCollectionEquality().hash(vibrateState),
+      const DeepCollectionEquality().hash(scanAlwaysState));
 
   @JsonKey(ignore: true)
   @override
@@ -186,7 +214,8 @@ abstract class _TbServerInfo implements TbServerInfo {
       {required final String serverUrl,
       final String? comps,
       final String? deviceId,
-      final int? vibrateState}) = _$_TbServerInfo;
+      final int? vibrateState,
+      final int? scanAlwaysState}) = _$_TbServerInfo;
 
   factory _TbServerInfo.fromJson(Map<String, dynamic> json) =
       _$_TbServerInfo.fromJson;
@@ -199,6 +228,8 @@ abstract class _TbServerInfo implements TbServerInfo {
   String? get deviceId => throw _privateConstructorUsedError;
   @override
   int? get vibrateState => throw _privateConstructorUsedError;
+  @override
+  int? get scanAlwaysState => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TbServerInfoCopyWith<_$_TbServerInfo> get copyWith =>

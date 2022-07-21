@@ -5,7 +5,7 @@ import 'package:kdlwms/domain/repository/tb_wh_cm_code_repo.dart';
 
 // 배치명 : 공통코드 전체 덮어쓰기
 class MigTbWhCmCode {
-  late final CmCodeRcvRepoImpl cmCodeRcvRepoImpl;
+  late CmCodeRcvRepoImpl cmCodeRcvRepoImpl;
   final TbWhCmCodeRepo repository;
 
   MigTbWhCmCode(this.repository, this.cmCodeRcvRepoImpl);

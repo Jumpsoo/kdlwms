@@ -68,7 +68,6 @@ class _SubMainPagState extends State<PltWorkPage> {
   //생성자
   @override
   Widget build(BuildContext context) {
-    double value = 0;
 
 
     return Scaffold(
@@ -83,15 +82,15 @@ class _SubMainPagState extends State<PltWorkPage> {
           child: Column(
             children:  [
               const BtnPacking(),//1.적재작업
-              const Padding(padding: const EdgeInsets.only(bottom: 10)),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
               const BtnPrintLabel(),//2.라벨발행
               const Padding(padding: EdgeInsets.only(bottom: 10)),
               const BtnPackingView(),//3.실적조회
               const Padding(padding: EdgeInsets.only(bottom: 10)),
               const BtnPackingLoad(),//4.상차화면
-              const Padding(padding: const EdgeInsets.only(bottom: 10)),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
               const BtnPackingDelete(),//5.적재이력삭제
-              const Padding(padding: const EdgeInsets.only(bottom: 10)),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
               const BtnMovePrevious(), //6.이전화면
               const Padding(padding: EdgeInsets.only(bottom: 5)),
               Container(

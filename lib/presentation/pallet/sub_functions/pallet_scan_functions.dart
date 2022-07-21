@@ -1,8 +1,11 @@
 // 01. 실적입력화면 세부 함수
+import 'package:flutter/services.dart';
 import 'package:kdlwms/domain/model/tb_wh_pallet.dart';
 
 import 'package:kdlwms/kdl_common/common_functions.dart';
+import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:pluto_grid/pluto_grid.dart';
+import 'package:pointmobile_scanner/pointmobile_scanner.dart';
 
 // 상단 그리드 입력창용
 // 컬럼 리스트 지정
@@ -67,18 +70,23 @@ List<PlutoColumn> getTopGridColumns() {
 List<PlutoRow> getPackTopGridRowsGrouping(List<TbWhPalletGroup> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
-  for (var e in pallets) {
-    PlutoRow row = PlutoRow(
-      cells: {
-        'SEQ': PlutoCell(value: nRowNum),
-        'itemNo': PlutoCell(value: e.itemNo),
-        'itemLot': PlutoCell(value: e.itemLot),
-        'quantity': PlutoCell(value: e.quantity),
-        'boxCnt': PlutoCell(value: e.boxCnt),
-      },
-    );
-    nRowNum = nRowNum + 1;
-    rows.add(row);
+
+  try{
+    for (var e in pallets) {
+      PlutoRow row = PlutoRow(
+        cells: {
+          'SEQ': PlutoCell(value: nRowNum),
+          'itemNo': PlutoCell(value: e.itemNo),
+          'itemLot': PlutoCell(value: e.itemLot),
+          'quantity': PlutoCell(value: e.quantity),
+          'boxCnt': PlutoCell(value: e.boxCnt),
+        },
+      );
+      nRowNum = nRowNum + 1;
+      rows.add(row);
+    }
+  }catch(e){
+    writeLog(e.toString());
   }
   return rows;
 }
@@ -178,3 +186,11 @@ List<PlutoRow> getPackButtomGridRows(List<TbWhPallet> pallets) {
   }
   return rows;
 }
+
+
+void disableScanner() {
+  PointmobileScanner.triggerOff();
+  gTriggered = true;
+}
+
+Future<void> onNothing(MethodCall call) async {}

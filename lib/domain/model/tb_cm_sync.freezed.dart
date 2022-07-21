@@ -20,14 +20,14 @@ TbCmSync _$TbCmSyncFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TbCmSync {
-  String get VERSION_CODE => throw _privateConstructorUsedError;
-  String? get VERSION_DESC => throw _privateConstructorUsedError;
-  DateTime? get SYNC_DATETIME => throw _privateConstructorUsedError;
-  String? get CMF_1 => throw _privateConstructorUsedError;
-  String? get CMF_2 => throw _privateConstructorUsedError;
-  String? get CMF_3 => throw _privateConstructorUsedError;
-  String? get CMF_4 => throw _privateConstructorUsedError;
-  String? get CMF_5 => throw _privateConstructorUsedError;
+  String get versionCode => throw _privateConstructorUsedError;
+  String? get versionDesc => throw _privateConstructorUsedError;
+  DateTime? get syncDateTime => throw _privateConstructorUsedError;
+  String? get cmf1 => throw _privateConstructorUsedError;
+  String? get cmf2 => throw _privateConstructorUsedError;
+  String? get cmf3 => throw _privateConstructorUsedError;
+  String? get cmf4 => throw _privateConstructorUsedError;
+  String? get cmf5 => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,14 +40,14 @@ abstract class $TbCmSyncCopyWith<$Res> {
   factory $TbCmSyncCopyWith(TbCmSync value, $Res Function(TbCmSync) then) =
       _$TbCmSyncCopyWithImpl<$Res>;
   $Res call(
-      {String VERSION_CODE,
-      String? VERSION_DESC,
-      DateTime? SYNC_DATETIME,
-      String? CMF_1,
-      String? CMF_2,
-      String? CMF_3,
-      String? CMF_4,
-      String? CMF_5});
+      {String versionCode,
+      String? versionDesc,
+      DateTime? syncDateTime,
+      String? cmf1,
+      String? cmf2,
+      String? cmf3,
+      String? cmf4,
+      String? cmf5});
 }
 
 /// @nodoc
@@ -60,47 +60,47 @@ class _$TbCmSyncCopyWithImpl<$Res> implements $TbCmSyncCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? VERSION_CODE = freezed,
-    Object? VERSION_DESC = freezed,
-    Object? SYNC_DATETIME = freezed,
-    Object? CMF_1 = freezed,
-    Object? CMF_2 = freezed,
-    Object? CMF_3 = freezed,
-    Object? CMF_4 = freezed,
-    Object? CMF_5 = freezed,
+    Object? versionCode = freezed,
+    Object? versionDesc = freezed,
+    Object? syncDateTime = freezed,
+    Object? cmf1 = freezed,
+    Object? cmf2 = freezed,
+    Object? cmf3 = freezed,
+    Object? cmf4 = freezed,
+    Object? cmf5 = freezed,
   }) {
     return _then(_value.copyWith(
-      VERSION_CODE: VERSION_CODE == freezed
-          ? _value.VERSION_CODE
-          : VERSION_CODE // ignore: cast_nullable_to_non_nullable
+      versionCode: versionCode == freezed
+          ? _value.versionCode
+          : versionCode // ignore: cast_nullable_to_non_nullable
               as String,
-      VERSION_DESC: VERSION_DESC == freezed
-          ? _value.VERSION_DESC
-          : VERSION_DESC // ignore: cast_nullable_to_non_nullable
+      versionDesc: versionDesc == freezed
+          ? _value.versionDesc
+          : versionDesc // ignore: cast_nullable_to_non_nullable
               as String?,
-      SYNC_DATETIME: SYNC_DATETIME == freezed
-          ? _value.SYNC_DATETIME
-          : SYNC_DATETIME // ignore: cast_nullable_to_non_nullable
+      syncDateTime: syncDateTime == freezed
+          ? _value.syncDateTime
+          : syncDateTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      CMF_1: CMF_1 == freezed
-          ? _value.CMF_1
-          : CMF_1 // ignore: cast_nullable_to_non_nullable
+      cmf1: cmf1 == freezed
+          ? _value.cmf1
+          : cmf1 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_2: CMF_2 == freezed
-          ? _value.CMF_2
-          : CMF_2 // ignore: cast_nullable_to_non_nullable
+      cmf2: cmf2 == freezed
+          ? _value.cmf2
+          : cmf2 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_3: CMF_3 == freezed
-          ? _value.CMF_3
-          : CMF_3 // ignore: cast_nullable_to_non_nullable
+      cmf3: cmf3 == freezed
+          ? _value.cmf3
+          : cmf3 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_4: CMF_4 == freezed
-          ? _value.CMF_4
-          : CMF_4 // ignore: cast_nullable_to_non_nullable
+      cmf4: cmf4 == freezed
+          ? _value.cmf4
+          : cmf4 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_5: CMF_5 == freezed
-          ? _value.CMF_5
-          : CMF_5 // ignore: cast_nullable_to_non_nullable
+      cmf5: cmf5 == freezed
+          ? _value.cmf5
+          : cmf5 // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -113,14 +113,14 @@ abstract class _$$_TbCmSyncCopyWith<$Res> implements $TbCmSyncCopyWith<$Res> {
       __$$_TbCmSyncCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String VERSION_CODE,
-      String? VERSION_DESC,
-      DateTime? SYNC_DATETIME,
-      String? CMF_1,
-      String? CMF_2,
-      String? CMF_3,
-      String? CMF_4,
-      String? CMF_5});
+      {String versionCode,
+      String? versionDesc,
+      DateTime? syncDateTime,
+      String? cmf1,
+      String? cmf2,
+      String? cmf3,
+      String? cmf4,
+      String? cmf5});
 }
 
 /// @nodoc
@@ -135,47 +135,47 @@ class __$$_TbCmSyncCopyWithImpl<$Res> extends _$TbCmSyncCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? VERSION_CODE = freezed,
-    Object? VERSION_DESC = freezed,
-    Object? SYNC_DATETIME = freezed,
-    Object? CMF_1 = freezed,
-    Object? CMF_2 = freezed,
-    Object? CMF_3 = freezed,
-    Object? CMF_4 = freezed,
-    Object? CMF_5 = freezed,
+    Object? versionCode = freezed,
+    Object? versionDesc = freezed,
+    Object? syncDateTime = freezed,
+    Object? cmf1 = freezed,
+    Object? cmf2 = freezed,
+    Object? cmf3 = freezed,
+    Object? cmf4 = freezed,
+    Object? cmf5 = freezed,
   }) {
     return _then(_$_TbCmSync(
-      VERSION_CODE: VERSION_CODE == freezed
-          ? _value.VERSION_CODE
-          : VERSION_CODE // ignore: cast_nullable_to_non_nullable
+      versionCode: versionCode == freezed
+          ? _value.versionCode
+          : versionCode // ignore: cast_nullable_to_non_nullable
               as String,
-      VERSION_DESC: VERSION_DESC == freezed
-          ? _value.VERSION_DESC
-          : VERSION_DESC // ignore: cast_nullable_to_non_nullable
+      versionDesc: versionDesc == freezed
+          ? _value.versionDesc
+          : versionDesc // ignore: cast_nullable_to_non_nullable
               as String?,
-      SYNC_DATETIME: SYNC_DATETIME == freezed
-          ? _value.SYNC_DATETIME
-          : SYNC_DATETIME // ignore: cast_nullable_to_non_nullable
+      syncDateTime: syncDateTime == freezed
+          ? _value.syncDateTime
+          : syncDateTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      CMF_1: CMF_1 == freezed
-          ? _value.CMF_1
-          : CMF_1 // ignore: cast_nullable_to_non_nullable
+      cmf1: cmf1 == freezed
+          ? _value.cmf1
+          : cmf1 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_2: CMF_2 == freezed
-          ? _value.CMF_2
-          : CMF_2 // ignore: cast_nullable_to_non_nullable
+      cmf2: cmf2 == freezed
+          ? _value.cmf2
+          : cmf2 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_3: CMF_3 == freezed
-          ? _value.CMF_3
-          : CMF_3 // ignore: cast_nullable_to_non_nullable
+      cmf3: cmf3 == freezed
+          ? _value.cmf3
+          : cmf3 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_4: CMF_4 == freezed
-          ? _value.CMF_4
-          : CMF_4 // ignore: cast_nullable_to_non_nullable
+      cmf4: cmf4 == freezed
+          ? _value.cmf4
+          : cmf4 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_5: CMF_5 == freezed
-          ? _value.CMF_5
-          : CMF_5 // ignore: cast_nullable_to_non_nullable
+      cmf5: cmf5 == freezed
+          ? _value.cmf5
+          : cmf5 // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -185,38 +185,38 @@ class __$$_TbCmSyncCopyWithImpl<$Res> extends _$TbCmSyncCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TbCmSync implements _TbCmSync {
   _$_TbCmSync(
-      {required this.VERSION_CODE,
-      this.VERSION_DESC,
-      this.SYNC_DATETIME,
-      this.CMF_1,
-      this.CMF_2,
-      this.CMF_3,
-      this.CMF_4,
-      this.CMF_5});
+      {required this.versionCode,
+      this.versionDesc,
+      this.syncDateTime,
+      this.cmf1,
+      this.cmf2,
+      this.cmf3,
+      this.cmf4,
+      this.cmf5});
 
   factory _$_TbCmSync.fromJson(Map<String, dynamic> json) =>
       _$$_TbCmSyncFromJson(json);
 
   @override
-  final String VERSION_CODE;
+  final String versionCode;
   @override
-  final String? VERSION_DESC;
+  final String? versionDesc;
   @override
-  final DateTime? SYNC_DATETIME;
+  final DateTime? syncDateTime;
   @override
-  final String? CMF_1;
+  final String? cmf1;
   @override
-  final String? CMF_2;
+  final String? cmf2;
   @override
-  final String? CMF_3;
+  final String? cmf3;
   @override
-  final String? CMF_4;
+  final String? cmf4;
   @override
-  final String? CMF_5;
+  final String? cmf5;
 
   @override
   String toString() {
-    return 'TbCmSync(VERSION_CODE: $VERSION_CODE, VERSION_DESC: $VERSION_DESC, SYNC_DATETIME: $SYNC_DATETIME, CMF_1: $CMF_1, CMF_2: $CMF_2, CMF_3: $CMF_3, CMF_4: $CMF_4, CMF_5: $CMF_5)';
+    return 'TbCmSync(versionCode: $versionCode, versionDesc: $versionDesc, syncDateTime: $syncDateTime, cmf1: $cmf1, cmf2: $cmf2, cmf3: $cmf3, cmf4: $cmf4, cmf5: $cmf5)';
   }
 
   @override
@@ -225,30 +225,30 @@ class _$_TbCmSync implements _TbCmSync {
         (other.runtimeType == runtimeType &&
             other is _$_TbCmSync &&
             const DeepCollectionEquality()
-                .equals(other.VERSION_CODE, VERSION_CODE) &&
+                .equals(other.versionCode, versionCode) &&
             const DeepCollectionEquality()
-                .equals(other.VERSION_DESC, VERSION_DESC) &&
+                .equals(other.versionDesc, versionDesc) &&
             const DeepCollectionEquality()
-                .equals(other.SYNC_DATETIME, SYNC_DATETIME) &&
-            const DeepCollectionEquality().equals(other.CMF_1, CMF_1) &&
-            const DeepCollectionEquality().equals(other.CMF_2, CMF_2) &&
-            const DeepCollectionEquality().equals(other.CMF_3, CMF_3) &&
-            const DeepCollectionEquality().equals(other.CMF_4, CMF_4) &&
-            const DeepCollectionEquality().equals(other.CMF_5, CMF_5));
+                .equals(other.syncDateTime, syncDateTime) &&
+            const DeepCollectionEquality().equals(other.cmf1, cmf1) &&
+            const DeepCollectionEquality().equals(other.cmf2, cmf2) &&
+            const DeepCollectionEquality().equals(other.cmf3, cmf3) &&
+            const DeepCollectionEquality().equals(other.cmf4, cmf4) &&
+            const DeepCollectionEquality().equals(other.cmf5, cmf5));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(VERSION_CODE),
-      const DeepCollectionEquality().hash(VERSION_DESC),
-      const DeepCollectionEquality().hash(SYNC_DATETIME),
-      const DeepCollectionEquality().hash(CMF_1),
-      const DeepCollectionEquality().hash(CMF_2),
-      const DeepCollectionEquality().hash(CMF_3),
-      const DeepCollectionEquality().hash(CMF_4),
-      const DeepCollectionEquality().hash(CMF_5));
+      const DeepCollectionEquality().hash(versionCode),
+      const DeepCollectionEquality().hash(versionDesc),
+      const DeepCollectionEquality().hash(syncDateTime),
+      const DeepCollectionEquality().hash(cmf1),
+      const DeepCollectionEquality().hash(cmf2),
+      const DeepCollectionEquality().hash(cmf3),
+      const DeepCollectionEquality().hash(cmf4),
+      const DeepCollectionEquality().hash(cmf5));
 
   @JsonKey(ignore: true)
   @override
@@ -263,33 +263,33 @@ class _$_TbCmSync implements _TbCmSync {
 
 abstract class _TbCmSync implements TbCmSync {
   factory _TbCmSync(
-      {required final String VERSION_CODE,
-      final String? VERSION_DESC,
-      final DateTime? SYNC_DATETIME,
-      final String? CMF_1,
-      final String? CMF_2,
-      final String? CMF_3,
-      final String? CMF_4,
-      final String? CMF_5}) = _$_TbCmSync;
+      {required final String versionCode,
+      final String? versionDesc,
+      final DateTime? syncDateTime,
+      final String? cmf1,
+      final String? cmf2,
+      final String? cmf3,
+      final String? cmf4,
+      final String? cmf5}) = _$_TbCmSync;
 
   factory _TbCmSync.fromJson(Map<String, dynamic> json) = _$_TbCmSync.fromJson;
 
   @override
-  String get VERSION_CODE => throw _privateConstructorUsedError;
+  String get versionCode => throw _privateConstructorUsedError;
   @override
-  String? get VERSION_DESC => throw _privateConstructorUsedError;
+  String? get versionDesc => throw _privateConstructorUsedError;
   @override
-  DateTime? get SYNC_DATETIME => throw _privateConstructorUsedError;
+  DateTime? get syncDateTime => throw _privateConstructorUsedError;
   @override
-  String? get CMF_1 => throw _privateConstructorUsedError;
+  String? get cmf1 => throw _privateConstructorUsedError;
   @override
-  String? get CMF_2 => throw _privateConstructorUsedError;
+  String? get cmf2 => throw _privateConstructorUsedError;
   @override
-  String? get CMF_3 => throw _privateConstructorUsedError;
+  String? get cmf3 => throw _privateConstructorUsedError;
   @override
-  String? get CMF_4 => throw _privateConstructorUsedError;
+  String? get cmf4 => throw _privateConstructorUsedError;
   @override
-  String? get CMF_5 => throw _privateConstructorUsedError;
+  String? get cmf5 => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TbCmSyncCopyWith<_$_TbCmSync> get copyWith =>

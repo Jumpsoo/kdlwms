@@ -12,8 +12,8 @@ class TbCmLocationDbHelper {
     try {
       final maps = await db.query(
         'TB_CM_LOCATION',
-        where: 'WORKSHOP = ? AND LOCATION = ? ',
-        whereArgs: [tbCmLocation.WORKSHOP, tbCmLocation.LOCATION],
+        where: 'workshop = ? AND location = ? ',
+        whereArgs: [tbCmLocation.workshop, tbCmLocation.location],
       );
 
       return Result.success(maps.map((e) => TbCmLocation.fromJson(e)).toList());
@@ -37,7 +37,7 @@ class TbCmLocationDbHelper {
     try {
       final maps = await db.query(
         'TB_CM_LOCATION',
-        where: 'SET_FLAG = ? ',
+        where: 'setFlag = ? ',
         whereArgs: ['Y'],
       );
       return Result.success(
@@ -52,8 +52,8 @@ class TbCmLocationDbHelper {
       await db.update(
         'TB_CM_LOCATION',
         tbCmLocation.toJson(),
-        where: 'WORKSHOP = ? AND LOCATION = ? ',
-        whereArgs: [tbCmLocation.WORKSHOP, tbCmLocation.LOCATION],
+        where: 'workshop = ? AND location = ? ',
+        whereArgs: [tbCmLocation.workshop, tbCmLocation.location],
       );
       return const Result.success(true);
     } catch (e) {
@@ -67,7 +67,7 @@ class TbCmLocationDbHelper {
     try {
       final maps = await db.query(
         'TB_CM_LOCATION',
-        where: 'WORKSHOP = ? ',
+        where: 'workshop = ? ',
         whereArgs: [sWorkShop],
       );
 
@@ -77,12 +77,12 @@ class TbCmLocationDbHelper {
         return const Result.error('수정 할 데이터가 없습니다.');
       }
       for (TbCmLocation item in retList) {
-        item = item.copyWith(SET_FLAG: 'Y');
+        item = item.copyWith(setFlag: 'Y');
         await db.update(
           'TB_CM_LOCATION',
           item.toJson(),
-          where: 'WORKSHOP = ? AND LOCATION = ? ',
-          whereArgs: [item.WORKSHOP, item.LOCATION],
+          where: 'workshop = ? AND location = ? ',
+          whereArgs: [item.workshop, item.location],
         );
       }
       return const Result.success(true);
@@ -104,12 +104,12 @@ class TbCmLocationDbHelper {
       }
 
       for (TbCmLocation item in retList) {
-        item = item.copyWith(SET_FLAG: 'N');
+        item = item.copyWith(setFlag: 'N');
         await db.update(
           'TB_CM_LOCATION',
           item.toJson(),
-          where: 'WORKSHOP = ? AND LOCATION = ? ',
-          whereArgs: [item.WORKSHOP, item.LOCATION],
+          where: 'workshop = ? AND location = ? ',
+          whereArgs: [item.workshop, item.location],
         );
       }
       return const Result.success(true);
@@ -131,8 +131,8 @@ class TbCmLocationDbHelper {
     try {
       await db.delete(
         'TB_CM_LOCATION',
-        where: 'WORKSHOP = ? AND LOCATION = ? ',
-        whereArgs: [tbCmLocation.WORKSHOP, tbCmLocation.LOCATION],
+        where: 'workshop = ? AND location = ? ',
+        whereArgs: [tbCmLocation.workshop, tbCmLocation.location],
       );
       return const Result.success(true);
     } catch (e) {
@@ -144,7 +144,7 @@ class TbCmLocationDbHelper {
     try {
       await db.delete(
         'TB_CM_LOCATION',
-        where: 'SET_FLAG = ?',
+        where: 'setFlag = ?',
         whereArgs: [setFlag],
       );
       return const Result.success(true);
@@ -156,25 +156,25 @@ class TbCmLocationDbHelper {
   Future<Result<bool>> upsertTbCmLocation(TbCmLocation tbCmLocation) async {
     try {
       final maps = await db.query('TB_CM_LOCATION',
-          where: 'WORKSHOP = ? ', whereArgs: [tbCmLocation.WORKSHOP]);
+          where: 'workshop = ? ', whereArgs: [tbCmLocation.workshop]);
 
       if (maps.map((e) => TbCmLocation.fromJson(e)).toList().isNotEmpty) {
         //상태값은 그대로 둬야한다.
         await db.rawQuery(
             'UPDATE TB_CM_LOCATION  '
-            'SET  WORKSHOP_NM = ?, SYNC_DATETIME = ?'
-            ' WHERE WORKSHOP = ?',
+            'SET  workshopNm = ?, syncDateTime = ?'
+            ' WHERE workshop = ?',
             [
-              tbCmLocation.WORKSHOP_NM,
-              tbCmLocation.SYNC_DATETIME,
-              tbCmLocation.WORKSHOP,
+              tbCmLocation.workshopNm,
+              tbCmLocation.syncDateTime,
+              tbCmLocation.workshop,
             ]);
 
         await db.update(
           'TB_CM_LOCATION',
           tbCmLocation.toJson(),
-          where: 'WORKSHOP = ?',
-          whereArgs: [tbCmLocation.WORKSHOP],
+          where: 'workshop = ?',
+          whereArgs: [tbCmLocation.workshop],
         );
       } else {
         await db.insert('TB_CM_LOCATION', tbCmLocation.toJson());

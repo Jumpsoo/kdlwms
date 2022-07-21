@@ -7,15 +7,14 @@ part 'tb_cm_sync.g.dart';
 @freezed
 class TbCmSync with _$TbCmSync {
   factory TbCmSync({
-    required String	VERSION_CODE,
-    String?	VERSION_DESC,
-    DateTime?	SYNC_DATETIME,
-    String?	CMF_1,
-    String?	CMF_2,
-    String?	CMF_3,
-    String?	CMF_4,
-    String?	CMF_5,
-
+    required String	versionCode,
+    String?	versionDesc,
+    DateTime?	syncDateTime,
+    String?	cmf1,
+    String?	cmf2,
+    String?	cmf3,
+    String?	cmf4,
+    String?	cmf5,
   }) = _TbCmSync;
 
   factory TbCmSync.fromJson(Map<String, dynamic> json) => _$TbCmSyncFromJson(json);

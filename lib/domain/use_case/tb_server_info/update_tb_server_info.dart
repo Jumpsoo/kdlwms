@@ -9,8 +9,8 @@ class MergeTbServerInfo {
   MergeTbServerInfo(this.repository);
 
   // 값조회 -> 있으면 삭제 -> 등록
-  Future<Result<bool>> call(String sUrl, String sDeviceId, int nVibrateEnable) async {
-    TbServerInfo tbServerInfo = TbServerInfo(serverUrl: sUrl, deviceId: sDeviceId, vibrateState: nVibrateEnable);
+  Future<Result<bool>> call(String sUrl, String sDeviceId, int nVibrateEnable, int nScanAlwaysOn) async {
+    TbServerInfo tbServerInfo = TbServerInfo(serverUrl: sUrl, deviceId: sDeviceId, vibrateState: nVibrateEnable, scanAlwaysState: nScanAlwaysOn);
     return await repository.mergeTbServerInfo(tbServerInfo);
   }
 }

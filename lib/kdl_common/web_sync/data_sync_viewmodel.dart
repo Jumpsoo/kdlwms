@@ -8,7 +8,6 @@ import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:kdlwms/domain/use_case/use_case_data_sync.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync_events.dart';
-import 'package:kdlwms/kdl_common/web_sync/data_sync_state.dart';
 import 'package:kdlwms/kdl_common/com_ui/comm_ui_events.dart';
 
 class DataSyncViewModel with ChangeNotifier {

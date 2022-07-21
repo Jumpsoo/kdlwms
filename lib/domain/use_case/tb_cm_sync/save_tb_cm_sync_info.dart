@@ -9,9 +9,9 @@ class SaveLastSyncInfo {
 
   Future<Result<bool?>> call(String pdaVersion) async {
     TbCmSync tbCmSync = TbCmSync(
-      VERSION_CODE: pdaVersion,
-      VERSION_DESC: pdaVersion,
-      SYNC_DATETIME: DateTime.now(),
+      versionCode: pdaVersion,
+      versionDesc: pdaVersion,
+      syncDateTime: DateTime.now(),
     );
     Result result = await repository.mergeTbCmSync(tbCmSync);
     result.when(success: (value){

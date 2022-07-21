@@ -15,6 +15,7 @@ class SelectPackingSummaryUseCase {
 
   Future<List<TbWhPalletGroup>?> call(
       String sComps, String sWareHouse, String sLocation) async {
+
     TbWhPallet tbWhPallet =
         TbWhPallet(comps: sComps, workshop: sWareHouse, location: sLocation);
 

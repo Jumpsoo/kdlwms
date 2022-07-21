@@ -28,12 +28,26 @@ class SelectPropertyInfo {
   SelectPropertyInfo(this.repository);
 
   Future<Result<TbServerInfo>> call() async {
+    bool bRet = false;
+    String sMsg = '';
+    late TbServerInfo tbServerInfo;
+
     Result result = await repository.selectTbServerInfo();
     result.when(success: (value) {
+
+      bRet = true;
+      tbServerInfo = value;
+
       return Result.success(value);
     }, error: (message) {
-      return Result.error(message);
+      bRet = false;
+      sMsg = message;
     });
-    return Result.error(gErrorMsg);
+
+    if(bRet){
+      return Result.success(tbServerInfo);
+    }else{
+      return Result.error(sMsg);
+    }
   }
 }

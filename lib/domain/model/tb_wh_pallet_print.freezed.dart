@@ -43,8 +43,8 @@ abstract class $TbWhPalletPrintCopyWith<$Res> {
       _$TbWhPalletPrintCopyWithImpl<$Res>;
   $Res call(
       {String? comps,
-        String? workshop,
-        int? total,
+      String? workshop,
+      int? total,
       DateTime? palletDate,
       String? arrival,
       String? printFlag,
@@ -82,7 +82,7 @@ class _$TbWhPalletPrintCopyWithImpl<$Res>
       workshop: workshop == freezed
           ? _value.workshop
           : workshop // ignore: cast_nullable_to_non_nullable
-      as String?,
+              as String?,
       total: total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -124,7 +124,7 @@ abstract class _$$_TbWhPalletPrintCopyWith<$Res>
   @override
   $Res call(
       {String? comps,
-        String? workshop,
+      String? workshop,
       int? total,
       DateTime? palletDate,
       String? arrival,
@@ -165,7 +165,7 @@ class __$$_TbWhPalletPrintCopyWithImpl<$Res>
       workshop: workshop == freezed
           ? _value.workshop
           : workshop // ignore: cast_nullable_to_non_nullable
-      as String?,
+              as String?,
       total: total == freezed
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable

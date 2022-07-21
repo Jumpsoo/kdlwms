@@ -6,16 +6,16 @@ part 'tb_cm_location.g.dart';
 @freezed
 class TbCmLocation with _$TbCmLocation {
   factory TbCmLocation({
-    required String  WORKSHOP    ,
-    String?  WORKSHOP_NM    ,
-    required String  LOCATION    ,
-    String? SET_FLAG,
-    DateTime? SYNC_DATETIME ,
-    String?  CMF_1           ,
-    String?  CMF_2           ,
-    String?  CMF_3           ,
-    String?  CMF_4           ,
-    String?  CMF_5
+    required String  workshop    ,
+    String?  workshopNm    ,
+    required String  location    ,
+    String? setFlag,
+    DateTime? syncDateTime ,
+    String?  cmf1           ,
+    String?  cmf2           ,
+    String?  cmf3           ,
+    String?  cmf4           ,
+    String?  cmf5
   }) = _TbCmLocation;
 
   factory TbCmLocation.fromJson(Map<String, dynamic> json) => _$TbCmLocationFromJson(json);

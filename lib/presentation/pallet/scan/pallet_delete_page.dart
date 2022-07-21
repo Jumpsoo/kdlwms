@@ -51,7 +51,7 @@ class _PalletDeletePageState extends State<PalletDeletePage> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) =>
         showCustomSnackBarSuccess(
-            context, '삭제할 항목을 선택하고, \r\n삭제 버튼을 터치하거나 전체삭제 터치'));
+            context, '삭제할 항목을 선택하고, \r\n삭제 버튼을 터치하거나 전체삭제 터치', false));
   }
 
   @override
@@ -92,7 +92,7 @@ class _PalletDeletePageState extends State<PalletDeletePage> {
             //   ),
             // ),
             const Padding(padding: EdgeInsets.only(top: 5)),
-            Container(
+            SizedBox(
               height: 450,
               child: PlutoGrid(
                 columns: getDeleteGridColumns(),
@@ -160,8 +160,8 @@ class _PalletDeletePageState extends State<PalletDeletePage> {
     //선택된 행
     PlutoRow row = mainGridStateManager.currentCell!.row;
     List<PlutoCell> cells = row.cells.values.toList();
-
     List<TbWhPalletForDelete> loadingList = [];
+
     loadingList.add(TbWhPalletForDelete(
       comps: cells[0].value,
       location: cells[1].value,
@@ -172,8 +172,13 @@ class _PalletDeletePageState extends State<PalletDeletePage> {
     // 데이터 삭제
     Result result = await viewModel.useCasesWms
         .deleteTbWhPalletByLocationUseCase(loadingList);
+
     result.when(success: (value) {
-      showCustomSnackBarSuccess(ownContext, gSuccessMsg);
+      showCustomSnackBarSuccess(
+        ownContext,
+        gSuccessMsg,
+        true,
+      );
     }, error: (message) {
       showCustomSnackBarWarn(context, message);
     });
@@ -203,7 +208,11 @@ class _PalletDeletePageState extends State<PalletDeletePage> {
     Result result = await viewModel.useCasesWms
         .deleteTbWhPalletByLocationUseCase(loadingList);
     result.when(success: (value) {
-      showCustomSnackBarSuccess(ownContext, gSuccessMsg);
+      showCustomSnackBarSuccess(
+        ownContext,
+        gSuccessMsg,
+        true,
+      );
     }, error: (message) {
       showCustomSnackBarWarn(context, message);
     });

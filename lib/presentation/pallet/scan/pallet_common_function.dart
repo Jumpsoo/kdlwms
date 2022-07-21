@@ -14,7 +14,8 @@ Future<String?> palletCommonGetDefaultWorkShop(BuildContext context) async {
   Result? resultSetFlag =
       await viewModelShop.useCaseCommonInfo.selectTbCmLocationCurrentItem();
   resultSetFlag.when(success: (val) {
-    defaultLocation = val.WORKSHOP;
+
+    defaultLocation = val.workshop;
   }, error: (message) {
     defaultLocation = '';
   });
@@ -37,7 +38,7 @@ Future<List<ComboValueType>> getWorkshopComboValueList(
       success: (c) {
         for (TbCmLocation tb in c) {
           ComboValueType item =
-              ComboValueType(key: tb.WORKSHOP, value: tb.WORKSHOP_NM!);
+              ComboValueType(key: tb.workshop, value: tb.workshopNm!);
           comboItemList.add(item);
         }
       },
@@ -62,7 +63,7 @@ Future<List<ComboValueType>> getLocationComboValueList(
       success: (c) {
         for (TbWhCmCode tb in c) {
           ComboValueType item = ComboValueType(
-              key: tb.codeCd!, value: tb.codeCd! + ':' + (tb.ref1 == null ? '' : tb.ref1)!);
+              key: tb.codeCd!, value: tb.codeCd! + ':' + (tb.ref1 == null ? '' : tb.ref1!));
           comboItemList.add(item);
         }
       },
@@ -76,6 +77,7 @@ Future<List<ComboValueType>> getLocationComboValueList(
 PlutoGridConfiguration getGridStyle1() {
   return const PlutoGridConfiguration(
       enterKeyAction: PlutoGridEnterKeyAction.none,
+
       enableColumnBorder: true,
       rowHeight: 30,
       columnHeight: 30,

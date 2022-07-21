@@ -10,57 +10,55 @@ class MainFrameNavigationBarMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: BottomNavigationBar(
-          backgroundColor: Colors.blueGrey[900],
-          unselectedItemColor: Colors.white,
-          unselectedFontSize: 18,
-          selectedFontSize: 18,
-          onTap: (index) => {
-                if (index == 0)
-                  {
-                    //주요정보 새로받기
-                    //받은 후 화면 갱신
-                    //화면 갱신하면서 버전정보 수정
-                    // 버전정보 최신화가 안되면 강제 종료 "정보 초기화 실패"
-                    //loadSyncDataPage(context),
-                    _syncData(context),
-                  }
-                else if (index == 1)
-                  {
-                    _moveToSetting(context),
-                  }
-                else if (index == 2)
-                  {
-                    exitProgram(context),
-                  }
-              },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.update,
-                color: Colors.white,
-              ),
-              label: '정보 받기',
+    return BottomNavigationBar(
+        backgroundColor: Colors.blueGrey[900],
+        unselectedItemColor: Colors.white,
+        unselectedFontSize: 18,
+        selectedFontSize: 18,
+        onTap: (index) => {
+              if (index == 0)
+                {
+                  //주요정보 새로받기
+                  //받은 후 화면 갱신
+                  //화면 갱신하면서 버전정보 수정
+                  // 버전정보 최신화가 안되면 강제 종료 "정보 초기화 실패"
+                  //loadSyncDataPage(context),
+                  _syncData(context),
+                }
+              else if (index == 1)
+                {
+                  _moveToSetting(context),
+                }
+              else if (index == 2)
+                {
+                  exitProgram(context),
+                }
+            },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.update,
+              color: Colors.white,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.white,
-                size: 25,
-              ),
-              label: '환경 설정',
+            label: '정보 받기',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+              size: 25,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.highlight_off,
-                color: Colors.white,
-                size: 25,
-              ),
-              label: '종료',
+            label: '환경 설정',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.highlight_off,
+              color: Colors.white,
+              size: 25,
             ),
-          ]),
-    );
+            label: '종료',
+          ),
+        ]);
   }
 
   void _moveToSetting(BuildContext context) async {

@@ -12,6 +12,7 @@ _$_TbServerInfo _$$_TbServerInfoFromJson(Map<String, dynamic> json) =>
       comps: json['comps'] as String?,
       deviceId: json['deviceId'] as String?,
       vibrateState: json['vibrateState'] as int?,
+      scanAlwaysState: json['scanAlwaysState'] as int?,
     );
 
 Map<String, dynamic> _$$_TbServerInfoToJson(_$_TbServerInfo instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$_TbServerInfoToJson(_$_TbServerInfo instance) =>
       'comps': instance.comps,
       'deviceId': instance.deviceId,
       'vibrateState': instance.vibrateState,
+      'scanAlwaysState': instance.scanAlwaysState,
     };

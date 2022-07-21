@@ -3,6 +3,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_cm_sync.dart';
@@ -67,28 +68,6 @@ Future<void> showAlertDialog(BuildContext context, String sMsg) async {
   );
 }
 
-Future<void> _asyncConfirmDialog(BuildContext context) async {
-  return showDialog<void>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Confirm Title'),
-        content: const Text('bora hihi'),
-        actions: <Widget>[
-          ElevatedButton(
-            child: const Text('CANCEL'),
-            onPressed: () {},
-          ),
-          ElevatedButton(
-            child: const Text('ACCEPT'),
-            onPressed: () {},
-          )
-        ],
-      );
-    },
-  );
-}
-
 Future<void> showSuccessMsg(BuildContext context) async {
   await showAlertDialog(context, '성공적으로 처리되었습니다.');
 }
@@ -99,6 +78,7 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
 }
 
 //경고일 경우 팝업도 보여주고 하단 스낵바도 보여준다.
+// 에러일 경우에는 스캐너 종료
 void showCustomSnackBarWarn(BuildContext context, String message) async {
   ScaffoldMessenger.of(context).clearSnackBars();
 
@@ -109,8 +89,8 @@ void showCustomSnackBarWarn(BuildContext context, String message) async {
   //오류소리
   playNgSound();
 
-  PointmobileScanner.triggerOff();
-  gbTriggerOn = false;
+  //스캐너 비활성화
+  // disableScanner();
 
   final snackBar1 = SnackBar(
     backgroundColor: Colors.red,
@@ -126,11 +106,12 @@ void showCustomSnackBarWarn(BuildContext context, String message) async {
   ScaffoldMessenger.of(context).showSnackBar(snackBar1);
 }
 
-void showCustomSnackBarSuccess(BuildContext context, String message) {
+void showCustomSnackBarSuccess(BuildContext context, String message, bool bPlaySound) {
   ScaffoldMessenger.of(context).clearSnackBars();
 
-  playOkSound();
-
+  if(bPlaySound) {
+    playOkSound();
+  }
   final snackBar1 = SnackBar(
     content: Text(message),
     action: SnackBarAction(
@@ -143,6 +124,9 @@ void showCustomSnackBarSuccess(BuildContext context, String message) {
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar1);
 }
+
+
+
 
 showCircularProgressIndicator(BuildContext context) {
   String sMessage = '처리중';
@@ -185,12 +169,14 @@ void writeLog(var msg) {
 Future<bool> checkSyncStatus(BuildContext context) async {
   DataSyncViewModel dataSyncViewModel =
       gTransitContext.read<DataSyncViewModel>();
+
   Result resultSyncStatus =
       await dataSyncViewModel.useCaseDataBatch.getLastSyncInfo();
   resultSyncStatus.when(success: (value) {
     TbCmSync tbCmSync = value;
-    String localSyncDate = tbCmSync.SYNC_DATETIME!.month.toString() +
-        tbCmSync.SYNC_DATETIME!.day.toString();
+
+    String localSyncDate = tbCmSync.syncDateTime!.month.toString() +
+        tbCmSync.syncDateTime!.day.toString();
     DateTime currDate = DateTime.now();
     String currentDate = currDate.month.toString() + currDate.day.toString();
 
@@ -217,8 +203,8 @@ Future<bool> checkSyncStatusNoAlert() async {
       await dataSyncViewModel.useCaseDataBatch.getLastSyncInfo();
   resultSyncStatus.when(success: (value) {
     TbCmSync tbCmSync = value;
-    String localSyncDate = tbCmSync.SYNC_DATETIME!.month.toString() +
-        tbCmSync.SYNC_DATETIME!.day.toString();
+    String localSyncDate = tbCmSync.syncDateTime!.month.toString() +
+        tbCmSync.syncDateTime!.day.toString();
     DateTime currDate = DateTime.now();
     String currentDate = currDate.month.toString() + currDate.day.toString();
 
@@ -294,16 +280,67 @@ Future<bool> tryConnection() async {
 
 void playScanOkSound() async {
   await audioPlayerOk.open(Audio('assets/ok.wav'));
-  audioPlayerOk.play();
+  await audioPlayerOk.play();
 }
 
 void playOkSound() async {
-  await audioPlayerOk.open(Audio('assets/ok.wav'));
-  // audioPlayerOk.open(Audio('assets/ok2.mp3'));
-  audioPlayerOk.play();
+  //await audioPlayerOk.open(Audio('assets/ok.wav'));
+  await audioPlayerOk.open(Audio('assets/ding1.mp3'));
+  await audioPlayerOk.play();
 }
 
 void playNgSound() async {
-  audioPlayerNG.open(Audio('assets/siren.mp3'));
-  audioPlayerNG.play();
+  await audioPlayerNG.open(Audio('assets/siren.mp3'));
+  await audioPlayerNG.play();
 }
+
+
+var bodyProgress = Container(
+  child: new Stack(
+    children: <Widget>[
+
+      Container(
+        alignment: AlignmentDirectional.center,
+        decoration: new BoxDecoration(
+          color: Colors.white70,
+        ),
+        child: new Container(
+          decoration: new BoxDecoration(
+              color: Colors.blue[200],
+              borderRadius: new BorderRadius.circular(10.0)
+          ),
+          width: 300.0,
+          height: 200.0,
+          alignment: AlignmentDirectional.center,
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Center(
+                child: new SizedBox(
+                  height: 50.0,
+                  width: 50.0,
+                  child: new CircularProgressIndicator(
+                    value: null,
+                    strokeWidth: 7.0,
+                  ),
+                ),
+              ),
+              new Container(
+                margin: const EdgeInsets.only(top: 25.0),
+                child: new Center(
+                  child: new Text(
+                    "loading.. wait...",
+                    style: new TextStyle(
+                        color: Colors.white
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+);

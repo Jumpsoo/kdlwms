@@ -1,7 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/main_frame_widgets/btn_move_exit.dart';
@@ -76,8 +75,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
       body: Padding(
@@ -182,8 +179,8 @@ class _MainPageState extends State<MainPage> {
   void getVersion() async {
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
-    Result result =
-        await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+    await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+
     String version = await viewModelSetting.useCaseCommonInfo
         .getCurrentLocalVersion('PDA_VERSION');
 

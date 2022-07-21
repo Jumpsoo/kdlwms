@@ -60,10 +60,11 @@ import 'package:kdlwms/domain/use_case/data_batch/mig_tb_cm_sync.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_item.dart';
 
 Future<List<SingleChildWidget>> getWmsProviders() async {
-  //deleteDatabase('wms_db_local_v1');
+
+  // deleteDatabase('wms_db_local_v3');
 
   Database database = await openDatabase(
-    'wms_db_local_v3',
+    'wms_db_local_v4',
     version: 1,
     onCreate: (database, version) async {
       //1. 공통코드
@@ -104,16 +105,16 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
           'updtrId  INTEGER)');
 
       await database.execute('CREATE TABLE TB_CM_LOCATION ( '
-          ' WORKSHOP      TEXT,       '
-          ' WORKSHOP_NM   TEXT,'
-          ' LOCATION      TEXT, '
-          ' SET_FLAG      TEXT, '
-          ' SYNC_DATETIME  TIMESTAMP ,'
-          ' CMF_1      TEXT, '
-          ' CMF_2      TEXT, '
-          ' CMF_3      TEXT, '
-          ' CMF_4      TEXT, '
-          ' CMF_5      TEXT   )');
+          ' workshop      TEXT,       '
+          ' workshopNm   TEXT,'
+          ' location      TEXT, '
+          ' setFlag      TEXT, '
+          ' syncDateTime  TIMESTAMP ,'
+          ' cmf1      TEXT, '
+          ' cmf2      TEXT, '
+          ' cmf3      TEXT, '
+          ' cmf4      TEXT, '
+          ' cmf5      TEXT   )');
 
       //4. 패킹정보
       await database.execute('CREATE TABLE TB_WH_PALLET ( '
@@ -168,21 +169,22 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
 
       //5.동기화 정보( 서버 & 클라이언트), 버전, 데이터 동기화 일시
       await database.execute('CREATE TABLE TB_CM_SYNC ( '
-          'VERSION_CODE     TEXT,'
-          'VERSION_DESC     TEXT,'
-          'SYNC_DATETIME    TIMESTAMP,'
-          'CMF_1            TEXT,'
-          'CMF_2            TEXT,'
-          'CMF_3            TEXT,'
-          'CMF_4            TEXT,'
-          'CMF_5            TEXT )');
+          'versionCode     TEXT,'
+          'versionDesc     TEXT,'
+          'syncDateTime    TIMESTAMP,'
+          'cmf1            TEXT,'
+          'cmf2            TEXT,'
+          'cmf3            TEXT,'
+          'cmf4            TEXT,'
+          'cmf5            TEXT )');
 
       //6. 서버 접속 정보
       await database.execute('CREATE TABLE TB_SERVER_INFO ( '
           'serverUrl     TEXT,'
           'comps         TEXT,'
           'deviceId     TEXT,'
-          'vibrateState  INT )');
+          'vibrateState  INT,'
+          'scanAlwaysState  INT )');
 
       //
       // //6. 공장정보

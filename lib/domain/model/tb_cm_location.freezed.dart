@@ -20,16 +20,16 @@ TbCmLocation _$TbCmLocationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TbCmLocation {
-  String get WORKSHOP => throw _privateConstructorUsedError;
-  String? get WORKSHOP_NM => throw _privateConstructorUsedError;
-  String get LOCATION => throw _privateConstructorUsedError;
-  String? get SET_FLAG => throw _privateConstructorUsedError;
-  DateTime? get SYNC_DATETIME => throw _privateConstructorUsedError;
-  String? get CMF_1 => throw _privateConstructorUsedError;
-  String? get CMF_2 => throw _privateConstructorUsedError;
-  String? get CMF_3 => throw _privateConstructorUsedError;
-  String? get CMF_4 => throw _privateConstructorUsedError;
-  String? get CMF_5 => throw _privateConstructorUsedError;
+  String get workshop => throw _privateConstructorUsedError;
+  String? get workshopNm => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
+  String? get setFlag => throw _privateConstructorUsedError;
+  DateTime? get syncDateTime => throw _privateConstructorUsedError;
+  String? get cmf1 => throw _privateConstructorUsedError;
+  String? get cmf2 => throw _privateConstructorUsedError;
+  String? get cmf3 => throw _privateConstructorUsedError;
+  String? get cmf4 => throw _privateConstructorUsedError;
+  String? get cmf5 => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,16 +43,16 @@ abstract class $TbCmLocationCopyWith<$Res> {
           TbCmLocation value, $Res Function(TbCmLocation) then) =
       _$TbCmLocationCopyWithImpl<$Res>;
   $Res call(
-      {String WORKSHOP,
-      String? WORKSHOP_NM,
-      String LOCATION,
-      String? SET_FLAG,
-      DateTime? SYNC_DATETIME,
-      String? CMF_1,
-      String? CMF_2,
-      String? CMF_3,
-      String? CMF_4,
-      String? CMF_5});
+      {String workshop,
+      String? workshopNm,
+      String location,
+      String? setFlag,
+      DateTime? syncDateTime,
+      String? cmf1,
+      String? cmf2,
+      String? cmf3,
+      String? cmf4,
+      String? cmf5});
 }
 
 /// @nodoc
@@ -65,57 +65,57 @@ class _$TbCmLocationCopyWithImpl<$Res> implements $TbCmLocationCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? WORKSHOP = freezed,
-    Object? WORKSHOP_NM = freezed,
-    Object? LOCATION = freezed,
-    Object? SET_FLAG = freezed,
-    Object? SYNC_DATETIME = freezed,
-    Object? CMF_1 = freezed,
-    Object? CMF_2 = freezed,
-    Object? CMF_3 = freezed,
-    Object? CMF_4 = freezed,
-    Object? CMF_5 = freezed,
+    Object? workshop = freezed,
+    Object? workshopNm = freezed,
+    Object? location = freezed,
+    Object? setFlag = freezed,
+    Object? syncDateTime = freezed,
+    Object? cmf1 = freezed,
+    Object? cmf2 = freezed,
+    Object? cmf3 = freezed,
+    Object? cmf4 = freezed,
+    Object? cmf5 = freezed,
   }) {
     return _then(_value.copyWith(
-      WORKSHOP: WORKSHOP == freezed
-          ? _value.WORKSHOP
-          : WORKSHOP // ignore: cast_nullable_to_non_nullable
+      workshop: workshop == freezed
+          ? _value.workshop
+          : workshop // ignore: cast_nullable_to_non_nullable
               as String,
-      WORKSHOP_NM: WORKSHOP_NM == freezed
-          ? _value.WORKSHOP_NM
-          : WORKSHOP_NM // ignore: cast_nullable_to_non_nullable
+      workshopNm: workshopNm == freezed
+          ? _value.workshopNm
+          : workshopNm // ignore: cast_nullable_to_non_nullable
               as String?,
-      LOCATION: LOCATION == freezed
-          ? _value.LOCATION
-          : LOCATION // ignore: cast_nullable_to_non_nullable
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as String,
-      SET_FLAG: SET_FLAG == freezed
-          ? _value.SET_FLAG
-          : SET_FLAG // ignore: cast_nullable_to_non_nullable
+      setFlag: setFlag == freezed
+          ? _value.setFlag
+          : setFlag // ignore: cast_nullable_to_non_nullable
               as String?,
-      SYNC_DATETIME: SYNC_DATETIME == freezed
-          ? _value.SYNC_DATETIME
-          : SYNC_DATETIME // ignore: cast_nullable_to_non_nullable
+      syncDateTime: syncDateTime == freezed
+          ? _value.syncDateTime
+          : syncDateTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      CMF_1: CMF_1 == freezed
-          ? _value.CMF_1
-          : CMF_1 // ignore: cast_nullable_to_non_nullable
+      cmf1: cmf1 == freezed
+          ? _value.cmf1
+          : cmf1 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_2: CMF_2 == freezed
-          ? _value.CMF_2
-          : CMF_2 // ignore: cast_nullable_to_non_nullable
+      cmf2: cmf2 == freezed
+          ? _value.cmf2
+          : cmf2 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_3: CMF_3 == freezed
-          ? _value.CMF_3
-          : CMF_3 // ignore: cast_nullable_to_non_nullable
+      cmf3: cmf3 == freezed
+          ? _value.cmf3
+          : cmf3 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_4: CMF_4 == freezed
-          ? _value.CMF_4
-          : CMF_4 // ignore: cast_nullable_to_non_nullable
+      cmf4: cmf4 == freezed
+          ? _value.cmf4
+          : cmf4 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_5: CMF_5 == freezed
-          ? _value.CMF_5
-          : CMF_5 // ignore: cast_nullable_to_non_nullable
+      cmf5: cmf5 == freezed
+          ? _value.cmf5
+          : cmf5 // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -129,16 +129,16 @@ abstract class _$$_TbCmLocationCopyWith<$Res>
       __$$_TbCmLocationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String WORKSHOP,
-      String? WORKSHOP_NM,
-      String LOCATION,
-      String? SET_FLAG,
-      DateTime? SYNC_DATETIME,
-      String? CMF_1,
-      String? CMF_2,
-      String? CMF_3,
-      String? CMF_4,
-      String? CMF_5});
+      {String workshop,
+      String? workshopNm,
+      String location,
+      String? setFlag,
+      DateTime? syncDateTime,
+      String? cmf1,
+      String? cmf2,
+      String? cmf3,
+      String? cmf4,
+      String? cmf5});
 }
 
 /// @nodoc
@@ -154,57 +154,57 @@ class __$$_TbCmLocationCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? WORKSHOP = freezed,
-    Object? WORKSHOP_NM = freezed,
-    Object? LOCATION = freezed,
-    Object? SET_FLAG = freezed,
-    Object? SYNC_DATETIME = freezed,
-    Object? CMF_1 = freezed,
-    Object? CMF_2 = freezed,
-    Object? CMF_3 = freezed,
-    Object? CMF_4 = freezed,
-    Object? CMF_5 = freezed,
+    Object? workshop = freezed,
+    Object? workshopNm = freezed,
+    Object? location = freezed,
+    Object? setFlag = freezed,
+    Object? syncDateTime = freezed,
+    Object? cmf1 = freezed,
+    Object? cmf2 = freezed,
+    Object? cmf3 = freezed,
+    Object? cmf4 = freezed,
+    Object? cmf5 = freezed,
   }) {
     return _then(_$_TbCmLocation(
-      WORKSHOP: WORKSHOP == freezed
-          ? _value.WORKSHOP
-          : WORKSHOP // ignore: cast_nullable_to_non_nullable
+      workshop: workshop == freezed
+          ? _value.workshop
+          : workshop // ignore: cast_nullable_to_non_nullable
               as String,
-      WORKSHOP_NM: WORKSHOP_NM == freezed
-          ? _value.WORKSHOP_NM
-          : WORKSHOP_NM // ignore: cast_nullable_to_non_nullable
+      workshopNm: workshopNm == freezed
+          ? _value.workshopNm
+          : workshopNm // ignore: cast_nullable_to_non_nullable
               as String?,
-      LOCATION: LOCATION == freezed
-          ? _value.LOCATION
-          : LOCATION // ignore: cast_nullable_to_non_nullable
+      location: location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
               as String,
-      SET_FLAG: SET_FLAG == freezed
-          ? _value.SET_FLAG
-          : SET_FLAG // ignore: cast_nullable_to_non_nullable
+      setFlag: setFlag == freezed
+          ? _value.setFlag
+          : setFlag // ignore: cast_nullable_to_non_nullable
               as String?,
-      SYNC_DATETIME: SYNC_DATETIME == freezed
-          ? _value.SYNC_DATETIME
-          : SYNC_DATETIME // ignore: cast_nullable_to_non_nullable
+      syncDateTime: syncDateTime == freezed
+          ? _value.syncDateTime
+          : syncDateTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      CMF_1: CMF_1 == freezed
-          ? _value.CMF_1
-          : CMF_1 // ignore: cast_nullable_to_non_nullable
+      cmf1: cmf1 == freezed
+          ? _value.cmf1
+          : cmf1 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_2: CMF_2 == freezed
-          ? _value.CMF_2
-          : CMF_2 // ignore: cast_nullable_to_non_nullable
+      cmf2: cmf2 == freezed
+          ? _value.cmf2
+          : cmf2 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_3: CMF_3 == freezed
-          ? _value.CMF_3
-          : CMF_3 // ignore: cast_nullable_to_non_nullable
+      cmf3: cmf3 == freezed
+          ? _value.cmf3
+          : cmf3 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_4: CMF_4 == freezed
-          ? _value.CMF_4
-          : CMF_4 // ignore: cast_nullable_to_non_nullable
+      cmf4: cmf4 == freezed
+          ? _value.cmf4
+          : cmf4 // ignore: cast_nullable_to_non_nullable
               as String?,
-      CMF_5: CMF_5 == freezed
-          ? _value.CMF_5
-          : CMF_5 // ignore: cast_nullable_to_non_nullable
+      cmf5: cmf5 == freezed
+          ? _value.cmf5
+          : cmf5 // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -214,44 +214,44 @@ class __$$_TbCmLocationCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TbCmLocation implements _TbCmLocation {
   _$_TbCmLocation(
-      {required this.WORKSHOP,
-      this.WORKSHOP_NM,
-      required this.LOCATION,
-      this.SET_FLAG,
-      this.SYNC_DATETIME,
-      this.CMF_1,
-      this.CMF_2,
-      this.CMF_3,
-      this.CMF_4,
-      this.CMF_5});
+      {required this.workshop,
+      this.workshopNm,
+      required this.location,
+      this.setFlag,
+      this.syncDateTime,
+      this.cmf1,
+      this.cmf2,
+      this.cmf3,
+      this.cmf4,
+      this.cmf5});
 
   factory _$_TbCmLocation.fromJson(Map<String, dynamic> json) =>
       _$$_TbCmLocationFromJson(json);
 
   @override
-  final String WORKSHOP;
+  final String workshop;
   @override
-  final String? WORKSHOP_NM;
+  final String? workshopNm;
   @override
-  final String LOCATION;
+  final String location;
   @override
-  final String? SET_FLAG;
+  final String? setFlag;
   @override
-  final DateTime? SYNC_DATETIME;
+  final DateTime? syncDateTime;
   @override
-  final String? CMF_1;
+  final String? cmf1;
   @override
-  final String? CMF_2;
+  final String? cmf2;
   @override
-  final String? CMF_3;
+  final String? cmf3;
   @override
-  final String? CMF_4;
+  final String? cmf4;
   @override
-  final String? CMF_5;
+  final String? cmf5;
 
   @override
   String toString() {
-    return 'TbCmLocation(WORKSHOP: $WORKSHOP, WORKSHOP_NM: $WORKSHOP_NM, LOCATION: $LOCATION, SET_FLAG: $SET_FLAG, SYNC_DATETIME: $SYNC_DATETIME, CMF_1: $CMF_1, CMF_2: $CMF_2, CMF_3: $CMF_3, CMF_4: $CMF_4, CMF_5: $CMF_5)';
+    return 'TbCmLocation(workshop: $workshop, workshopNm: $workshopNm, location: $location, setFlag: $setFlag, syncDateTime: $syncDateTime, cmf1: $cmf1, cmf2: $cmf2, cmf3: $cmf3, cmf4: $cmf4, cmf5: $cmf5)';
   }
 
   @override
@@ -259,34 +259,34 @@ class _$_TbCmLocation implements _TbCmLocation {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TbCmLocation &&
-            const DeepCollectionEquality().equals(other.WORKSHOP, WORKSHOP) &&
+            const DeepCollectionEquality().equals(other.workshop, workshop) &&
             const DeepCollectionEquality()
-                .equals(other.WORKSHOP_NM, WORKSHOP_NM) &&
-            const DeepCollectionEquality().equals(other.LOCATION, LOCATION) &&
-            const DeepCollectionEquality().equals(other.SET_FLAG, SET_FLAG) &&
+                .equals(other.workshopNm, workshopNm) &&
+            const DeepCollectionEquality().equals(other.location, location) &&
+            const DeepCollectionEquality().equals(other.setFlag, setFlag) &&
             const DeepCollectionEquality()
-                .equals(other.SYNC_DATETIME, SYNC_DATETIME) &&
-            const DeepCollectionEquality().equals(other.CMF_1, CMF_1) &&
-            const DeepCollectionEquality().equals(other.CMF_2, CMF_2) &&
-            const DeepCollectionEquality().equals(other.CMF_3, CMF_3) &&
-            const DeepCollectionEquality().equals(other.CMF_4, CMF_4) &&
-            const DeepCollectionEquality().equals(other.CMF_5, CMF_5));
+                .equals(other.syncDateTime, syncDateTime) &&
+            const DeepCollectionEquality().equals(other.cmf1, cmf1) &&
+            const DeepCollectionEquality().equals(other.cmf2, cmf2) &&
+            const DeepCollectionEquality().equals(other.cmf3, cmf3) &&
+            const DeepCollectionEquality().equals(other.cmf4, cmf4) &&
+            const DeepCollectionEquality().equals(other.cmf5, cmf5));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(WORKSHOP),
-      const DeepCollectionEquality().hash(WORKSHOP_NM),
-      const DeepCollectionEquality().hash(LOCATION),
-      const DeepCollectionEquality().hash(SET_FLAG),
-      const DeepCollectionEquality().hash(SYNC_DATETIME),
-      const DeepCollectionEquality().hash(CMF_1),
-      const DeepCollectionEquality().hash(CMF_2),
-      const DeepCollectionEquality().hash(CMF_3),
-      const DeepCollectionEquality().hash(CMF_4),
-      const DeepCollectionEquality().hash(CMF_5));
+      const DeepCollectionEquality().hash(workshop),
+      const DeepCollectionEquality().hash(workshopNm),
+      const DeepCollectionEquality().hash(location),
+      const DeepCollectionEquality().hash(setFlag),
+      const DeepCollectionEquality().hash(syncDateTime),
+      const DeepCollectionEquality().hash(cmf1),
+      const DeepCollectionEquality().hash(cmf2),
+      const DeepCollectionEquality().hash(cmf3),
+      const DeepCollectionEquality().hash(cmf4),
+      const DeepCollectionEquality().hash(cmf5));
 
   @JsonKey(ignore: true)
   @override
@@ -301,40 +301,40 @@ class _$_TbCmLocation implements _TbCmLocation {
 
 abstract class _TbCmLocation implements TbCmLocation {
   factory _TbCmLocation(
-      {required final String WORKSHOP,
-      final String? WORKSHOP_NM,
-      required final String LOCATION,
-      final String? SET_FLAG,
-      final DateTime? SYNC_DATETIME,
-      final String? CMF_1,
-      final String? CMF_2,
-      final String? CMF_3,
-      final String? CMF_4,
-      final String? CMF_5}) = _$_TbCmLocation;
+      {required final String workshop,
+      final String? workshopNm,
+      required final String location,
+      final String? setFlag,
+      final DateTime? syncDateTime,
+      final String? cmf1,
+      final String? cmf2,
+      final String? cmf3,
+      final String? cmf4,
+      final String? cmf5}) = _$_TbCmLocation;
 
   factory _TbCmLocation.fromJson(Map<String, dynamic> json) =
       _$_TbCmLocation.fromJson;
 
   @override
-  String get WORKSHOP => throw _privateConstructorUsedError;
+  String get workshop => throw _privateConstructorUsedError;
   @override
-  String? get WORKSHOP_NM => throw _privateConstructorUsedError;
+  String? get workshopNm => throw _privateConstructorUsedError;
   @override
-  String get LOCATION => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
   @override
-  String? get SET_FLAG => throw _privateConstructorUsedError;
+  String? get setFlag => throw _privateConstructorUsedError;
   @override
-  DateTime? get SYNC_DATETIME => throw _privateConstructorUsedError;
+  DateTime? get syncDateTime => throw _privateConstructorUsedError;
   @override
-  String? get CMF_1 => throw _privateConstructorUsedError;
+  String? get cmf1 => throw _privateConstructorUsedError;
   @override
-  String? get CMF_2 => throw _privateConstructorUsedError;
+  String? get cmf2 => throw _privateConstructorUsedError;
   @override
-  String? get CMF_3 => throw _privateConstructorUsedError;
+  String? get cmf3 => throw _privateConstructorUsedError;
   @override
-  String? get CMF_4 => throw _privateConstructorUsedError;
+  String? get cmf4 => throw _privateConstructorUsedError;
   @override
-  String? get CMF_5 => throw _privateConstructorUsedError;
+  String? get cmf5 => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_TbCmLocationCopyWith<_$_TbCmLocation> get copyWith =>

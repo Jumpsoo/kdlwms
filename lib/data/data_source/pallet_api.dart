@@ -149,7 +149,10 @@ class PalletApi {
         sParameters =
             '$callUrl?comps=$gComps&palletDate=$scanDate&location=$sLocation&workshop=$sWorkShop';
       }
+
       final res = await client.get(Uri.parse(sParameters));
+      print(sParameters);
+      print(res.statusCode);
       if (res.statusCode == 200) {
         Map<String, dynamic> jsonResponse =
             jsonDecode(utf8.decode(res.bodyBytes));

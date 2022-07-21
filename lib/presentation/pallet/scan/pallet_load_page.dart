@@ -90,8 +90,12 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     //프로그래스바
     hideCircularProgressIndicator();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showCustomSnackBarSuccess(context, '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.'));
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => showCustomSnackBarSuccess(
+              context,
+              '로케이션을 먼저 리딩하거나 \r\n작업위치를 선택하세요.',
+              false,
+            ));
   }
 
   @override
@@ -127,7 +131,10 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
                             await checkSyncStatus(context);
 
                             showCustomSnackBarSuccess(
-                                context, '로케이션 번호를 읽히세요.');
+                              context,
+                              '로케이션 번호를 읽히세요.',
+                              false,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(100, 40),
@@ -161,7 +168,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
                       ),
                     ],
                   ),
-                  Padding(padding: EdgeInsets.only(left: 5)),
+                  const Padding(padding: EdgeInsets.only(left: 5)),
                   Column(
                     children: [
                       Container(
@@ -174,7 +181,11 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
                             await checkSyncStatus(context);
 
                             //해당버튼을 누르면 창고위치로 값을 넘겨준다
-                            showCustomSnackBarSuccess(context, '창고 QR을 입력하세요.');
+                            showCustomSnackBarSuccess(
+                              context,
+                              '창고 QR을 입력하세요.',
+                              false,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(70, 40),
@@ -231,7 +242,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
             //   ),
             // ),
             const Padding(padding: EdgeInsets.only(top: 5)),
-            Container(
+            SizedBox(
               height: 400,
               child: PlutoGrid(
                 columns: getPackGridColumns(),
@@ -316,7 +327,11 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     // 데이터 삭제
     await viewModel.useCasesWms.loadingPalletFinishUseCase(loadingList);
 
-    showCustomSnackBarSuccess(ownContext, gSuccessMsg);
+    showCustomSnackBarSuccess(
+      ownContext,
+      gSuccessMsg,
+      true,
+    );
 
     // 처리후 비동기 호출 추가
     WidgetsBinding.instance
@@ -368,7 +383,11 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     }
 
     viewModel.useCasesWms.deletePallet(tbWhPallets);
-    showCustomSnackBarSuccess(context, gSuccessMsg);
+    showCustomSnackBarSuccess(
+      context,
+      gSuccessMsg,
+      true,
+    );
 
     return true;
   }
@@ -380,7 +399,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     PlutoGridStateManager gridStateManager,
     String sQrCode,
   ) async {
-    int nCheckedItemCnt = 0;
+    // int nCheckedItemCnt = 0;
 
     switch (sGbn) {
       case 'DELETE':
@@ -442,7 +461,6 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     );
   }
 
-
   Future<void> viewAll(String? sWareHouse, String? sLocation) async {
     // viewTopList();
     viewBottomList();
@@ -457,11 +475,15 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     setState(() {
       _dataWorkshop = comboList;
       _readWorkShop = sDefaultLocation!;
-      if (sDefaultLocation != null) {
+      if (sDefaultLocation.isNotEmpty) {
         _readWorkShop = sDefaultLocation;
       }
       if (sDefaultLocation == '') {
-        showCustomSnackBarSuccess(context, '이동태그를 먼저 읽혀주세요.');
+        showCustomSnackBarSuccess(
+          context,
+          '이동태그를 먼저 읽혀주세요.',
+          false,
+        );
       }
     });
   }
@@ -542,10 +564,8 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
               value: _readLocation,
               style: const TextStyle(color: Colors.black, fontSize: 16.0),
               onChanged: (String? newValue) {
-                writeLog('AAAAAAAAAAAAAAAAAA');
                 if (newValue != null) {
                   setState(() {
-                    writeLog('AAAAAAAAAAAAAAAAAA');
                     _readLocation = newValue;
                     viewAll(_readWorkShop, _readLocation);
                   });
@@ -626,7 +646,11 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     }
 
     if (sVal != null && sVal.length < sPivot.length) {
-      showCustomSnackBarSuccess(context, '(이동태그가 읽혀주세요.)');
+      showCustomSnackBarSuccess(
+        context,
+        '(이동태그가 읽혀주세요.)',
+        false,
+      );
       return;
     }
     _readPalletSeq = sVal!;
@@ -643,5 +667,4 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
       _decodeResult = error.toString();
     });
   }
-
 }

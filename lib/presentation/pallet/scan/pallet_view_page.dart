@@ -87,8 +87,12 @@ class _PalletViewPageState extends State<PalletViewPage> {
     //프로그래스바
     hideCircularProgressIndicator();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
-        showCustomSnackBarSuccess(context, '로케이션을 먼저 스캔하세요.'));
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => showCustomSnackBarSuccess(
+              context,
+              '로케이션을 먼저 스캔하세요.',
+              false,
+            ));
   }
 
   @override
@@ -124,7 +128,10 @@ class _PalletViewPageState extends State<PalletViewPage> {
                             await checkSyncStatus(context);
 
                             showCustomSnackBarSuccess(
-                                context, '로케이션 번호를 읽히세요.');
+                              context,
+                              '로케이션 번호를 읽히세요.',
+                              false,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(100, 40),
@@ -171,7 +178,11 @@ class _PalletViewPageState extends State<PalletViewPage> {
                             await checkSyncStatus(context);
 
                             //해당버튼을 누르면 창고위치로 값을 넘겨준다
-                            showCustomSnackBarSuccess(context, '창고 QR을 입력하세요.');
+                            showCustomSnackBarSuccess(
+                              context,
+                              '창고 QR을 입력하세요.',
+                              false,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             fixedSize: const Size(70, 40),
@@ -301,11 +312,11 @@ class _PalletViewPageState extends State<PalletViewPage> {
   void _changeReadQrData(String sQrData) async {
     try {
       //공백일 경우에러 발생
-      if (_readWorkShop == null || _readWorkShop.isEmpty) {
+      if (_readWorkShop.isEmpty) {
         showCustomSnackBarWarn(context, '작업위치를 먼저 설정하세요.');
         return;
       }
-      if (_readLocation == null || _readLocation.isEmpty) {
+      if (_readLocation.isEmpty) {
         showCustomSnackBarWarn(context, '창고를 먼저 스캔하세요.');
         return;
       }
@@ -366,7 +377,7 @@ class _PalletViewPageState extends State<PalletViewPage> {
       _dataWorkshop = comboList;
 
       _readWorkShop = sDefaultLocation!;
-      if (sDefaultLocation != null) {
+      if (sDefaultLocation.isNotEmpty) {
         _readWorkShop = sDefaultLocation;
       }
 
@@ -418,7 +429,11 @@ class _PalletViewPageState extends State<PalletViewPage> {
     }
 
     viewModel.useCasesWms.deletePallet(tbWhPallets);
-    showCustomSnackBarSuccess(context, gSuccessMsg);
+    showCustomSnackBarSuccess(
+      context,
+      gSuccessMsg,
+      true,
+    );
 
     return true;
   }
@@ -477,7 +492,6 @@ class _PalletViewPageState extends State<PalletViewPage> {
     PlutoGridStateManager gridStateManager,
     String sQrCode,
   ) async {
-
     switch (sGbn) {
       case 'DELETE':
         if (gridStateManager.currentCell == null) {
@@ -596,7 +610,6 @@ class _PalletViewPageState extends State<PalletViewPage> {
     String? sVal = lDecodeResult[1];
 
     if (sVal == 'READ_FAIL') {
-      showCustomSnackBarWarn(context, '(바코드 읽기 실패)');
       return;
     }
 
@@ -621,8 +634,8 @@ class _PalletViewPageState extends State<PalletViewPage> {
     });
   }
 
-  // void _onExit() {
-  //   PointmobileScanner.disableScanner();
-  //   Navigator.pop(context);
-  // }
+// void _onExit() {
+//   PointmobileScanner.disableScanner();
+//   Navigator.pop(context);
+// }
 }
