@@ -70,7 +70,8 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
       _decodeResult = "준비";
       _readWorkShop = '';
       _readLocation = '';
-      //for test, 지울것
+
+      // 향후 사업장 정해지면 구현할것
       gComps = 'C1';
     });
 

@@ -82,15 +82,15 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
 void showCustomSnackBarWarn(BuildContext context, String message) async {
   ScaffoldMessenger.of(context).clearSnackBars();
 
+  print('bb');
   //진동
   if (gVibrateEnable == 0) {
     Vibration.vibrate(duration: 1000);
   }
   //오류소리
   playNgSound();
-
   //스캐너 비활성화
-  // disableScanner();
+  setDisableScanner();
 
   final snackBar1 = SnackBar(
     backgroundColor: Colors.red,
@@ -104,12 +104,15 @@ void showCustomSnackBarWarn(BuildContext context, String message) async {
     ),
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar1);
+
+  setenEableScanner();
 }
 
-void showCustomSnackBarSuccess(BuildContext context, String message, bool bPlaySound) {
+void showCustomSnackBarSuccess(
+    BuildContext context, String message, bool bPlaySound) {
   ScaffoldMessenger.of(context).clearSnackBars();
 
-  if(bPlaySound) {
+  if (bPlaySound) {
     playOkSound();
   }
   final snackBar1 = SnackBar(
@@ -124,9 +127,6 @@ void showCustomSnackBarSuccess(BuildContext context, String message, bool bPlayS
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar1);
 }
-
-
-
 
 showCircularProgressIndicator(BuildContext context) {
   String sMessage = '처리중';
@@ -161,7 +161,7 @@ exitProgram(BuildContext context) async {
 
 //향후 로그저장필요시 상세 구현할것
 void writeLog(var msg) {
-  if(kDebugMode) {
+  if (kDebugMode) {
     print(msg);
   }
 }
@@ -294,11 +294,21 @@ void playNgSound() async {
   await audioPlayerNG.play();
 }
 
+void setenEableScanner() {
+
+  WidgetsBinding.instance.addPostFrameCallback(
+        (_) => PointmobileScanner.enableScanner(),
+  );
+}
+
+void setDisableScanner() {
+  PointmobileScanner.triggerOff();
+  PointmobileScanner.disableScanner();
+}
 
 var bodyProgress = Container(
   child: new Stack(
     children: <Widget>[
-
       Container(
         alignment: AlignmentDirectional.center,
         decoration: new BoxDecoration(
@@ -307,8 +317,7 @@ var bodyProgress = Container(
         child: new Container(
           decoration: new BoxDecoration(
               color: Colors.blue[200],
-              borderRadius: new BorderRadius.circular(10.0)
-          ),
+              borderRadius: new BorderRadius.circular(10.0)),
           width: 300.0,
           height: 200.0,
           alignment: AlignmentDirectional.center,
@@ -331,9 +340,7 @@ var bodyProgress = Container(
                 child: new Center(
                   child: new Text(
                     "loading.. wait...",
-                    style: new TextStyle(
-                        color: Colors.white
-                    ),
+                    style: new TextStyle(color: Colors.white),
                   ),
                 ),
               ),

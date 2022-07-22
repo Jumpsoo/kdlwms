@@ -72,7 +72,8 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
       _readWorkShop = '';
       _readLocation = '';
       _readWareHouseNm = '실적없음';
-      //for test, 지울것
+
+      // 향후 사업장 정해지면 구현할것
       gComps = 'C1';
     });
 

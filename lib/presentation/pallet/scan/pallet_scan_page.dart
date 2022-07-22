@@ -66,8 +66,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
   late final PlutoGridStateManager topGridStateManager;
   late final PlutoGridStateManager downGridStateManager;
 
+  //초기 값 세팅
   @override
-  // init에는 watch 사용 금지
   void initState() {
     super.initState();
 
@@ -79,7 +79,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _readWareHouse = '';
       _readWareHouseNm = '실적없음';
 
-      //for test, 지울것
+      // 향후 사업장 정해지면 구현할것
       gComps = 'C1';
     });
 
@@ -306,7 +306,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
   // 리딩한 작업내용을 아래 그리드에 추가함
   // 값 파싱->임시저장 -> 재조회
   void _changeReadQrData(String sQrData) async {
-
     //식별표 파싱
     TbWhPallet? pallet = await viewModel.useCasesWms
         .scanQrCode(sQrData, _readWorkShop, _readLocation);
@@ -434,7 +433,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
   // 작업중인 내용 확정 처리
   // 확정 후 확정 리스트 서버로 송신
   Future<bool> confirmPacking() async {
-
     if (await _checkValue(context, 'CONFIRM', downGridStateManager, '') ==
         false) {
       return false;
@@ -627,15 +625,10 @@ class _PalletScanPageState extends State<PalletScanPage> {
   void dispose() {
     _subscription?.cancel();
     _controller.dispose();
+    //스캐너 비활성화
+    setDisableScanner();
+    setenEableScanner();
     super.dispose();
-  }
-
-  @override
-  void deactivate() {
-    super.deactivate();
-
-    PointmobileScanner.channel.setMethodCallHandler(onNothing);
-    disableScanner();
   }
 
   // 버튼을 누를때 마다 bTriggered 변경한다.
@@ -844,8 +837,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
         break;
 
       case 'CONFIRM':
-
-      //공백일 경우에러 발생
+        //공백일 경우에러 발생
         if (_readWorkShop.isEmpty) {
           showCustomSnackBarWarn(context, '작업장 입력 미설정.');
           return false;

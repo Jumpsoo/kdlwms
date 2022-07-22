@@ -188,9 +188,5 @@ List<PlutoRow> getPackButtomGridRows(List<TbWhPallet> pallets) {
 }
 
 
-void disableScanner() {
-  PointmobileScanner.triggerOff();
-  gTriggered = true;
-}
 
 Future<void> onNothing(MethodCall call) async {}
