@@ -204,9 +204,9 @@ List<PlutoColumn> getPackGridColumns() {
     PlutoColumn(
       title: 'SEQ',
       field: 'palletSeq',
-      width: 50,
+      width: 80,
       textAlign: PlutoColumnTextAlign.right,
-      type: PlutoColumnType.number(),
+      type: PlutoColumnType.text(),
       enableColumnDrag: false,
       enableContextMenu: false,
       enableEditingMode: false,
