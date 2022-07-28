@@ -2,13 +2,13 @@ import 'package:kdlwms/domain/use_case/tb_server_info/select_tb_server_info.dart
 import 'package:kdlwms/domain/use_case/tb_server_info/update_tb_server_info.dart';
 
 class UseCaseServerInfo {
-  final SelectTbServerInfo selectTbServerInfo;
-  final SelectPropertyInfo selectPropertyInfo;
-  final MergeTbServerInfo mergeTbServerInfo;
+  final SelectTbServerInfoUseCase selectTbServerInfoUseCase;
+  final SelectPropertyInfoUseCase selectPropertyInfoUseCase;
+  final MergeTbServerInfoUseCase mergeTbServerInfoUseCase;
 
   UseCaseServerInfo({
-    required this.selectTbServerInfo,
-    required this.selectPropertyInfo,
-    required this.mergeTbServerInfo,
+    required this.selectTbServerInfoUseCase,
+    required this.selectPropertyInfoUseCase,
+    required this.mergeTbServerInfoUseCase,
   });
 }

@@ -358,7 +358,7 @@ class _SettingPropertyState extends State<SettingProperty> {
     viewModelSetting = context.read<SettingInfoViewModel>();
 
     Result result = await viewModelSetting.useCaseServerInfo
-        .mergeTbServerInfo(sUrl, sDeviceId, nVibrateEnable, nScanAlwaysOn);
+        .mergeTbServerInfoUseCase(sUrl, sDeviceId, nVibrateEnable, nScanAlwaysOn);
     result.when(
         success: (value) {
           showCustomSnackBarSuccess(

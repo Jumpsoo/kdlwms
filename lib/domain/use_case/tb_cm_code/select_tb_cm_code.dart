@@ -19,6 +19,7 @@ class GetCurrentLocalVersion {
   GetCurrentLocalVersion(this.repository);
 
   Future<String> call(String _grpCd) async {
+
     String version = '';
     TbWhCmCode tbWhCmCode = TbWhCmCode(grpCd: _grpCd, comps: gComps);
     Result result = await repository.selectTbWhCmCodeListByGrpCd(tbWhCmCode);
@@ -28,6 +29,7 @@ class GetCurrentLocalVersion {
         TbWhCmCode code = retList[0];
         version = code.codeCd!;
       }
+
     }, error: (message){
       return Result.error(message);
     });

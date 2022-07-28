@@ -78,8 +78,8 @@ List<PlutoColumn> getPrintItemColumns() {
 List<PlutoRow> getPrintGridRowsGroup(List<TbWhPalletPrint> pallets) {
   List<PlutoRow> rows = List.empty(growable: true);
   int nRowNum = 0;
+
   for (var e in pallets) {
-    nRowNum = nRowNum + 1;
     PlutoRow row = PlutoRow(
       cells: {
         'printFlag': PlutoCell(value: e.printFlag),

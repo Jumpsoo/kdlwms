@@ -61,7 +61,7 @@ import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_item.dart';
 
 Future<List<SingleChildWidget>> getWmsProviders() async {
 
-  // deleteDatabase('wms_db_local_v3');
+  deleteDatabase('wms_db_local_v3');
 
   Database database = await openDatabase(
     'wms_db_local_v4',
@@ -199,8 +199,8 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
   );
 
   //서버사이드 repository 등록
-  ItemRcvRepoImpl itemRcvRepo = ItemRcvRepoImpl();
-  CmCodeRcvRepoImpl cmCodeRcvRepo = CmCodeRcvRepoImpl();
+  ItemRcvRepoApiImpl itemRcvRepo = ItemRcvRepoApiImpl();
+  CmCodeRcvRepoApiImpl cmCodeRcvRepo = CmCodeRcvRepoApiImpl();
   // CmCodeRcvApi cmCodeRcvApi = CmCodeRcvApi();
   PalletApi palletApi = PalletApi();
 
@@ -306,9 +306,9 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
   );
 
   UseCaseServerInfo useCaseServerInfo = UseCaseServerInfo(
-    selectTbServerInfo: SelectTbServerInfo(tbServerInfoRepo),
-    mergeTbServerInfo: MergeTbServerInfo(tbServerInfoRepo),
-    selectPropertyInfo: SelectPropertyInfo(tbServerInfoRepo),
+    selectTbServerInfoUseCase: SelectTbServerInfoUseCase(tbServerInfoRepo),
+    mergeTbServerInfoUseCase: MergeTbServerInfoUseCase(tbServerInfoRepo),
+    selectPropertyInfoUseCase: SelectPropertyInfoUseCase(tbServerInfoRepo),
   );
 
   SettingInfoViewModel settingWorkshopViewModel = SettingInfoViewModel(

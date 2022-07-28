@@ -225,23 +225,6 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
             const Padding(padding: EdgeInsets.only(top: 5)),
             //하단그리드
 
-            // Container(
-            //   height: 180,
-            //   child: PlutoGrid(
-            //     columns: getLoadTopGridColumns(),
-            //     mode: PlutoGridMode.select,
-            //     rows: [],
-            //     // columnGroups: columnGroups,
-            //     onLoaded: (PlutoGridOnLoadedEvent event) {
-            //       topGridStateManager = event.stateManager;
-            //       viewTopList();
-            //     },
-            //     onChanged: (PlutoGridOnChangedEvent event) {
-            //       //to do
-            //     },
-            //     configuration: getGridStyle1(),
-            //   ),
-            // ),
             const Padding(padding: EdgeInsets.only(top: 5)),
             SizedBox(
               height: 400,
@@ -340,58 +323,58 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
 
     // await viewAll(_readWorkShop, _readLocation);
   }
-
-  void deletePackedPallet() async {
-    bool bRet = await _deletePackItem(
-        context, downGridStateManager, _readWorkShop, _readLocation);
-
-    if (bRet) {
-      viewAll(_readWorkShop, _readLocation);
-    }
-  }
-
-//선택된 항목 삭제
-  Future<bool> _deletePackItem(
-      BuildContext context,
-      PlutoGridStateManager gridStateManager,
-      String sWorkshop,
-      String sLocation) async {
-    PalletViewModel viewModel = context.read<PalletViewModel>();
-
-    if (await _checkValue(context, 'DELETE', gridStateManager, '') == false) {
-      return false;
-    }
-    List<TbWhPallet> tbWhPallets = [];
-
-    // for (PlutoRow row in gridStateManager.currentSelectingRows) {
-    PlutoRow row = gridStateManager.currentCell!.row;
-    List<PlutoCell> cells = row.cells.values.toList();
-
-    tbWhPallets.add(TbWhPallet(
-        comps: gComps,
-        workshop: sWorkshop,
-        location: sLocation,
-        itemNo: cells[1].value,
-        itemLot: cells[2].value,
-        quantity: cells[4].value,
-        palletSeq: cells[3].value,
-        barcode: cells[5].value));
-
-    if (tbWhPallets.isEmpty) {
-      hideCircularProgressIndicator();
-      showCustomSnackBarWarn(context, '완료처리 할 내용이 없습니다.');
-      return false;
-    }
-
-    viewModel.useCasesWms.deletePallet(tbWhPallets);
-    showCustomSnackBarSuccess(
-      context,
-      gSuccessMsg,
-      true,
-    );
-
-    return true;
-  }
+//
+//   void deletePackedPallet() async {
+//     bool bRet = await _deletePackItem(
+//         context, downGridStateManager, _readWorkShop, _readLocation);
+//
+//     if (bRet) {
+//       viewAll(_readWorkShop, _readLocation);
+//     }
+//   }
+//
+// //선택된 항목 삭제
+//   Future<bool> _deletePackItem(
+//       BuildContext context,
+//       PlutoGridStateManager gridStateManager,
+//       String sWorkshop,
+//       String sLocation) async {
+//     PalletViewModel viewModel = context.read<PalletViewModel>();
+//
+//     if (await _checkValue(context, 'DELETE', gridStateManager, '') == false) {
+//       return false;
+//     }
+//     List<TbWhPallet> tbWhPallets = [];
+//
+//     // for (PlutoRow row in gridStateManager.currentSelectingRows) {
+//     PlutoRow row = gridStateManager.currentCell!.row;
+//     List<PlutoCell> cells = row.cells.values.toList();
+//
+//     tbWhPallets.add(TbWhPallet(
+//         comps: gComps,
+//         workshop: sWorkshop,
+//         location: sLocation,
+//         itemNo: cells[1].value,
+//         itemLot: cells[2].value,
+//         quantity: cells[4].value,
+//         palletSeq: cells[3].value,
+//         barcode: cells[5].value));
+//
+//     if (tbWhPallets.isEmpty) {
+//       hideCircularProgressIndicator();
+//       showCustomSnackBarWarn(context, '완료처리 할 내용이 없습니다.');
+//       return false;
+//     }
+//
+//     viewModel.useCasesWms.deletePallet(tbWhPallets);
+//     showCustomSnackBarSuccess(
+//       context,
+//       gSuccessMsg,
+//       true,
+//     );
+//
+//     return true;
+//   }
 
 //체크로직, 완료, 삭제 시
   Future<bool> _checkValue(
@@ -403,24 +386,24 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
     // int nCheckedItemCnt = 0;
 
     switch (sGbn) {
-      case 'DELETE':
-        if (gridStateManager.currentCell == null) {
-          showCustomSnackBarWarn(context, '삭제할 항목이 선택하세요.');
-          return false;
-        }
-        if (gridStateManager.rows.isEmpty) {
-          showCustomSnackBarWarn(context, '삭제할 항목이 없습니다.');
-          return false;
-        }
-        if (await showAlertDialogQ(
-              context,
-              '확인',
-              '작업 중인 내용을 삭제 하시겠습니까?',
-            ) ==
-            false) {
-          return false;
-        }
-        break;
+      // case 'DELETE':
+      //   if (gridStateManager.currentCell == null) {
+      //     showCustomSnackBarWarn(context, '삭제할 항목이 선택하세요.');
+      //     return false;
+      //   }
+      //   if (gridStateManager.rows.isEmpty) {
+      //     showCustomSnackBarWarn(context, '삭제할 항목이 없습니다.');
+      //     return false;
+      //   }
+      //   if (await showAlertDialogQ(
+      //         context,
+      //         '확인',
+      //         '작업 중인 내용을 삭제 하시겠습니까?',
+      //       ) ==
+      //       false) {
+      //     return false;
+      //   }
+      //   break;
 
       case 'LOAD':
         //인터넷 접속 확인
@@ -446,6 +429,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
 
   //하단 리스트 조회
   void viewBottomList() {
+
     int nPalletSeq = 0;
     try {
       nPalletSeq = int.parse(_readPalletSeq);
@@ -460,6 +444,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
       _readLocation,
       nPalletSeq,
     );
+
   }
 
   Future<void> viewAll(String? sWareHouse, String? sLocation) async {
@@ -603,10 +588,10 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
   void setBarcodeScanner() {
     PointmobileScanner.channel.setMethodCallHandler(_onBarcodeScannerHandler);
     PointmobileScanner.initScanner();
-    // PointmobileScanner.triggerOn();
-
-    PointmobileScanner.enableScanner();
+    PointmobileScanner.triggerOn();
     PointmobileScanner.enableBeep();
+
+    // PointmobileScanner.enableBeep();
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_CODE128);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_EAN13);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_QR);
@@ -646,7 +631,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
       return;
     }
 
-    if (sVal != null && sVal.length < sPivot.length) {
+    if (sVal == null) {
       showCustomSnackBarSuccess(
         context,
         '(이동태그가 읽혀주세요.)',
@@ -654,7 +639,16 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
       );
       return;
     }
-    _readPalletSeq = sVal!;
+    if(sVal != null && sVal.length < sPivot.length){
+
+      showCustomSnackBarSuccess(
+        context,
+        '(이동태그 형식이 잘못되었습니다.)',
+        false,
+      );
+      return;
+    }
+    _readPalletSeq = sVal;
 
     if (_readPalletSeq.isNotEmpty) {
       _readPalletSeq = _readPalletSeq.substring(2, 10);

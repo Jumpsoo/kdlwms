@@ -2,7 +2,7 @@ import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/data/repository/cm_code_rcv_repo_impl.dart';
 
 class GetServerVersion {
-  final CmCodeRcvRepoImpl repository;
+  final CmCodeRcvRepoApiImpl repository;
 
   GetServerVersion(this.repository);
 

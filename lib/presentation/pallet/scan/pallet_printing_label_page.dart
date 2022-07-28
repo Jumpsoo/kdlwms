@@ -445,6 +445,9 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     PointmobileScanner.initScanner();
     PointmobileScanner.enableScanner();
     PointmobileScanner.enableBeep();
+
+    // PointmobileScanner.enableBeep();
+
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_CODE128);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_EAN13);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_QR);
@@ -458,11 +461,12 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
       showAlertDialog(context, '(진행불가) 공장 정보 미설정. \r\n 작업장 설정 화면에서 설정필요 ');
       return;
     }
+    print('1111');
     try {
       if (call.method == PointmobileScanner.ON_DECODE) {
-        // showCircularProgressIndicator(context);
+        print('222');
         _onDecode(call);
-        // await hideCircularProgressIndicator();
+
       } else if (call.method == PointmobileScanner.ON_ERROR) {
         _onError(call.arguments);
       } else {
@@ -476,6 +480,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
   // (중요) 바코드 읽혔을 때 처리 이벤트
   void _onDecode(MethodCall call) {
     final List lDecodeResult = call.arguments;
+    print(lDecodeResult);
     String? sVal = lDecodeResult[1];
 
     if (sVal == 'READ_FAIL') {
@@ -515,7 +520,6 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     PalletViewModel viewModel = context.read<PalletViewModel>();
     List<TbWhPalletPrint> printingList = [];
 
-    //for (PlutoRow row in gridStateManager.rows) {
     PlutoRow row = gridStateManager.currentCell!.row;
     List<PlutoCell> cells = row.cells.values.toList();
     printingList.add(TbWhPalletPrint(
@@ -539,6 +543,7 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
     Result result =
         await viewModel.useCasesWms.printingPalletUseCase(printingList);
     result.when(success: (value) {
+
       showCustomSnackBarSuccess(context, gSuccessMsg, true);
 
       viewPrintingList(
@@ -565,18 +570,20 @@ class _PalletPrintingLabelPageState extends State<PalletPrintingLabelPage> {
         .selectPrintingList(gComps, _readWorkShop, _readLocation, '');
 
     result.when(success: (valueList) {
-      print(valueList);
-      List<TbWhPalletPrint> pallets = valueList;
 
+      List<TbWhPalletPrint> pallets = valueList;
       if (pallets.isEmpty) {
         showCustomSnackBarSuccess(context, '해당 작업위치에 입력 완료한 실적이 없습니다.', false);
       } else {
+
         gridStateManager.appendRows(getPrintGridRowsGroup(pallets));
         gridStateManager.notifyListeners();
 
-        setState(() {
-          _readWareHouseNm = pallets[0].arrival!;
-        });
+        if(pallets.isEmpty) {
+          setState(() {
+            _readWareHouseNm = pallets[0].arrival == null ? ''  :  pallets[0].arrival!;
+          });
+        }
       }
     }, error: (message) {
       showCustomSnackBarWarn(context, message);

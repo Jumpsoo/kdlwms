@@ -6,9 +6,9 @@ import 'package:kdlwms/domain/repository/tb_wh_item_repo.dart';
 
 class MigTbWhItem {
   final TbWhItemRepo repository;
-  final ItemRcvRepoImpl recvRepository;
+  final ItemRcvRepoApiImpl recvRepositoryApi;
 
-  MigTbWhItem(this.repository, this.recvRepository);
+  MigTbWhItem(this.repository, this.recvRepositoryApi);
 
   // 서버에서 값조회 -> 있으면 삭제 -> 등록
   // 서버에서 데이터를 조회해서 로컬디비에 저장한다.
@@ -16,7 +16,7 @@ class MigTbWhItem {
 
     String errorMsg =  ' ';
     //서버에서 데이터를 조회한다.
-    Result resultRecv = await recvRepository.selectItemList('');
+    Result resultRecv = await recvRepositoryApi.selectItemList('');
     resultRecv.when(success: (itemList) async {
       if (itemList.isEmpty) {
         return const Result.error('복사할 대상이 없습니다.');
@@ -24,8 +24,6 @@ class MigTbWhItem {
 
       Result resultDelete = await repository.deleteAndInsertTbWhItemBatch(itemList);
       resultDelete.when(success: (value) async {
-
-
 
       }, error: (message) async{
         errorMsg = message;

@@ -74,29 +74,12 @@ class _PalletDeletePageState extends State<PalletDeletePage> {
           children: <Widget>[
             //하단그리드
 
-            // Container(
-            //   height: 180,
-            //   child: PlutoGrid(
-            //     columns: getLoadTopGridColumns(),
-            //     mode: PlutoGridMode.select,
-            //     rows: [],
-            //     // columnGroups: columnGroups,
-            //     onLoaded: (PlutoGridOnLoadedEvent event) {
-            //       topGridStateManager = event.stateManager;
-            //       viewTopList();
-            //     },
-            //     onChanged: (PlutoGridOnChangedEvent event) {
-            //       //to do
-            //     },
-            //     configuration: getGridStyle1(),
-            //   ),
-            // ),
             const Padding(padding: EdgeInsets.only(top: 5)),
             SizedBox(
               height: 450,
               child: PlutoGrid(
                 columns: getDeleteGridColumns(),
-                rows: [],
+                rows: [],//const 부여하면 오류남
                 // columnGroups: columnGroups,
                 onLoaded: (PlutoGridOnLoadedEvent event) {
                   mainGridStateManager = event.stateManager;

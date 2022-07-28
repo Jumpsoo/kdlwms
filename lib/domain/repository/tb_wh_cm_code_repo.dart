@@ -19,5 +19,5 @@ abstract class TbWhCmCodeRepo {
 
   Future<Result<bool>> deleteTbWhCmCodeAll();
 
-  Future<Result<bool>> deleteAndInsertTbWhItemBatch(List<TbWhCmCode> tbWhCmCode );
+  Future<Result<bool>> deleteAndInsertTbWhCmCodeBatch(List<TbWhCmCode> tbWhCmCode );
 }

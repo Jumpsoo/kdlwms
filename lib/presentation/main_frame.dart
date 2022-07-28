@@ -179,7 +179,8 @@ class _MainPageState extends State<MainPage> {
   void getVersion() async {
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
-    await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+
+    //await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
 
     String version = await viewModelSetting.useCaseCommonInfo
         .getCurrentLocalVersion('PDA_VERSION');

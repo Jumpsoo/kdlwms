@@ -47,7 +47,7 @@ class TbWhCmCodeRepoImpl implements TbWhCmCodeRepo {
   }
 
   @override
-  Future<Result<bool>> deleteAndInsertTbWhItemBatch(List<TbWhCmCode> tbWhCmCodes) async {
+  Future<Result<bool>> deleteAndInsertTbWhCmCodeBatch(List<TbWhCmCode> tbWhCmCodes) async {
 
     Result result = await deleteTbWhCmCodeAll();
     result.when(success: (value) async {

@@ -23,6 +23,7 @@ class UpdateLocalVersion{
 
     TbWhCmCode condItem = TbWhCmCode(grpCd: 'PDA_VERSION');
     Result result = await repository.selectTbWhCmCodeListByGrpCd(condItem);
+
     result.when(success: (updatingList) async{
 
       for(TbWhCmCode item in updatingList){
@@ -33,6 +34,7 @@ class UpdateLocalVersion{
         }, error: (message){
           return Result.error(message);
         });
+
       }
     }, error: (message){
       return Result.error(message);

@@ -3,7 +3,7 @@ import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_item.dart';
 import 'package:kdlwms/domain/repository/item_rcv_repo.dart';
 
-class ItemRcvRepoImpl implements ItemRcvRepo {
+class ItemRcvRepoApiImpl implements ItemRcvRepoApi {
   ItemRcvApi api = ItemRcvApi();
 
   @override

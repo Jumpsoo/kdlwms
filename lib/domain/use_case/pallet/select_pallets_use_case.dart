@@ -104,6 +104,7 @@ class SelectLoadingListByApiUseCase {
 
   Future<Result<List<TbWhPalletPrint>?>> call(String sComps, String sWorkShop,
       String sLocation, int nScanPalletSeq) async {
+
     TbWhPallet tbWhPallet =
         TbWhPallet(comps: gComps, workshop: sWorkShop, location: sLocation);
 

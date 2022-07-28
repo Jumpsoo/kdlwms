@@ -3,10 +3,10 @@ import 'package:kdlwms/domain/model/tb_server_info.dart';
 import 'package:kdlwms/domain/repository/tb_server_info_repo.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 
-class SelectTbServerInfo {
+class SelectTbServerInfoUseCase {
   final TbServerInfoRepo repository;
 
-  SelectTbServerInfo(this.repository);
+  SelectTbServerInfoUseCase(this.repository);
 
   Future<String> call() async {
     String sUrl = '';
@@ -22,10 +22,10 @@ class SelectTbServerInfo {
 }
 
 //장치명 기타정보가져오기 가져오기
-class SelectPropertyInfo {
+class SelectPropertyInfoUseCase {
   final TbServerInfoRepo repository;
 
-  SelectPropertyInfo(this.repository);
+  SelectPropertyInfoUseCase(this.repository);
 
   Future<Result<TbServerInfo>> call() async {
     bool bRet = false;

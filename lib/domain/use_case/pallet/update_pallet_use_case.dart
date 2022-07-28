@@ -17,6 +17,7 @@ class UpdatePalletUseCase {
 
 //완료처리
 class ConfirmPalletFinishUseCase {
+
   final TbWhPalletRepo repository;
   PalletApi api = PalletApi();
 
@@ -24,6 +25,7 @@ class ConfirmPalletFinishUseCase {
 
   // 변경 후 서버전송 - 완료처리
   Future<Result<bool>> call(List<TbWhPallet> palletList) async {
+
     String sMsg = '';
     bool bRet = false;
 
@@ -31,19 +33,26 @@ class ConfirmPalletFinishUseCase {
     //전송이 성공했을때 데이터 클리어
     result.when(success: (value) async {
       bRet = true;
+
+    }, error: (message) {
+      bRet = false;
+      sMsg = message;
+    });
+
+    if(bRet) {
       Result resultUpd = await repository.deleteTbWhPallet(palletList);
-      resultUpd.when(success: (value) {
+      resultUpd.when(success: (value) async {
+        print(">>>>>>>>>>>>>>>>>>>>>>> deleteTbWhPallet 1");
+        print(value);
+
         bRet = true;
       }, error: (message) {
         bRet = false;
         sMsg = message;
       });
-    }, error: (message) {
-      bRet = false;
-      sMsg = message;
-    });
+    }
     if (bRet) {
-      return const Result.success(true);
+      return Result.success(bRet);
     } else {
       return Result.error(sMsg);
     }

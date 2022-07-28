@@ -82,7 +82,6 @@ Future<void> showErrorMsg(BuildContext context, String sErrorLocation) async {
 void showCustomSnackBarWarn(BuildContext context, String message) async {
   ScaffoldMessenger.of(context).clearSnackBars();
 
-  print('bb');
   //진동
   if (gVibrateEnable == 0) {
     Vibration.vibrate(duration: 1000);
@@ -90,7 +89,10 @@ void showCustomSnackBarWarn(BuildContext context, String message) async {
   //오류소리
   playNgSound();
   //스캐너 비활성화
-  setDisableScanner();
+  if(gScanAlwaysOn == 1) {
+
+     setOffAutoScanner();
+  }
 
   final snackBar1 = SnackBar(
     backgroundColor: Colors.red,
@@ -104,8 +106,12 @@ void showCustomSnackBarWarn(BuildContext context, String message) async {
     ),
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar1);
+  WidgetsBinding.instance.addPostFrameCallback((_) =>setOffOnScanner());
+  // setOffOnScanner();
 
-  setenEableScanner();
+  WidgetsBinding.instance.addPostFrameCallback(
+        (_) => setOffOnScanner(),
+  );
 }
 
 void showCustomSnackBarSuccess(
@@ -166,6 +172,7 @@ void writeLog(var msg) {
   }
 }
 
+//동기화 일자체크 ( 화면용)
 Future<bool> checkSyncStatus(BuildContext context) async {
   DataSyncViewModel dataSyncViewModel =
       gTransitContext.read<DataSyncViewModel>();
@@ -196,6 +203,7 @@ Future<bool> checkSyncStatus(BuildContext context) async {
   return gSync;
 }
 
+//동기화 일자체크
 Future<bool> checkSyncStatusNoAlert() async {
   DataSyncViewModel dataSyncViewModel =
       gTransitContext.read<DataSyncViewModel>();
@@ -217,26 +225,6 @@ Future<bool> checkSyncStatusNoAlert() async {
     gSync = false;
   });
   return gSync;
-}
-
-Map<T, List<S>> groupBy<S, T>(Iterable<S> values, T Function(S) key) {
-  var map = <T, List<S>>{};
-  for (var element in values) {
-    (map[key(element)] ??= []).add(element);
-  }
-  return map;
-}
-
-Map<K, V> mergeMaps<K, V>(Map<K, V> map1, Map<K, V> map2,
-    {V Function(V, V)? value}) {
-  var result = Map<K, V>.of(map1);
-  if (value == null) return result..addAll(map2);
-
-  map2.forEach((key, mapValue) {
-    result[key] =
-        result.containsKey(key) ? value(result[key] as V, mapValue) : mapValue;
-  });
-  return result;
 }
 
 //인터넷 접속 어뎁터 확인
@@ -294,16 +282,15 @@ void playNgSound() async {
   await audioPlayerNG.play();
 }
 
-void setenEableScanner() {
+void setOffAutoScanner() async {
+  PointmobileScanner.disableScanner();
 
-  WidgetsBinding.instance.addPostFrameCallback(
-        (_) => PointmobileScanner.enableScanner(),
-  );
 }
 
-void setDisableScanner() {
-  PointmobileScanner.triggerOff();
-  PointmobileScanner.disableScanner();
+void setOffOnScanner() async {
+  await Future.delayed(const Duration(milliseconds: 1000), () async {
+    PointmobileScanner.enableScanner();
+  });
 }
 
 var bodyProgress = Container(

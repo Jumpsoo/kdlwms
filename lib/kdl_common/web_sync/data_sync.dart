@@ -12,20 +12,6 @@ import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 
-class DataSync extends StatefulWidget {
-  const DataSync({Key? key}) : super(key: key);
-
-  @override
-  State<DataSync> createState() => _DataSyncState();
-}
-
-class _DataSyncState extends State<DataSync> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
 Future<bool> syncData(bool ignoreMsg) async {
   // const double nTotalPercent = 100;
   const double nIncreaseUnit = 100 / 4;
@@ -48,7 +34,6 @@ Future<bool> syncData(bool ignoreMsg) async {
 
   //서버버전
   sServerVersion = await dataSyncViewModel.useCaseDataBatch.getServerVersion();
-  print('sServerVersion : $sServerVersion');
   writeLog('로컬버전 / 서버버전 : $gCurrentVersion / $sServerVersion');
 
   //연결체크
@@ -56,7 +41,7 @@ Future<bool> syncData(bool ignoreMsg) async {
   if (bRet == false) {
     return false;
   }
-  if(sServerVersion.isNotEmpty) {
+  if (sServerVersion.isNotEmpty) {
     gCurrentVersion = sServerVersion;
   }
   if (ignoreMsg == true && gCurrentVersion == sServerVersion) {
@@ -105,7 +90,7 @@ Future<bool> syncData(bool ignoreMsg) async {
     return false;
   } // 01.공통코드 완료
 
-  await Future.delayed(const Duration(milliseconds:  500), () {});
+  await Future.delayed(const Duration(milliseconds: 500), () {});
 
   sBatchName = '02.품목정보';
   writeLog(sBatchName);
@@ -147,8 +132,10 @@ Future<bool> syncData(bool ignoreMsg) async {
   }
   //
   await Future.delayed(const Duration(milliseconds: 500), () {});
-
+  print(">>>>>");
+print(sServerVersion);
   sBatchName = '04.버전정보 동기화중..';
+  writeLog(sBatchName);
   //로컬버전정보 -> 서버로 변경
   Result resultVersion = await dataSyncViewModel.useCaseDataBatch
       .updateLocalVersion(sServerVersion);
@@ -194,6 +181,7 @@ void updateProgressBar(
 //### 02. 품목정보 리스트
 Future<bool> _getBatchItem(BuildContext context, String sBatchName,
     Result result, ProgressDialog progressDialog, double percentage) async {
+
   bool retVal = false;
   writeLog('$sBatchName : 시작');
   // DataSyncViewModel viewModel = context.read<DataSyncViewModel>();
@@ -205,13 +193,16 @@ Future<bool> _getBatchItem(BuildContext context, String sBatchName,
       writeLog('$sBatchName : 성공');
       retVal = true;
     }, error: (message) async {
+
       await showAlertDialog(context, message);
       await showAlertDialog(context, '동기화 실패로 종료됩니다. 시스템 관리자에게 문의하세요.');
+
       progressDialog.hide();
       writeLog('$sBatchName : 오류 [$message]');
       retVal = false;
       //실패시 프로그램 강제 종료
       WidgetsBinding.instance.addPostFrameCallback((_) => _exitInitialProgram);
+
     });
   } catch (e) {
     writeLog('$sBatchName : 오류 + [$e]');

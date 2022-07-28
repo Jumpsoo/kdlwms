@@ -41,6 +41,7 @@ import 'package:provider/provider.dart';
 //   });
 // }
 
+//상차 대상 리스트 조회
 Future<void> createLoadingButtomGridView(
     BuildContext context,
     PlutoGridStateManager gridStateManager,
@@ -52,6 +53,7 @@ Future<void> createLoadingButtomGridView(
   PalletViewModel viewModel = context.read<PalletViewModel>();
   gridStateManager.rows.clear();
   gridStateManager.removeRows(gridStateManager.rows);
+
   //조회
   Result result = await viewModel.useCasesWms.selectLoadingListByApiUseCase(
       gComps, sWareHouse, sLocation, nScanPalletSeq);

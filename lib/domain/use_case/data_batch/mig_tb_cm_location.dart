@@ -7,7 +7,7 @@ import 'package:kdlwms/domain/repository/tb_cm_location_repo.dart';
 
 class MigTbCmLocation {
   final TbCmLocationRepo repository;
-  final CmCodeRcvRepoImpl cmCodeRepository;
+  final CmCodeRcvRepoApiImpl cmCodeRepository;
 
   MigTbCmLocation(this.repository, this.cmCodeRepository);
 

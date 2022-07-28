@@ -70,7 +70,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
   @override
   void initState() {
     super.initState();
-
     setState(() {
       _decodeResult = "준비";
       _readWorkShop = '';
@@ -87,10 +86,8 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
     // 실제 장비 연결시 주석 해제 할것
     // 실제장비가 아닌경우 shutdown 되기 때문에, 연결장비에 따라 분기한다.
-    if (Platform.isAndroid) {
-      setBarcodeScanner();
-      writeLog('Set Scan : OK!');
-    }
+    setBarcodeScanner();
+    writeLog('Set Scan : OK!');
 
     gTriggered = gScanAlwaysOn == 1 ? true : false;
 
@@ -144,6 +141,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
                               //showCustomSnackBarSuccess(
                               // context, '로케이션 번호를 읽히세요.');
+                              setOffOnScanner();
                             },
                             style: ElevatedButton.styleFrom(
                               fixedSize: const Size(100, 40),
@@ -192,6 +190,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
                               // //해당버튼을 누르면 창고위치로 값을 넘겨준다
                               // showCustomSnackBarSuccess(
                               //     context, '창고 QR을 입력하세요.');
+
                             },
                             style: ElevatedButton.styleFrom(
                               fixedSize: const Size(70, 40),
@@ -306,6 +305,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
   // 리딩한 작업내용을 아래 그리드에 추가함
   // 값 파싱->임시저장 -> 재조회
   void _changeReadQrData(String sQrData) async {
+
     //식별표 파싱
     TbWhPallet? pallet = await viewModel.useCasesWms
         .scanQrCode(sQrData, _readWorkShop, _readLocation);
@@ -318,6 +318,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
     //공백일 경우에러 발생
     if (_readWorkShop.isEmpty) {
       showCustomSnackBarWarn(context, '작업장 입력 미설정.');
+
       return;
     }
 
@@ -327,7 +328,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
         return;
       }
     }
-
     //qr 실적에서 창고코드 조회 후 체크
     TbWhItem tbWhItem = TbWhItem(comps: gComps, itemNo: pallet.itemNo);
     Result resultItem =
@@ -337,18 +337,15 @@ class _PalletScanPageState extends State<PalletScanPage> {
       TbWhItem retWhItem = value;
       pallet = pallet!.copyWith(arrival: retWhItem.warehouseCd);
     }, error: (message) {
+
       showCustomSnackBarWarn(context, message);
       return message;
     });
 
     //입력값 체킄
     if (await checkValueAdd(context, pallet) == false) {
-      // for(TbWhPallet item in await getSendRow()){
-      //   print(item);
-      // }
       return;
     }
-
     //추가시 validation 은 repository 내부에있음
     Result result = await viewModel.useCasesWms.addPallet(pallet!);
     result.when(
@@ -368,7 +365,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
   //체크로직, 완료, 삭제 시
   Future<bool> checkValueAdd(BuildContext context, TbWhPallet? pallet) async {
     bool bRet = false;
-
     if (pallet == null) {
       return false;
     }
@@ -425,7 +421,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
     viewBottomList();
   }
 
-  void _viewAll() {
+  void _viewAll() async {
     viewTopList();
     viewBottomList();
   }
@@ -452,12 +448,17 @@ class _PalletScanPageState extends State<PalletScanPage> {
         gSuccessMsg,
         true,
       );
-
       // 처리후 비동기 호출 추가
       WidgetsBinding.instance.addPostFrameCallback((_) => _viewAll());
+      //
     }, error: (message) {
       showCustomSnackBarWarn(ownContext, message);
       return false;
+    });
+
+    setState(() {
+      _readWareHouse = '';
+      _readWareHouseNm = '실적없음';
     });
 
     return true;
@@ -626,20 +627,21 @@ class _PalletScanPageState extends State<PalletScanPage> {
     _subscription?.cancel();
     _controller.dispose();
     //스캐너 비활성화
-    setDisableScanner();
-    setenEableScanner();
+    setOffAutoScanner();
     super.dispose();
   }
 
   // 버튼을 누를때 마다 bTriggered 변경한다.
   // 에러가 나면 false 처리한다.
   void setAutoScanning() async {
+
     if (gScanAlwaysOn == 1) {
       if (gTriggered == false) {
         PointmobileScanner.triggerOff();
       } else {
         PointmobileScanner.triggerOn();
       }
+
     }
   }
 
@@ -654,6 +656,10 @@ class _PalletScanPageState extends State<PalletScanPage> {
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_EAN13);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_QR);
     PointmobileScanner.enableSymbology(PointmobileScanner.SYM_UPCA);
+
+    //
+    WidgetsBinding.instance.addPostFrameCallback((_) =>setAutoScanning());
+
   }
 
   //바코드 관련 이벤트 및 함수 선언부분
@@ -673,7 +679,6 @@ class _PalletScanPageState extends State<PalletScanPage> {
     } catch (e) {
       writeLog(e.toString());
     }
-
     setAutoScanning();
   }
 
@@ -691,17 +696,22 @@ class _PalletScanPageState extends State<PalletScanPage> {
     //로케이션번호일경우
     //TAG 리스트 스캔시 해당분기로 빠지는걸 방지
     if (sVal != null && sVal.length < 4 && sVal.substring(0, 1) == 'L') {
+
       //Location
       _readLocation = sVal;
       _clearData();
       _changeLocation(_readLocation);
+      //성공
       playScanOkSound();
+
     } else if (sVal != null && sVal.length > 100) {
+
       //제품 QR
       _readQRData = sVal;
       // 실적 추가 후 품번에 대한 로케이션 정보를 불러온다.
       _changeReadQrData(_readQRData);
       playScanOkSound();
+
     } else {
       showCustomSnackBarWarn(context, '스캔한 작업 코드가 부적절합니다.');
     }
@@ -899,6 +909,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
 
     List<TbWhPalletGroup>? pallets = await viewModel.useCasesWms
         .selectPackingSummaryUseCase(gComps, sWareHouse, sLocation);
+
     try {
       if (pallets != null) {
         gridStateManager.appendRows(getPackTopGridRowsGrouping(pallets));
@@ -914,20 +925,23 @@ class _PalletScanPageState extends State<PalletScanPage> {
       String sWareHouse,
       String sLocation) async {
     PalletViewModel viewModel = context.read<PalletViewModel>();
+
     gridStateManager.rows.clear();
     gridStateManager.removeRows(gridStateManager.rows);
 
     //조회
     List<TbWhPallet>? pallets = await viewModel.useCasesWms
         .selectPackingListUseCase(sWareHouse, sLocation);
+
     if (pallets != null && pallets.isNotEmpty) {
       gridStateManager.appendRows(
         getPackButtomGridRows(pallets),
       );
-      gridStateManager.notifyListeners();
 
       //창고 코드 설정
       _changeWareHouse(context, pallets[0]);
     }
+
+    gridStateManager.notifyListeners();
   }
 }

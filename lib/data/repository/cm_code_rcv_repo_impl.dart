@@ -3,7 +3,7 @@ import 'package:kdlwms/data/data_source/result.dart';
 import 'package:kdlwms/domain/model/tb_wh_cm_code.dart';
 import 'package:kdlwms/domain/repository/cm_code_rcv_repo.dart';
 
-class CmCodeRcvRepoImpl implements CmCodeRcvRepo {
+class CmCodeRcvRepoApiImpl implements CmCodeRcvRepoApi {
   CmCodeRcvApi api = CmCodeRcvApi();
 
   @override

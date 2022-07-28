@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
     }).catchError((error) {
       //
     });
+
     Future<String> varDeviceId = _getPropertyInfo(context);
     varDeviceId.then((val) {
       if (val.isNotEmpty) {
@@ -83,7 +84,7 @@ class MyApp extends StatelessWidget {
     String sUrl = '';
     SettingInfoViewModel viewModelSetting;
     viewModelSetting = context.read<SettingInfoViewModel>();
-    sUrl = await viewModelSetting.useCaseServerInfo.selectTbServerInfo();
+    sUrl = await viewModelSetting.useCaseServerInfo.selectTbServerInfoUseCase();
 
     return sUrl;
   }
@@ -95,7 +96,7 @@ class MyApp extends StatelessWidget {
     viewModelSetting = context.read<SettingInfoViewModel>();
 
     Result result =
-        await viewModelSetting.useCaseServerInfo.selectPropertyInfo();
+        await viewModelSetting.useCaseServerInfo.selectPropertyInfoUseCase();
     result.when(success: (value) {
       TbServerInfo info = value;
       gDeviceId = info.deviceId!;
