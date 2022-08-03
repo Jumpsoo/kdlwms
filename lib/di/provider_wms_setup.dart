@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:kdlwms/data/data_source/pallet_api.dart';
 import 'package:kdlwms/data/data_source/tb_cm_location_db_helper.dart';
 import 'package:kdlwms/data/data_source/tb_cm_sync_db_helper.dart';
@@ -52,6 +54,8 @@ import 'package:kdlwms/domain/use_case/web_api/get_common_info.dart';
 import 'package:kdlwms/kdl_common/web_sync/data_sync_viewmodel.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:sqflite/sqflite.dart';
@@ -59,12 +63,26 @@ import 'package:kdlwms/domain/use_case/data_batch/mig_tb_cm_location.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_cm_sync.dart';
 import 'package:kdlwms/domain/use_case/data_batch/mig_tb_wh_item.dart';
 
-Future<List<SingleChildWidget>> getWmsProviders() async {
 
-  deleteDatabase('wms_db_local_v3');
+Future<Database> initializeDB() async {
 
-  Database database = await openDatabase(
-    'wms_db_local_v4',
+  // Future<Directory?>? _appSupportDirectory;
+  // _appSupportDirectory = getApplicationSupportDirectory();
+  // //   openDatabase(
+  // //   join(path, 'database.db'),
+  // //   onCreate: (database, version) async {
+  // //     await database.execute(
+  // //         "CREATE TABLE Notes(id INTEGER PRIMARY KEY AUTOINCREMENT,
+  // //         description TEXT NOT NULL)",
+  // //     );
+  // //   },
+  // //   version: 1,
+  // // );
+
+  String path = await getDatabasesPath();
+print(path);
+  return await openDatabase(
+    join(path, 'wms_database.db'),
     version: 1,
     onCreate: (database, version) async {
       //1. 공통코드
@@ -197,6 +215,13 @@ Future<List<SingleChildWidget>> getWmsProviders() async {
       //     'MAX_SEQ     INT )');
     },
   );
+
+
+}
+
+Future<List<SingleChildWidget>> getWmsProviders() async {
+
+  Database database = await initializeDB();
 
   //서버사이드 repository 등록
   ItemRcvRepoApiImpl itemRcvRepo = ItemRcvRepoApiImpl();

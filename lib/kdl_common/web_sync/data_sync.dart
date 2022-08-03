@@ -9,7 +9,8 @@ import 'package:kdlwms/kdl_common/common_functions.dart';
 import 'package:kdlwms/kdl_common/kdl_globals.dart';
 import 'package:kdlwms/presentation/pallet/scan/pallet_viewmodel.dart';
 import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart';
-import 'package:progress_dialog/progress_dialog.dart';
+import 'package:progress_dialog_null_safe/progress_dialog_null_safe.dart';
+
 import 'package:provider/provider.dart';
 
 Future<bool> syncData(bool ignoreMsg) async {
@@ -53,7 +54,7 @@ Future<bool> syncData(bool ignoreMsg) async {
 
   ProgressDialog progressDialog = ProgressDialog(
     gTransitContext,
-    type: ProgressDialogType.Download,
+    type: ProgressDialogType.download,
     textDirection: TextDirection.ltr,
     isDismissible: true,
   );
@@ -132,8 +133,7 @@ Future<bool> syncData(bool ignoreMsg) async {
   }
   //
   await Future.delayed(const Duration(milliseconds: 500), () {});
-  print(">>>>>");
-print(sServerVersion);
+
   sBatchName = '04.버전정보 동기화중..';
   writeLog(sBatchName);
   //로컬버전정보 -> 서버로 변경
