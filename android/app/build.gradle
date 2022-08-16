@@ -44,7 +44,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.kdlwms"
-        minSdkVersion 16
+        minSdkVersion 19 //file downloader 사용을 위한 sdk min 버전 수정  Fr. 16 -> To. 19
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
