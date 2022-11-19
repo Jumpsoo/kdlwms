@@ -102,7 +102,9 @@ class MyApp extends StatelessWidget {
       gDeviceId = info.deviceId!;
       gVibrateEnable = info.vibrateState!;
       gScanAlwaysOn = info.scanAlwaysState!;
+      gComps = info.comps!;
 
+      print(">> gComps22 : {$info.comps}");
 
     }, error: (message) {
       //showCustomSnackBarWarn(context, message);

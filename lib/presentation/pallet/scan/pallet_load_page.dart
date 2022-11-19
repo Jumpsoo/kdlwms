@@ -72,7 +72,7 @@ class _PalletLoadPageState extends State<PalletLoadPage> {
       _readLocation = '';
 
       // 향후 사업장 정해지면 구현할것
-      gComps = 'C1';
+      //gComps = 'C1';
     });
 
     // 실제 장비 연결시 주석 해제 할것

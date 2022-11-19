@@ -79,7 +79,7 @@ class _PalletScanPageState extends State<PalletScanPage> {
       _readWareHouseNm = '실적없음';
 
       // 향후 사업장 정해지면 구현할것
-      gComps = 'C1';
+      //gComps = 'C1';
     });
 
     //

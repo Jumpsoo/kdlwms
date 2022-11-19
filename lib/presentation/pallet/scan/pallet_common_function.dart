@@ -7,6 +7,7 @@ import 'package:kdlwms/presentation/set_workshop/setting_workshop_viewmodel.dart
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:provider/provider.dart';
 
+
 Future<String?> palletCommonGetDefaultWorkShop(BuildContext context) async {
   SettingInfoViewModel viewModelShop = context.read<SettingInfoViewModel>();
   String? defaultLocation;
